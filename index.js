@@ -61,10 +61,10 @@ function linkImages(pageList) {
     var i = 0;
     pageList.forEach(function (entry) {
         images[i] = `<img src = "${pageList[i]}">"`
-
+        pageList[i] = images[i]
 
         i = i + 1;
     });
-    console.log(images)
-    return images
+    console.log(pageList)
+    return pageList
 }
