@@ -1,15 +1,26 @@
 let express = require('express');
 let app = express();
 app.use("/manga", express.static('manga'))
+const fs = require('fs');
 
 // Set express as Node.js web application
 // server framework.
 
 
+// let mangaName = "hori"
+// let chapName = "hori_chap_1"
+// var pageList = getPages(mangaName, chapName);
+
+
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 
-app.get("/", (req, res) => {
+app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
+    var mangaName = req.params.mangaName,
+    chapName = req.params.chapName;
+
+    var pageList = getPages(mangaName, chapName);
+
     res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
 });
 
@@ -18,48 +29,34 @@ app.listen(3000, (req, res) => {
     console.log("Connected on port:3000");
 });
 
-let mangaName = "hori"
-let chapName = "Horimiya Chapter 6.5 Bonus Manga Myamura - Manganelo_files"
-var pageList = getPages();
-
-
-displayPages(mangaName, chapName, pageList)
-
 
 //does all of the formatting in order to display images instead of a blob of text
 function displayPages(mangaName, chapName, pageList) {
     let link = ""
-    //  pageList = getPages
-    
+
     pageList.forEach(function (entry, i) {
-    link = link +`<img src = "manga/${mangaName}/${chapName}/${pageList[i]}">\n`
-    
+        link = link + `<img src = "/manga/${mangaName}/${chapName}/${pageList[i]}">\n`
+
     })
     return link
 }
 
-console.log(pageList)
+//gets all of the pages in the selectrd directory
+function getPages(mangaName, chapName) {
 
-
-function getPages() {
-
-    //reads and prints files in the selected directory
     var pageList = readFiles();
-    console.log(pageList)
-
+    pageList = filterList(pageList)
 
 
     //lists all files in directory
     function readFiles() {
         var pageList = [];
-        const testFolder = './manga/hori/Horimiya Chapter 6.5 Bonus Manga Myamura - Manganelo_files';
-        const fs = require('fs');
+        const testFolder = `./manga/${mangaName}/${chapName}`;
 
         fs.readdirSync(testFolder).forEach(file => {
             pageList.push(file);
-
         });
-        pageList = filterList(pageList)
+        
         return pageList;
     }
 
@@ -72,23 +69,5 @@ function getPages() {
         return (images)
     }
 
-
-    // let links = linkImages(pageList)
-
-
-    //turns links to images into something that is usable by the html code with <img src>
-    function linkImages(pageList) {
-
-        var images = []
-        var i = 0;
-        pageList.forEach(function (entry) {
-            // images[i] = `<img src = "${pageList[i]}">`
-            pageList[i] = images[i]
-
-            i = i + 1;
-        });
-        console.log(pageList)
-        return pageList
-    }
     return pageList
 }
