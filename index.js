@@ -30,8 +30,11 @@ displayPages(mangaName, chapName, pageList)
 function displayPages(mangaName, chapName, pageList) {
     let link = ""
     //  pageList = getPages
-    link = `manga/${mangaName}/${chapName}/${pageList[0]}`
-
+    
+    pageList.forEach(function (entry, i) {
+    link = link +`<img src = "manga/${mangaName}/${chapName}/${pageList[i]}">\n`
+    
+    })
     return link
 }
 
