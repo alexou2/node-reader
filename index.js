@@ -44,7 +44,7 @@ function displayPages(mangaName, chapName, pageList) {
 
     pageList.forEach(function (entry, i) {
         link = link + `<img src = "/manga/${mangaName}/${chapName}/${pageList[i]}">\n`
-        
+
     })
     return link
 }
@@ -56,7 +56,7 @@ function getPages(mangaName, chapName) {
     pageList = filterList(pageList)
 
 
-    //lists all files in directory
+    //lists all files for a chapter
     function readFiles() {
         var pageList = [];
         const testFolder = `./manga/${mangaName}/${chapName}`;
@@ -79,28 +79,35 @@ function getPages(mangaName, chapName) {
 
     return pageList
 }
-function renderHomepage(){
+
+
+let chapterList = getChapterList()
+console.log(chapterList)
+renderHomepage(chapterList)
+function renderHomepage(chapterList) {
     app.get(`/`, (req, res) => {
-    
-        res.render("../home", { chapterList: getChapterList() });
-    
-    console.log("home.js is running")
+
+        res.render("../home", { chapterList: chapterList, mangaName: "hori" });
+        console.log(chapterList)
+        console.log("home.js is running")
+
+
     });
-    
-    
-    
-    
-    //gets chapters from a manga
-    function getChapterList(){
-            var pageList = [];
-            var mangaName = "hori"
-            const testFolder = `./manga/${mangaName}/`;
-    
-            fs.readdirSync(testFolder).forEach(file => {
-                pageList.push(file);
-            });
-            console.log("home.js is running")
-    console.log(pageList)
-            return pageList;
-        }}
-    
+}
+
+
+
+//gets chapters from a manga
+function getChapterList() {
+    var chapterList = [];
+    var mangaName = "hori"
+    const testFolder = `./manga/${mangaName}/`;
+
+    fs.readdirSync(testFolder).forEach(file => {
+        chapterList.push(file);
+    });
+    console.log("home.js is running")
+    // console.log(chapterList)
+    return chapterList;
+}
+
