@@ -3,6 +3,10 @@ let app = express();
 app.use("/manga", express.static('manga'))
 const fs = require('fs');
 
+//renders the homepage
+let home = require('./home.js')
+home.renderHomepage()
+
 // Set express as Node.js web application
 // server framework.
 
@@ -41,7 +45,6 @@ function displayPages(mangaName, chapName, pageList) {
     pageList.forEach(function (entry, i) {
         link = link + `<img src = "/manga/${mangaName}/${chapName}/${pageList[i]}">\n`
         
-
     })
     return link
 }
@@ -76,3 +79,28 @@ function getPages(mangaName, chapName) {
 
     return pageList
 }
+function renderHomepage(){
+    app.get(`/`, (req, res) => {
+    
+        res.render("../home", { chapterList: getChapterList() });
+    
+    console.log("home.js is running")
+    });
+    
+    
+    
+    
+    //gets chapters from a manga
+    function getChapterList(){
+            var pageList = [];
+            var mangaName = "hori"
+            const testFolder = `./manga/${mangaName}/`;
+    
+            fs.readdirSync(testFolder).forEach(file => {
+                pageList.push(file);
+            });
+            console.log("home.js is running")
+    console.log(pageList)
+            return pageList;
+        }}
+    
