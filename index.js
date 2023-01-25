@@ -87,7 +87,7 @@ renderHomepage(chapterList)
 function renderHomepage(chapterList) {
     app.get(`/`, (req, res) => {
 
-        res.render("../home", { chapterList: chapterList, mangaName: "hori" });
+        res.render("../home", { chapterList: chapterList, mangaName: "gal" });
         console.log(chapterList)
         console.log("home.js is running")
 
@@ -100,7 +100,7 @@ function renderHomepage(chapterList) {
 //gets chapters from a manga
 function getChapterList() {
     var chapterList = [];
-    var mangaName = "hori"
+    var mangaName = "gal"
     const testFolder = `./manga/${mangaName}/`;
 
     fs.readdirSync(testFolder).forEach(file => {
