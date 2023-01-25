@@ -17,11 +17,15 @@ app.set('view engine', 'ejs');
 
 app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     var mangaName = req.params.mangaName,
-    chapName = req.params.chapName;
+        chapName = req.params.chapName;
 
     var pageList = getPages(mangaName, chapName);
 
-    res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
+    // res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
+
+    res.render("../index", { path_to_image: pageList });
+
+
 });
 
 // Server setup
@@ -36,6 +40,7 @@ function displayPages(mangaName, chapName, pageList) {
 
     pageList.forEach(function (entry, i) {
         link = link + `<img src = "/manga/${mangaName}/${chapName}/${pageList[i]}">\n`
+        
 
     })
     return link
@@ -56,7 +61,7 @@ function getPages(mangaName, chapName) {
         fs.readdirSync(testFolder).forEach(file => {
             pageList.push(file);
         });
-        
+
         return pageList;
     }
 
