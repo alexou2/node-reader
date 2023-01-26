@@ -1,11 +1,12 @@
 body{
     background-color:darkred;
-    font-family:fantasy;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
 
 }
 .top-bar{
     background-color: blueviolet;
     padding:2em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 h1{
 }
