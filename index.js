@@ -25,7 +25,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     // res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
 
-    res.render("../index", { path_to_image: pageList });
+    res.render("../index", { path_to_image: pageList , chapName: chapName});
 
 
 });
@@ -35,17 +35,6 @@ app.listen(3000, (req, res) => {
     console.log("Connected on port:3000");
 });
 
-
-//does all of the formatting in order to display images instead of a blob of text
-function displayPages(mangaName, chapName, pageList) {
-    let link = ""
-
-    pageList.forEach(function (entry, i) {
-        link = link + `<img src = "/manga/${mangaName}/${chapName}/${pageList[i]}">\n`
-
-    })
-    return link
-}
 
 //gets all of the pages in the selectrd directory
 function getPages(mangaName, chapName) {
@@ -111,7 +100,7 @@ function renderChapterList(mangaList) {
         var mangaName = getMangaName(url.parse(req.url).pathname)
 
         // mangaName = getList(url.parse(req.url).pathname)
-        // console.log(mangaName)
+        // console.log("name: ",mangaName)
 
         var chapterList = getList(mangaName)
 
