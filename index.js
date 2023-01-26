@@ -22,6 +22,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
         chapName = req.params.chapName;
 
     var pageList = getPages(mangaName, chapName);
+    pageList = pageList.sort(function(a, b){return a - b});
+    console.log(pageList)
 
     // res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
 

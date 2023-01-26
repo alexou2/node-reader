@@ -1,6 +1,7 @@
 body{
     background-color:darkred;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    
 
 }
 .top-bar{
@@ -8,5 +9,7 @@ body{
     padding:2em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-h1{
+
+.page{
+    text-align: center;
 }
