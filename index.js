@@ -52,6 +52,7 @@ function displayPages(mangaName, chapName, pageList) {
 //gets all of the pages in the selectrd directory
 function getPages(mangaName, chapName) {
 
+
     var pageList = readFiles();
     pageList = filterList(pageList)
 
@@ -81,26 +82,32 @@ function getPages(mangaName, chapName) {
 }
 
 
-let chapterList = getChapterList()
-console.log(chapterList)
-renderHomepage(chapterList)
-function renderHomepage(chapterList) {
-    app.get(`/`, (req, res) => {
 
-        res.render("../home", { chapterList: chapterList, mangaName: "gal" });
+
+
+
+
+//renders navigation pages
+renderHomepage()
+renderChapterList()
+
+
+function renderHomepage() {
+
+
+    app.get(`/`, (req, res) => {
+        let mangaName = "."
+        let chapterList = getList(mangaName)
+        res.render("../home", { mangaList: chapterList, mangaName: mangaName});
         console.log(chapterList)
         console.log("home.js is running")
-
-
     });
 }
 
 
-
 //gets chapters from a manga
-function getChapterList() {
+function getList(mangaName) {
     var chapterList = [];
-    var mangaName = "gal"
     const testFolder = `./manga/${mangaName}/`;
 
     fs.readdirSync(testFolder).forEach(file => {
@@ -108,6 +115,45 @@ function getChapterList() {
     });
     console.log("home.js is running")
     // console.log(chapterList)
+
+    //calls function to render a specific page
+
+
+    return chapterList;
+}
+
+
+
+
+
+
+function renderChapterList() {
+
+
+    app.get(`/manga/:mangaName`, (req, res) => {
+        var mangaName = "hori"
+        var chapterList = getChapterList(mangaName)
+
+        res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
+        // console.log(chapterList)
+        console.log("chapter page is running")
+    });
+}
+
+function getChapterList(mangaName) {
+    var chapterList = [];
+
+    const testFolder = `./manga/${mangaName}/`;
+
+    fs.readdirSync(testFolder).forEach(file => {
+        chapterList.push(file);
+    });
+    console.log("home.js is running")
+    // console.log(chapterList)
+
+    //calls function to render a specific page
+
+
     return chapterList;
 }
 

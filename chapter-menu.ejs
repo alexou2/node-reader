@@ -10,10 +10,10 @@
 <body>
     hello world!<br>
 
-<h1>
-<% for(var i=0; i<mangaList.length; i++) {%>
-<a href="manga/<%= mangaList[i] %>"><%= i+1 %>)  <%= mangaList[i] %></a><br>
-    <% } %>
-</h1>
+
+<% for(var i=0; i<chapterList.length; i++) {%>
+<a href="<%= chapterList[i] %>"><%= chapterList[i] %></a><br>
+        <% } %>
+    
 </body>
 </html>
