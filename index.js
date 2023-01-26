@@ -11,11 +11,6 @@ home.renderHomepage()
 // server framework.
 
 
-// let mangaName = "hori"
-// let chapName = "hori_chap_1"
-// var pageList = getPages(mangaName, chapName);
-
-
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 
@@ -84,76 +79,62 @@ function getPages(mangaName, chapName) {
 
 
 
-
-
-
 //renders navigation pages
-renderHomepage()
-renderChapterList()
+let mangaList = renderHomepage()
+console.log("mangaList is ",mangaList)
+renderChapterList(mangaList)
+
 
 
 function renderHomepage() {
-
-
+    let mangaName = "."
+    let mangaList = getList(mangaName)
+    
     app.get(`/`, (req, res) => {
-        let mangaName = "."
-        let chapterList = getList(mangaName)
-        res.render("../home", { mangaList: chapterList, mangaName: mangaName});
-        console.log(chapterList)
+        res.render("../home", { mangaList: mangaList, mangaName: mangaName });
         console.log("home.js is running")
     });
+    return mangaList
 }
+
+
+
+
+
+function renderChapterList(mangaList) {
+    console.log(mangaList)
+
+    app.get(`/manga/:mangaName`, (req, res) => {
+        var mangaName = mangaList[0]
+        var chapterList = getList(mangaName)
+        console.log("chapterList: ",chapterList)
+        console.log("magaName: ", mangaName)
+
+        res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
+        console.log(mangaName)
+        console.log("chapter page is running")
+
+        var url = require("url");
+
+
+console.log("current directory: ", )
+
+var url_parts = url.parse(req.url);
+//  console.log(url_parts);
+ console.log(url_parts.pathname);
+
+    });
+}
+
 
 
 //gets chapters from a manga
 function getList(mangaName) {
-    var chapterList = [];
+    var contentList = [];
     const testFolder = `./manga/${mangaName}/`;
 
     fs.readdirSync(testFolder).forEach(file => {
-        chapterList.push(file);
+        contentList.push(file);
     });
-    console.log("home.js is running")
-    // console.log(chapterList)
-
-    //calls function to render a specific page
-
-
-    return chapterList;
+    return contentList;
 }
-
-
-
-
-
-
-function renderChapterList() {
-
-
-    app.get(`/manga/:mangaName`, (req, res) => {
-        var mangaName = "hori"
-        var chapterList = getChapterList(mangaName)
-
-        res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
-        // console.log(chapterList)
-        console.log("chapter page is running")
-    });
-}
-
-function getChapterList(mangaName) {
-    var chapterList = [];
-
-    const testFolder = `./manga/${mangaName}/`;
-
-    fs.readdirSync(testFolder).forEach(file => {
-        chapterList.push(file);
-    });
-    console.log("home.js is running")
-    // console.log(chapterList)
-
-    //calls function to render a specific page
-
-
-    return chapterList;
-}
-
