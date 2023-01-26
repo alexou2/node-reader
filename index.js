@@ -1,7 +1,7 @@
 let express = require('express');
 let app = express();
 app.use("/manga", express.static('./manga'))
-app.use("ressources",express.static('./ressources'))
+app.use(express.static('./ressources'))
 
 const fs = require('fs');
 var url = require('url');
