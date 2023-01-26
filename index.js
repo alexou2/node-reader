@@ -1,6 +1,6 @@
 let express = require('express');
 let app = express();
-app.use("/manga", express.static('manga'))
+app.use("/manga", express.static('.'))
 const fs = require('fs');
 var url = require('url');
 
