@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 app.use("/manga", express.static('manga'))
 const fs = require('fs');
+var url  = require('url');
 
 //renders the homepage
 let home = require('./home.js')
@@ -105,23 +106,26 @@ function renderChapterList(mangaList) {
     console.log(mangaList)
 
     app.get(`/manga/:mangaName`, (req, res) => {
-        var mangaName = mangaList[0]
+        // var mangaName = mangaList[0]
+        var mangaName = getMangaName(url.parse(req.url).pathname)
+
+        // mangaName = getList(url.parse(req.url).pathname)
+        // console.log(mangaName)
+
         var chapterList = getList(mangaName)
-        console.log("chapterList: ",chapterList)
-        console.log("magaName: ", mangaName)
 
         res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
         console.log("chapter page is running")
 
-        var url = require("url");
 
 
-console.log("current directory: ", )
 
 var url_parts = url.parse(req.url);
 //  console.log(url_parts);
  console.log(url_parts.pathname);
+
+getMangaName(url_parts.pathname)
 
     });
 }
@@ -137,4 +141,14 @@ function getList(mangaName) {
         contentList.push(file);
     });
     return contentList;
+}
+
+
+function getMangaName(path){
+    var mangaName = path.toString().split("/");
+    mangaName = mangaName[2]
+    var message = ("reading:"+ mangaName)
+    console.log(path)
+    console.log(message)
+    return mangaName
 }
