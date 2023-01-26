@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 app.use("/manga", express.static('manga'))
 const fs = require('fs');
-var url  = require('url');
+var url = require('url');
 
 //renders the homepage
 let home = require('./home.js')
@@ -82,7 +82,7 @@ function getPages(mangaName, chapName) {
 
 //renders navigation pages
 let mangaList = renderHomepage()
-console.log("mangaList is ",mangaList)
+console.log("manga list is ", mangaList)
 renderChapterList(mangaList)
 
 
@@ -90,10 +90,10 @@ renderChapterList(mangaList)
 function renderHomepage() {
     let mangaName = "."
     let mangaList = getList(mangaName)
-    
+
     app.get(`/`, (req, res) => {
         res.render("../home", { mangaList: mangaList, mangaName: mangaName });
-        console.log("home.js is running")
+        console.log("homepage is running")
     });
     return mangaList
 }
@@ -103,7 +103,6 @@ function renderHomepage() {
 
 
 function renderChapterList(mangaList) {
-    console.log(mangaList)
 
     app.get(`/manga/:mangaName`, (req, res) => {
         // var mangaName = mangaList[0]
@@ -117,16 +116,6 @@ function renderChapterList(mangaList) {
         res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
         console.log("chapter page is running")
-
-
-
-
-var url_parts = url.parse(req.url);
-//  console.log(url_parts);
- console.log(url_parts.pathname);
-
-getMangaName(url_parts.pathname)
-
     });
 }
 
@@ -144,10 +133,10 @@ function getList(mangaName) {
 }
 
 
-function getMangaName(path){
+function getMangaName(path) {
     var mangaName = path.toString().split("/");
     mangaName = mangaName[2]
-    var message = ("reading:"+ mangaName)
+    var message = ("reading:" + mangaName)
     console.log(path)
     console.log(message)
     return mangaName
