@@ -71,6 +71,8 @@ function getPages(mangaName, chapName) {
 
     return pageList
 }
+
+//sorts the lists with the number in them created by chatGPT ;)
 function sortList(arr) {
     arr.sort((a, b) => {
         let a_parts = a.split(" ");
@@ -84,15 +86,13 @@ function sortList(arr) {
 }
 
 
-
-
-//renders navigation pages
+//calls the functions to render navigation pages
 let mangaList = renderHomepage()
 console.log("manga list is ", mangaList)
 renderChapterList(mangaList)
 
 
-
+//renders the homepage accessible at localhost:3000
 function renderHomepage() {
     let mangaName = "."
     let mangaList = getList(mangaName)
@@ -108,17 +108,14 @@ function renderHomepage() {
 function renderChapterList(mangaList) {
 
     app.get(`/manga/:mangaName`, (req, res) => {
-        // var mangaName = mangaList[0]
         var mangaName = getMangaName(url.parse(req.url).pathname)
-
-        // mangaName = getList(url.parse(req.url).pathname)
-        // console.log("name: ",mangaName)
 
         var chapterList = getList(mangaName)
 
         chapterList = sortList(chapterList)
         console.log(chapterList)
 
+        //rendres chapter-menu.ejs with the arguments
         res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
         console.log("chapter page is running")
@@ -132,13 +129,22 @@ function getList(mangaName) {
     var contentList = [];
     const testFolder = `./manga/${mangaName}/`;
 
+    //gets file from the folder
     fs.readdirSync(testFolder).forEach(file => {
         contentList.push(file);
     });
+    console.log("content list: ", contentList)
+
+    //removes all elements that contains ".ht" in them
+    contentList = contentList.filter(function (p) {
+        console.log(!p.includes('.ht'))
+        return !p.includes(`.ht`);
+    });
+
     return contentList;
 }
 
-
+//extracts the manga name by getting the url and then removing what is not part of the manga's name
 function getMangaName(path) {
     var mangaName = path.toString().split("/");
     mangaName = mangaName[2]
