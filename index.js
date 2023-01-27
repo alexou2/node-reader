@@ -27,6 +27,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     // res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
 
+pageList = sortList(pageList)
+
     res.render("../index", { path_to_image: pageList , chapName: chapName});
 
 
@@ -69,6 +71,17 @@ function getPages(mangaName, chapName) {
 
     return pageList
 }
+function sortList(arr){
+arr.sort((a, b) => {
+    let a_parts = a.split(" ");
+    let b_parts = b.split(" ");
+    let a_num = parseInt(a_parts[a_parts.length-3]) || parseInt(a.match(/\d+/)[0]);
+    let b_num = parseInt(b_parts[b_parts.length-3]) || parseInt(b.match(/\d+/)[0]);
+    return a_num === 0 ? -1 : b_num === 0 ? 1 : a_num - b_num;
+});
+console.log(arr); // ["Comic Girls Vol.1 Chapter 0 - Manganelo_files", "Comic Girls Vol.1 Chapter 1 - Manganelo_files", "Comic Girls Chapter 2 - Manganelo_files", "[1-n]", "[2-n]", "[10-n]"]
+return arr
+}
 
 
 
@@ -91,10 +104,7 @@ function renderHomepage() {
     return mangaList
 }
 
-
-
-
-
+//renders the page where all of a manga's chapters are displayed
 function renderChapterList(mangaList) {
 
     app.get(`/manga/:mangaName`, (req, res) => {
@@ -105,6 +115,9 @@ function renderChapterList(mangaList) {
         // console.log("name: ",mangaName)
 
         var chapterList = getList(mangaName)
+
+chapterList = sortList(chapterList)
+console.log(chapterList)
 
         res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
