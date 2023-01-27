@@ -22,14 +22,14 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
         chapName = req.params.chapName;
 
     var pageList = getPages(mangaName, chapName);
-    pageList = pageList.sort(function(a, b){return a - b});
+    pageList = pageList.sort(function (a, b) { return a - b });
     console.log(pageList)
 
     // res.render("../index", { path_to_image: displayPages(mangaName, chapName, pageList) });
 
-pageList = sortList(pageList)
+    pageList = sortList(pageList)
 
-    res.render("../index", { path_to_image: pageList , chapName: chapName});
+    res.render("../index", { path_to_image: pageList, chapName: chapName });
 
 
 });
@@ -71,16 +71,16 @@ function getPages(mangaName, chapName) {
 
     return pageList
 }
-function sortList(arr){
-arr.sort((a, b) => {
-    let a_parts = a.split(" ");
-    let b_parts = b.split(" ");
-    let a_num = parseInt(a_parts[a_parts.length-3]) || parseInt(a.match(/\d+/)[0]);
-    let b_num = parseInt(b_parts[b_parts.length-3]) || parseInt(b.match(/\d+/)[0]);
-    return a_num === 0 ? -1 : b_num === 0 ? 1 : a_num - b_num;
-});
-console.log(arr); // ["Comic Girls Vol.1 Chapter 0 - Manganelo_files", "Comic Girls Vol.1 Chapter 1 - Manganelo_files", "Comic Girls Chapter 2 - Manganelo_files", "[1-n]", "[2-n]", "[10-n]"]
-return arr
+function sortList(arr) {
+    arr.sort((a, b) => {
+        let a_parts = a.split(" ");
+        let b_parts = b.split(" ");
+        let a_num = parseInt(a_parts[a_parts.length - 3]) || parseInt(a.match(/\d+/)[0]);
+        let b_num = parseInt(b_parts[b_parts.length - 3]) || parseInt(b.match(/\d+/)[0]);
+        return a_num === 0 ? -1 : b_num === 0 ? 1 : a_num - b_num;
+    });
+    console.log(arr); // ["Comic Girls Vol.1 Chapter 0 - Manganelo_files", "Comic Girls Vol.1 Chapter 1 - Manganelo_files", "Comic Girls Chapter 2 - Manganelo_files", "[1-n]", "[2-n]", "[10-n]"]
+    return arr
 }
 
 
@@ -116,8 +116,8 @@ function renderChapterList(mangaList) {
 
         var chapterList = getList(mangaName)
 
-chapterList = sortList(chapterList)
-console.log(chapterList)
+        chapterList = sortList(chapterList)
+        console.log(chapterList)
 
         res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
@@ -143,6 +143,7 @@ function getMangaName(path) {
     var mangaName = path.toString().split("/");
     mangaName = mangaName[2]
     var message = ("reading:" + mangaName)
+    mangaName = mangaName.replaceAll('%20', '\ ')
     console.log(path)
     console.log(message)
     return mangaName

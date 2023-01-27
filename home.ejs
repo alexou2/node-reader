@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,15 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
 </head>
+
 <body>
     <div class="top-bar">
         <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
             </a><br>
-</p></div>
-<h1>
-<% for(var i=0; i<mangaList.length; i++) {%>
-<a href="manga/<%= mangaList[i] %>"><%= i+1 %>)  <%= mangaList[i] %></a><br>
-    <% } %>
-</h1>
+        </p>
+    </div>
+
+
+
+    <div class="mangaList">
+        <% for(var i=0; i<mangaList.length; i++) {%>
+            <a href="manga/<%= mangaList[i] %>">
+                <%= i+1 %>) <%= mangaList[i] %>
+            </a><br>
+            <% } %>
+    </div>
+
 </body>
+
 </html>

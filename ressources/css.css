@@ -1,15 +1,48 @@
-body{
-    background-color:darkred;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    
+body {
+    background-color: darkred;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 
 }
-.top-bar{
+
+.top-bar {
     background-color: blueviolet;
-    padding:2em;
+    /* padding: 2em; */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.page{
+.page {
     text-align: center;
+    /* display:block; */
+}
+
+img {
+    max-width: 100%;
+    /* display: block; */
+    text-align: center;
+}
+
+.mangaList {}
+
+.chapterList {
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+.text-box {
+    text-align: center;
+
+    border-radius: 25px;
+
+    font-size: 4em;
+
+    margin: 10px;
+    padding: 10px;
+
+    /* color: brown; */
+    background: cornsilk;
+    border: 1px solid burlywood;
+
+    margin-left: 25%;
+    margin-right: 25%;
 }
