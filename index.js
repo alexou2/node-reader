@@ -29,7 +29,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     pageList = sortList(pageList)
 
-    res.render("../index", { path_to_image: pageList, chapName: chapName });
+    res.render("../index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
 
 
 });
