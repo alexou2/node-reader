@@ -1,0 +1,15 @@
+//client-side for now
+
+
+const images = document.querySelectorAll('.container-chapter-reader > img');
+
+let result = "";
+
+for (let image of images) {
+  console.log(image);
+  result += image.src + "\n";
+}
+
+console.log(result)
+
+//gets all of the images from manganato
