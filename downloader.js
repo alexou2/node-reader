@@ -1,36 +1,24 @@
-// it works!
-// credits to chatGPT
-
+const puppeteer = require('puppeteer');
 const fs = require('fs');
-const path = require('path');
-const {Builder, By, Key, until} = require('selenium-webdriver');
 
-(async function example() {
-  let driver = await new Builder().forBrowser('firefox').build();
-  try {
-    await driver.get('https://chapmanganato.com/manga-jt987302/chapter-15');
-    let imgElements = await driver.findElements(By.css('img'));
-    let imgUrls = await Promise.all(imgElements.map(img => img.getAttribute('src')));
-    let dirName = "chapmanganato.com/manga-jt987302/chapter-14";
+(async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://chapmanganato.com/manga-jt987302/chapter-15');
 
-    if (!fs.existsSync(dirName)){
-        fs.mkdirSync(dirName);
+    // Get all the image elements on the page
+    const images = await page.$$eval('img', imgs => imgs.map(img => img.src));
+    const folderName = 'Chapter_15'
+    if (!fs.existsSync(folderName)) {
+      fs.mkdirSync(folderName);
+    }
+    
+    // Download each image
+    for (let i = 0; i < images.length; i++) {
+        const response = await page.goto(images[i]);
+        const buffer = await response.buffer();
+        fs.writeFileSync(`${folderName}/image-${i}.jpg`, buffer);
     }
 
-    for (let i = 0; i < imgUrls.length; i++) {
-        let imgUrl = imgUrls[i];
-        let fileName = path.basename(imgUrl);
-        let fullPath = path.join(dirName, fileName);
-
-        let data = await driver.executeScript(`return (async () => {
-            const response = await fetch('${imgUrl}', { method: 'GET' });
-            return await response.arrayBuffer();
-        })();`);
-
-        fs.writeFileSync(fullPath, Buffer.from(data));
-    }
-
-  } finally {
-    await driver.quit();
-  }
+    await browser.close();
 })();
