@@ -6,9 +6,6 @@ app.use(express.static('./ressources'))
 const fs = require('fs');
 var url = require('url');
 
-//renders the homepage
-let home = require('./home.js')
-home.renderHomepage()
 
 // Set express as Node.js web application
 // server framework.
