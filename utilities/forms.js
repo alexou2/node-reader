@@ -1,17 +1,12 @@
-const app = require("express")
+let express = require('express');
+let app = express();
 
 //renders the form to add new chapters
 app.get(`/new`, (req, res) => {
-    var mangaName = req.params.mangaName,
-        chapName = req.params.chapName;
+    res.render("../views/add-chapter");
 
-    var pageList = getPages(mangaName, chapName);
-    pageList = pageList.sort(function (a, b) { return a - b });
-    console.log(pageList)
+});
 
-    pageList = sortList(pageList)
-
-    res.render("../views/add-chapter", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
-
-
+app.listen(3000, (req, res) => {
+    console.log("Connected on port:3000");
 });

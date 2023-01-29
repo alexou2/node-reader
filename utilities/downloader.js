@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const mangaName = "testing";
 
-//runs the download function
+//runs the download function for a set number of times
 for (let number = 1; number < 15; number ++){
 download(number)
 }
@@ -13,8 +13,6 @@ download(number)
 //downloads the chapters
 function download(number){
 (async () => {
-
-
   
 
     const browser = await puppeteer.launch();
