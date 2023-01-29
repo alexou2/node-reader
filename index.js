@@ -29,7 +29,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     pageList = sortList(pageList)
 
-    res.render("../index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
 
 
 });
@@ -98,7 +98,7 @@ function renderHomepage() {
     let mangaList = getList(mangaName)
 
     app.get(`/`, (req, res) => {
-        res.render("../home", { mangaList: mangaList, mangaName: mangaName });
+        res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
         console.log("homepage is running")
     });
     return mangaList
@@ -116,7 +116,7 @@ function renderChapterList(mangaList) {
         console.log(chapterList)
 
         //rendres chapter-menu.ejs with the arguments
-        res.render("../chapter-menu", { mangaName: mangaName, chapterList: chapterList });
+        res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
         console.log(mangaName)
         console.log("chapter page is running")
     });
