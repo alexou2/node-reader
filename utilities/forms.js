@@ -9,7 +9,7 @@ add: function () {
 app.set('view engine', 'ejs');
 
 app.get(`/new/`, (req, res) => {
-    res.render("../../views/add-manga");
+    res.render("../../views/add-manga", {description: "desc", markdown: "mkd", title:"title"});
 });
 console.log(__dirname)
 

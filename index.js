@@ -14,7 +14,9 @@ var url = require('url');
 // const forms = require("./utilities/forms.js")
 // forms.add()
 app.get(`/new/`, (req, res) => {
-    res.render("../views/add-manga");
+    // res.render("../views/add-manga");
+    res.render("../views/add-manga", {description: "desc", markdown: "mkd", title:"title"});
+
 });
 
 
