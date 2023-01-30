@@ -11,8 +11,11 @@ var url = require('url');
 // server framework.
 
 
-// const forms = require("utilities/forms.js")
-
+// const forms = require("./utilities/forms.js")
+// forms.add()
+app.get(`/new/`, (req, res) => {
+    res.render("../views/add-manga");
+});
 
 
 // Set EJS as templating engine
