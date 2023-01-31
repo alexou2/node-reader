@@ -7,7 +7,7 @@ const mangaName = "after school mate";
 
 
 //runs the download function for a set number of times
-for (let number = 1; number <= 7; number ++){
+for (let number = 1; number <= 173; number ++){
 download(number)
 }
 
@@ -23,7 +23,7 @@ function download(number){
     
     // await page.goto('https://chapmanganato.com/manga-jt987302/chapter-15');
     // await page.goto(`https://chapmanganato.com/manga-jt987302/chapter-${number}`);
-    await page.goto(`https://chapmanganato.com/manga-ns991327/chapter-${number}`);
+    await page.goto(`https://chapmanganato.com/manga-aa951409/chapter-${number}`);
 
 
     
