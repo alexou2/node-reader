@@ -26,11 +26,11 @@ $('.panel-story-chapter-list a').each((index, element) => {
 });
 
 //gets all of the image links form the page
-$('img').each((index, element) => {
+$('.info-image img').each((index, element) => {
     images.push($(element).attr('src'));
 });
 
 console.log(links); // [ 'link1', 'link2' ]
-// console.log(images); // [ 'image1.jpg', 'image2.jpg' ]
+console.log(images); // [ 'image1.jpg', 'image2.jpg' ]
 this.images = images
 });
