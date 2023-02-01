@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 
-const mangaName = "one piece";
+
 
 
 
@@ -10,10 +10,12 @@ const mangaName = "one piece";
 
 //splits the number of chapter in chunks of 9 chapters to fix memory leak issues
 
-const chapterNumber = 1000
+const chapterNumber = 10
+const mangaName = "one piece";
 
 
-for (let number = 1; number <= 11; number ++){
+
+for (let number = 1; number <= chapterNumber; number ++){
 download(number)
 console.log(`started chapter ${number}`)
 }

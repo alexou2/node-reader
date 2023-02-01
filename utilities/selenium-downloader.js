@@ -10,7 +10,7 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
     await driver.get('https://chapmanganato.com/manga-jt987302/chapter-14');
     let imgElements = await driver.findElements(By.css('img'));
     let imgUrls = await Promise.all(imgElements.map(img => img.getAttribute('src')));
-    let dirName = "chapmanganato.com/manga-jt987302/chapter-14";
+    let dirName = "chapter-14";
 
     if (!fs.existsSync(dirName)){
         fs.mkdirSync(dirName);
