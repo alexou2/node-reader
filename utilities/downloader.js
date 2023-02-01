@@ -10,12 +10,19 @@ const fs = require('fs');
 
 //splits the number of chapter in chunks of 9 chapters to fix memory leak issues
 
+
+//number of chapters you want to download ( I recommend downloading by chunks of 10 chapters to avoid memory leak)
 const chapterNumber = 10
-const mangaName = "one piece";
+//the name of the folder will have this name
+const mangaName = "one piece"
+// the manganato link for the chapters (remove the chapter number from the url)
+const chapterLink = "https://chapmanganato.com/manga-aa951409/chapter-"
+// if you have more than 9 chapters to download, change this variable, otherwise, don't
+const minChap = 1
 
 
 
-for (let number = 1; number <= chapterNumber; number ++){
+for (let number = minChap; number <= chapterNumber; number ++){
 download(number)
 console.log(`started chapter ${number}`)
 }
@@ -31,8 +38,12 @@ function download(number){
     
     
     // await page.goto('https://chapmanganato.com/manga-jt987302/chapter-15');
-    // await page.goto(`https://chapmanganato.com/manga-jt987302/chapter-${number}`);
-    await page.goto(`https://chapmanganato.com/manga-aa951409/chapter-${number}`, {waitUntil: 'load', timeout: 0});
+    
+
+    // await page.goto(`https://chapmanganato.com/manga-aa951409/chapter-${number}`, {waitUntil: 'load', timeout: 0});
+   
+   //downloads the page 
+    await page.goto(`${chapterLink}${number}`, {waitUntil: 'load', timeout: 0});
 
 
     
