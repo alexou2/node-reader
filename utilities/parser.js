@@ -7,11 +7,11 @@ const fs = require ('fs')
 const request = require('request');
 
 
-request('http://manganato.com', function (error, response, body) {
+request('https://chapmanganato.com/manga-aa951409/', function (error, response, body) {
     let content = body
     // console.log(content)
 
-console.log(content)
+// console.log(content)
 
 let html
 html = content
@@ -20,14 +20,17 @@ const $ = cheerio.load(html);
 const links = [];
 const images = [];
 
-$('.chapter a').each((index, element) => {
+//gets the chapters from the list
+$('.panel-story-chapter-list a').each((index, element) => {
     links.push($(element).attr('href'));
 });
 
+//gets all of the image links form the page
 $('img').each((index, element) => {
     images.push($(element).attr('src'));
 });
 
 console.log(links); // [ 'link1', 'link2' ]
-console.log(images); // [ 'image1.jpg', 'image2.jpg' ]
+// console.log(images); // [ 'image1.jpg', 'image2.jpg' ]
+this.images = images
 });
