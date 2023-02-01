@@ -1,10 +1,17 @@
 const cheerio = require('cheerio');
 const fs = require ('fs')
 
+const { linkSync } = require("fs");
+
 
 // gets the content of a local html file
 // const data = fs.readFileSync('test.html', 'utf8')
 const request = require('request');
+
+
+let links = []
+let images = []
+
 
 
 request('https://chapmanganato.com/manga-aa951409/', function (error, response, body) {
@@ -17,8 +24,8 @@ let html
 html = content
 
 const $ = cheerio.load(html);
-const links = [];
-const images = [];
+// const links = [];
+// const images = [];
 
 //gets the chapters from the list
 $('.panel-story-chapter-list a').each((index, element) => {
@@ -30,7 +37,10 @@ $('.info-image img').each((index, element) => {
     images.push($(element).attr('src'));
 });
 
-console.log(links); // [ 'link1', 'link2' ]
-console.log(images); // [ 'image1.jpg', 'image2.jpg' ]
-this.images = images
-});
+console.log(links);
+console.log(images); 
+})
+
+
+
+console.log(links)
