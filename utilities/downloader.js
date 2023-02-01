@@ -2,16 +2,12 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 
-
-
-
-
 //runs the download function for a set number of times
 
 //splits the number of chapter in chunks of 9 chapters to fix memory leak issues
 
 
-//number of chapters you want to download ( I recommend downloading by chunks of 10 chapters to avoid memory leak)
+//number of chapters you want to download (I recommend downloading by chunks of 10 chapters to avoid memory leak)
 const chapterNumber = 10
 //the name of the folder will have this name
 const mangaName = "one piece"
