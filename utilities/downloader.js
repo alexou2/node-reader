@@ -2,7 +2,10 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 
-//runs the download function for a set number of times
+
+
+
+
 
 //splits the number of chapter in chunks of 9 chapters to fix memory leak issues
 
@@ -17,7 +20,7 @@ const chapterLink = "https://chapmanganato.com/manga-aa951409/chapter-"
 const minChap = 1
 
 
-
+//runs the download function for a set number of times
 for (let number = minChap; number <= chapterNumber; number ++){
 download(number)
 console.log(`started chapter ${number}`)
