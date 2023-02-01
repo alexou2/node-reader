@@ -2,13 +2,20 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 
-const mangaName = "after school mate";
+const mangaName = "one piece";
 
 
 
 //runs the download function for a set number of times
-for (let number = 1; number <= 173; number ++){
+
+//splits the number of chapter in chunks of 9 chapters to fix memory leak issues
+
+const chapterNumber = 1000
+
+
+for (let number = 1; number <= 11; number ++){
 download(number)
+console.log(`started chapter ${number}`)
 }
 
 
@@ -23,7 +30,7 @@ function download(number){
     
     // await page.goto('https://chapmanganato.com/manga-jt987302/chapter-15');
     // await page.goto(`https://chapmanganato.com/manga-jt987302/chapter-${number}`);
-    await page.goto(`https://chapmanganato.com/manga-aa951409/chapter-${number}`);
+    await page.goto(`https://chapmanganato.com/manga-aa951409/chapter-${number}`, {waitUntil: 'load', timeout: 0});
 
 
     
@@ -55,6 +62,7 @@ function download(number){
         fs.writeFileSync(`${folderName}/image-${i}.jpg`, buffer);
     }
 
+    await page.close()
     await browser.close();
     console.log(`${folderName} has finished downloading`)
 })();
