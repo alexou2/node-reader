@@ -3,38 +3,30 @@ let app = express();
 app.use("/manga", express.static('./manga'))
 app.use(express.static('./ressources'))
 const bodyParser = require('body-parser')
-
-app.use(bodyParser.urlencoded({ extended: false }))
-
-
-
 const fs = require('fs');
 var url = require('url');
 
+// Set EJS as templating engine
+app.set('view engine', 'ejs');
 
-// Set express as Node.js web application
-// server framework.
 
 
-// const forms = require("./utilities/forms.js")
-// forms.add()
+//form to add chapters
+app.use(bodyParser.urlencoded({ extended: false }))
+
+//loads the form
 app.get(`/new/`, (req, res) => {
     // res.render("../views/add-manga");
     res.render("../views/add-manga", {description: "desc", markdown: "mkd", title:"title"});
-
-
-
-
 });
 
-
+//prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
 console.log(req.body)
 res.redirect(`/`)
 })
 
-// Set EJS as templating engine
-app.set('view engine', 'ejs');
+
 
 app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     var mangaName = req.params.mangaName,

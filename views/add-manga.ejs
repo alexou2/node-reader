@@ -1,22 +1,12 @@
+<h1>Add a new manga</h1>
 <form method = "post">
-
 <div class="form-group">
-    <label for="title">manga  name</label>
-    <input required value="<%= title %>" 
-    type="text" name="title" id="title" 
-    class="form-control">
-</div>
-<div class="form-group">
-    <label for="description">link to first chapter</label>
-    <textarea name="description" id="description" 
-    class="form-control"><%= description %></textarea>
-</div>
-<div class="form-group">
-    <label for="markdown">number of chapters</label>
+    <label for="link">mangaNato link</label>
     <textarea required name="markdown" id="markdown" 
-    class="form-control"><%= markdown %></textarea>
+    class="form-control">manganato.com/</textarea>
 </div>
+<a href="manganato.com">visit site</a> <br>
 
-<a href="/" class="btn btn-secondary">Cancel</a>
+<a href="/" class="btn btn-secondary">cancel</a>
 <button type="submit" class="btn btn-primary">Save</button>
 </form>
