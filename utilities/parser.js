@@ -1,13 +1,15 @@
 const cheerio = require('cheerio');
 const fs = require ('fs');
-import { download } from './downloader';
+// import { download } from './downloader';
 
 const { linkSync } = require("fs");
+const sem = require ('semaphore')(10);
 
 
 // gets the content of a local html file
 // const data = fs.readFileSync('test.html', 'utf8')
 const request = require('request');
+const download = require('./downloader.js')
 
 
 let links = []
@@ -38,8 +40,15 @@ $('.info-image img').each((index, element) => {
     images.push($(element).attr('src'));
 });
 
+links = links.reverse()
 console.log("inks: ", links);
 console.log("images: ", images); 
+
+for (let i = 1; i<= links.length; i++){
+    sem.take(()=>{
+download.download(links[i], i, "one piece", sem)
+    })
+}
 })
 
 
