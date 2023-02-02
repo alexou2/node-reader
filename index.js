@@ -2,6 +2,11 @@ let express = require('express');
 let app = express();
 app.use("/manga", express.static('./manga'))
 app.use(express.static('./ressources'))
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
 
 const fs = require('fs');
 var url = require('url');
@@ -17,8 +22,16 @@ app.get(`/new/`, (req, res) => {
     // res.render("../views/add-manga");
     res.render("../views/add-manga", {description: "desc", markdown: "mkd", title:"title"});
 
+
+
+
 });
 
+
+app.post(`/new`, (req, res) => {
+console.log(req.body)
+res.redirect(`/`)
+})
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');

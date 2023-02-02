@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
-const fs = require ('fs')
+const fs = require ('fs');
+import { download } from './downloader';
 
 const { linkSync } = require("fs");
 
@@ -37,10 +38,9 @@ $('.info-image img').each((index, element) => {
     images.push($(element).attr('src'));
 });
 
-console.log(links);
-console.log(images); 
+console.log("inks: ", links);
+console.log("images: ", images); 
 })
 
 
 
-console.log(links)
