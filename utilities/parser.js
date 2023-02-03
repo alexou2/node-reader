@@ -9,7 +9,7 @@ const sem = require ('semaphore')(10);
 // gets the content of a local html file
 // const data = fs.readFileSync('test.html', 'utf8')
 const request = require('request');
-const download = require('./downloader.js')
+const ddl = require('./downloader.js')
 
 
 let links = []
@@ -59,7 +59,7 @@ console.log("mangaName: ", mangaName)
 //calls download function
 for (let i = 0; i< links.length; i++){
     sem.take(()=>{
-download.download(links[i], i, mangaName, sem)
+ddl.download(links[i], i, mangaName, sem)
     })
 }
 })
