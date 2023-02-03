@@ -1,15 +1,15 @@
 let express = require('express');
 let app = express();
-app.use("/manga", express.static('./manga'))
-app.use(express.static('./ressources'))
+
 const bodyParser = require('body-parser')
 const fs = require('fs');
 var url = require('url');
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
-
-
+//serve mangas and css
+app.use("/manga", express.static('./manga'))
+app.use(express.static('./ressources'))
 
 //form to add chapters
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -22,7 +22,9 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
+// let mangaLink = req.body
 let mangaLink = req.body
+
     console.log(mangaLink)
 res.redirect(`/`)
 })
