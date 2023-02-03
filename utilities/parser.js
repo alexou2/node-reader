@@ -22,7 +22,7 @@ let images
 let mangaName
 
 
-mangaLink = 'https://chapmanganato.com/manga-gn983696'
+mangaLink = 'https://manganato.com/manga-pn992722'
 
 
 request(mangaLink, function (error, response, body) {
