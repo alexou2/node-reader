@@ -18,21 +18,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //loads the form
 app.get(`/new/`, (req, res) => {
     // res.render("../views/add-manga");
-    res.render("../views/add-manga", {description: "desc", markdown: "mkd", title:"title"});
+    res.render("../views/add-manga", { description: "desc", markdown: "mkd", title: "title" });
 });
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-// let mangaLink = req.body
-let mangaLink = req.body
+    // let mangaLink = req.body
+    let mangaLink = req.body
 
-// mangaLink = mangaLink.toString()
-// mangaLink = ''+ mangaLink
-
-parse.parse('https://manganato.com/manga-mv989756')
+    // parse.parse('https://manganato.com/manga-mv989756')
 
     console.log(mangaLink)
-res.redirect(`/`)
+    res.redirect(`/`)
 })
 
 

@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-// let sem = requimangaNamere('semaphore')(10)
+// let sem = require('semaphore')(10)
 
 
 
