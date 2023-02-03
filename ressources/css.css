@@ -102,3 +102,21 @@ a{
     color: white;
     margin: 0;
 }
+
+.change-chapter {
+    text-align: right;
+
+    border-radius: 25px;
+
+    font-size: 2em;
+
+    margin: 10px;
+    padding: 10px;
+
+    color: rgb(50, 50, 100);
+    background: white;
+    border: 1px solid burlywood;
+
+    /* margin-left: 25%;
+    margin-right: 25%; */
+}

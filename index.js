@@ -29,7 +29,7 @@ let mangaLink = req.body
 // mangaLink = mangaLink.toString()
 // mangaLink = ''+ mangaLink
 
-parse.parse('https://manganato.com/manga-pn992722')
+parse.parse('https://manganato.com/manga-mv989756')
 
     console.log(mangaLink)
 res.redirect(`/`)
