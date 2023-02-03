@@ -59,15 +59,17 @@ await page.goto(chapterLink, {waitUntil:'load', timeout: 0})
     const images = await page.$$eval('img', imgs => imgs.map(img => img.src));
 
 
-
+images.shift()
+images.pop()
+console.log(images)
 
     // const folderName = `../manga/${mangaName}/Chapter_15`
-    const folderName = `../manga/${mangaName}/Chapter_${number+1}`
+    const folderName = `manga/${mangaName}/Chapter_${number+1}`
 
 
 
-    if (!fs.existsSync(`../manga/${mangaName}`)) {
-      fs.mkdirSync(`../manga/${mangaName}`)
+    if (!fs.existsSync(`manga/${mangaName}`)) {
+      fs.mkdirSync(`manga/${mangaName}`)
     }
 
 

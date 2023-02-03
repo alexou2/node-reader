@@ -1,10 +1,9 @@
 const cheerio = require('cheerio');
 const fs = require ('fs');
-// import { download } from './downloader';
 
 const { linkSync } = require("fs");
 const { parse } = require('path');
-const sem = require ('semaphore')(10);
+const sem = require ('semaphore')(5);
 
 
 // gets the content of a local html file
@@ -22,7 +21,7 @@ let images
 let mangaName
 
 
-mangaLink = 'https://manganato.com/manga-pn992722'
+// mangaLink = 'https://manganato.com/manga-mi989765'
 
 
 request(mangaLink, function (error, response, body) {
