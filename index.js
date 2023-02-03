@@ -4,6 +4,7 @@ let app = express();
 const bodyParser = require('body-parser')
 const fs = require('fs');
 var url = require('url');
+const parse = require('./utilities/parser')
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
@@ -24,6 +25,11 @@ app.get(`/new/`, (req, res) => {
 app.post(`/new`, (req, res) => {
 // let mangaLink = req.body
 let mangaLink = req.body
+
+// mangaLink = mangaLink.toString()
+// mangaLink = ''+ mangaLink
+
+// parse.parse(mangaLink)
 
     console.log(mangaLink)
 res.redirect(`/`)

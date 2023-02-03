@@ -51,7 +51,7 @@ console.log("started downloading", chapterLink)
 
     //downloads the page 
     // await page.goto(`${chapterLink}${number}`, { waitUntil: 'load', timeout: 0 });
-await page.goto(chapterLink)
+await page.goto(chapterLink, {waitUntil:'load', timeout: 0})
 
 
 

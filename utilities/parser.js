@@ -3,6 +3,7 @@ const fs = require ('fs');
 // import { download } from './downloader';
 
 const { linkSync } = require("fs");
+const { parse } = require('path');
 const sem = require ('semaphore')(10);
 
 
@@ -12,12 +13,16 @@ const request = require('request');
 const ddl = require('./downloader.js')
 
 
+
+module.exports = {
+    parse : function(mangaLink){
+
 let links = []
 let images
-let mangaName = []
+let mangaName
 
 
-let mangaLink = 'https://chapmanganato.com/manga-qj993844'
+mangaLink = 'https://chapmanganato.com/manga-gn983696'
 
 
 request(mangaLink, function (error, response, body) {
@@ -65,4 +70,5 @@ ddl.download(links[i], i, mangaName, sem)
 })
 
 
-
+    }
+    }
