@@ -22,7 +22,8 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-console.log(req.body)
+let mangaLink = req.body
+    console.log(mangaLink)
 res.redirect(`/`)
 })
 

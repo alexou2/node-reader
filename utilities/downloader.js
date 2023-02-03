@@ -62,7 +62,7 @@ await page.goto(chapterLink)
 
 
     // const folderName = `../manga/${mangaName}/Chapter_15`
-    const folderName = `../manga/${mangaName}/Chapter_${number}`
+    const folderName = `../manga/${mangaName}/Chapter_${number+1}`
 
 
 

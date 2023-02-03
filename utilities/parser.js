@@ -13,11 +13,14 @@ const download = require('./downloader.js')
 
 
 let links = []
-let images = []
+let images
+let mangaName = []
 
 
+let mangaLink = 'https://chapmanganato.com/manga-qj993844'
 
-request('https://chapmanganato.com/manga-aa951409/', function (error, response, body) {
+
+request(mangaLink, function (error, response, body) {
     let content = body
     // console.log(content)
 
@@ -37,16 +40,26 @@ $('.panel-story-chapter-list a').each((index, element) => {
 
 //gets all of the image links form the page
 $('.info-image img').each((index, element) => {
-    images.push($(element).attr('src'));
+    images = ($(element).attr('src'));
 });
+
+
+$('.panel-breadcrumb .a-h').each((index, element) => {
+    mangaName = ($(element).attr('title'));
+});
+
+
 
 links = links.reverse()
 console.log("inks: ", links);
 console.log("images: ", images); 
+console.log("mangaName: ", mangaName)
 
-for (let i = 1; i<= links.length; i++){
+
+//calls download function
+for (let i = 0; i< links.length; i++){
     sem.take(()=>{
-download.download(links[i], i, "one piece", sem)
+download.download(links[i], i, mangaName, sem)
     })
 }
 })
