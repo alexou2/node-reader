@@ -12,9 +12,14 @@
 
 <body>
     <div class="top-bar">
-        <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
-            </a><br>
-        </p>
+        <div class="page-name">
+            HOME
+        </div>
+
+        <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
+        </a>
+
+
     </div>
 
     <!-- shows current path -->
@@ -24,27 +29,46 @@
     </div>
 
     <div class="text-box">
-
         Home
-
     </div>
 
 
 
+
+
+
+    <!-- displaus the mangas present as a list -->
     <div class="list mangaList">
-        <% for(var i=0; i<mangaList.length; i++) {%>
-            <img src = "manga/<%=mangaList[i]%>/cover.jpg"><br>
-            <a href="manga/<%= mangaList[i] %>">
-                <%= i+1 %>) <%= mangaList[i] %>
-            </a><br>
-            <% } %>
+        <table>
+            <tr>
+                <% for(var i=0; i<mangaList.length; i++) {%>
+
+                    <th><a href="manga/<%= mangaList[i] %>"><img src="manga/<%=mangaList[i]%>/cover.jpg"></a></th>
+
+                    <% } %>
+            </tr>
+            <tr>
+                <% for(var i=0; i<mangaList.length; i++) {%>
+                   <th><%= mangaList[i] %></th>
+                        <% } %>
+            </tr>
+                        
+            
+
+        </table>
     </div>
 
-<div class="add-chapter">
 
-<a href="/new">add a chapter or manga</a>
 
-</div>
+
+
+
+
+
+
+    <div class="add-chapter">
+        <a href="/new">add a chapter or manga</a>
+    </div>
 
 
 </body>

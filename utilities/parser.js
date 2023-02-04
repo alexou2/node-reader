@@ -65,7 +65,9 @@ module.exports = {
             
             //replaces spaces with a backslash before the space
             for (let i = 0; i<chapterName.length;i++){
-            chapterName[i] = chapterName[i].replaceAll(':', '\ ')
+            chapterName[i] = chapterName[i].replaceAll(':', '_ ')
+            chapterName[i] = chapterName[i].replaceAll('?', '_ ')
+            chapterName[i] = chapterName[i].replaceAll('!', '_ ')
 
             }
             console.log("chapters: ", chapterName)
