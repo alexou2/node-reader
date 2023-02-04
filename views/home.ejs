@@ -71,7 +71,7 @@
     <div id="manga-list">
         <% for (var i=0; i < mangaList.length; i++) { %>
             <div class="manga-item">
-                <img class="manga-image" src="manga/<%= mangaList[i] %>/cover.jpg" />
+                <a href="manga/<%= mangaList[i] %>"><img class="manga-image" src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
                 <br>
                 <%= mangaList[i] %>
             </div>
