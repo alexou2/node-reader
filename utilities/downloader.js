@@ -5,7 +5,7 @@ const fs = require('fs');
 
 
 module.exports = {
-  download: function (chapterLink, number, mangaName, sem) {
+  download: function (chapterLink, chapterName, mangaName, sem, coverImage) {
     (async () => {
       console.log("started downloading", chapterLink)
 
@@ -18,7 +18,6 @@ module.exports = {
       await page.goto(chapterLink, { waitUntil: 'load', timeout: 0 })
 
 
-
       // Get all the image elements on the page
       const images = await page.$$eval('img', imgs => imgs.map(img => img.src));
 
@@ -28,7 +27,7 @@ module.exports = {
       console.log(images)
 
       // const folderName = `../manga/${mangaName}/Chapter_15`
-      const folderName = `manga/${mangaName}/Chapter_${number + 1}`
+      const folderName = `manga/${mangaName}/${chapterName}`
 
 
 
@@ -53,6 +52,51 @@ module.exports = {
       console.log(`${folderName} has finished downloading`)
       sem.leave(1)
     })();
-  }
+  
+  
+  
+  },
+
+getCoverImage: function(coverImage, mangaName){
+  (async () => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+
+    //downloads the cover image
+    await page.goto(coverImage, {waitUntil: 'load', timeout: 0})
+
+
+    // download the cover image
+    const cover  = await page.$$eval('img', imgs => imgs.map(img => img.src));
+
+
+    const folderName = `manga/${mangaName}`
+
+
+//creates the directory for the cover
+    if (!fs.existsSync(`manga/${mangaName}`)) {
+      fs.mkdirSync(`manga/${mangaName}`)
+    }
+
+console.log(cover)
+    // Download each image
+      const response = await page.goto(cover[0]);
+      const buffer = await response.buffer();
+      fs.writeFileSync(`${folderName}/cover.jpg`, buffer);
+    
+
+    await page.close()
+    await browser.close();
+    console.log(`${folderName} has finished downloading`)
+  })();
+
+
+
+},
+
 
 }
+
+

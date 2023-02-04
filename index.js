@@ -41,8 +41,6 @@ app.post(`/new`, (req, res) => {
     let mangaString = formData.toString();  // Convert the value to a string
   
     console.log(mangaString);  // Output: the string value of the "mangaList" field
-  
-    res.send('Form data received');
 
 
 
@@ -54,10 +52,10 @@ app.post(`/new`, (req, res) => {
 
     
     
-    // if (!mangaLink) {
-    //     console.log("mangaList field is not present in the request body.");
-    //     return res.status(400).send("Bad Request: mangaList field is missing.");
-    // }
+    if (!mangaLink) {
+        console.log("mangaList field is not present in the request body.");
+        return res.status(400).send("Bad Request: mangaList field is missing.");
+    }
      parse.parse(mangaString)
     res.redirect(`/`)
 })

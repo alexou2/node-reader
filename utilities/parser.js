@@ -17,8 +17,9 @@ module.exports = {
     parse: function (mangaLink) {
 
         let links = []
-        let images
+        let coverImage
         let mangaName
+        let chapterName = []
 
 
         // mangaLink = 'https://manganato.com/manga-mi989765'
@@ -34,8 +35,6 @@ module.exports = {
             html = content
 
             const $ = cheerio.load(html);
-            // const links = [];
-            // const images = [];
 
             //gets the chapters from the list
             $('.panel-story-chapter-list a').each((index, element) => {
@@ -44,28 +43,39 @@ module.exports = {
 
             //gets all of the image links form the page
             $('.info-image img').each((index, element) => {
-                images = ($(element).attr('src'));
+                coverImage = ($(element).attr('src'));
             });
 
-
+            //gets the manga name feom the link near the top of the page
             $('.panel-breadcrumb .a-h').each((index, element) => {
                 mangaName = ($(element).attr('title'));
             });
 
 
+            $('.panel-story-chapter-list a').each((index, element) => {
+                chapterName.push($(element).attr('title'));
+            });
 
+            // prints the informations to debug
             links = links.reverse()
             console.log("inks: ", links);
-            console.log("images: ", images);
+            console.log("cover image: ", coverImage);
             console.log("mangaName: ", mangaName)
+            chapterName = chapterName.reverse()
+            console.log("chapters: ", chapterName)
 
 
             //calls download function
+//downloads only the cover image
+            ddl.getCoverImage(coverImage, mangaName)
             for (let i = 0; i < links.length; i++) {
                 sem.take(() => {
-                    ddl.download(links[i], i, mangaName, sem)
+                    //calls download function to download the chapters
+                    // ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
+
+
         })
 
 
