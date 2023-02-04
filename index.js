@@ -4,7 +4,11 @@ let app = express();
 const bodyParser = require('body-parser')
 const fs = require('fs');
 var url = require('url');
-const parse = require('./utilities/parser')
+const parse = require('./utilities/parser');
+const { JSHandle } = require('puppeteer');
+
+app.use(bodyParser.json());
+
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
@@ -21,14 +25,24 @@ app.get(`/new/`, (req, res) => {
     res.render("../views/add-manga", { description: "desc", markdown: "mkd", title: "title" });
 });
 
+
+app.use(express.urlencoded({ extended: true }));
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    // let mangaLink = req.body
-    let mangaLink = req.body
+    let mangaLink = req.body.mangaLink
+    
+console.log(mangaLink)
 
-    // parse.parse('https://manganato.com/manga-mv989756')
 
-    console.log(mangaLink)
+// if (!mangaLink) {
+//     console.log("mangaList field is not present in the request body.");
+//     return res.status(400).send("Bad Request: mangaList field is missing.");
+// }
+
+     parse.parse('https://chapmanganato.com/manga-ao978349')
+   console.log(mangaLink)
+
+
     res.redirect(`/`)
 })
 
