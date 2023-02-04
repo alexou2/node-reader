@@ -26,25 +26,46 @@ app.get(`/new/`, (req, res) => {
 });
 
 
+
+
+
+
 app.use(express.urlencoded({ extended: true }));
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    let mangaLink = req.body.mangaLink
+    let mangaLink = req.body
+    console.log(mangaLink)
+
+
+    let formData = req.body.mangaList;  // Get the value of the "mangaList" field in the form
+    let mangaString = formData.toString();  // Convert the value to a string
+  
+    console.log(mangaString);  // Output: the string value of the "mangaList" field
+  
+    res.send('Form data received');
+
+
+
     
-console.log(mangaLink)
+    
+    
+    
+    
 
-
-// if (!mangaLink) {
-//     console.log("mangaList field is not present in the request body.");
-//     return res.status(400).send("Bad Request: mangaList field is missing.");
-// }
-
-     parse.parse('https://chapmanganato.com/manga-ao978349')
-   console.log(mangaLink)
-
-
+    
+    
+    // if (!mangaLink) {
+    //     console.log("mangaList field is not present in the request body.");
+    //     return res.status(400).send("Bad Request: mangaList field is missing.");
+    // }
+     parse.parse(mangaString)
     res.redirect(`/`)
 })
+
+
+
+
+
 
 
 
