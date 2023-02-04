@@ -62,6 +62,12 @@ module.exports = {
             console.log("cover image: ", coverImage);
             console.log("mangaName: ", mangaName)
             chapterName = chapterName.reverse()
+            
+            //replaces spaces with a backslash before the space
+            for (let i = 0; i<chapterName.length;i++){
+            chapterName[i] = chapterName[i].replaceAll(':', '\ ')
+
+            }
             console.log("chapters: ", chapterName)
 
 
