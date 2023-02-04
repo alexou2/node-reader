@@ -38,7 +38,11 @@
 
 
     <!-- displaus the mangas present as a list -->
-    <div class="list mangaList">
+    <!-- <div class="list mangaList">
+        
+        
+        
+        
         <table>
             <tr>
                 <% for(var i=0; i<mangaList.length; i++) {%>
@@ -56,7 +60,27 @@
             
 
         </table>
+
+
+
+
+        
+    </div> -->
+
+
+    <div id="manga-list">
+        <% for (var i=0; i < mangaList.length; i++) { %>
+            <div class="manga-item">
+                <img class="manga-image" src="manga/<%= mangaList[i] %>/cover.jpg" />
+                <br>
+                <%= mangaList[i] %>
+            </div>
+            <% } %>
     </div>
+
+
+
+
 
 
 
