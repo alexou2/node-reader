@@ -44,6 +44,7 @@ app.post(`/new`, (req, res) => {
 
 
 
+
     
     
     
@@ -124,13 +125,43 @@ function getPages(mangaName, chapName) {
 
 //sorts the lists with the number in them created by chatGPT ;)
 function sortList(arr) {
-    arr.sort((a, b) => {
-        let a_parts = a.split(" ");
-        let b_parts = b.split(" ");
-        let a_num = parseInt(a_parts[a_parts.length - 3]) || parseInt(a.match(/\d+/)[0]);
-        let b_num = parseInt(b_parts[b_parts.length - 3]) || parseInt(b.match(/\d+/)[0]);
-        return a_num === 0 ? -1 : b_num === 0 ? 1 : a_num - b_num;
-    });
+  
+  
+  
+  
+  
+    // arr.sort((a, b) => {
+    //     let a_parts = a.split(" ");
+    //     let b_parts = b.split(" ");
+    //     let a_num = parseInt(a_parts[a_parts.length - 3]) || parseInt(a.match(/\d+/)[0]);
+    //     let b_num = parseInt(b_parts[b_parts.length - 3]) || parseInt(b.match(/\d+/)[0]);
+    //     return a_num === 0 ? -1 : b_num === 0 ? 1 : a_num - b_num;
+    // });
+    
+    
+    
+    const regex = /\d+/;
+
+arr.sort((a, b) => {
+  const aMatch = a.match(regex);
+  const bMatch = b.match(regex);
+  if (!aMatch && !bMatch) {
+    return a.localeCompare(b);
+  } else if (!aMatch) {
+    return 1;
+  } else if (!bMatch) {
+    return -1;
+  } else {
+    const aNum = parseInt(aMatch[0]);
+    const bNum = parseInt(bMatch[0]);
+    return aNum - bNum;
+  }
+});
+
+    
+    
+    
+    
     console.log(arr); // ["Comic Girls Vol.1 Chapter 0 - Manganelo_files", "Comic Girls Vol.1 Chapter 1 - Manganelo_files", "Comic Girls Chapter 2 - Manganelo_files", "[1-n]", "[2-n]", "[10-n]"]
     return arr
 }

@@ -71,7 +71,7 @@ module.exports = {
             for (let i = 0; i < links.length; i++) {
                 sem.take(() => {
                     //calls download function to download the chapters
-                    // ddl.download(links[i], chapterName[i], mangaName, sem)
+                    ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
 

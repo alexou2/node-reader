@@ -33,6 +33,7 @@
 
     <div class="list mangaList">
         <% for(var i=0; i<mangaList.length; i++) {%>
+            <img src = "manga/<%=mangaList[i]%>/cover.jpg"><br>
             <a href="manga/<%= mangaList[i] %>">
                 <%= i+1 %>) <%= mangaList[i] %>
             </a><br>
