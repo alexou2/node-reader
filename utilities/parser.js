@@ -51,6 +51,10 @@ module.exports = {
                 mangaName = ($(element).attr('title'));
             });
 
+            //gets the chapter's name
+            $('.panel-story-chapter-list a').each((index, element) => {
+                chapterName.push($(element).attr('title'));
+            });
 
             ;
 
@@ -80,7 +84,8 @@ module.exports = {
                     ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
-        })
+            //this line might cause problems, but is supposed to inform the user when the manga has finished downloading
+        }).then(console.log("\nfinished downloading\n"))  
     },
 
 
