@@ -77,6 +77,16 @@ body {
     background-color: rgb(60, 60, 60);
 }
 
+
+  .add-chapter-by-name{
+    text-align: right;
+  }
+form{
+    
+}  
+
+
+
 a {
     color: rgb(150, 50, 215);
     margin: 1em;
@@ -138,7 +148,7 @@ a {
     text-align: center;
 }
 
-
+/* code for the manga list */
 #manga-list {
     width: 100%;
     display: flex;
@@ -156,7 +166,11 @@ a {
     width: 100%;
     height: auto;
     max-width: 100%;
+border-radius: 0.75em;
+    /* height: 100%; */
+    /* width: auto; */
   }
-  
-  
-  
+
+  .cover-page img{
+    border-radius: 0.75em;
+  }

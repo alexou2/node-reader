@@ -13,12 +13,18 @@
 <body>
     <div class="top-bar">
         <div class="page-name">
-            HOME
+            <h2>HOME</h2>
         </div>
 
         <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
         </a>
-
+        <div class="add-chapter-by-name">
+            <form action="/" method="post">
+                <label for="mangaList">Add a new manga</label>
+                <input type="text" id="mangaList" name="mangaList">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
 
     </div>
 
@@ -34,57 +40,16 @@
 
 
 
-
-
-
-    <!-- displaus the mangas present as a list -->
-    <!-- <div class="list mangaList">
-        
-        
-        
-        
-        <table>
-            <tr>
-                <% for(var i=0; i<mangaList.length; i++) {%>
-
-                    <th><a href="manga/<%= mangaList[i] %>"><img src="manga/<%=mangaList[i]%>/cover.jpg"></a></th>
-
-                    <% } %>
-            </tr>
-            <tr>
-                <% for(var i=0; i<mangaList.length; i++) {%>
-                   <th><%= mangaList[i] %></th>
-                        <% } %>
-            </tr>
-                        
-            
-
-        </table>
-
-
-
-
-        
-    </div> -->
-
-
     <div id="manga-list">
         <% for (var i=0; i < mangaList.length; i++) { %>
             <div class="manga-item">
-                <a href="manga/<%= mangaList[i] %>"><img class="manga-image" src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
+                <a href="manga/<%= mangaList[i] %>"><img class="manga-image"
+                        src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
                 <br>
                 <%= mangaList[i] %>
             </div>
             <% } %>
     </div>
-
-
-
-
-
-
-
-
 
 
 
