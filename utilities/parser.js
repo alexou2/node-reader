@@ -84,8 +84,7 @@ module.exports = {
                     ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
-            //this line might cause problems, but is supposed to inform the user when the manga has finished downloading
-        }).then(console.log("\nfinished downloading\n"))  
+        })
     },
 
 
