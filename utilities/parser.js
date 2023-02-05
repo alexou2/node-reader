@@ -62,19 +62,19 @@ module.exports = {
             console.log("cover image: ", coverImage);
             console.log("mangaName: ", mangaName)
             chapterName = chapterName.reverse()
-            
+
             //replaces spaces with a backslash before the space
-            for (let i = 0; i<chapterName.length;i++){
-            chapterName[i] = chapterName[i].replaceAll(':', '_ ')
-            chapterName[i] = chapterName[i].replaceAll('?', '_ ')
-            chapterName[i] = chapterName[i].replaceAll('!', '_ ')
+            for (let i = 0; i < chapterName.length; i++) {
+                chapterName[i] = chapterName[i].replaceAll(':', '_ ')
+                chapterName[i] = chapterName[i].replaceAll('?', '_ ')
+                chapterName[i] = chapterName[i].replaceAll('!', '_ ')
 
             }
             console.log("chapters: ", chapterName)
 
 
             //calls download function
-//downloads only the cover image
+            //downloads only the cover image
             ddl.getCoverImage(coverImage, mangaName)
             for (let i = 0; i < links.length; i++) {
                 sem.take(() => {
@@ -82,10 +82,19 @@ module.exports = {
                     ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
-
-
         })
+    },
 
+    // gets the manga link from a string
+    getMangaLink: function (searchedManga) {
 
+        //convert the searched manga string into a search query for manganato
+        console.log(searchedManga)
+        searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
+        searchedManga = 'https://manganato.com/search/story/'+searchedManga;
+        console.log(searchedManga)
+
+return searchedManga
     }
+
 }

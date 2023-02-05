@@ -44,20 +44,10 @@ app.post(`/new`, (req, res) => {
 
 
 
+    //  parse.parse(mangaString)
 
-    
-    
-    
-    
-    
-
-    
-    
-    if (!mangaLink) {
-        console.log("mangaList field is not present in the request body.");
-        return res.status(400).send("Bad Request: mangaList field is missing.");
-    }
-     parse.parse(mangaString)
+    let searchedManga = parse.getMangaLink(mangaString)
+    parse.parse(searchedManga)
     res.redirect(`/`)
 })
 
