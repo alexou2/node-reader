@@ -44,10 +44,10 @@ app.post(`/new`, (req, res) => {
 
 
 
-    //  parse.parse(mangaString)
+     parse.parse(mangaString)
 
-    let searchedManga = parse.getMangaLink(mangaString)
-    parse.parse(searchedManga)
+    // let searchedManga = parse.getMangaLink(mangaString)
+    // parse.parse(searchedManga)
     res.redirect(`/`)
 })
 

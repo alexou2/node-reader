@@ -52,9 +52,7 @@ module.exports = {
             });
 
 
-            $('.panel-story-chapter-list a').each((index, element) => {
-                chapterName.push($(element).attr('title'));
-            });
+            ;
 
             // prints the informations to debug
             links = links.reverse()
@@ -85,16 +83,37 @@ module.exports = {
         })
     },
 
+
+
     // gets the manga link from a string
     getMangaLink: function (searchedManga) {
+        request(searchedManga, function (error, response, body) {
+let content = body
 
-        //convert the searched manga string into a search query for manganato
-        console.log(searchedManga)
-        searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
-        searchedManga = 'https://manganato.com/search/story/'+searchedManga;
-        console.log(searchedManga)
+            //convert the searched manga string into a search query for manganato
+            console.log(searchedManga)
+            searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
+            searchedManga = 'https://manganato.com/search/story/' + searchedManga;
+            console.log(searchedManga)
 
-return searchedManga
+
+
+            //gets the link for the first manga to be returned by the search query
+            let returnedManga = []
+
+            const $ = cheerio.load(searchedManga);
+
+            $('.item-right a').each((index, element) => {
+                returnedManga.push($(element).attr('href'));
+            });
+
+
+
+            console.log("returnedmanga", returnedManga)
+
+
+            // return searchedManga
+        }
+        )
     }
-
 }
