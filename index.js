@@ -72,8 +72,10 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
         res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName});
 
-chapterList[i+1]
 });
+
+
+
 
 // Server setup
 app.listen(3000, (req, res) => {
