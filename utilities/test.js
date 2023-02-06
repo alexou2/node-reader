@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 //loads the form
 app.get(`/`, (req, res) => {
     // res.render("../views/add-manga");
-    res.render("../../views/add-manga");
+    res.render("../views/add-manga");
 });
 
 
@@ -24,21 +24,30 @@ app.get(`/`, (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    let mangaLink = req.body
-    console.log(mangaLink)
+    // let mangaLink = req.body
+    // console.log(mangaLink)
 
 
-    let formData = req.body.mangaList;  // Get the value of the "mangaList" field in the form
-    let mangaString = formData.toString();  // Convert the value to a string
+    // let formData = req.body.mangaList;  // Get the value of the "mangaList" field in the form
+    // let mangaString = formData.toString();  // Convert the value to a string
   
-    console.log(mangaString);  // Output: the string value of the "mangaList" field
+    // console.log(mangaString);  // Output: the string value of the "mangaList" field
   
     
 
 
 
     
-    
+    const fs = require('fs');
+
+const folderName = "folder!with?special^characters";
+const hexFolderName = Array.from(folderName).map(c => c.charCodeAt(0).toString(16)).join('');
+
+fs.mkdirSync(hexFolderName);
+
+
+console.log(hexFolderName)
+
     
     
     

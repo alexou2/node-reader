@@ -47,16 +47,19 @@ module.exports = {
             });
 
             //gets the manga name feom the link near the top of the page
-            $('.panel-breadcrumb .a-h').each((index, element) => {
-                mangaName = ($(element).attr('title'));
-            });
+            // $('.panel-breadcrumb .a-h').each((index, element) => {
+            //     mangaName = ($(element).attr('title'));
+            // });
+            mangaName = $('.story-info-right h1').text();
 
-            //gets the chapter's name
+
+
+            // gets the chapter's name
             $('.panel-story-chapter-list a').each((index, element) => {
                 chapterName.push($(element).attr('title'));
             });
 
-            ;
+
 
             // prints the informations to debug
             links = links.reverse()
@@ -65,11 +68,11 @@ module.exports = {
             console.log("mangaName: ", mangaName)
             chapterName = chapterName.reverse()
 
-            //replaces spaces with a backslash before the space
+            //replaces problematic characters to avoid causing problems
             for (let i = 0; i < chapterName.length; i++) {
-                chapterName[i] = chapterName[i].replaceAll(':', '_ ')
-                chapterName[i] = chapterName[i].replaceAll('?', '_ ')
-                chapterName[i] = chapterName[i].replaceAll('!', '_ ')
+                chapterName[i] = chapterName[i].replaceAll(':', '_')
+                chapterName[i] = chapterName[i].replaceAll('?', '_')
+                chapterName[i] = chapterName[i].replaceAll('!', '_')
 
             }
             console.log("chapters: ", chapterName)
@@ -92,7 +95,7 @@ module.exports = {
     // gets the manga link from a string
     getMangaLink: function (searchedManga) {
         request(searchedManga, function (error, response, body) {
-let content = body
+            let content = body
 
             //convert the searched manga string into a search query for manganato
             console.log(searchedManga)

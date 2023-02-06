@@ -21,10 +21,10 @@ module.exports = {
       // Get all the image elements on the page
       const images = await page.$$eval('img', imgs => imgs.map(img => img.src));
 
-
+// removes the first and the last element(manganato logo and go home button)
       images.shift()
       images.pop()
-      console.log(images)
+      // console.log(images)
 
       // const folderName = `../manga/${mangaName}/Chapter_15`
       const folderName = `manga/${mangaName}/${chapterName}`
