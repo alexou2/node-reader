@@ -72,3 +72,25 @@ console.log(hexFolderName)
 app.listen(3000, (req, res) => {
     console.log("Connected on port:3000");
 })
+
+
+const findCurrentChapter = (chapterList, currentChapter) => {
+    return new Promise((resolve, reject) => {
+      for (let i in chapterList) {
+        if (chapterList[i] === currentChapter) {
+          resolve(i);
+          break;
+        }
+      }
+      reject(`Chapter ${currentChapter} not found in chapterList`);
+    });
+  };
+  
+  findCurrentChapter(['Chapter 1', 'Chapter 2', 'Chapter 3'], 'Chapter 2')
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  

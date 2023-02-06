@@ -65,12 +65,21 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     //gets and sorts page list
     var pageList = getPages(mangaName, chapName);
     pageList = pageList.sort(function (a, b) { return a - b });
-    console.log(pageList)
     pageList = sortList(pageList)
 
 
+    //gets the chapter list in order to determine what is the next and previous chapter
+    var chapterList = getList(mangaName)
+    chapterList = sortList(chapterList)
+    // console.log(chapterList)
 
-        res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName});
+    let prevAndNext = getNextAndPrev(chapterList, chapName)
+
+    let prevChapter = prevAndNext[0]
+    let nextChapter = prevAndNext[1]
+    console.group(prevAndNext)
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
+
 
 });
 
@@ -148,7 +157,7 @@ function sortList(arr) {
 //calls the functions to render navigation pages
 let mangaList = renderHomepage()
 console.log("manga list is ", mangaList)
-renderChapterList(mangaList)
+
 
 
 //renders the homepage accessible at localhost:3000
@@ -159,27 +168,28 @@ function renderHomepage() {
     app.get(`/`, (req, res) => {
         res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
         console.log("homepage is running")
+
+        //restarts server when refreshing page
+        res.send('Refreshing the page');
     });
     return mangaList
 }
 
 //renders the page where all of a manga's chapters are displayed
-// function renderChapterList(mangaList) {
 
-    app.get(`/manga/:mangaName`, (req, res) => {
-        var mangaName = getMangaName(url.parse(req.url).pathname)
+app.get(`/manga/:mangaName`, (req, res) => {
+    var mangaName = getMangaName(url.parse(req.url).pathname)
 
-        var chapterList = getList(mangaName)
+    var chapterList = getList(mangaName)
 
-        chapterList = sortList(chapterList)
-        console.log(chapterList)
+    chapterList = sortList(chapterList)
+    // console.log("chapterList ",chapterList)
 
-        //rendres chapter-menu.ejs with the arguments
-        res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
-        console.log(mangaName)
-        console.log("chapter page is running")
-    });
-// }
+    //rendres chapter-menu.ejs with the arguments
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
+    console.log(mangaName)
+    console.log("chapter page is running")
+});
 
 
 
@@ -212,4 +222,25 @@ function getMangaName(path) {
     console.log(path)
     console.log(message)
     return mangaName
+}
+
+
+async function getNextAndPrev(chapterList, currentChapter) {
+    let prevChapter
+    let nextChapter
+    //the first value is the 
+    let prevAndNext = []
+
+//find where the current chapter is in the list and returns i
+let i = 0    
+for (i in chapterList) {
+        if (chapterList[i] == currentChapter) {
+            break
+        }
+    }
+prevAndNext[0] =(chapterList[i-1])
+prevAndNext[1] =(chapterList[i+1])
+    console.log(prevAndNext)
+
+    return prevAndNext
 }
