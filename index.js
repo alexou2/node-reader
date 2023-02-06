@@ -164,7 +164,7 @@ function renderHomepage() {
 }
 
 //renders the page where all of a manga's chapters are displayed
-function renderChapterList(mangaList) {
+// function renderChapterList(mangaList) {
 
     app.get(`/manga/:mangaName`, (req, res) => {
         var mangaName = getMangaName(url.parse(req.url).pathname)
@@ -179,7 +179,7 @@ function renderChapterList(mangaList) {
         console.log(mangaName)
         console.log("chapter page is running")
     });
-}
+// }
 
 
 
