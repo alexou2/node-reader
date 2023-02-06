@@ -68,13 +68,11 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     console.log(pageList)
     pageList = sortList(pageList)
 
-    let nextChap
-    nextChap =
 
 
-        res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, nextChap: chapName + 1 });
+        res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName});
 
-
+chapterList[i+1]
 });
 
 // Server setup
