@@ -19,14 +19,14 @@ app.use(express.static('./ressources'))
 //form to add chapters
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
+
+
+
 //loads the form
 app.get(`/new/`, (req, res) => {
-    // res.render("../views/add-manga");
     res.render("../views/add-manga");
 });
-
-
-
 
 
 
@@ -43,11 +43,15 @@ app.post(`/new`, (req, res) => {
     console.log(mangaString);  // Output: the string value of the "mangaList" field
 
 
-
+    // sends the string to the parser in order to get the links for all of the chapters
     parse.parse(mangaString)
 
+
+    //enables searching using only the name and not the url
     // let searchedManga = parse.getMangaLink(mangaString)
     // parse.parse(searchedManga)
+
+    // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
 })
 
@@ -57,7 +61,7 @@ app.post(`/new`, (req, res) => {
 
 
 
-
+// loads the page where the chapters are read
 app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     var mangaName = req.params.mangaName,
         chapName = req.params.chapName;
@@ -78,7 +82,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     let prevChapter = prevAndNext[0]
     let nextChapter = prevAndNext[1]
     console.group(prevAndNext)
-    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName });
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
 
 
 });
@@ -232,7 +236,7 @@ function getNextAndPrev(chapterList, currentChapter) {
     let prevAndNext = []
 
     //find where the current chapter is in the list and returns i
-    for (var i = 0; i<chapterList.length; i++) {
+    for (var i = 0; i < chapterList.length; i++) {
         if (chapterList[i] == currentChapter) {
             break
         }
