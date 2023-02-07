@@ -27,7 +27,7 @@ module.exports = {
 
         request(mangaLink, function (error, response, body) {
             let content = body
-            console.log(content)
+            // console.log(content)
 
             let html
             html = content
@@ -120,8 +120,8 @@ module.exports = {
 
             console.log("returnedmanga", returnedManga)
 
-
-            return returnedManga
+            parse(returnedManga[0])
+            return returnedManga[0]
         }
         )
     },

@@ -19,7 +19,7 @@ app.use(express.static('./ressources'))
 //form to add chapters
 app.use(bodyParser.urlencoded({ extended: false }))
 
-
+app.use(express.urlencoded({ extended: true }));
 
 
 
@@ -30,7 +30,9 @@ app.get(`/new/`, (req, res) => {
 
 
 
-app.use(express.urlencoded({ extended: true }));
+
+
+
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
     let mangaLink = req.body
@@ -50,11 +52,18 @@ app.post(`/new`, (req, res) => {
 
 
 
-    
+
     //enables searching using only the name and not the url
+    
     let searchedManga = parse.searchByName(mangaString)
-    console.log(searchedManga)
-    // parse.parse(searchedManga)
+    console.log("manga name", searchedManga)
+
+    mangaLink = parse.getMangaLink(searchedManga)
+    console.log("parser feed ", mangaLink)
+
+    parse.parse(mangaLink)
+
+
 
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
@@ -151,7 +160,7 @@ function sortList(arr) {
             const aNum = parseInt(aMatch[0]);
             const bNum = parseInt(bMatch[0]);
             return aNum - bNum;
-        }
+        } title
     });
 
 
