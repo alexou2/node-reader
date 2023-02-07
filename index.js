@@ -179,7 +179,7 @@ function renderHomepage() {
         console.log("homepage is running")
 
         //restarts server when refreshing page
-        res.send('Refreshing the page');
+        // res.send('Refreshing the page');
     });
     return mangaList
 }

@@ -100,24 +100,28 @@ module.exports = {
 
             let html
             html = content
-            console.log("body ", html)
+            // console.log("body ", html)
             $ = cheerio.load(html);
-            
+
 
             //gets the link for the first manga to be returned by the search query
             let returnedManga = []
 
+            console.log("\n\nstarted searching form matches\n\n")
 
-            $('.a-h text-nowrap item-title a').each((index, element) => {
+            $('.panel-search-story h3 a').each((index, element) => {
                 returnedManga.push($(element).attr('href'));
+
+                // conslole.log("\n\n\n\nelement", element)
             });
 
+            console.log("\n\nfinished searching form matches\n\n")
 
 
             console.log("returnedmanga", returnedManga)
 
 
-            // return searchedManga
+            return returnedManga
         }
         )
     },
@@ -128,7 +132,7 @@ module.exports = {
         console.log("input", searchedManga)
         searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
         searchedManga = 'https://manganato.com/search/story/' + searchedManga;
-        console.log("searched manga: ",searchedManga)
+        console.log("searched manga: ", searchedManga)
 
 
         //calls getMangaLink()
