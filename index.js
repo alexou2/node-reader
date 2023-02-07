@@ -44,11 +44,16 @@ app.post(`/new`, (req, res) => {
 
 
     // sends the string to the parser in order to get the links for all of the chapters
-    parse.parse(mangaString)
+    // parse.parse(mangaString)
 
 
+
+
+
+    
     //enables searching using only the name and not the url
-    // let searchedManga = parse.getMangaLink(mangaString)
+    let searchedManga = parse.searchByName(mangaString)
+    console.log(searchedManga)
     // parse.parse(searchedManga)
 
     // redirects the user to the homepage after adding the manga
@@ -77,8 +82,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     chapterList = sortList(chapterList)
     // console.log(chapterList)
 
+    //gets the previpus chapter and the next chapter
     let prevAndNext = getNextAndPrev(chapterList, chapName)
-
     let prevChapter = prevAndNext[0]
     let nextChapter = prevAndNext[1]
     console.group(prevAndNext)
@@ -206,7 +211,7 @@ function getList(mangaName) {
     fs.readdirSync(testFolder).forEach(file => {
         contentList.push(file);
     });
-    console.log("content list: ", contentList)
+    // console.log("content list: ", contentList)
 
     //removes all elements that contains ".ht" in them
     contentList = contentList.filter(function (p) {

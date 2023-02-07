@@ -27,14 +27,12 @@ module.exports = {
 
         request(mangaLink, function (error, response, body) {
             let content = body
-            // console.log(content)
-
-            // console.log(content)
+            console.log(content)
 
             let html
             html = content
 
-            const $ = cheerio.load(html);
+            let $ = cheerio.load(html);
 
             //gets the chapters from the list
             $('.panel-story-chapter-list a').each((index, element) => {
@@ -97,20 +95,20 @@ module.exports = {
         request(searchedManga, function (error, response, body) {
             let content = body
 
-            //convert the searched manga string into a search query for manganato
-            console.log(searchedManga)
-            searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
-            searchedManga = 'https://manganato.com/search/story/' + searchedManga;
-            console.log(searchedManga)
 
 
+
+            let html
+            html = content
+            console.log("body ", html)
+            $ = cheerio.load(html);
+            
 
             //gets the link for the first manga to be returned by the search query
             let returnedManga = []
 
-            const $ = cheerio.load(searchedManga);
 
-            $('.item-right a').each((index, element) => {
+            $('.a-h text-nowrap item-title a').each((index, element) => {
                 returnedManga.push($(element).attr('href'));
             });
 
@@ -122,5 +120,20 @@ module.exports = {
             // return searchedManga
         }
         )
+    },
+
+    //searched sor a specific manga
+    searchByName: function (searchedManga) {
+        //convert the searched manga string into a search query for manganato
+        console.log("input", searchedManga)
+        searchedManga[0] = searchedManga[0].replaceAll('\ ', '_')
+        searchedManga = 'https://manganato.com/search/story/' + searchedManga;
+        console.log("searched manga: ",searchedManga)
+
+
+        //calls getMangaLink()
+        this.getMangaLink(searchedManga)
+        return searchedManga
     }
+
 }
