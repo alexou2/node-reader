@@ -225,21 +225,20 @@ function getMangaName(path) {
 }
 
 
-async function getNextAndPrev(chapterList, currentChapter) {
+function getNextAndPrev(chapterList, currentChapter) {
     let prevChapter
     let nextChapter
     //the first value is the 
     let prevAndNext = []
 
-//find where the current chapter is in the list and returns i
-let i = 0    
-for (i in chapterList) {
+    //find where the current chapter is in the list and returns i
+    for (var i = 0; i<chapterList.length; i++) {
         if (chapterList[i] == currentChapter) {
             break
         }
     }
-prevAndNext[0] =(chapterList[i-1])
-prevAndNext[1] =(chapterList[i+1])
+    prevAndNext[0] = (chapterList[i - 1])
+    prevAndNext[1] = (chapterList[i + 1])
     console.log(prevAndNext)
 
     return prevAndNext
