@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //loads the form
 app.get(`/new/`, (req, res) => {
     // res.render("../views/add-manga");
-    res.render("../views/add-manga", { description: "desc", markdown: "mkd", title: "title" });
+    res.render("../views/add-manga");
 });
 
 
