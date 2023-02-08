@@ -135,13 +135,17 @@ const getMangaLink = async (mangaString) =>{
     console.log(mangaString)
     
     
-    let searchedManga = await parse.searchByName(mangaString)
+    let searchedManga = parse.searchByName(mangaString)
     console.log("manga name", searchedManga)
 
     let mangaLink = parse.getMangaLink(searchedManga)
+   
+   
+   
     console.log("parser feed ", mangaLink)
 
-    parse.parse(mangaLink)
+
+    // parse.parse(mangaLink)
 
 }
 getMangaLink(mangaString)
