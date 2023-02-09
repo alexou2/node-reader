@@ -52,8 +52,6 @@ module.exports = {
             rating: 'desc',
             followedCount: 'desc'
         };
-
-
     },
 
     //gets the chapterIDs for the chapter entered
@@ -68,7 +66,7 @@ module.exports = {
 
             console.log(resp.data.data.map(chapter => chapter.id));
             let chapterLinks = resp.data.data.map(chapter => chapter.id)
-printLinks('chapter', chapterLinks)
+            printLinks('chapter', chapterLinks)
         })();
 
 
