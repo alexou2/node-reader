@@ -7,8 +7,9 @@
 
 const axios = require('axios');
 const { searchByName } = require('./parser');
+const fs = require('fs')
 
-//I use semaphores in order not to fill up my ram by downloading every chapter at the same time
+//I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
 const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
@@ -74,7 +75,7 @@ module.exports = {
 
 
             for (let j = 0; j < chapterIDs.length; j++) {
-                console.log('\x1b[94m%s\x1b[0m',`started chapter #${j}`)
+                console.log('\x1b[94m%s\x1b[0m', `started chapter #${j}`)
                 sem.take(() => {
                     this.downloadPages(chapterIDs[j], sem, j)
                 })
