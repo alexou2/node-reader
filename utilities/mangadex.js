@@ -5,7 +5,8 @@
 
 
 
-const axios = require('axios')
+const axios = require('axios');
+const { searchByName } = require('./parser');
 //I use semaphores in ord not to fill up my ram by downloading every chapter at the same time
 const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
@@ -17,8 +18,9 @@ const baseUrl = 'https://api.mangadex.org'
 
 module.exports = {
     //does a search on mangadex.org and returns the 
-    getMangaID: function (title) {
-
+    getMangaID: async function (title) {
+        
+        
         (async () => {
             const resp = await axios({
                 method: 'GET',
@@ -26,17 +28,12 @@ module.exports = {
                 params: {
                     title: title
                 }
-            });
-            let mangaID = ((resp.data.data.map(manga => manga.id)));
+            });          
+            console.log("\nmanga corresponding to search: ",resp.data.data.map(manga => manga.id));
 
-            console.log(resp.data.data.map(manga => manga.id));
-            return mangaID
+            var mangaID = resp.data.data.map(manga => manga.id)
         })();
 
-
-
-        console.log(mangaID)
-        return mangaID
     },
 
 
