@@ -74,10 +74,10 @@ module.exports = {
 
 
             for (let j = 0; j < chapterIDs.length; j++) {
-                console.log("started chapter #", j)
-                sem.take(()=> {
-                    this.downloadPages(chapterIDs[j])
-                 } )
+                console.log('\x1b[94m%s\x1b[0m',`started chapter #${j}`)
+                sem.take(() => {
+                    this.downloadPages(chapterIDs[j], sem, j)
+                })
             }
 
         })();
@@ -86,9 +86,11 @@ module.exports = {
 
 
 
-    downloadPages: function (chapterIDs) {
+    downloadPages: function (chapterIDs, sem, j) {
 
-sem.leave(1)
+
+        sem.leave(1)
+        console.log("\x1b[33m%s\x1b[0m", "  finished chaptrer", j, "\n")
     },
 
 
