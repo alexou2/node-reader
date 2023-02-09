@@ -96,15 +96,15 @@ module.exports = {
 
 
             // calls the download function and passes each chapter
-            // for (let j = 0; j < chapterID.length; j++) {
+            for (let j = 0; j < chapterID.length; j++) {
 
-            // sem.take(() => {
-            let j = 0
+            sem.take(() => {
+            // let j = 0
 
             this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
             console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
-            // })
-            // }
+            })
+            }
 
         })();
     },
@@ -154,9 +154,10 @@ module.exports = {
                 const resp = await axios({
                     method: 'GET',
                     url: `${host}/data/${chapterHash}/${page}`,
+                    maxContentLength: 200000000000000,
                     responseType: 'arraybuffer'
                 });
-
+console.log(`${folderPath}/${page}`, resp.data)
                 fs.writeFileSync(`${folderPath}/${page}`, resp.data);
             };
 
@@ -165,7 +166,7 @@ module.exports = {
 
 
             console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
-            // sem.leave(1)
+            sem.leave(1)
         })();
     },
 
