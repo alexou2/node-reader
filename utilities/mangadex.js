@@ -14,7 +14,7 @@ const sem = require('semaphore')(5);//change 5 by any number to change the numbe
 const baseUrl = 'https://api.mangadex.org'
 
 
-const languages = 'en'
+const languages = 'en'// modify this if you want to get chapters in another language
 
 
 module.exports = {
@@ -38,22 +38,10 @@ module.exports = {
             var mangaID = resp.data.data.map(manga => manga.id)
 
 
-
-
             // returns only the first manga returned for simplicity purposes.I might change this later, or I might just forget about is :)
             this.getChapters(mangaID[0])
         })();
 
-    },
-
-
-    //sorts the returned chapters by which one is the most popular in order to avoid downloading the wrong manga
-    sortByPopular: function (mangaID) {
-        //sets the order for the sorting function
-        const order = {
-            rating: 'desc',
-            followedCount: 'desc'
-        };
     },
 
 
@@ -66,30 +54,41 @@ module.exports = {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/manga/${mangaID}/feed`,
+
+                // parameters to filter the mangas
                 params: {
-                    "order[chapter]": "asc",
-                    "translatedLanguage[]": languages
+                    "order[chapter]": "asc", //sorts the chapter list 
+                    "translatedLanguage[]": languages //will only return one specific language 
                 },
 
 
             });
 
             console.log(resp.data.data.map(chapter => chapter.id));
-            let chapterLinks = resp.data.data.map(chapter => chapter.id)
+            let chapterIDs = resp.data.data.map(chapter => chapter.id)
 
             // for debuging only. prints the mandaIDs as links
-            printLinks('chapter', chapterLinks)
+            printLinks('chapter', chapterIDs)
+
+
+
+
+            for (let j = 0; j < chapterIDs.length; j++) {
+                console.log("started chapter #", j)
+                sem.take(()=> {
+                    this.downloadPages(chapterIDs[j])
+                 } )
+            }
+
         })();
-
-
         return chapterLinks
     },
 
 
 
-    downloadPages: function () {
+    downloadPages: function (chapterIDs) {
 
-
+sem.leave(1)
     },
 
 
