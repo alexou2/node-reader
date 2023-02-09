@@ -19,8 +19,8 @@ const baseUrl = 'https://api.mangadex.org'
 module.exports = {
     //does a search on mangadex.org and returns the 
     getMangaID: async function (title) {
-        
-        
+
+
         (async () => {
             const resp = await axios({
                 method: 'GET',
@@ -28,18 +28,20 @@ module.exports = {
                 params: {
                     title: title
                 }
-            });          
-            console.log("\nmanga corresponding to search: ",resp.data.data.map(manga => manga.id));
+            });
+            console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
 
             var mangaID = resp.data.data.map(manga => manga.id)
+            this.getChapters(mangaID)
         })();
 
     },
 
 
     getChapters: function (mangaID) {
+        let chapterLinks
 
-        return ChapterLinks
+        return chapterLinks
     },
 
 

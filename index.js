@@ -46,7 +46,7 @@ app.post(`/new`, (req, res) => {
 
 
     // sends the string to the parser in order to get the links for all of the chapters
-    // parse.parse(mangaString)
+    parse.parse(mangaString)
 
 
 
@@ -54,14 +54,15 @@ app.post(`/new`, (req, res) => {
 
 
     //enables searching using only the name and not the url
-    
-    let searchedManga = parse.searchByName(mangaString)
-    console.log("manga name", searchedManga)
+    //currently on hold, since I am trying mangadex's download api
 
-    mangaLink = parse.getMangaLink(searchedManga)
-    console.log("parser feed ", mangaLink)
+    // let searchedManga = parse.searchByName(mangaString)
+    // console.log("manga name", searchedManga)
 
-    parse.parse(mangaLink)
+    // mangaLink = parse.getMangaLink(searchedManga)
+    // console.log("parser feed ", mangaLink)
+
+    // parse.parse(mangaLink)
 
 
 
