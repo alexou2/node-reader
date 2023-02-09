@@ -7,7 +7,7 @@
 
 const axios = require('axios');
 const { searchByName } = require('./parser');
-//I use semaphores in ord not to fill up my ram by downloading every chapter at the same time
+//I use semaphores in order not to fill up my ram by downloading every chapter at the same time
 const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
@@ -31,15 +31,46 @@ module.exports = {
             });
             console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
 
+
+
+
             var mangaID = resp.data.data.map(manga => manga.id)
-            this.getChapters(mangaID)
+
+
+
+
+            // returns only the first manga returned for simplicity purposes.I might change this later, or I might just forget about is :)
+            this.getChapters(mangaID[0])
         })();
 
     },
 
+    //sorts the returned chapters by which one is the most popular in order to avoid downloading the wrong manga
+    sortByPopular: function (mangaID) {
+        //sets the order for the sorting function
+        const order = {
+            rating: 'desc',
+            followedCount: 'desc'
+        };
 
+
+    },
+
+    //gets the chapterIDs for the chapter entered
     getChapters: function (mangaID) {
         let chapterLinks
+
+        (async () => {
+            const resp = await axios({
+                method: 'GET',
+                url: `${baseUrl}/manga/${mangaID}/feed`
+            });
+
+            console.log(resp.data.data.map(chapter => chapter.id));
+            let chapterLinks = resp.data.data.map(chapter => chapter.id)
+printLinks('chapter', chapterLinks)
+        })();
+
 
         return chapterLinks
     },
@@ -58,4 +89,11 @@ module.exports = {
     }
 
 
+}
+//for debug purposes
+// outputs a mangadex link i order to check the returned ids
+function printLinks(type, link) {
+    for (let i = 0; i < link.length; i++) {
+        console.log(`https://mangadex.org/${type}/${link[i]}`)
+    }
 }
