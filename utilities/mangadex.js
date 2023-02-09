@@ -9,7 +9,7 @@ const { searchByName } = require('./parser');
 const fs = require('fs')
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
-const sem = require('semaphore')(2);//change 5 by any number to change the number of chapters that can be downloaded at the same time
+const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
@@ -96,23 +96,25 @@ module.exports = {
 
 
             // calls the download function and passes each chapter
-            for (let j = 0; j < chapterID.length; j++) {
-                
-                sem.take(() => {
-                    this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
-                    console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
-                })
-            }
+            // for (let j = 0; j < chapterID.length; j++) {
+
+            // sem.take(() => {
+            let j = 0
+
+            this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
+            console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
+            // })
+            // }
 
         })();
     },
 
 
-//gets all of the informations from mangadex in order to download chapters
+    //gets all of the informations from mangadex in order to download chapters
     getInfos: function (chapterID, mangaName, chapterName, sem, j) {
 
 
-        let host, hash, data, dataSaver;
+        let host, chapterHash, data, dataSaver;
 
         (async () => {
             const resp = await axios({
@@ -131,7 +133,7 @@ module.exports = {
     },
 
 
-
+    //actually downloads the pages
     downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data) {
 
 
@@ -159,17 +161,12 @@ module.exports = {
             };
 
             console.log(`Downloaded ${data.length} pages.`);
+
+
+
+            console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
+            // sem.leave(1)
         })();
-
-
-
-
-
-
-
-        
-        console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
-        sem.leave(1)
     },
 
 
