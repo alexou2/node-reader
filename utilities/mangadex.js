@@ -7,13 +7,14 @@
 
 const axios = require('axios');
 const { searchByName } = require('./parser');
+
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time
 const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
 
-
+const languages = 'en'
 
 
 module.exports = {
@@ -26,12 +27,12 @@ module.exports = {
                 method: 'GET',
                 url: `${baseUrl}/manga`,
                 params: {
-                    title: title
+                    title: title,
+                    "order[relevance]": "desc",
                 }
+
             });
             console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
-
-
 
 
             var mangaID = resp.data.data.map(manga => manga.id)
@@ -45,6 +46,7 @@ module.exports = {
 
     },
 
+
     //sorts the returned chapters by which one is the most popular in order to avoid downloading the wrong manga
     sortByPopular: function (mangaID) {
         //sets the order for the sorting function
@@ -54,6 +56,8 @@ module.exports = {
         };
     },
 
+
+
     //gets the chapterIDs for the chapter entered
     getChapters: function (mangaID) {
         let chapterLinks
@@ -61,17 +65,26 @@ module.exports = {
         (async () => {
             const resp = await axios({
                 method: 'GET',
-                url: `${baseUrl}/manga/${mangaID}/feed`
+                url: `${baseUrl}/manga/${mangaID}/feed`,
+                params: {
+                    "order[chapter]": "asc",
+                    "translatedLanguage[]": languages
+                },
+
+
             });
 
             console.log(resp.data.data.map(chapter => chapter.id));
             let chapterLinks = resp.data.data.map(chapter => chapter.id)
+
+            // for debuging only. prints the mandaIDs as links
             printLinks('chapter', chapterLinks)
         })();
 
 
         return chapterLinks
     },
+
 
 
     downloadPages: function () {
