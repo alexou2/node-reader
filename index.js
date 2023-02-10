@@ -136,7 +136,9 @@ function getPages(mangaName, chapName) {
     //filters the files givent to it and keeps only jpg files
     function filterList(pageList) {
         var images = pageList.filter(function (p) {
-            return (p.includes('.jpg'));
+
+
+            return ((p.includes('.jpg')) || (p.includes('.png')));
         });
         return (images)
     }

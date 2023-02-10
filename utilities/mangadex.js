@@ -10,7 +10,7 @@ const fs = require('fs');
 const { text } = require('body-parser');
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
-const sem = require('semaphore')(20);//change 5 by any number to change the number of chapters that can be downloaded at the same time
+const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
@@ -255,7 +255,7 @@ module.exports = {
                     // console.log(`${folderPath}/${page}`, resp.data)
                     fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                 } catch {
-                    console.error(`err downloading pages`)
+                    console.error('\x1b[91m%s\x1b[0m',`err downloading pages`)
                 }
             };
 
@@ -263,7 +263,7 @@ module.exports = {
 
 
 
-            // console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
+            console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
             sem.leave(1)
         })();
     },
