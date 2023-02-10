@@ -98,5 +98,3 @@ console.log(cover)
 
 
 }
-
-

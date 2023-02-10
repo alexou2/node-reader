@@ -159,14 +159,11 @@ module.exports = {
             console.log(text)
 
             this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
-            // this.downloadChapters(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
-            // this.downloadChapters(mangaName, chapterName, sem, j, pageLinks)
         })();
     },
 
 
 
-    // downloadChapters: function (mangaName, chapterName, sem, j, pageLinks) {
 
 
 
@@ -185,7 +182,7 @@ module.exports = {
             const resp = await axios({
                 method: 'GET',
                 url: `${host}/data/${chapterHash}/${page}`,
-                //   maxContentLength: Infinity,
+                maxContentLength: Infinity,
                 responseType: 'arraybuffer'
             });
 
@@ -195,34 +192,6 @@ module.exports = {
             // }
         }
     },
-    // const downloadImage = async (url) => {
-    //     try {
-    //         const response = await axios.get(url, { responseType: 'arraybuffer', timeout: 5000 });
-    //         const imageName = url.split('/').pop();
-
-    //         fs.mkdirSync(`./manga/${mangaName}`, { recursive: true });
-
-    //         fs.writeFileSync(`./manga/${mangaName}/${chapterName}/${imageName}`, response.data);
-    //         console.log(`Image ${imageName} downloaded.`);
-    //     } catch (error) {
-    //         console.error(`Error downloading image from ${url}: ${error}`);
-    //     }
-    // };
-
-    // (async () => {
-    //     pageLinks.forEach(async (url) => {
-    //         await downloadImage(url);
-    //     });
-
-
-    //     sem.leave(1)
-    // })();
-
-
-
-
-    // },
-
 
 
     //actually downloads the pages
@@ -249,13 +218,12 @@ module.exports = {
                         url: `${host}/data/${chapterHash}/${page}`,
                         maxContentLength: Infinity,
                         responseType: 'arraybuffer'
-                        // responseType: 'stream'
                     });
 
                     // console.log(`${folderPath}/${page}`, resp.data)
                     fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                 } catch {
-                    console.error('\x1b[91m%s\x1b[0m',`err downloading pages`)
+                    console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
                 }
             };
 
