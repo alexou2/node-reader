@@ -154,18 +154,19 @@ module.exports = {
                 const resp = await axios({
                     method: 'GET',
                     url: `${host}/data/${chapterHash}/${page}`,
-                    maxContentLength: 200000000000000,
+                    // maxContentLength: 99999999999999990,
                     responseType: 'arraybuffer'
+                    // responseType: 'stream'
                 });
 console.log(`${folderPath}/${page}`, resp.data)
                 fs.writeFileSync(`${folderPath}/${page}`, resp.data);
             };
 
-            console.log(`Downloaded ${data.length} pages.`);
+            // console.log(`Downloaded ${data.length} pages.`);
 
 
 
-            console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
+            // console.log("\x1b[33m%s\x1b[0m", "  finished ", chapterName, "\n")
             sem.leave(1)
         })();
     },
