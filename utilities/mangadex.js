@@ -6,10 +6,11 @@
 
 const axios = require('axios');
 const { searchByName } = require('./parser');
-const fs = require('fs')
+const fs = require('fs');
+const { text } = require('body-parser');
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
-const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
+const sem = require('semaphore')(20);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
@@ -29,6 +30,7 @@ module.exports = {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/manga`,
+                maxContentLength: Infinity,
                 params: {
                     title: title,
                     "order[relevance]": "desc",
@@ -61,6 +63,7 @@ module.exports = {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/manga/${mangaID}/feed`,
+                maxContentLength: Infinity,
 
                 // parameters to filter the mangas
                 params: {
@@ -85,7 +88,7 @@ module.exports = {
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
 
-                chapterName[k] = `chapter ${chapter[k]}_ ${chapterTitle[k]}`;
+                chapterName[k] = `chapter ${chapter[k]}_${chapterTitle[k]}`;
             }
 
 
@@ -98,12 +101,13 @@ module.exports = {
             // calls the download function and passes each chapter
             for (let j = 0; j < chapterID.length; j++) {
 
-            sem.take(() => {
-            // let j = 0
+                sem.take(() => {
+                    // let j = 0
 
-            this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
-            console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
-            })
+                    this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
+                    console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
+
+                })
             }
 
         })();
@@ -120,6 +124,7 @@ module.exports = {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/at-home/server/${chapterID}`,
+                maxContentLength: Infinity,
             });
 
             host = resp.data.baseUrl;
@@ -128,9 +133,96 @@ module.exports = {
             dataSaver = resp.data.chapter.dataSaver;
 
 
+
+            let i = 0
+            let pageLinks = []
+            for (const page of data) {
+                pageLinks.push(`${host}/data/${chapterHash}/${page}`)
+                i++
+            }
+            console.log('pageLinks', pageLinks)
+            console.log(pageLinks.length)
+            console.log(i)
+
+
+            let input = ''
+
+            for (const content of pageLinks) {
+                console.log(content)
+                input += content + '\n'
+            }
+
+
+            fs.writeFileSync('./test.txt', input);
+
+            const text = fs.readFileSync('./test.txt', 'utf8')
+            console.log(text)
+
             this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
+            // this.downloadChapters(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
+            // this.downloadChapters(mangaName, chapterName, sem, j, pageLinks)
         })();
     },
+
+
+
+    // downloadChapters: function (mangaName, chapterName, sem, j, pageLinks) {
+
+
+
+
+
+
+    downloadChapters: async function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data) {
+
+        //creates a folder for the manga
+        const folderPath = `../manga/${mangaName}/${chapterName}`
+        fs.mkdirSync(folderPath, { recursive: true });
+
+        //downloads the pages in the correct folder
+        for (const page of data) {
+            // try {
+            const resp = await axios({
+                method: 'GET',
+                url: `${host}/data/${chapterHash}/${page}`,
+                //   maxContentLength: Infinity,
+                responseType: 'arraybuffer'
+            });
+
+            fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+            // } catch (error) {
+            // console.error(`Error downloading image from ${host}`)
+            // }
+        }
+    },
+    // const downloadImage = async (url) => {
+    //     try {
+    //         const response = await axios.get(url, { responseType: 'arraybuffer', timeout: 5000 });
+    //         const imageName = url.split('/').pop();
+
+    //         fs.mkdirSync(`./manga/${mangaName}`, { recursive: true });
+
+    //         fs.writeFileSync(`./manga/${mangaName}/${chapterName}/${imageName}`, response.data);
+    //         console.log(`Image ${imageName} downloaded.`);
+    //     } catch (error) {
+    //         console.error(`Error downloading image from ${url}: ${error}`);
+    //     }
+    // };
+
+    // (async () => {
+    //     pageLinks.forEach(async (url) => {
+    //         await downloadImage(url);
+    //     });
+
+
+    //     sem.leave(1)
+    // })();
+
+
+
+
+    // },
+
 
 
     //actually downloads the pages
@@ -148,21 +240,26 @@ module.exports = {
 
 
 
-
+        //downloads the pages in the correct folderw
         (async () => {
             for (const page of data) {
-                const resp = await axios({
-                    method: 'GET',
-                    url: `${host}/data/${chapterHash}/${page}`,
-                    // maxContentLength: 99999999999999990,
-                    responseType: 'arraybuffer'
-                    // responseType: 'stream'
-                });
-console.log(`${folderPath}/${page}`, resp.data)
-                fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                try {
+                    const resp = await axios({
+                        method: 'GET',
+                        url: `${host}/data/${chapterHash}/${page}`,
+                        maxContentLength: Infinity,
+                        responseType: 'arraybuffer'
+                        // responseType: 'stream'
+                    });
+
+                    // console.log(`${folderPath}/${page}`, resp.data)
+                    fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                } catch {
+                    console.error(`err downloading pages`)
+                }
             };
 
-            // console.log(`Downloaded ${data.length} pages.`);
+            console.log(`Downloaded ${data.length} pages.`);
 
 
 

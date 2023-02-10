@@ -97,6 +97,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     let prevChapter = prevAndNext[0]
     let nextChapter = prevAndNext[1]
     console.group(prevAndNext)
+    console.log(pageList)
     res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
 
 
