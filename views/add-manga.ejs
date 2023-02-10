@@ -1,20 +1,10 @@
 <h1>Add a new manga</h1>
-<!-- <form method="post">
-    <div class="form-group">
-        <label for="link">mangaNato link</label>
-        <textarea required name="mangaList" id="mangaLink" class="form-control">https://manganato.com/</textarea>
-    </div>
-    <a href="https://manganato.com" target="_blank">visit site</a> <br>
-
-    <a href="/" class="btn btn-secondary">cancel</a>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form> -->
 <div class="add-manga">
 
     <!-- the part where the input is -->
     <form action="/new" method="post">
-        <label for="mangaList">Manga link:</label>
-        <input type="text" id="mangaList" name="mangaList">
+        <label for="mangaName">Manga link:</label>
+        <input type="text" id="mangaName" name="mangaName">
 
         <label for="url">link</label>
         <input type="url" name="link" id="link">
@@ -28,7 +18,7 @@
         <div>
             <p>
                 translated language
-                <select class="translatedLanguage">
+                <select class="translatedLanguage" name="translatedLanguage">
                     <option data-c="en" selected="">English</option>
                     <option data-c="fr">French</option>
                     <option data-c="it">Italian</option>
@@ -40,7 +30,7 @@
 <!-- selector for the source -->
         <div>
             source
-            <select class="select_source">
+            <select class="select_source" name="source">
                 <option data-c="mangadex" selected="">Mangadex</option>
                 <option data-c="manganato">Manganato</option>
 

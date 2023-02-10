@@ -10,12 +10,10 @@ const fs = require('fs');
 const { text } = require('body-parser');
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
-const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
+const sem = require('semaphore')(10);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
-//will only get chapters translated in this language
-const languages = 'en'// modify this if you want to get chapters in another language
 
 
 module.exports = {
@@ -23,7 +21,7 @@ module.exports = {
 
 
     //does a search on mangadex.org and returns the 
-    getMangaID: async function (title) {
+    getMangaID: async function (title, languages) {
 
 
         (async () => {
@@ -46,8 +44,12 @@ module.exports = {
             console.log(mangaName)
 
 
+
+            // let coverImage = `https://uploads.mangadex.org/covers/${mangaID}/${ma}.png.512.jpg`
+
+
             // returns only the first manga returned for simplicity purposes.I might change this later, or I might just forget about is :)
-            this.getChapters(mangaID[0], mangaName[0])
+            this.getChapters(mangaID[0], mangaName[0], languages)
         })();
 
     },
@@ -56,7 +58,7 @@ module.exports = {
 
 
     //gets the chapterIDs for the chapter entered
-    getChapters: function (mangaID, mangaName) {
+    getChapters: function (mangaID, mangaName, languages) {
         let chapterName = [];
 
         (async () => {
@@ -153,10 +155,10 @@ module.exports = {
             }
 
 
-            fs.writeFileSync('./test.txt', input);
+            // fs.writeFileSync('./test.txt', input);
 
-            const text = fs.readFileSync('./test.txt', 'utf8')
-            console.log(text)
+            // const text = fs.readFileSync('./test.txt', 'utf8')
+            // console.log(text)
 
             this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
         })();
@@ -178,7 +180,7 @@ module.exports = {
 
         //downloads the pages in the correct folder
         for (const page of data) {
-            // try {
+            try {
             const resp = await axios({
                 method: 'GET',
                 url: `${host}/data/${chapterHash}/${page}`,
@@ -187,9 +189,9 @@ module.exports = {
             });
 
             fs.writeFileSync(`${folderPath}/${page}`, resp.data);
-            // } catch (error) {
-            // console.error(`Error downloading image from ${host}`)
-            // }
+            } catch (error) {
+            console.error(`Error downloading image from ${host}`)
+            }
         }
     },
 

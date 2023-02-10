@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const fs = require('fs');
 var url = require('url');
 const parse = require('./utilities/parser');
+const mangadex = require('./utilities/mangadex')
 const { JSHandle } = require('puppeteer');
 
 app.use(bodyParser.json());
@@ -45,8 +46,26 @@ app.post(`/new`, (req, res) => {
     console.log(mangaString);  // Output: the string value of the "mangaList" field
 
 
-    // sends the string to the parser in order to get the links for all of the chapters
-    parse.parse(mangaString)
+
+    try {
+        switch (req.body.source) {
+
+            //if mangadex is the source
+            case 'Mangadex': mangadex.getMangaID(req.body.mangaName, req.body.translatedLanguages)
+                console.log('mangadex')
+                break;
+
+            // if manganato is the source
+            case 'Manganato': parse.parse(mangaString)
+                break;
+            //if no match is found
+            default: console.log(`no valid matches were found for ${req.body.mangaList}`)
+        }
+    } catch {
+        console.error('An error occured. Please check your connection with the site.')
+        console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
+        console.log('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
+    }
 
 
 
@@ -56,13 +75,13 @@ app.post(`/new`, (req, res) => {
     //enables searching using only the name and not the url
     //currently on hold, since I am trying mangadex's download api
 
-    // let searchedManga = parse.searchByName(mangaString)
-    // console.log("manga name", searchedManga)
+    let searchedManga = parse.searchByName(mangaString)
+    console.log("manga name", searchedManga)
 
-    // mangaLink = parse.getMangaLink(searchedManga)
-    // console.log("parser feed ", mangaLink)
+    mangaLink = parse.getMangaLink(searchedManga)
+    console.log("parser feed ", mangaLink)
 
-    // parse.parse(mangaLink)
+    parse.parse(mangaLink)
 
 
 
