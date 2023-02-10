@@ -10,6 +10,8 @@
     <button type="submit" class="btn btn-primary">Save</button>
 </form> -->
 <div class="add-manga">
+
+    <!-- the part where the input is -->
     <form action="/new" method="post">
         <label for="mangaList">Manga link:</label>
         <input type="text" id="mangaList" name="mangaList">
@@ -21,44 +23,30 @@
             <input type="submit" value="Submit">
             <a button href="/">Cancel</a>
         </p>
+
+        <!-- selector for the tanslated language (mangadex only) -->
         <div>
             <p>
                 translated language
                 <select class="translatedLanguage">
                     <option data-c="en" selected="">English</option>
                     <option data-c="fr">French</option>
+                    <option data-c="it">Italian</option>
                 </select>
             </p>
         </div>
 
 
-
+<!-- selector for the source -->
         <div>
             source
-            <div>
+            <select class="select_source">
+                <option data-c="mangadex" selected="">Mangadex</option>
+                <option data-c="manganato">Manganato</option>
 
-                <input type="radio" name="source" id="mangadex">
-                <label for="mangadex">Mangadex</label>
-            </div>
-            <div>
-
-                <input type="radio" name="source" id="manganato">
-                <label for="manganato">Manganato</label>
-            </div>
+            </select>
 
         </div>
-
-
-
-        <select class="select_source">
-            <option data-c="mangadex" selected="">mangadex</option>
-            <option data-c="manganato" selected="">manganato</option>
-
-
-
-        </select>
-
-
 
     </form>
 </div>
