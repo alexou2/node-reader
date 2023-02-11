@@ -204,7 +204,7 @@ module.exports = {
 
 
         //creates a folder for the manga
-        const folderPath = `../manga/${mangaName}/${chapterName}`
+        const folderPath = `manga/${mangaName}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
 
 

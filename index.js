@@ -40,25 +40,32 @@ app.post(`/new`, (req, res) => {
     console.log(mangaLink)
 
 
-    let formData = req.body.mangaList;  // Get the value of the "mangaList" field in the form
+    let formData = req.body.mangaName;  // Get the value of the "mangaList" field in the form
     let mangaString = formData.toString();  // Convert the value to a string
 
     console.log(mangaString);  // Output: the string value of the "mangaList" field
 
+    console.log(`language for chapters: ${req.body.translatedLanguages}`)
 
+    console.log(req.body.source)
+    console.log(req.body.translatedLanguages)
 
     try {
         switch (req.body.source) {
 
-            //if mangadex is the source
-            case 'Mangadex': mangadex.getMangaID(req.body.mangaName, req.body.translatedLanguages)
-                console.log('mangadex')
+                //if mangadex is the source
+            case 'Mangadex':
+                mangadex.getMangaID(req.body.mangaName, req.body.translatedLanguages)
+                console.log('mangadex in ', req.body.translatedLanguages)
                 break;
 
-            // if manganato is the source
-            case 'Manganato': parse.parse(mangaString)
+                // if manganato is the source
+            case 'Manganato':
+                parse.parse(mangaString)
+                console.log(`manganato in ${req.body.translatedLanguages}`)
                 break;
-            //if no match is found
+
+                //if no match is found
             default: console.log(`no valid matches were found for ${req.body.mangaList}`)
         }
     } catch {
@@ -75,13 +82,13 @@ app.post(`/new`, (req, res) => {
     //enables searching using only the name and not the url
     //currently on hold, since I am trying mangadex's download api
 
-    let searchedManga = parse.searchByName(mangaString)
-    console.log("manga name", searchedManga)
+    // let searchedManga = parse.searchByName(mangaString)
+    // console.log("manga name", searchedManga)
 
-    mangaLink = parse.getMangaLink(searchedManga)
-    console.log("parser feed ", mangaLink)
+    // mangaLink = parse.getMangaLink(searchedManga)
+    // console.log("parser feed ", mangaLink)
 
-    parse.parse(mangaLink)
+    // parse.parse(mangaLink)
 
 
 
