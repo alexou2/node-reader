@@ -30,6 +30,7 @@ first-time setup:
 
     9) after filling the form, you will be redirected to the homepage. if no new manga has appeared, wait untill the chaprers have finished downloading and then type `rs` to restart the server
 
+    9.5) you can change the source from manganato or mangadex if you want (the language selector only works for mangadex)
 
 
 list of commands (assuming that you are in the project folder in the terminal):
@@ -55,7 +56,6 @@ If you want to modify the code:
 
 
     template files: 
-
 
         views/index.ejs : where the chapters are viewed (/manga/mangaName/chapterName)
 
