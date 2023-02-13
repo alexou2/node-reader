@@ -61,7 +61,8 @@ app.post(`/new`, (req, res) => {
 
                 // if manganato is the source
             case 'Manganato':
-                parse.parse(mangaString)
+                // parse.parse(mangaString)
+                parse.searchByName(req.body.mangaName)
                 console.log(`manganato in ${req.body.translatedLanguages}`)
                 break;
 

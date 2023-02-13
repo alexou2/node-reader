@@ -122,7 +122,7 @@ module.exports = {
 
             console.log("returnedmanga", returnedManga)
 
-            parse(returnedManga[0])
+            this.parse(returnedManga[0])
             return returnedManga[0]
         }
         )
