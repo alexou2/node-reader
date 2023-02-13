@@ -8,7 +8,7 @@ I highly recommend that you check out their site at https://mangadex.org
 
 first-time setup:
 
-    1) Download the latest version of the program, since I usually uptate the code 2-3 times per day.
+    1) Download the latest version of the program, since I usually uptate the code 2-3 times per day and some commits might not be completely functionnal.
     1.5) If there is a bug, make sure to check for the newest version and if it still doesn't work, please create an issue.
     
     2) Install nodejs on your computer from the nodejs website or install it by typing `sudo apt install nodejs && sudo apt install npm`in a command prompt (linux only)
