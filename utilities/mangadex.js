@@ -181,16 +181,16 @@ module.exports = {
         //downloads the pages in the correct folder
         for (const page of data) {
             try {
-            const resp = await axios({
-                method: 'GET',
-                url: `${host}/data/${chapterHash}/${page}`,
-                maxContentLength: Infinity,
-                responseType: 'arraybuffer'
-            });
+                const resp = await axios({
+                    method: 'GET',
+                    url: `${host}/data/${chapterHash}/${page}`,
+                    maxContentLength: Infinity,
+                    responseType: 'arraybuffer'
+                });
 
-            fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                fs.writeFileSync(`${folderPath}/${page}`, resp.data);
             } catch (error) {
-            console.error(`Error downloading image from ${host}`)
+                console.error(`Error downloading image from ${host}`)
             }
         }
     },
@@ -223,7 +223,7 @@ module.exports = {
                     });
 
                     // console.log(`${folderPath}/${page}`, resp.data)
-                    fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                    // fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
                 }
@@ -245,10 +245,44 @@ module.exports = {
     filterByTag: function (includedTag, excludedTag) {
 
 
+    },
+
+
+    //get the cover image from mangadex for the downloaded chapter
+    getCoverImage: function (mangaID) {
+
+
+        (async () => {
+            const resp = await axios({
+                method: 'GET',
+                url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=${mangaID}&includes%5B%5D=manga`,
+
+
+                maxContentLength: Infinity,
+            });
+
+            // gets the fileName from the mangadex api
+            const cover_fileName = resp.data.data.map(manga => manga.attributes.fileName)
+
+
+
+            //builds a link to the cover image based on the fileName and the mangaID
+            const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`
+            console.log(coverLink)
+
+        })()
+
+
+
     }
 
 
 }
+
+
+
+
+
 //for debug purposes
 // outputs a mangadex link i order to check the returned ids
 function printLinks(type, link) {

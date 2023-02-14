@@ -109,23 +109,27 @@ module.exports = {
             //gets the link for the first manga to be returned by the search query
             let returnedManga = []
 
-            console.log("\n\nstarted searching form matches\n\n")
+            console.log("\n\nstarted searching form matches\n\n");
+                (async (searchedManga) => {
+                    let matches = await $('.panel-search-story h3 a').each((index, element) => {
+                        returnedManga.push($(element).attr('href'));
 
-            $('.panel-search-story h3 a').each((index, element) => {
-                returnedManga.push($(element).attr('href'));
+                        console.log("in process of returning matches");
 
-                // conslole.log("\n\n\n\nelement", element)
-            });
-
-            console.log("\n\nfinished searching form matches\n\n")
+                        conslole.log("\n\n\n\nelement", element);
+                    });
 
 
-            console.log("returnedmanga", returnedManga)
+                    console.log("\n\nfinished searching form matches\n\n");
 
-            this.parse(returnedManga[0])
-            return returnedManga[0]
-        }
-        )
+
+                    console.log("returnedmanga", returnedManga)
+
+                    parse(returnedManga[0])
+                    return returnedManga[0]
+                }
+                )
+        })();
     },
 
     //searched sor a specific manga
