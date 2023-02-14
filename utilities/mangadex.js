@@ -41,17 +41,20 @@ module.exports = {
 
             var mangaID = resp.data.data.map(manga => manga.id)
 
-            let mangaName = resp.data.data.map(manga => manga.attributes.title.ja)
-            mangaName = mangaName
+            let mangaName = resp.data.data.map(manga => manga.attributes.title)
+            console.log(mangaName)
+            mangaName = mangaName[0]
+            mangaName = JSON.stringify(mangaName)
+            console.log()
+            mangaName = mangaName.split('"')
+            mangaName = mangaName[3]
             console.log(mangaName)
 
 
 
-            // let coverImage = `https://uploads.mangadex.org/covers/${mangaID}/${ma}.png.512.jpg`
 
 
-            // returns only the first manga returned for simplicity purposes.I might change this later, or I might just forget about is :)
-            this.getChapters(mangaID[0], mangaName[0], languages)
+            this.getChapters(mangaID[0], mangaName, languages)
         })();
 
     },
@@ -79,10 +82,8 @@ module.exports = {
 
             console.log(resp.data.data.map(chapter => chapter.id));
 
+            // gets informations from the chapters 
             let chapterID = resp.data.data.map(chapter => chapter.id)
-            // let chapterName = resp.data.data.map(chapter => chapter.attributes.title)
-
-            // console.log(chapterName)
 
             let chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
 
@@ -96,9 +97,9 @@ module.exports = {
             }
 
 
-            console.log("formattd chapter names", chapterName)
+            // console.log("formattd chapter names", chapterName)
             // for debuging only. prints the mandaIDs as links
-            printLinks('chapter', chapterID)
+            // printLinks('chapter', chapterID)
 
 
 
@@ -106,7 +107,7 @@ module.exports = {
             try {
                 this.getCoverImage(mangaName, mangaID)
             } catch {
-                console.log('couldnt get the cover image for this manga')
+                console.error('couldnt get the cover image for this manga')
             }
 
 
@@ -115,11 +116,6 @@ module.exports = {
             for (let j = 0; j < chapterID.length; j++) {
 
                 sem.take(() => {
-                    // let j = 0
-
-
-
-
 
                     this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
                     console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
@@ -157,17 +153,16 @@ module.exports = {
                 pageLinks.push(`${host}/data/${chapterHash}/${page}`)
                 i++
             }
-            console.log('pageLinks', pageLinks)
+            // console.log('pageLinks', pageLinks)
             console.log(pageLinks.length)
-            console.log(i)
 
 
-            let input = ''
+            // let input = ''
 
-            for (const content of pageLinks) {
-                console.log(content)
-                input += content + '\n'
-            }
+            // for (const content of pageLinks) {
+            //     console.log(content)
+            //     input += content + '\n'
+            // }
 
 
             // fs.writeFileSync('./test.txt', input);
@@ -175,17 +170,14 @@ module.exports = {
             // const text = fs.readFileSync('./test.txt', 'utf8')
             // console.log(text)
 
-            this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID)
+            this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
         })();
     },
 
 
 
     //actually downloads the pages
-    downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID) {
-
-
-
+    downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data) {
 
 
         //creates a folder for the manga
@@ -216,7 +208,7 @@ module.exports = {
                     fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                     console.log('page downloaded')
                 } catch {
-                    console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
+                    console.error('\x1b[91m%s\x1b[0m', `err downloading ${page}`)
                 }
             };
 

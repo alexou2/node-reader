@@ -104,9 +104,15 @@ let languages= "en";
 
   var mangaID = resp.data.data.map(manga => manga.id)
 
-  let mangaName = resp.data.data.map(manga => manga.attributes.title.ja)
+  let mangaName = resp.data.data.map(manga => manga.attributes.title)
+  
+  console.log('\n\n\n\n')
+  
   mangaName = mangaName[0]
-  console.log(mangaName)
+  mangaName = JSON.stringify(mangaName)
+  console.log()
+  mangaName = mangaName.split('"')
+  console.log(mangaName[3])
 
 
   // let coverImage = `https://uploads.mangadex.org/covers/${mangaID}/${ma}.png.512.jpg`

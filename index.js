@@ -76,23 +76,6 @@ app.post(`/new`, (req, res) => {
     }
 
 
-
-
-
-
-    //enables searching using only the name and not the url
-    //currently on hold, since I am trying mangadex's download api
-
-    // let searchedManga = parse.searchByName(mangaString)
-    // console.log("manga name", searchedManga)
-
-    // mangaLink = parse.getMangaLink(searchedManga)
-    // console.log("parser feed ", mangaLink)
-
-    // parse.parse(mangaLink)
-
-
-
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
 })
