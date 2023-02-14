@@ -245,7 +245,7 @@ module.exports = {
                     });
 
                     // console.log(`${folderPath}/${page}`, resp.data)
-                    // fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                    fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                     console.log('page downloaded')
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
