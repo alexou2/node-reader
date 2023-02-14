@@ -8,6 +8,7 @@ const axios = require('axios');
 const { searchByName } = require('./parser');
 const fs = require('fs');
 const { text } = require('body-parser');
+const https = require('https')
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
 const sem = require('semaphore')(10);//change 5 by any number to change the number of chapters that can be downloaded at the same time
@@ -100,6 +101,15 @@ module.exports = {
 
 
 
+            //gets the cover image from the manga
+            try {
+                this.getCoverImage(mangaName, mangaID)
+            } catch {
+                console.log('couldnt get the cover image for this manga')
+            }
+
+
+
             // calls the download function and passes each chapter
             for (let j = 0; j < chapterID.length; j++) {
 
@@ -107,11 +117,7 @@ module.exports = {
                     // let j = 0
 
 
-                    // try {
-                    //     this.getCoverImage(mangaName, mangaID)
-                    // } catch {
-                    //     console.log('couldnt get the cover image for this manga')
-                    // }
+
 
 
                     this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
@@ -174,45 +180,6 @@ module.exports = {
 
 
 
-
-
-
-
-
-
-    // downloadChapters: async function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID) {
-
-    //     //creates a folder for the manga
-    //     const folderPath = `../manga/${mangaName}/${chapterName}`
-    //     fs.mkdirSync(folderPath, { recursive: true });
-
-
-    //     // gets the cover timage for the manga
-    //     try {
-    //         this.getCoverImage(mangaName, mangaID)
-    //     } catch {
-    //         console.log('couldnt get the cover image for this manga')
-    //     }
-    //     //downloads the pages in the correct folder
-    //     for (const page of data) {
-    //         try {
-    //             const resp = await axios({
-    //                 method: 'GET',
-    //                 url: `${host}/data/${chapterHash}/${page}`,
-    //                 maxContentLength: Infinity,
-    //                 responseType: 'arraybuffer'
-    //             });
-    //             // downloads chapter pages
-    //             fs.writeFileSync(`${folderPath}/${page}`, resp.data);
-    //         } catch (error) {
-    //             console.error(`Error downloading image from ${host}`)
-    //         }
-
-
-    //     }
-    // },
-
-
     //actually downloads the pages
     downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID) {
 
@@ -273,38 +240,43 @@ module.exports = {
 
     //get the cover image from mangadex for the downloaded chapter
     getCoverImage: function (mangaName, mangaID) {
-        const folderPath = `manga/${mangaName}`
+        const folderPath = `./manga/${mangaName}`;
         fs.mkdirSync(folderPath, { recursive: true });
+
+        // const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
         try {
             (async () => {
                 const resp = await axios({
                     method: 'GET',
                     url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=${mangaID}&includes%5B%5D=manga`,
-
-
                     maxContentLength: Infinity,
                 });
 
-                // gets the fileName from the mangadex api
-                let cover_fileName = resp.data.data.map(manga => manga.attributes.fileName)
+                let cover_fileName = resp.data.data.map(manga => manga.attributes.fileName);
+
+                // cover_fileName = cover_fileName.split(',');
+                cover_fileName = cover_fileName[0]
 
 
+                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`;
 
-                //builds a link to the cover image based on the fileName and the mangaID
-                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName[0]}`
-                console.log(coverLink)
-                // downloads the cover image
+                let coverName = cover_fileName.split('.')
+                coverName = `cover.${coverName[1]}`
 
-cover_fileName = cover_fileName[0]
+                const file = fs.createWriteStream(`${folderPath}/${coverName}`);
+                https.get(coverLink, function (response) {
+                    response.pipe(file);
+                });
 
-                fs.writeFileSync(`${folderPath}/${cover_fileName}`, coverLink);
-            })()
+                console.log(`Downloaded file: ${coverName}`);
+
+            })();
 
         } catch {
             console.log('error when downloading covre drom mangadex')
         }
 
-    }
+    },
 
 
 }
