@@ -1,30 +1,30 @@
-const fs = require('fs')
-const axios = require('axios')
+// const fs = require('fs')
+// const axios = require('axios')
 
-const text = (fs.readFileSync('./test.txt', 'utf8'))
-console.log(text);
-const urlArray = text.split("\n");
-urlArray.pop()
-console.log(urlArray);
+// const text = (fs.readFileSync('./test.txt', 'utf8'))
+// console.log(text);
+// const urlArray = text.split("\n");
+// urlArray.pop()
+// console.log(urlArray);
 
 
 
-const downloadImage = async (url) => {
-    try {
-      const response = await axios.get(url, { responseType: 'arraybuffer', timeout: 5000 });
-      const imageName = url.split('/').pop();
-      fs.writeFileSync(`./images/${imageName}`, response.data);
-      console.log(`Image ${imageName} downloaded.`);
-    } catch (error) {
-      console.error(`Error downloading image from ${url}: ${error}`);
-    }
-  };
+// const downloadImage = async (url) => {
+//     try {
+//       const response = await axios.get(url, { responseType: 'arraybuffer', timeout: 5000 });
+//       const imageName = url.split('/').pop();
+//       fs.writeFileSync(`./images/${imageName}`, response.data);
+//       console.log(`Image ${imageName} downloaded.`);
+//     } catch (error) {
+//       console.error(`Error downloading image from ${url}: ${error}`);
+//     }
+//   };
   
-  (async () => {
-    urlArray.forEach(async (url) => {
-      await downloadImage(url);
-    });
-  })();
+//   (async () => {
+//     urlArray.forEach(async (url) => {
+//       await downloadImage(url);
+//     });
+//   })();
   
 
 
@@ -48,3 +48,36 @@ const downloadImage = async (url) => {
 
 //     console.log(`Downloaded ${data.length} pages.`);
 // })();
+
+
+
+
+const axios = require('axios');
+const https = require('https');
+const fs = require('fs');
+
+const mangaName = "horimiya";
+const folderPath = `./manga/${mangaName}`;
+fs.mkdirSync(folderPath, { recursive: true });
+
+const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
+
+(async () => {
+  const resp = await axios({
+    method: 'GET',
+    url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=6d0e8d89-9b15-4155-af91-896d0c1b476b&includes%5B%5D=manga`,
+    maxContentLength: Infinity,
+  });
+
+  const cover_fileName = resp.data.data.map(manga => manga.attributes.fileName);
+  const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`;
+
+  const file = fs.createWriteStream(`${folderPath}/${cover_fileName}`);
+  https.get(coverLink, function(response) {
+    response.pipe(file);
+  });
+
+  console.log(`Downloaded file: ${cover_fileName}`);
+
+  console.log(`Contents: ${fs.readdirSync(folderPath)}`);
+})();
