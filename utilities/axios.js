@@ -57,27 +57,60 @@ const https = require('https');
 const fs = require('fs');
 
 const mangaName = "horimiya";
-const folderPath = `./manga/${mangaName}`;
-fs.mkdirSync(folderPath, { recursive: true });
+// const folderPath = `./manga/${mangaName}`;
+// fs.mkdirSync(folderPath, { recursive: true });
 
-const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
+// const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
+
+// (async () => {
+//   const resp = await axios({
+//     method: 'GET',
+//     url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=6d0e8d89-9b15-4155-af91-896d0c1b476b&includes%5B%5D=manga`,
+//     maxContentLength: Infinity,
+//   });
+
+//   const cover_fileName = resp.data.data.map(manga => manga.attributes.fileName);
+//   const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`;
+
+//   const file = fs.createWriteStream(`${folderPath}/${cover_fileName}`);
+//   https.get(coverLink, function(response) {
+//     response.pipe(file);
+//   });
+
+//   console.log(`Downloaded file: ${cover_fileName}`);
+
+//   console.log(`Contents: ${fs.readdirSync(folderPath)}`);
+// })();
+
+
+
+const baseUrl = 'https://api.mangadex.org'
+let title = 'gimai seikatsu ';
+let languages= "en";
 
 (async () => {
   const resp = await axios({
-    method: 'GET',
-    url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=6d0e8d89-9b15-4155-af91-896d0c1b476b&includes%5B%5D=manga`,
-    maxContentLength: Infinity,
+      method: 'GET',
+      url: `${baseUrl}/manga`,
+      maxContentLength: Infinity,
+      params: {
+          title: title,
+          "order[relevance]": "desc",
+      }
+
   });
+  console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
 
-  const cover_fileName = resp.data.data.map(manga => manga.attributes.fileName);
-  const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`;
 
-  const file = fs.createWriteStream(`${folderPath}/${cover_fileName}`);
-  https.get(coverLink, function(response) {
-    response.pipe(file);
-  });
+  var mangaID = resp.data.data.map(manga => manga.id)
 
-  console.log(`Downloaded file: ${cover_fileName}`);
+  let mangaName = resp.data.data.map(manga => manga.attributes.title.ja)
+  mangaName = mangaName[0]
+  console.log(mangaName)
 
-  console.log(`Contents: ${fs.readdirSync(folderPath)}`);
+
+  // let coverImage = `https://uploads.mangadex.org/covers/${mangaID}/${ma}.png.512.jpg`
+
+
+  // returns only the first manga returned for simplicity purposes.I might change this later, or I might just forget about is :)
 })();

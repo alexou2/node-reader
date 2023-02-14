@@ -41,7 +41,8 @@ module.exports = {
 
             var mangaID = resp.data.data.map(manga => manga.id)
 
-            let mangaName = resp.data.data.map(manga => manga.attributes.title.en)
+            let mangaName = resp.data.data.map(manga => manga.attributes.title.ja)
+            mangaName = mangaName
             console.log(mangaName)
 
 
