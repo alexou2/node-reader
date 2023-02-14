@@ -11,12 +11,15 @@ const sem = require('semaphore')(5);// I would recomend 5 to 10 with 16gb of ram
 // gets the content of a local html file
 // const data = fs.readFileSync('test.html', 'utf8')
 const request = require('request');
+const { download } = require('./downloader.js');
 const ddl = require('./downloader.js')
+
 
 
 
 module.exports = {
     parse: function (mangaLink) {
+        console.log('parser started')
 
         let links = []
         let coverImage
@@ -110,27 +113,31 @@ module.exports = {
             let returnedManga = []
 
             console.log("\n\nstarted searching form matches\n\n");
-                (async (searchedManga) => {
-                    let matches = await $('.panel-search-story h3 a').each((index, element) => {
-                        returnedManga.push($(element).attr('href'));
+            // (async () => {
+            console.log("inside async");
+            $('.panel-search-story h3 a').each((index, element) => {
+                returnedManga.push($(element).attr('href'));
 
-                        console.log("in process of returning matches");
+                console.log("in process of returning matches");
 
-                        conslole.log("\n\n\n\nelement", element);
-                    });
+                console.log("\n\n\n\nelement", element);
+            });
+
+            // console.log(matches)
+            console.log("\n\nfinished searching form matches\n\n");
 
 
-                    console.log("\n\nfinished searching form matches\n\n");
+            console.log("returnedmanga", returnedManga)
 
 
-                    console.log("returnedmanga", returnedManga)
-
-                    parse(returnedManga[0])
-                    return returnedManga[0]
-                }
-                )
-        })();
+            console.log('calling parser')
+            // parser.parse(returnedManga[0])
+            console.log('done!')
+            return returnedManga[0]
+        }
+        )
     },
+
 
     //searched sor a specific manga
     searchByName: function (searchedManga) {
@@ -142,7 +149,8 @@ module.exports = {
 
 
         //calls getMangaLink()
-        this.getMangaLink(searchedManga)
+        // this.getMangaLink(searchedManga)
+        ddl.getMangaLink(searchedManga)
         return searchedManga
     }
 

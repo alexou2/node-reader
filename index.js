@@ -50,7 +50,7 @@ app.post(`/new`, (req, res) => {
     console.log(req.body.source)
     console.log(req.body.translatedLanguages)
 
-    try {
+    // try {
         switch (req.body.source) {
 
                 //if mangadex is the source
@@ -61,19 +61,19 @@ app.post(`/new`, (req, res) => {
 
                 // if manganato is the source
             case 'Manganato':
-                // parse.parse(mangaString)
-                parse.searchByName(req.body.mangaName)
+                parse.parse(mangaString)
+                // parse.searchByName(req.body.mangaName)
                 console.log(`manganato in ${req.body.translatedLanguages}`)
                 break;
 
                 //if no match is found
             default: console.log(`no valid matches were found for ${req.body.mangaList}`)
         }
-    } catch {
-        console.error('An error occured. Please check your connection with the site.')
-        console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
-        console.log('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
-    }
+    // } catch {
+    //     console.error('An error occured. Please check your connection with the site.')
+    //     console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
+    //     console.log('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
+    // }
 
 
 

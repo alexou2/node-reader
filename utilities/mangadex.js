@@ -106,7 +106,15 @@ module.exports = {
                 sem.take(() => {
                     // let j = 0
 
-                    this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j)
+
+                    try {
+                        this.getCoverImage(mangaName, mangaID)
+                    } catch {
+                        console.log('couldnt get the cover image for this manga')
+                    }
+
+
+                    this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
                     console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
 
                 })
@@ -117,7 +125,7 @@ module.exports = {
 
 
     //gets all of the informations from mangadex in order to download chapters
-    getInfos: function (chapterID, mangaName, chapterName, sem, j) {
+    getInfos: function (chapterID, mangaName, chapterName, sem, j, mangaID) {
 
 
         let host, chapterHash, data, dataSaver;
@@ -160,7 +168,7 @@ module.exports = {
             // const text = fs.readFileSync('./test.txt', 'utf8')
             // console.log(text)
 
-            this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
+            this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID)
         })();
     },
 
@@ -172,32 +180,41 @@ module.exports = {
 
 
 
-    downloadChapters: async function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data) {
+    // downloadChapters: async function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID) {
 
-        //creates a folder for the manga
-        const folderPath = `../manga/${mangaName}/${chapterName}`
-        fs.mkdirSync(folderPath, { recursive: true });
+    //     //creates a folder for the manga
+    //     const folderPath = `../manga/${mangaName}/${chapterName}`
+    //     fs.mkdirSync(folderPath, { recursive: true });
 
-        //downloads the pages in the correct folder
-        for (const page of data) {
-            try {
-                const resp = await axios({
-                    method: 'GET',
-                    url: `${host}/data/${chapterHash}/${page}`,
-                    maxContentLength: Infinity,
-                    responseType: 'arraybuffer'
-                });
 
-                fs.writeFileSync(`${folderPath}/${page}`, resp.data);
-            } catch (error) {
-                console.error(`Error downloading image from ${host}`)
-            }
-        }
-    },
+    //     // gets the cover timage for the manga
+    //     try {
+    //         this.getCoverImage(mangaName, mangaID)
+    //     } catch {
+    //         console.log('couldnt get the cover image for this manga')
+    //     }
+    //     //downloads the pages in the correct folder
+    //     for (const page of data) {
+    //         try {
+    //             const resp = await axios({
+    //                 method: 'GET',
+    //                 url: `${host}/data/${chapterHash}/${page}`,
+    //                 maxContentLength: Infinity,
+    //                 responseType: 'arraybuffer'
+    //             });
+    //             // downloads chapter pages
+    //             fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+    //         } catch (error) {
+    //             console.error(`Error downloading image from ${host}`)
+    //         }
+
+
+    //     }
+    // },
 
 
     //actually downloads the pages
-    downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data) {
+    downloadPages: function (chapterID, mangaName, chapterName, sem, j, host, chapterHash, data, mangaID) {
 
 
 
@@ -207,7 +224,12 @@ module.exports = {
         const folderPath = `manga/${mangaName}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
 
-
+ // gets the cover timage for the manga
+        // try {
+        //     this.getCoverImage(mangaName, mangaID)
+        // } catch {
+        //     console.log('couldnt get the cover image for this manga')
+        // }
 
 
 
@@ -223,7 +245,7 @@ module.exports = {
                     });
 
                     // console.log(`${folderPath}/${page}`, resp.data)
-                    // fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                    fs.writeFileSync(`${folderPath}/${page}`, resp.data);
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
                 }
@@ -249,7 +271,7 @@ module.exports = {
 
 
     //get the cover image from mangadex for the downloaded chapter
-    getCoverImage: function (mangaID) {
+    getCoverImage: function (mangaName, mangaID) {
 
 
         (async () => {
@@ -269,7 +291,8 @@ module.exports = {
             //builds a link to the cover image based on the fileName and the mangaID
             const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`
             console.log(coverLink)
-
+            // downloads the cover image
+            fs.writeFileSync(`${mangaName}/${coverLink}`, coverLink);
         })()
 
 
