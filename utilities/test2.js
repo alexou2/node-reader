@@ -26,6 +26,9 @@ const baseUrl = 'https://uploads.mangadex.org';
 
 
 // })();
+mangaName = "horimiya"
+const folderPath = `manga/${mangaName}`
+        fs.mkdirSync(folderPath, { recursive: true });
 
 const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
 
@@ -49,5 +52,5 @@ const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
     const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`
     console.log(coverLink)
 
-
+    fs.writeFileSync(`${folderPath}/${cover_fileName}`, coverLink);
 })()

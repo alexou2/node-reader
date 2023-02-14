@@ -107,11 +107,11 @@ module.exports = {
                     // let j = 0
 
 
-                    try {
-                        this.getCoverImage(mangaName, mangaID)
-                    } catch {
-                        console.log('couldnt get the cover image for this manga')
-                    }
+                    // try {
+                    //     this.getCoverImage(mangaName, mangaID)
+                    // } catch {
+                    //     console.log('couldnt get the cover image for this manga')
+                    // }
 
 
                     this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
@@ -224,7 +224,7 @@ module.exports = {
         const folderPath = `manga/${mangaName}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
 
- // gets the cover timage for the manga
+        // gets the cover timage for the manga
         // try {
         //     this.getCoverImage(mangaName, mangaID)
         // } catch {
@@ -245,7 +245,8 @@ module.exports = {
                     });
 
                     // console.log(`${folderPath}/${page}`, resp.data)
-                    fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                    // fs.writeFileSync(`${folderPath}/${page}`, resp.data);
+                    console.log('page downloaded')
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading pages`)
                 }
@@ -272,30 +273,36 @@ module.exports = {
 
     //get the cover image from mangadex for the downloaded chapter
     getCoverImage: function (mangaName, mangaID) {
+        const folderPath = `manga/${mangaName}`
+        fs.mkdirSync(folderPath, { recursive: true });
+        try {
+            (async () => {
+                const resp = await axios({
+                    method: 'GET',
+                    url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=${mangaID}&includes%5B%5D=manga`,
 
 
-        (async () => {
-            const resp = await axios({
-                method: 'GET',
-                url: `https://api.mangadex.org/cover?limit=10&manga%5B%5D=${mangaID}&includes%5B%5D=manga`,
+                    maxContentLength: Infinity,
+                });
 
-
-                maxContentLength: Infinity,
-            });
-
-            // gets the fileName from the mangadex api
-            const cover_fileName = resp.data.data.map(manga => manga.attributes.fileName)
+                // gets the fileName from the mangadex api
+                let cover_fileName = resp.data.data.map(manga => manga.attributes.fileName)
 
 
 
-            //builds a link to the cover image based on the fileName and the mangaID
-            const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`
-            console.log(coverLink)
-            // downloads the cover image
-            fs.writeFileSync(`${mangaName}/${coverLink}`, coverLink);
-        })()
+                //builds a link to the cover image based on the fileName and the mangaID
+                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName[0]}`
+                console.log(coverLink)
+                // downloads the cover image
 
+cover_fileName = cover_fileName[0]
 
+                fs.writeFileSync(`${folderPath}/${cover_fileName}`, coverLink);
+            })()
+
+        } catch {
+            console.log('error when downloading covre drom mangadex')
+        }
 
     }
 
