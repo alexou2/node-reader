@@ -2,7 +2,6 @@ this is  a list of the features that I am planning on adding
 
 
     features:
-        download cover images from mangadex
         remove useles console.log() and give context for the ones that are useful
         creating a database for users to continue their progress
         adding a "start reading" button
@@ -10,6 +9,7 @@ this is  a list of the features that I am planning on adding
         encode the file names in order to avoid replacing characters like ?, !, \
         add search by name functionnality to manganato
         add more sites like asura scans
+        fix cover images that won't display properly after refreching the page
         improve UX
         add javascript to resize image sizes
         redo the sorting function for the chapters

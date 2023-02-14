@@ -258,7 +258,7 @@ module.exports = {
                 cover_fileName = cover_fileName[0]
 
 
-                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}`;
+                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}.512.jpg`;
 
                 let coverName = cover_fileName.split('.')
                 coverName = `cover.${coverName[1]}`
