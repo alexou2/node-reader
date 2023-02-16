@@ -41,6 +41,7 @@ module.exports = {
 
             var mangaID = resp.data.data.map(manga => manga.id)
 
+            // fetches the first manga name in the mangadex list
             let mangaName = resp.data.data.map(manga => manga.attributes.title)
             console.log(mangaName)
             mangaName = mangaName[0]
@@ -50,8 +51,13 @@ module.exports = {
             mangaName = mangaName[3]
             console.log(mangaName)
 
+            // fetches the alternative titles for the manga
+            let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
+            console.log(altTitles)
 
 
+            let tags = resp.data.data.map(tags => tags.tags.attributes.name)
+            console.log("tags", tags)
 
 
             this.getChapters(mangaID[0], mangaName, languages)
@@ -251,7 +257,7 @@ module.exports = {
                 cover_fileName = cover_fileName[0]
 
 
-                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}.512.jpg`;
+                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}.256.jpg`;
 
                 let coverName = cover_fileName.split('.')
                 coverName = `cover.${coverName[1]}`

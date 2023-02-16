@@ -104,15 +104,12 @@ let languages= "en";
 
   var mangaID = resp.data.data.map(manga => manga.id)
 
-  let mangaName = resp.data.data.map(manga => manga.attributes.title)
+  let contentRating = resp.data.data.map(rating => rating.attributes.contentRating)
+  console.log(contentRating)
   
-  console.log('\n\n\n\n')
-  
-  mangaName = mangaName[0]
-  mangaName = JSON.stringify(mangaName)
-  console.log()
-  mangaName = mangaName.split('"')
-  console.log(mangaName[3])
+  let tags = resp.data.data.map(rating => rating.attributes.contentRating)
+  console.log(tgs)
+
 
 
   // let coverImage = `https://uploads.mangadex.org/covers/${mangaID}/${ma}.png.512.jpg`
