@@ -96,12 +96,12 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     //gets and sorts page list
     var pageList = getPages(mangaName, chapName);
     pageList = pageList.sort(function (a, b) { return a - b });
-    pageList = sortList(pageList)
+    pageList = sortList(pageList, 'pages')
 
 
     //gets the chapter list in order to determine what is the next and previous chapter
     var chapterList = getList(mangaName)
-    chapterList = sortList(chapterList)
+    chapterList = sortList(chapterList, 'chapters')
     // console.log(chapterList)
 
     //gets the previpus chapter and the next chapter
@@ -136,7 +136,7 @@ function getPages(mangaName, chapName) {
     function readFiles() {
         var pageList = [];
         const testFolder = `./manga/${mangaName}/${chapName}`;
-// reads the files in the folder and returns its contents
+        // reads the files in the folder and returns its contents
         fs.readdirSync(testFolder).forEach(file => {
             pageList.push(file);
         });
@@ -147,7 +147,7 @@ function getPages(mangaName, chapName) {
     //filters the files givent to it and keeps only jpg files
     function filterList(pageList) {
         var images = pageList.filter(function (p) {
-//returns only the images
+            //returns only the images
             return ((p.includes('.jpg')) || (p.includes('.png')));
         });
         return (images)
@@ -157,27 +157,54 @@ function getPages(mangaName, chapName) {
 }
 
 //sorts the lists with the number in them created by chatGPT ;)
-function sortList(arr) {
-
-    const regex = /\d+/;
-
-    arr.sort((a, b) => {
-        const aMatch = a.match(regex);
-        const bMatch = b.match(regex);
-        if (!aMatch && !bMatch) {
-            return a.localeCompare(b);
-        } else if (!aMatch) {
-            return 1;
-        } else if (!bMatch) {
-            return -1;
-        } else {
-            const aNum = parseInt(aMatch[0]);
-            const bNum = parseInt(bMatch[0]);
-            return aNum - bNum;
-        } title
-    });
+function sortList(arr, type) {
 
 
+// if the array to sort is pages
+    if (type == 'pages') {
+        const regex = /\d+/;
+
+        arr.sort((a, b) => {
+            const aMatch = a.match(regex);
+            const bMatch = b.match(regex);
+            if (!aMatch && !bMatch) {
+                return a.localeCompare(b);
+            } else if (!aMatch) {
+                return 1;
+            } else if (!bMatch) {
+                return -1;
+            } else {
+                const aNum = parseInt(aMatch[0]);
+                const bNum = parseInt(bMatch[0]);
+                return aNum - bNum;
+            } title
+        });
+
+    } 
+    else {
+        const regex = /Chapter\s*(\d+(?:\.\d+)?)/i;
+
+        arr.sort((a, b) => {
+            const aMatch = a.match(regex);
+            const bMatch = b.match(regex);
+            if (!aMatch && !bMatch) {
+                return a.localeCompare(b);
+            } else if (!aMatch) {
+                return 1;
+            } else if (!bMatch) {
+                return -1;
+            } else {
+                const aNum = parseFloat(aMatch[1]);
+                const bNum = parseFloat(bMatch[1]);
+                if (aNum === bNum) {
+                    return arr.indexOf(a) - arr.indexOf(b);
+                } else {
+                    return aNum - bNum;
+                }
+            }
+        });
+
+    }
 
 
 
@@ -214,7 +241,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
     var chapterList = getList(mangaName)
 
-    chapterList = sortList(chapterList)
+    chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
 
     //rendres chapter-menu.ejs with the arguments
