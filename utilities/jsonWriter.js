@@ -30,11 +30,35 @@ module.exports = {
         return data.path
     },
 
+    getCoverPath: function (path) {
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
+        data = JSON.parse(data)
+        return data.cover_path
+    },
+
     getChapters: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
 
         return data.chapters
+    },
+
+    getPathOrder: function (path) {
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
+        data = JSON.parse(data);
+
+        let pathOrder = data.chapters.map(path => path.chapterPath)
+
+        return pathOrder
+    },
+
+    getchapterNames: function (path) {
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
+        data = JSON.parse(data);
+
+        let chapterNames = data.chapters.map(path => path.chapterName)
+
+        return chapterNames
     },
 
 
