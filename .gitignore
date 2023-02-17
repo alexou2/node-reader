@@ -1,4 +1,4 @@
 manga/
 node_modules
 *.jpg
-jsonFiles/
+jsonFiles/*.json

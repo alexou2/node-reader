@@ -1,4 +1,4 @@
-const fs = require('fs');
+ const fs = require('fs');
 
 
 // let outputContent = () => {
@@ -15,7 +15,7 @@ const fs = require('fs');
 // outputContent()
 
 
-modules.exports = {
+module.exports = {
 
 
     getName: function (path) {
@@ -39,7 +39,7 @@ modules.exports = {
 
 
     // writes a new json file for each manga
-    addManga: function (mangaName, path, chapter_count, chapterNameList, chapterPathList, tags, description) {
+    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
         let chapters = []
 
         // gives attributes to each chapter
