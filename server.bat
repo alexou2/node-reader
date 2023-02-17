@@ -1,4 +1,2 @@
-github
-git pull
-code .
+github && code .
 nodemon index.js
