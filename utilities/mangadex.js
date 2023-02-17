@@ -56,11 +56,57 @@ module.exports = {
             console.log(altTitles)
 
 
-            // let tags = resp.data.data.map(tags => tags.tags.attributes.name)
-            // console.log("tags", tags)
+
+
+
+
+
+
+
+
+            // gets all of the informations from mangadex
+            this.writeJson(mangaID[0], mangaName, languages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             this.getChapters(mangaID[0], mangaName, languages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         })();
 
     },
@@ -101,11 +147,6 @@ module.exports = {
 
                 chapterName[k] = `chapter ${chapter[k]}_${chapterTitle[k]}`;
             }
-
-
-            // console.log("formattd chapter names", chapterName)
-            // for debuging only. prints the mandaIDs as links
-            // printLinks('chapter', chapterID)
 
 
 
@@ -162,20 +203,6 @@ module.exports = {
             // console.log('pageLinks', pageLinks)
             console.log(pageLinks.length)
 
-
-            // let input = ''
-
-            // for (const content of pageLinks) {
-            //     console.log(content)
-            //     input += content + '\n'
-            // }
-
-
-            // fs.writeFileSync('./test.txt', input);
-
-            // const text = fs.readFileSync('./test.txt', 'utf8')
-            // console.log(text)
-
             this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
         })();
     },
@@ -189,13 +216,6 @@ module.exports = {
         //creates a folder for the manga
         const folderPath = `manga/${mangaName}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
-
-        // gets the cover timage for the manga
-        // try {
-        //     this.getCoverImage(mangaName, mangaID)
-        // } catch {
-        //     console.log('couldnt get the cover image for this manga')
-        // }
 
 
 
@@ -277,17 +297,42 @@ module.exports = {
 
     },
 
+    // gets informations and sends them to be written in a json file
+    writeJson: function (mangaID, mangaName, languages) {
 
-}
+        const mangaJSON = require('./jsonWriter');
+        let chapterName = [];
+
+        (async () => {
+            const resp = await axios({
+                method: 'GET',
+                url: `${baseUrl}/manga/${mangaID}/feed`,
+                maxContentLength: Infinity,
+
+                // parameters to filter the mangas
+                params: {
+                    "order[chapter]": "asc", //sorts the chapter list 
+                    "translatedLanguage[]": languages //will only return one specific language 
+                },
+
+            });
+
+            let chapterID = resp.data.data.map(chapter => chapter.id)
+
+            let chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
+
+            let chapter = resp.data.data.map(chapter => chapter.attributes.chapter)
+            //creates formatted chapter name
+
+            for (let k = 0; k < chapterID.length; k++) {
+                chapterName[k] = `chapter ${chapter[k]}: ${chapterTitle[k]}`;
+            }
+
+            let path = `manga/${mangaName}`
 
 
+            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a")
 
-
-
-//for debug purposes
-// outputs a mangadex link i order to check the returned ids
-function printLinks(type, link) {
-    for (let i = 0; i < link.length; i++) {
-        console.log(`https://mangadex.org/${type}/${link[i]}`)
+        })();
     }
 }

@@ -33,7 +33,7 @@ module.exports = {
     getChapters: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
-        
+
         return data.chapters
     },
 
@@ -42,11 +42,17 @@ module.exports = {
     // writes a new json file for each manga
     addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
         let chapters = []
+        console.log("started adding mangas")
 
         // gives attributes to each chapter
         for (let i = 0; i < chapterNameList.length; i++) {
-            chapters.push({ sorting_order: i + 1, chapterName: chapterNameList[i], chapterPath: path + "/" + chapterPathList[i] })
+            chapters.push({
+                sorting_order: i + 1,
+                chapterName: chapterNameList[i],
+                chapterPath: path + "/" + chapterPathList[i],
+            })
         }
+        console.log(chapterPathList)
 
         // the attributes of the file
         let mangaJSON = {
@@ -58,6 +64,7 @@ module.exports = {
             description: description,
             chapters: chapters,
         }
+
 
         // convert JSON object to a string
         const manga = JSON.stringify(mangaJSON, 'null', 2)
