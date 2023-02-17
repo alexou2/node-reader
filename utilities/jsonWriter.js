@@ -1,4 +1,4 @@
- const fs = require('fs');
+const fs = require('fs');
 
 
 // let outputContent = () => {
@@ -19,21 +19,22 @@ module.exports = {
 
 
     getName: function (path) {
-        let data = fs.readFileSync(path, 'utf8')
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
         return data.mangaName
     },
 
     getPath: function (path) {
-        let data = fs.readFileSync(path, 'utf8')
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
         return data.path
     },
 
     getChapters: function (path) {
-        let data = fs.readFileSync(path, 'utf8')
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
-        return data.chapters.map(chap => chap)
+        
+        return data.chapters
     },
 
 
@@ -46,7 +47,6 @@ module.exports = {
         for (let i = 0; i < chapterNameList.length; i++) {
             chapters.push({ sorting_order: i + 1, chapterName: chapterNameList[i], chapterPath: path + "/" + chapterPathList[i] })
         }
-
 
         // the attributes of the file
         let mangaJSON = {
@@ -62,8 +62,6 @@ module.exports = {
         // convert JSON object to a string
         const manga = JSON.stringify(mangaJSON, 'null', 2)
 
-
-
         //writes the files
         fs.writeFileSync(`jsonFiles/${mangaName}.json`, (manga), err => {
             if (err) {
@@ -77,7 +75,7 @@ module.exports = {
 
 
     // updates the manga with new infos
-    updateManga: function (newInfos) {
+    updateManga: function (path, newInfos) {
 
 
     },
