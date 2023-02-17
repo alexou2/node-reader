@@ -36,43 +36,45 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    let mangaLink = req.body
-    console.log(mangaLink)
+    // let mangaLink = req.body
+    // console.log(mangaLink)
 
 
-    let formData = req.body.mangaName;  // Get the value of the "mangaList" field in the form
-    let mangaString = formData.toString();  // Convert the value to a string
+    // let formData = req.body.mangaName;  // Get the value of the "mangaList" field in the form
+    // let mangaString = formData.toString();  // Convert the value to a string
 
-    console.log(mangaString);  // Output: the string value of the "mangaList" field
+    // console.log(mangaString);  // Output: the string value of the "mangaList" field
 
-    console.log(`language for chapters: ${req.body.translatedLanguages}`)
+    console.log(req.body)
 
-    console.log(req.body.source)
-    console.log(req.body.translatedLanguages)
+    // console.log(`language for chapters: ${req.body.translatedLanguages}`)
+
+    // console.log(req.body.source)
+    // console.log(req.body.translatedLanguages)
 
     try {
         switch (req.body.source) {
 
-                //if mangadex is the source
+            //if mangadex is the source
             case 'Mangadex':
-                mangadex.getMangaID(req.body.mangaName+' ', req.body.translatedLanguages)
+                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages)
                 console.log('mangadex in ', req.body.translatedLanguages)
                 break;
 
-                // if manganato is the source
+            // if manganato is the source
             case 'Manganato':
-                parse.parse(mangaString)
+                parse.parse(req.body.mangaName)
                 // parse.searchByName(req.body.mangaName)
                 console.log(`manganato in ${req.body.translatedLanguages}`)
                 break;
 
-                //if no match is found
+            //if no match is found
             default: console.log(`no valid matches were found for ${req.body.mangaList}`)
         }
     } catch {
         console.error('An error occured. Please check your connection with the site.')
         console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
-        console.log('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
+        console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
     }
 
 
@@ -107,7 +109,9 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     let prevChapter = prevAndNext[0]
     let nextChapter = prevAndNext[1]
     console.group(prevAndNext)
-    console.log(pageList)
+    console.log('list of of pages for this chapter: ', pageList)
+
+    //sends the informations to the page used to render the chapters
     res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
 
 
@@ -116,29 +120,26 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
 
 
-// Server setup
+// enables the server to be accessed via localhost 3000
 app.listen(3000, (req, res) => {
     console.log("Connected on port:3000");
 });
 
 
+
 //gets all of the pages in the selectrd directory
 function getPages(mangaName, chapName) {
-
-
     var pageList = readFiles();
     pageList = filterList(pageList)
-
 
     //lists all files for a chapter
     function readFiles() {
         var pageList = [];
         const testFolder = `./manga/${mangaName}/${chapName}`;
-
+// reads the files in the folder and returns its contents
         fs.readdirSync(testFolder).forEach(file => {
             pageList.push(file);
         });
-
         return pageList;
     }
 
@@ -146,8 +147,7 @@ function getPages(mangaName, chapName) {
     //filters the files givent to it and keeps only jpg files
     function filterList(pageList) {
         var images = pageList.filter(function (p) {
-
-
+//returns only the images
             return ((p.includes('.jpg')) || (p.includes('.png')));
         });
         return (images)

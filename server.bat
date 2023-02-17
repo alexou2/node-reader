@@ -1,2 +1,1 @@
-github && code .
-nodemon index.js
+github && code . && nodemon index.js

@@ -56,8 +56,8 @@ module.exports = {
             console.log(altTitles)
 
 
-            let tags = resp.data.data.map(tags => tags.tags.attributes.name)
-            console.log("tags", tags)
+            // let tags = resp.data.data.map(tags => tags.tags.attributes.name)
+            // console.log("tags", tags)
 
 
             this.getChapters(mangaID[0], mangaName, languages)
