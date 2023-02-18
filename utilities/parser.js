@@ -73,10 +73,17 @@ module.exports = {
 
             //replaces problematic characters to avoid causing problems
             for (let i = 0; i < chapterName.length; i++) {
+                chapterName[i] = chapterName[i].trim()
+                     
+                //replaces problematic characters
                 chapterName[i] = chapterName[i].replaceAll(':', '_')
                 chapterName[i] = chapterName[i].replaceAll('?', '_')
                 chapterName[i] = chapterName[i].replaceAll('!', '_')
 
+                // removes all of the unwanted characters at the end of the string
+                if (chapterName[i].endsWith('_')) {
+                    chapterName[i] = chapterName[i].slice(0,-1)
+                }
             }
             console.log("chapters: ", chapterName)
 

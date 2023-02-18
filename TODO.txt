@@ -19,6 +19,7 @@ this is  a list of the features that I am planning on adding
         change the add-manga.ejs form depending on the website (enable/ disable language selection)
         add a progress bar in the top-bar to see when a manga has finished downloading
         give advanced options for downloading mangas (change name, download only a certain ammount of chapters, download only new chapters)
+        create an app compatible with android
 
 
     bug fixes:

@@ -68,11 +68,22 @@ module.exports = {
         let chapters = []
         console.log("started adding mangas")
 
+        for (let j = 0; j < chapterNameList.length; j++) {
+            chapterNameList[j] = chapterNameList[j].trim()
+
+
+            if (chapterNameList[j].endsWith(':')) {
+                chapterNameList[j] = chapterNameList[j].slice(0, -1)
+            }
+            console.log('chapters: ', chapterNameList[j])
+        }
+
+
         // gives attributes to each chapter
         for (let i = 0; i < chapterNameList.length; i++) {
             chapters.push({
-                sorting_order: i + 1,
                 chapterName: chapterNameList[i],
+                sorting_order: i + 1,
                 chapterPath: path + "/" + chapterPathList[i],
             })
         }
@@ -110,6 +121,42 @@ module.exports = {
 
 
     },
+    newManga: function (mangaName, jsonPath) {
+
+        let mangaStats = []
+
+        mangaStats.push(
+            {
+                mangaName: mangaName,
+                jsonPath: jsonPath,
+                coverImage: `manga/${mangaName}/cover.jpg`,
+            }
+        )
+
+
+        let allManga = {
+            list_of_mangas: mangaStats
+        }
+
+
+        const list = JSON.stringify(allManga, 'null', 2)
+
+        //writes the files
+        fs.writeFileSync(`jsonFiles/mangaList.json`, (list), err => {
+            if (err) {
+                console.log(`Error writing file: ${err}`)
+            } else {
+                console.log(`File is written successfully!`)
+            }
+        })
+
+    },
+
+    // is called if a manga doesn't have a json
+    ifNoJson: function () {
+
+
+    }
 
 
 }
