@@ -67,7 +67,7 @@ module.exports = {
 
 
             // gets all of the informations from mangadex
-            // this.writeJson(mangaID[0], mangaName, languages)
+            this.writeJson(mangaID[0], mangaName, languages)
 
 
 
@@ -152,12 +152,14 @@ module.exports = {
 
                 //removes th null if there is one
                 if (chapterName[k].endsWith('null')) {
-                    chapterName[k] = chapterName[k].slice(-3, 0)
+                    chapterName[k] = chapterName[k].slice(0, -5) + '.1'
                 }
                 chapterName[k] = chapterName[k].trim()
                 // if there is an underscore it will remove it
                 if (chapterName[k].endsWith('_')) {
-                    chapterName[k] = chapterName[k].slice(-1, 0)
+                    console.log(chapterName[k])
+                    chapterName[k] = chapterName[k].slice(0, -1)
+                    console.log('chapters:', chapterName[k])
                 }
                 chapterName[k] = chapterName[k].trim()
 

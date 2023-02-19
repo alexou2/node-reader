@@ -55,7 +55,6 @@ module.exports = {
     getchapterNames: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
         data = JSON.parse(data);
-
         let chapterNames = data.chapters.map(path => path.chapterName)
 
         return chapterNames
@@ -68,16 +67,27 @@ module.exports = {
         let chapters = []
         console.log("started adding mangas")
 
+        //formats each chapter's name 
         for (let j = 0; j < chapterNameList.length; j++) {
+            chapterNameList[j] = chapterNameList[j].trim()
+           
+            //removes th null if there is one
+            if (chapterNameList[j].endsWith('null')) {
+                chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
+                console.log("true")
+            }
             chapterNameList[j] = chapterNameList[j].trim()
 
 
+// removes : from the end of the chapter
             if (chapterNameList[j].endsWith(':')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -1)
             }
-            console.log('chapters: ', chapterNameList[j])
-        }
 
+            chapterNameList[j] = chapterNameList[j].trim()
+
+        }
+        console.log('chapters: ', chapterNameList)
 
         // gives attributes to each chapter
         for (let i = 0; i < chapterNameList.length; i++) {
