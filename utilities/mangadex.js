@@ -50,6 +50,8 @@ module.exports = {
             mangaName = mangaName.split('"')
             mangaName = mangaName[3]
             console.log(mangaName)
+            // removes the space at the end of the name
+            mangaName = mangaName.trim()
 
             // fetches the alternative titles for the manga
             let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
@@ -145,7 +147,21 @@ module.exports = {
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
 
-                chapterName[k] = `chapter ${chapter[k]}_${chapterTitle[k]}`;
+                chapterName[k] = `chapter ${chapter[k]}_ ${chapterTitle[k]}`;
+                chapterName[k] = chapterName[k].trim()
+
+                //removes th null if there is one
+                if (chapterName[k].endsWith('null')) {
+                    chapterName[k] = chapterName[k].slice(-3, 0)
+                }
+                chapterName[k] = chapterName[k].trim()
+                // if there is an underscore it will remove it
+                if (chapterName[k].endsWith('_')) {
+                    chapterName[k] = chapterName[k].slice(-1, 0)
+                }
+                chapterName[k] = chapterName[k].trim()
+
+
             }
 
 
