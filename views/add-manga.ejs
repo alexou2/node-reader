@@ -3,9 +3,11 @@
 
     <!-- the part where the input is -->
     <form action="/new" method="post">
-        <label for="mangaName">Manga link:</label>
+        
+        <div id="input_type">
+        <label for="mangaName">Manga name:</label>
         <input type="text" id="mangaName" name="mangaName">
-
+</div>
         
         <p>
             <button type="reset">Reset</button>
@@ -43,7 +45,7 @@
 
     <script>
         // when mangadex is selected
-        document.getElementById("manganato").onclick = function () {
+        document.getElementById("mangadex").onclick = function () {
             document.getElementById("input_type").innerHTML = `
             <label id="input_type" for="mangaName">Manga name:</label>
             <input type="url" id="mangaName" name="mangaName">
@@ -55,7 +57,7 @@
         // when manganato is selected
         document.getElementById("manganato").onclick = function () {
             document.getElementById("input_type").innerHTML = `
-            <label id="input_type" for="mangaName">manga link:</label>
+            <label id="input_type" for="mangaName">Manga link:</label>
             <input type="url" id="mangaName input_type" name="mangaName">
            `
         }
