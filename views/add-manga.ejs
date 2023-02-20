@@ -6,8 +6,7 @@
         <label for="mangaName">Manga link:</label>
         <input type="text" id="mangaName" name="mangaName">
 
-        <label for="url">link</label>
-        <input type="url" name="link" id="link">
+        
         <p>
             <button type="reset">Reset</button>
             <input type="submit" value="Submit">
@@ -30,8 +29,8 @@
         <div>
             source
             <select class="select_source" name="source">
-                <option data-c="mangadex" selected="">Mangadex</option>
-                <option data-c="manganato">Manganato</option>
+                <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                <option id="manganato" data-c="manganato">Manganato</option>
 
             </select>
 
@@ -39,4 +38,30 @@
 
 
     </form>
+
+
+
+    <script>
+        // when mangadex is selected
+        document.getElementById("manganato").onclick = function () {
+            document.getElementById("input_type").innerHTML = `
+            <label id="input_type" for="mangaName">Manga name:</label>
+            <input type="url" id="mangaName" name="mangaName">
+            `
+        }
+
+
+
+        // when manganato is selected
+        document.getElementById("manganato").onclick = function () {
+            document.getElementById("input_type").innerHTML = `
+            <label id="input_type" for="mangaName">manga link:</label>
+            <input type="url" id="mangaName input_type" name="mangaName">
+           `
+        }
+
+
+
+    </script>
+
 </div>
