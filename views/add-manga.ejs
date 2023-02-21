@@ -3,21 +3,17 @@
 
     <!-- the part where the input is -->
     <form action="/new" method="post">
-        
+
         <div id="input_type">
-        <label for="mangaName">Manga name:</label>
-        <input type="text" id="mangaName" name="mangaName">
-</div>
-        
-        <p>
-            <button type="reset">Reset</button>
-            <input type="submit" value="Submit">
-            <a button href="/">Cancel</a>
-        </p>
+            <label for="mangaName">Manga name:</label>
+            <input type="text" id="mangaName" name="mangaName">
+        </div>
+
+
 
 
         <!-- selector for the tanslated language (mangadex only) -->
-        <div>
+        <div id="translatedLanguages">
             translated language
             <select class="translatedLanguages" name="translatedLanguages">
                 <option data-c="en" value="en" selected="">English</option>
@@ -37,7 +33,11 @@
             </select>
 
         </div>
-
+        <p>
+            <button type="reset">Reset</button>
+            <input type="submit" value="Submit">
+            <a button href="/">Cancel</a>
+        </p>
 
     </form>
 
@@ -50,6 +50,17 @@
             <label id="input_type" for="mangaName">Manga name:</label>
             <input type="url" id="mangaName" name="mangaName">
             `
+
+
+            document.getElementById("translatedLanguages").innerHTML = `
+            <div>
+            translated language
+            <select class="translatedLanguages" name="translatedLanguages">
+                <option data-c="en" value="en" selected="">English</option>
+                <option data-c="fr" value="fr">Fançais</option>
+                <option data-c="it" value="it">Italian</option>
+            </select>
+        </div>`
         }
 
 
@@ -60,6 +71,7 @@
             <label id="input_type" for="mangaName">Manga link:</label>
             <input type="url" id="mangaName input_type" name="mangaName">
            `
+            document.getElementById("translatedLanguages").innerHTML = ``
         }
 
 
