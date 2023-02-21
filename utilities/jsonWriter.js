@@ -56,7 +56,7 @@ module.exports = {
         //formats each chapter's name 
         for (let j = 0; j < chapterNameList.length; j++) {
             chapterNameList[j] = chapterNameList[j].trim()
-           
+
             //removes th null if there is one
             if (chapterNameList[j].endsWith('null')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
@@ -67,7 +67,7 @@ module.exports = {
             chapterNameList[j] = sanitizeFilename(chapterNameList[j])
 
 
-// removes : from the end of the chapter
+            // removes : from the end of the chapter
             if (chapterNameList[j].endsWith(':')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -1)
             }
@@ -151,8 +151,16 @@ module.exports = {
     },
 
     // is called if a manga doesn't have a json
-    ifNoJson: function () {
+    checkJson: function () {
 
+        let mangaFiles = fs.readdirSync("manga");
+        let jsonFiles = fs.readdirSync("jsonFiles")
+
+        for (i in mangaFiles) {
+            for (j in jsonFiles) {
+
+            }
+        }
 
     }
 
