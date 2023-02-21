@@ -56,7 +56,7 @@ module.exports = {
             // removes the space at the end of the name
             mangaName = mangaName.trim()
             mangaName = sanitizeFilename(mangaName)
-            mangaName = mangaName.replaceAll('〇', 'O')
+            // mangaName = mangaName.replaceAll('〇', 'O')
 
             // fetches the alternative titles for the manga
             let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
@@ -157,7 +157,7 @@ module.exports = {
 
                 //removes th null if there is one
                 if (chapterName[k].endsWith('null')) {
-                    chapterName[k] = chapterName[k].slice(0, -5) + '.1'
+                    chapterName[k] = chapterName[k].slice(0, -6) + '.1'
                 }
                 chapterName[k] = chapterName[k].trim()
                 // if there is an underscore it will remove it

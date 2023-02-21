@@ -1,19 +1,5 @@
 const fs = require('fs');
-
-
-// let outputContent = () => {
-//     let data = fs.readFileSync('./manga.json', 'utf8')
-//     data = JSON.parse(data)
-
-
-
-//     console.log('name: ', data.mangaName)
-//     console.log(`path: ${__dirname}/${data.path}`)
-//     console.log('chapter number:', data.chapter_count)
-//     console.log(data.chapters.map(chap => chap.chapter1.map(path => path.path)))
-// }
-// outputContent()
-
+const sanitizeFilename = require('sanitize-filename');
 
 module.exports = {
 
