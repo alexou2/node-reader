@@ -70,7 +70,7 @@ module.exports = {
         //formats each chapter's name 
         for (let j = 0; j < chapterNameList.length; j++) {
             chapterNameList[j] = chapterNameList[j].trim()
-           
+
             //removes th null if there is one
             if (chapterNameList[j].endsWith('null')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
@@ -79,7 +79,7 @@ module.exports = {
             chapterNameList[j] = chapterNameList[j].trim()
 
 
-// removes : from the end of the chapter
+            // removes : from the end of the chapter
             if (chapterNameList[j].endsWith(':')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -1)
             }
@@ -163,10 +163,33 @@ module.exports = {
     },
 
     // is called if a manga doesn't have a json
-    ifNoJson: function () {
+    checkForJson: function () {
+
+        // gets the list of json files in the json folder
+        let jsonList = fs.readdirSync(`jsonFiles`)
+        // gets the list of mangas in the manga folder
+        let mangaList = fs.readdirSync(`manga`)
 
 
-    }
+        console.log(mangaList)
+        console.log(jsonList)
+
+
+
+        for (i in jsonList) {
+            let match = 0;
+            for (k in mangaList) {
+                if (jsonList[i] == `${mangaList[k]}.json`) {
+                    // console.log(`${jsonList[i]} and ${mangaList[k]} not found`)
+                    match++
+                }
+            }
+            if (match == 0) {
+                console.log('match not found for ', jsonList[i])
+            }
+        }
+
+    },
 
 
 }
