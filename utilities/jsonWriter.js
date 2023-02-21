@@ -62,7 +62,9 @@ module.exports = {
                 chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
                 console.log("true")
             }
+
             chapterNameList[j] = chapterNameList[j].trim()
+            chapterNameList[j] = sanitizeFilename(chapterNameList[j])
 
 
 // removes : from the end of the chapter

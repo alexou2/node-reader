@@ -233,7 +233,7 @@ app.get(`/`, (req, res) => {
 app.get(`/manga/:mangaName`, (req, res) => {
     var mangaName = getMangaName(url.parse(req.url).pathname)
     mangaName = decodeURIComponent(mangaName)
-    
+
     var chapterList = getList(decodeURIComponent(mangaName))
 
     chapterList = sortList(chapterList, 'chapters')
