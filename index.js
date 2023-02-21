@@ -160,7 +160,7 @@ function getPages(mangaName, chapName) {
 function sortList(arr, type) {
 
 
-// if the array to sort is pages
+    // if the array to sort is pages
     if (type == 'pages') {
         const regex = /\d+/;
 
@@ -180,7 +180,7 @@ function sortList(arr, type) {
             } title
         });
 
-    } 
+    }
     else {
         const regex = /Chapter\s*(\d+(?:\.\d+)?)/i;
 
@@ -213,33 +213,28 @@ function sortList(arr, type) {
 }
 
 
-//calls the functions to render navigation pages
-let mangaList = renderHomepage()
-console.log("manga list is ", mangaList)
+
 
 
 
 //renders the homepage accessible at localhost:3000
-function renderHomepage() {
+
+app.get(`/`, (req, res) => {
     let mangaName = "."
     let mangaList = getList(mangaName)
 
-    app.get(`/`, (req, res) => {
-        res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
-        console.log("homepage is running")
+    res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
+    console.log("homepage is running")
+});
 
-        //restarts server when refreshing page
-        // res.send('Refreshing the page');
-    });
-    return mangaList
-}
 
 //renders the page where all of a manga's chapters are displayed
 
 app.get(`/manga/:mangaName`, (req, res) => {
     var mangaName = getMangaName(url.parse(req.url).pathname)
 
-    var chapterList = getList(mangaName)
+    var chapterList = getList(decodeURIComponent(mangaName))
+// chapterList = decodeURIComponent(chapterList)
 
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)

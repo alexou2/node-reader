@@ -9,6 +9,9 @@ const { searchByName } = require('./parser');
 const fs = require('fs');
 const { text } = require('body-parser');
 const https = require('https')
+const sanitizeFilename = require('sanitize-filename');
+
+
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
 const sem = require('semaphore')(10);//change 5 by any number to change the number of chapters that can be downloaded at the same time
@@ -52,6 +55,8 @@ module.exports = {
             console.log(mangaName)
             // removes the space at the end of the name
             mangaName = mangaName.trim()
+            mangaName = sanitizeFilename(mangaName)
+            mangaName = mangaName.replaceAll('〇', 'O')
 
             // fetches the alternative titles for the manga
             let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
@@ -232,9 +237,9 @@ module.exports = {
 
 
         //creates a folder for the manga
-        const folderPath = `manga/${mangaName}/${chapterName}`
+        let folderPath = `manga/${sanitizeFilename(mangaName)}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
-
+        console.log(folderPath);
 
 
         //downloads the pages in the correct folderw
@@ -277,7 +282,7 @@ module.exports = {
 
     //get the cover image from mangadex for the downloaded chapter
     getCoverImage: function (mangaName, mangaID) {
-        const folderPath = `./manga/${mangaName}`;
+        const folderPath = `./manga/${sanitizeFilename(mangaName)}`;
         fs.mkdirSync(folderPath, { recursive: true });
 
         // const mangaID = '6d0e8d89-9b15-4155-af91-896d0c1b476b';
