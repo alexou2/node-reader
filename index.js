@@ -36,9 +36,21 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
+    // let mangaLink = req.body
+    // console.log(mangaLink)
+
+
+    // let formData = req.body.mangaName;  // Get the value of the "mangaList" field in the form
+    // let mangaString = formData.toString();  // Convert the value to a string
+
+    // console.log(mangaString);  // Output: the string value of the "mangaList" field
 
     console.log(req.body)
 
+    // console.log(`language for chapters: ${req.body.translatedLanguages}`)
+
+    // console.log(req.body.source)
+    // console.log(req.body.translatedLanguages)
 
     try {
         switch (req.body.source) {
@@ -148,7 +160,7 @@ function getPages(mangaName, chapName) {
 function sortList(arr, type) {
 
 
-    // if the array to sort is pages
+// if the array to sort is pages
     if (type == 'pages') {
         const regex = /\d+/;
 
@@ -168,7 +180,7 @@ function sortList(arr, type) {
             } title
         });
 
-    }
+    } 
     else {
         const regex = /Chapter\s*(\d+(?:\.\d+)?)/i;
 
@@ -202,29 +214,25 @@ function sortList(arr, type) {
 
 
 //calls the functions to render navigation pages
-// let mangaList = renderHomepage()
-// console.log("manga list is ", mangaList)
+let mangaList = renderHomepage()
+console.log("manga list is ", mangaList)
 
 
 
 //renders the homepage accessible at localhost:3000
-// function renderHomepage() {
-    // let mangaName = "."
-    // let mangaList = getList(mangaName)
+function renderHomepage() {
+    let mangaName = "."
+    let mangaList = getList(mangaName)
 
     app.get(`/`, (req, res) => {
-
-        let mangaName = "."
-        let mangaList = getList(mangaName)
-
         res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
         console.log("homepage is running")
 
         //restarts server when refreshing page
         // res.send('Refreshing the page');
     });
-    // return mangaList
-// }
+    return mangaList
+}
 
 //renders the page where all of a manga's chapters are displayed
 
