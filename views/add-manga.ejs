@@ -18,7 +18,7 @@
             <select class="translatedLanguages" name="translatedLanguages">
                 <option data-c="en" value="en" selected="">English</option>
                 <option data-c="fr" value="fr">Fançais</option>
-                <option data-c="it" value="it">Italian</option>
+                <option data-c="it" value="it">Italiano</option>
             </select>
         </div>
 
@@ -51,16 +51,16 @@
             <input type="url" id="mangaName" name="mangaName">
             `
 
-
+            //adds the translated languages option
             document.getElementById("translatedLanguages").innerHTML = `
-            <div>
+            
             translated language
             <select class="translatedLanguages" name="translatedLanguages">
                 <option data-c="en" value="en" selected="">English</option>
                 <option data-c="fr" value="fr">Fançais</option>
                 <option data-c="it" value="it">Italian</option>
             </select>
-        </div>`
+        `
         }
 
 
@@ -71,6 +71,7 @@
             <label id="input_type" for="mangaName">Manga link:</label>
             <input type="url" id="mangaName input_type" name="mangaName">
            `
+        //    removes the translated languages option
             document.getElementById("translatedLanguages").innerHTML = ``
         }
 
