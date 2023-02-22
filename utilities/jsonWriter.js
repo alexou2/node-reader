@@ -1,6 +1,16 @@
 const fs = require('fs');
 const sanitizeFilename = require('sanitize-filename');
 
+
+// todo before adding json database
+// create function to update json files
+// finish function for checking if all mangas have json files
+// add json files for manganato
+// 
+
+
+
+
 module.exports = {
 
 
@@ -44,6 +54,15 @@ module.exports = {
         let chapterNames = data.chapters.map(path => path.chapterName)
 
         return chapterNames
+    },
+
+    getMangaList: function () {
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
+        data = JSON.parse(data);
+        let mangaNameList = []
+        mangaNameList = data.ch.map(path => path.chapterName)
+        
+
     },
 
 
@@ -119,6 +138,8 @@ module.exports = {
 
 
     },
+
+
     newManga: function (mangaName, jsonPath) {
 
         let mangaStats = []
@@ -159,7 +180,7 @@ module.exports = {
         for (i in mangaFiles) {
             for (j in jsonFiles) {
 
-                
+
             }
         }
 
