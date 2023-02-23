@@ -36,28 +36,16 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    // let mangaLink = req.body
-    // console.log(mangaLink)
-
-
-    // let formData = req.body.mangaName;  // Get the value of the "mangaList" field in the form
-    // let mangaString = formData.toString();  // Convert the value to a string
-
-    // console.log(mangaString);  // Output: the string value of the "mangaList" field
-
+    
     console.log(req.body)
-
-    // console.log(`language for chapters: ${req.body.translatedLanguages}`)
-
-    // console.log(req.body.source)
-    // console.log(req.body.translatedLanguages)
+    console.log(req.body.baseOffset)
 
     try {
         switch (req.body.source) {
 
             //if mangadex is the source
             case 'Mangadex':
-                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages)
+                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, req.body.baseOffset)
                 console.log('mangadex in ', req.body.translatedLanguages)
                 break;
 

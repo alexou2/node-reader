@@ -25,7 +25,7 @@ module.exports = {
 
 
     //does a search on mangadex.org and returns the 
-    getMangaID: async function (title, languages) {
+    getMangaID: async function (title, languages, baseOffset) {
 
 
         (async () => {
@@ -67,8 +67,8 @@ module.exports = {
 
 
 
-            let baseOffset = 100
-
+            // let baseOffset = 100
+console.log(baseOffset)
 
 
             // gets all of the informations from mangadex

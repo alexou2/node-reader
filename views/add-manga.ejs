@@ -9,8 +9,11 @@
             <input type="text" id="mangaName" name="mangaName">
         </div>
 
-
-
+        <!-- base offset for not downloading the same first chapters -->
+        <div id="offset">
+            <label for="baseOffset">Manga name:</label>
+            <input type="number" id="baseOffset" name="baseOffset" value="0">
+        </div>
 
         <!-- selector for the tanslated language (mangadex only) -->
         <div id="translatedLanguages">
@@ -71,7 +74,7 @@
             <label id="input_type" for="mangaName">Manga link:</label>
             <input type="url" id="mangaName input_type" name="mangaName">
            `
-        //    removes the translated languages option
+            //    removes the translated languages option
             document.getElementById("translatedLanguages").innerHTML = ``
         }
 
