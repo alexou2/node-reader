@@ -67,12 +67,12 @@ module.exports = {
 
 
 
-
+            let baseOffset = 100
 
 
 
             // gets all of the informations from mangadex
-            this.writeJson(mangaID[0], mangaName, languages)
+            this.writeJson(mangaID[0], mangaName, languages, baseOffset)
 
 
 
@@ -94,7 +94,7 @@ module.exports = {
 
 
             // downloads the chapters
-            this.getChapters(mangaID[0], mangaName, languages)
+            this.getChapters(mangaID[0], mangaName, languages, baseOffset)
 
 
 
@@ -122,32 +122,37 @@ module.exports = {
 
 
     //gets the chapterIDs for the chapter entered
-    getChapters: function (mangaID, mangaName, languages) {
+    getChapters: function (mangaID, mangaName, languages, baseOffset) {
         let chapterName = [];
+        let chapter = [];
+        let chapterTitle = [];
+        let chapterID = [];
 
         (async () => {
-            const resp = await axios({
-                method: 'GET',
-                url: `${baseUrl}/manga/${mangaID}/feed`,
-                maxContentLength: Infinity,
+            for (let i = 0; i < 2; i++) {
+                const resp = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/manga/${mangaID}/feed`,
+                    maxContentLength: Infinity,
 
-                // parameters to filter the mangas
-                params: {
-                    "order[chapter]": "asc", //sorts the chapter list 
-                    "translatedLanguage[]": languages //will only return one specific language 
-                },
+                    // parameters to filter the mangas
+                    params: {
+                        "order[chapter]": "asc", //sorts the chapter list 
+                        "translatedLanguage[]": languages, //will only return one specific language 
+                        "offset": 100 * i + baseOffset,
+                    },
 
-            });
+                });
 
-            console.log(resp.data.data.map(chapter => chapter.id));
+                console.log(resp.data.data.map(chapter => chapter.id));
 
-            // gets informations from the chapters 
-            let chapterID = resp.data.data.map(chapter => chapter.id)
+                // gets informations from the chapters 
+                chapterID = chapterID.concat(resp.data.data.map(chapter => chapter.id))
 
-            let chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
+                chapterTitle = chapterTitle.concat(resp.data.data.map(chapter => chapter.attributes.title))
 
-            let chapter = resp.data.data.map(chapter => chapter.attributes.chapter)
-
+                chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
+            }
 
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
@@ -273,14 +278,6 @@ module.exports = {
 
 
 
-
-    // gets mangas that correspond to the included tags
-    filterByTag: function (includedTag, excludedTag) {
-
-
-    },
-
-
     //get the cover image from mangadex for the downloaded chapter
     getCoverImage: function (mangaName, mangaID) {
         const folderPath = `./manga/${sanitizeFilename(mangaName)}`;
@@ -322,7 +319,7 @@ module.exports = {
     },
 
     // gets informations and sends them to be written in a json file
-    writeJson: function (mangaID, mangaName, languages) {
+    writeJson: function (mangaID, mangaName, languages, baseOffset) {
 
         const mangaJSON = require('./jsonWriter');
         let chapterName = [];
@@ -347,7 +344,7 @@ module.exports = {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
                         // "limit": 500,
-                        "offset": 100 * i,
+                        "offset": 100 * i + baseOffset,
 
                     },
 
