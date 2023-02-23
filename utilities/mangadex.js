@@ -152,8 +152,9 @@ module.exports = {
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
 
-                chapterName[k] = `chapter ${chapter[k]}_ ${chapterTitle[k]}`;
+                chapterName[k] = `Chapter ${chapter[k]}_ ${chapterTitle[k]}`;
                 chapterName[k] = chapterName[k].trim()
+                chapterName[k] = sanitizeFilename(chapterName[k])
 
                 //removes th null if there is one
                 if (chapterName[k].endsWith('null')) {
@@ -335,29 +336,32 @@ module.exports = {
             let total
 
 
-            // for (let i = 0; i < 2; i++) {
-            const resp = await axios({
-                method: 'GET',
-                url: `${baseUrl}/manga/${mangaID}/feed`,
-                maxContentLength: Infinity,
+            for (let i = 0; i < 2; i++) {
+                const resp = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/manga/${mangaID}/feed`,
+                    maxContentLength: Infinity,
 
-                // parameters to filter the mangas
-                params: {
-                    "order[chapter]": "asc", //sorts the chapter list 
-                    "translatedLanguage[]": languages, //will only return one specific language 
-                    "limit": 500,
-                },
+                    // parameters to filter the mangas
+                    params: {
+                        "order[chapter]": "asc", //sorts the chapter list 
+                        "translatedLanguage[]": languages, //will only return one specific language 
+                        // "limit": 500,
+                        "offset": 100 * i,
 
-            });
+                    },
 
-            chapterID = resp.data.data.map(chapter => chapter.id)
+                });
 
-            chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
+                chapterID = chapterID.concat(resp.data.data.map(chapter => chapter.id))
 
-            chapter = resp.data.data.map(chapter => chapter.attributes.chapter)
-            total = resp.data.total
-            //creates formatted chapter name
-            // }
+                chapterTitle = chapterTitle.concat(resp.data.data.map(chapter => chapter.attributes.title))
+
+                chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
+
+                total = resp.data.total
+                //creates formatted chapter name
+            }
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
             }
