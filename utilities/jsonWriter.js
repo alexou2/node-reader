@@ -142,6 +142,7 @@ module.exports = {
                 mangaName: mangaName,
                 jsonPath: jsonPath,
                 coverImage: `manga/${mangaName}/cover.jpg`,
+                path: `manga/${mangaName}`
             }
         )
 
@@ -155,11 +156,13 @@ module.exports = {
 
         // updates th file
         let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
-      existingData.list_of_mangas.push(mangaStats)
-        
-      fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
+
+        existingData.list_of_mangas.push(mangaStats)
+
+        fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
     },
+
 
 
     // is called if a manga doesn't have a json
