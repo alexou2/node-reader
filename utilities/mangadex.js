@@ -342,9 +342,7 @@ module.exports = {
                     params: {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
-                        // "limit": 500,
                         "offset": 100 * i + baseOffset,
-
                     },
 
                 });

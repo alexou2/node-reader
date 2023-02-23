@@ -6,17 +6,13 @@ this is  a list of the features that I am planning on adding
         creating a database for users to continue their progress
         adding a "start reading" button
         add metadata for each manga
-        encode the file names in order to avoid replacing characters like ?, !, \
         add search by name functionnality to manganato
         add more sites like asura scans
         fix cover images that won't display properly after refreching the page
         improve UX
         add javascript to resize image sizes
-        redo the sorting function for the chapters
-        restart the server when a new manga has finished downloading
         hide the cover image link from the chapter list
         cleanup code
-        change the add-manga.ejs form depending on the website (enable/ disable language selection)
         add a progress bar in the top-bar to see when a manga has finished downloading
         give advanced options for downloading mangas (change name, download only a certain ammount of chapters, download only new chapters)
         create an app compatible with android
