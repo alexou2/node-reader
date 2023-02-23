@@ -19,7 +19,7 @@ first-time setup:
     4.5) go to the project folder with your file manager and then right-click and select "open in terminal" (this won't work in windows 10)
     
     5) Once this is done, you will need to install the libraries for nodejs. 
-    For this, type this: `npm i nodemon fs puppeteer express url axios body-parser semaphore request cheerio path https`
+    For this, type this: `npm i nodemon fs puppeteer express url axios body-parser semaphore request cheerio path https sanitize-filename`
     This will install all of the required libraries for the program to work
 
     6) start the server with `nodemon index.js` 

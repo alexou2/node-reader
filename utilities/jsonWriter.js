@@ -6,7 +6,7 @@ const sanitizeFilename = require('sanitize-filename');
 // create function to update json files
 // finish function for checking if all mangas have json files
 // add json files for manganato
-// 
+// have only one instance for each manga in manga list
 
 
 
@@ -152,8 +152,6 @@ module.exports = {
         }
 
 
-
-
         // updates th file
         let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
 
@@ -161,6 +159,7 @@ module.exports = {
 
         fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
+        this.outputJson(mangaName)
     },
 
 
@@ -178,6 +177,14 @@ module.exports = {
             }
         }
 
+    },
+
+    outputJson: function (req) {
+        console.log("name",this.getName(req))
+        console.log("chapterList",this.getChapters(req))
+        console.log("",this.getCoverPath(req))
+        // console.log("",)
+        // console.log("",)
     }
 
 

@@ -8,6 +8,9 @@ const parse = require('./utilities/parser');
 const mangadex = require('./utilities/mangadex')
 const { JSHandle } = require('puppeteer');
 
+const writeJson = require('./utilities/jsonWriter');
+const jsonWriter = require('./utilities/jsonWriter');
+
 app.use(bodyParser.json());
 
 
@@ -231,6 +234,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
     console.log(mangaName)
     console.log("chapter page is running")
+    writeJson.outputJson(mangaName)
 });
 
 

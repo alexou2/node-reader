@@ -5,7 +5,7 @@
 
 
 const axios = require('axios');
-const { searchByName } = require('./parser');
+const  searchByName = require('./parser');
 const fs = require('fs');
 const { text } = require('body-parser');
 const https = require('https')
