@@ -348,7 +348,7 @@ module.exports = {
             //creates formatted chapter name
 
             for (let k = 0; k < chapterID.length; k++) {
-                chapterName[k] = `chapter ${chapter[k]}: ${chapterTitle[k]}`;
+                chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
             }
 
             let path = `manga/${mangaName}`
