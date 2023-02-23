@@ -133,18 +133,11 @@ module.exports = {
     },
 
 
-    // updates the manga with new infos
-    updateManga: function (path, newInfos) {
-
-
-    },
 
 
     newManga: function (mangaName, jsonPath) {
 
-        let mangaStats = []
-
-        mangaStats.push(
+        let mangaStats = (
             {
                 mangaName: mangaName,
                 jsonPath: jsonPath,
@@ -158,25 +151,16 @@ module.exports = {
         }
 
 
-        const list = JSON.stringify(allManga, 'null', 2)
-
-        //writes the files
-        // fs.writeFileSync(`jsonFiles/mangaList.json`, (list), err => {
-        //     if (err) {
-        //         console.log(`Error writing file: ${err}`)
-        //     } else {
-        //         console.log(`File is written successfully!`)
-        //     }
-        // })
 
 
         // updates th file
         let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
       existingData.list_of_mangas.push(mangaStats)
         
-      fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData));
+      fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
     },
+
 
     // is called if a manga doesn't have a json
     checkJson: function () {
