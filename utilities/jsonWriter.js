@@ -61,7 +61,6 @@ module.exports = {
         data = JSON.parse(data);
         let mangaNameList = []
         mangaNameList = data.ch.map(path => path.chapterName)
-        
 
     },
 

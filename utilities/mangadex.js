@@ -335,7 +335,8 @@ module.exports = {
                 // parameters to filter the mangas
                 params: {
                     "order[chapter]": "asc", //sorts the chapter list 
-                    "translatedLanguage[]": languages //will only return one specific language 
+                    "translatedLanguage[]": languages, //will only return one specific language 
+                    "offset": 100
                 },
 
             });
