@@ -93,7 +93,7 @@ module.exports = {
 
 
 
-
+            // downloads the chapters
             this.getChapters(mangaID[0], mangaName, languages)
 
 
@@ -327,6 +327,15 @@ module.exports = {
         let chapterName = [];
 
         (async () => {
+
+            let offset = 0;
+            let chapterID = []
+            let chapterTitle = []
+            let chapter = []
+            let total
+
+
+            // for (let i = 0; i < 2; i++) {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/manga/${mangaID}/feed`,
@@ -336,26 +345,26 @@ module.exports = {
                 params: {
                     "order[chapter]": "asc", //sorts the chapter list 
                     "translatedLanguage[]": languages, //will only return one specific language 
-                    "offset": 100
+                    "limit": 500,
                 },
 
             });
 
-            let chapterID = resp.data.data.map(chapter => chapter.id)
+            chapterID = resp.data.data.map(chapter => chapter.id)
 
-            let chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
+            chapterTitle = resp.data.data.map(chapter => chapter.attributes.title)
 
-            let chapter = resp.data.data.map(chapter => chapter.attributes.chapter)
+            chapter = resp.data.data.map(chapter => chapter.attributes.chapter)
+            total = resp.data.total
             //creates formatted chapter name
-
+            // }
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
             }
-
             let path = `manga/${mangaName}`
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a")
+            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a", total)
 
         })();
     }

@@ -67,7 +67,7 @@ module.exports = {
 
 
     // writes a new json file for each manga
-    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
+    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description, total) {
         let chapters = []
         console.log("started adding mangas")
 
