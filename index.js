@@ -36,7 +36,7 @@ app.get(`/new/`, (req, res) => {
 
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
-    
+
     console.log(req.body)
     console.log(req.body.baseOffset)
 
@@ -45,7 +45,7 @@ app.post(`/new`, (req, res) => {
 
             //if mangadex is the source
             case 'Mangadex':
-                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, req.body.baseOffset)
+                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset))
                 console.log('mangadex in ', req.body.translatedLanguages)
                 break;
 

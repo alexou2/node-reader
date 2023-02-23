@@ -67,8 +67,8 @@ module.exports = {
 
 
 
-            // let baseOffset = 100
-console.log(baseOffset)
+            // let baseOffset = 0
+            console.log(typeof baseOffset);
 
 
             // gets all of the informations from mangadex
@@ -326,14 +326,13 @@ console.log(baseOffset)
 
         (async () => {
 
-            let offset = 0;
             let chapterID = []
             let chapterTitle = []
             let chapter = []
             let total
 
 
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 3; i++) {
                 const resp = await axios({
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed`,
