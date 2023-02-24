@@ -167,7 +167,7 @@ module.exports = {
 
         fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
-        this.outputJson(mangaName)
+        // this.outputJson(mangaName)
     },
 
 
