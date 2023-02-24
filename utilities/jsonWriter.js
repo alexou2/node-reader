@@ -7,6 +7,10 @@ const sanitizeFilename = require('sanitize-filename');
 // finish function for checking if all mangas have json files
 // add json files for manganato
 // have only one instance for each manga in manga list
+    // if offset for new chapters of existing manga >= existing chapters in json: add chapters at end of list
+    // if offset is lower: write complete json
+    // if last new downloaded chapter < old first chapter: add new feed and then add old data
+    // change sort order from i to the chapter number from mangadex
 
 
 
