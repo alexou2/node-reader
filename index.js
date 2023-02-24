@@ -27,6 +27,23 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
+// fs.mkdirSync('./manga', { recursive: true })
+// fs.mkdirSync('./jsonFiles', { recursive: true })
+
+if (!fs.existsSync(`manga`)) {
+    fs.mkdirSync(`manga`)
+  }
+  if (!fs.existsSync(`jsonFiles`)) {
+    fs.mkdirSync(`jsonFiles`)
+  }
+
+  const baseMangaList = JSON.stringify({ list_of_mangas :[]}, 'null', 2)
+
+fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
+
+
+
+
 //loads the form
 app.get(`/new/`, (req, res) => {
     res.render("../views/add-manga");

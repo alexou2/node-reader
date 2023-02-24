@@ -259,9 +259,8 @@ module.exports = {
                         responseType: 'arraybuffer'
                     });
 
-                    // console.log(`${folderPath}/${page}`, resp.data)
                     fs.writeFileSync(`${folderPath}/${page}`, resp.data);
-                    console.log('page downloaded')
+                    console.log('page downloaded: ', folderPath, page)
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading ${page}`)
                 }
