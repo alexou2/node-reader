@@ -140,7 +140,7 @@ module.exports = {
             }
         })
 
-        this.newManga(mangaName, `jsonFiles/${mangaName}.json`)
+        // this.newManga(mangaName, `jsonFiles/${mangaName}.json`)
     },
 
 
@@ -158,9 +158,9 @@ module.exports = {
         )
 
 
-        let allManga = {
-            list_of_mangas: mangaStats
-        }
+        // let allManga = {
+        //     list_of_mangas: mangaStats
+        // }
 
 
         // updates th file
