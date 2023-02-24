@@ -248,6 +248,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
     console.log(mangaName)
     console.log("chapter page is running")
+    console.log('outputting')
     writeJson.outputJson(mangaName)
 });
 

@@ -179,6 +179,9 @@ module.exports = {
         let jsonFiles = fs.readdirSync("jsonFiles")
 
         for (let i = 0; i < manga.length; i++) {
+            if (!fs.existsSync(`jsonFiles/${manga}.json`)) {
+                this.createMangaJson(req)
+            }
 
         }
 
@@ -189,9 +192,27 @@ module.exports = {
     // scans files and looks for informations for the manga
     createMangaJson: function (mangaName) {
 
-        // adds the manga to the manga list
+        let chapterNameList
+        let path
+        let jsonPath
+        let chapterPathList
+
+        jsonPath = `jsonFiles/${mangaName}.json`
+        path = `manga/${mangaName}`
+
+
+        chapterNameList = fs.readdirSync(`manga/${mangaName}`)
+        
+        chapterPathList = fs.readdirSync(`manga/${mangaName}`)
+        for (let i = 0; i < chapterPathList.length; i++) {
+            chapterPathList[i] = `manga/${chapterPathList[i]}`
+        }
+
+        console.log('\n\n\npath:', chapterNameList)
+
+        // // adds the manga to the manga list
         this.newManga(mangaName, jsonPath)
-        // creates the json file for this manga
+        // // creates the json file for this manga
         this.addManga(mangaName, path, chapterNameList, chapterPathList, "n/a", "n/a")
     },
 
@@ -200,8 +221,9 @@ module.exports = {
     outputJson: function (req) {
 
         console.log(req)
-        if (!fs.existsSync(`jsonFiles`)) {
+        if (!fs.existsSync(`jsonFiles/${req}`)) {
             this.createMangaJson(req)
+            console.log('finished creating json')
         } else {
 
             console.log("name:", this.getName(req));
@@ -211,6 +233,7 @@ module.exports = {
             console.log("all manga paths:", this.getAllMangaPath());
             console.log("all manga names:", this.getAllMangaNames());
         }
+
     }
 
 
