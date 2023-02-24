@@ -27,20 +27,17 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-// fs.mkdirSync('./manga', { recursive: true })
-// fs.mkdirSync('./jsonFiles', { recursive: true })
-
+// insures that the program won't crash because there is a folder or essential file missing
 if (!fs.existsSync(`manga`)) {
     fs.mkdirSync(`manga`)
-  }
-  if (!fs.existsSync(`jsonFiles`)) {
+}
+if (!fs.existsSync(`jsonFiles`)) {
     fs.mkdirSync(`jsonFiles`)
-  }
-
-  const baseMangaList = JSON.stringify({ list_of_mangas :[]}, 'null', 2)
-
+}
+if (!fs.existsSync(`jsonFiles/mangaList.json`)) {
+const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
 fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
-
+}
 
 
 

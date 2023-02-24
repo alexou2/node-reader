@@ -359,6 +359,7 @@ module.exports = {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
             }
             let path = `manga/${mangaName}`
+            // path = path.replaceAll(' ', '\ ')
 
 
             mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a", total)

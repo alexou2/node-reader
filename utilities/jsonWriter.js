@@ -190,8 +190,18 @@ module.exports = {
     outputJson: function (req) {
         console.log("name:", this.getName(req))
         console.log("chapterList:", this.getchapterNames(req))
-        console.log("cover file:", this.getCoverPath(req))
-        console.log("chapter paths:", this.getChapterPath(req))
+        console.log("cover file:", this.getCoverPath(req));
+        console.log("chapter paths:", this.getChapterPath(req));
+        console.log("all manga paths:", this.getAllMangaPath());
+        console.log("all manga names:", this.getAllMangaNames());
+
+
+        let content = this.getAllMangaPath();
+        // content = JSON.stringify(content)
+        console.log(content)
+for (let i = 0; i< content.length;i++) 
+console.log("its content:", fs.readdirSync(content[i]))
+        
     }
 
 
