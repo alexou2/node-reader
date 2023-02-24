@@ -328,7 +328,6 @@ module.exports = {
             let chapterID = []
             let chapterTitle = []
             let chapter = []
-            let total
 
 
             for (let i = 0; i < 3; i++) {
@@ -352,7 +351,6 @@ module.exports = {
 
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
 
-                total = resp.data.total
                 //creates formatted chapter name
             }
             for (let k = 0; k < chapterID.length; k++) {
@@ -362,7 +360,7 @@ module.exports = {
             // path = path.replaceAll(' ', '\ ')
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a", total)
+            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a")
 
         })();
     }

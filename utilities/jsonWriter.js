@@ -75,7 +75,7 @@ module.exports = {
 
 
     // writes a new json file for each manga
-    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description, total) {
+    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
         let chapters = []
         console.log("started adding mangas")
 
@@ -142,7 +142,7 @@ module.exports = {
 
 
 
-
+    // creates a json that lists all mangas that are available
     newManga: function (mangaName, jsonPath) {
 
         let mangaStats = (
@@ -178,30 +178,39 @@ module.exports = {
         let mangaFiles = fs.readdirSync("manga");
         let jsonFiles = fs.readdirSync("jsonFiles")
 
-        for (i in mangaFiles) {
-            for (j in jsonFiles) {
+        for (let i = 0; i < manga.length; i++) {
 
-
-            }
         }
+
 
     },
 
+
+    // scans files and looks for informations for the manga
+    createMangaJson: function (mangaName) {
+
+        // adds the manga to the manga list
+        this.newManga(mangaName, jsonPath)
+        // creates the json file for this manga
+        this.addManga(mangaName, path, chapterNameList, chapterPathList, "n/a", "n/a")
+    },
+
+
+    // mainly for testing and debugging, outouts informations when a manga page is loaded
     outputJson: function (req) {
-        console.log("name:", this.getName(req))
-        console.log("chapterList:", this.getchapterNames(req))
-        console.log("cover file:", this.getCoverPath(req));
-        console.log("chapter paths:", this.getChapterPath(req));
-        console.log("all manga paths:", this.getAllMangaPath());
-        console.log("all manga names:", this.getAllMangaNames());
 
+        console.log(req)
+        if (!fs.existsSync(`jsonFiles`)) {
+            this.createMangaJson(req)
+        } else {
 
-        let content = this.getAllMangaPath();
-        // content = JSON.stringify(content)
-        console.log(content)
-for (let i = 0; i< content.length;i++) 
-console.log("its content:", fs.readdirSync(content[i]))
-        
+            console.log("name:", this.getName(req));
+            console.log("chapterList:", this.getchapterNames(req));
+            console.log("cover file:", this.getCoverPath(req));
+            console.log("chapter paths:", this.getChapterPath(req));
+            console.log("all manga paths:", this.getAllMangaPath());
+            console.log("all manga names:", this.getAllMangaNames());
+        }
     }
 
 
