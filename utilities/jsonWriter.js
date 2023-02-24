@@ -13,41 +13,37 @@ const sanitizeFilename = require('sanitize-filename');
 
 module.exports = {
 
-
+    // gets the name of the manga 
     getName: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
         return data.mangaName
     },
 
+    // gets the path for the manga
     getPath: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
         return data.path
     },
 
+    // gets the cover path
     getCoverPath: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
         return data.cover_path
     },
 
-    getChapters: function (path) {
+    // returns the list of chapters
+    getChapterPath: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
         data = JSON.parse(data)
 
-        return data.chapters
+        let chapterPath = data.chapters.map(path => path.chapterPath)
+        return chapterPath
     },
 
-    getPathOrder: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
-        data = JSON.parse(data);
-
-        let pathOrder = data.chapters.map(path => path.chapterPath)
-
-        return pathOrder
-    },
-
+    // gets the chapter's names 
     getchapterNames: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
         data = JSON.parse(data);
@@ -56,12 +52,24 @@ module.exports = {
         return chapterNames
     },
 
-    getMangaList: function () {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
+    // gets the 
+    getAllMangaPath: function () {
+        let data = fs.readFileSync(`jsonFiles/mangaList.json`, 'utf8');
         data = JSON.parse(data);
-        let mangaNameList = []
-        mangaNameList = data.ch.map(path => path.chapterName)
 
+        let AllMangaPath = data.list_of_mangas.map(path => path.path)
+
+        return AllMangaPath
+    },
+
+    // gets all manga names
+    getAllMangaNames: function () {
+        let data = fs.readFileSync(`jsonFiles/mangaList.json`, 'utf8');
+        data = JSON.parse(data)
+
+        let AllMangaNames = data.list_of_mangas.map(name => name.mangaName)
+
+        return AllMangaNames
     },
 
 
@@ -180,11 +188,10 @@ module.exports = {
     },
 
     outputJson: function (req) {
-        console.log("name",this.getName(req))
-        console.log("chapterList",this.getChapters(req))
-        console.log("",this.getCoverPath(req))
-        // console.log("",)
-        // console.log("",)
+        console.log("name:", this.getName(req))
+        console.log("chapterList:", this.getchapterNames(req))
+        console.log("cover file:", this.getCoverPath(req))
+        console.log("chapter paths:", this.getChapterPath(req))
     }
 
 
