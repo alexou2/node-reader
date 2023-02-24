@@ -77,7 +77,7 @@ module.exports = {
     // writes a new json file for each manga
     addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
         let chapters = []
-        console.log("started adding mangas")
+        console.log("started creating json to manga")
 
         //formats each chapter's name 
         for (let j = 0; j < chapterNameList.length; j++) {
@@ -86,7 +86,6 @@ module.exports = {
             //removes th null if there is one
             if (chapterNameList[j].endsWith('null')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
-                console.log("true")
             }
 
             chapterNameList[j] = chapterNameList[j].trim()
@@ -111,7 +110,7 @@ module.exports = {
                 chapterPath: path + "/" + chapterPathList[i],
             })
         }
-        console.log(chapterPathList)
+        console.log('chapter paths:',chapterPathList)
 
         // the attributes of the file
         let mangaJSON = {
@@ -131,7 +130,7 @@ module.exports = {
         //writes the files
         fs.writeFileSync(`jsonFiles/${mangaName}.json`, (manga), err => {
             if (err) {
-                console.log(`Error writing file: ${err}`)
+                console.error(`Error writing file: ${err}`)
             } else {
                 console.log(`File is written successfully!`)
             }
@@ -178,9 +177,10 @@ module.exports = {
         let mangaFiles = fs.readdirSync("manga");
         let jsonFiles = fs.readdirSync("jsonFiles")
 
-        for (let i = 0; i < manga.length; i++) {
-            if (!fs.existsSync(`jsonFiles/${manga}.json`)) {
-                this.createMangaJson(req)
+        for (let i = 0; i < mangaFiles.length; i++) {
+            if (!fs.existsSync(`jsonFiles/${mangaFiles[i]}.json`)) {
+                this.createMangaJson(mangaFiles[i])
+                console.log('created missing jsons for manga')
             }
 
         }
@@ -208,7 +208,6 @@ module.exports = {
             chapterPathList[i] = `manga/${chapterPathList[i]}`
         }
 
-        console.log('\n\n\npath:', chapterNameList)
 
         // // adds the manga to the manga list
         this.newManga(mangaName, jsonPath)
@@ -220,6 +219,7 @@ module.exports = {
     // mainly for testing and debugging, outouts informations when a manga page is loaded
     outputJson: function (req) {
 
+        // if the manga doesn't have a json file: create it, else: output infos on the manga
         console.log(req)
         if (!fs.existsSync(`jsonFiles/${req}`)) {
             this.createMangaJson(req)

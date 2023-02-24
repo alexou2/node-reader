@@ -249,7 +249,9 @@ app.get(`/manga/:mangaName`, (req, res) => {
     console.log(mangaName)
     console.log("chapter page is running")
     console.log('outputting')
-    writeJson.outputJson(mangaName)
+    // writeJson.outputJson(mangaName)
+
+    writeJson.checkJson();
 });
 
 
