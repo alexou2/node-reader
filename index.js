@@ -101,9 +101,14 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     console.log('chap name: ', chapName)
 
-    chapName = chapName.replace(/%([^%]*)$/, '%2525');
-    chapName = decodeURIComponent(chapName)
-    // chapName = chapName+'%'
+
+
+    
+    // potential issue
+    // chapName = decodeURIComponent(chapName)
+
+
+
     //gets and sorts page list
     var pageList = getPages(mangaName, chapName);
     pageList = pageList.sort(function (a, b) { return a - b });
