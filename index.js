@@ -35,8 +35,8 @@ if (!fs.existsSync(`jsonFiles`)) {
     fs.mkdirSync(`jsonFiles`)
 }
 if (!fs.existsSync(`jsonFiles/mangaList.json`)) {
-const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
-fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
+    const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
+    fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
 }
 
 
@@ -98,6 +98,9 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     var mangaName = req.params.mangaName,
         chapName = req.params.chapName;
 
+console.log(req.params.chapName, '\n\n\n')
+
+chapName = decodeURIComponent(chapName)
     //gets and sorts page list
     var pageList = getPages(mangaName, chapName);
     pageList = pageList.sort(function (a, b) { return a - b });
@@ -236,10 +239,15 @@ app.get(`/`, (req, res) => {
 //renders the page where all of a manga's chapters are displayed
 
 app.get(`/manga/:mangaName`, (req, res) => {
-    var mangaName = getMangaName(url.parse(req.url).pathname)
-    mangaName = decodeURIComponent(mangaName)
+    // var mangaName = getMangaName(url.parse(req.url).pathname)
+    var mangaName = req.params.mangaName;
 
+    
+    mangaName = mangaName.replaceAll('%20', '\ ')
+    mangaName = decodeURIComponent(mangaName)
     var chapterList = getList(decodeURIComponent(mangaName))
+    // var chapterList = getList(mangaName)
+
 
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
@@ -277,15 +285,15 @@ function getList(mangaName) {
 }
 
 //extracts the manga name by getting the url and then removing what is not part of the manga's name
-function getMangaName(path) {
-    var mangaName = path.toString().split("/");
-    mangaName = mangaName[2]
-    var message = ("reading:" + mangaName)
-    mangaName = mangaName.replaceAll('%20', '\ ')
-    console.log(path)
-    console.log(message)
-    return mangaName
-}
+// function getMangaName(path) {
+//     var mangaName = path.toString().split("/");
+//     mangaName = mangaName[2]
+//     var message = ("reading:" + mangaName)
+//     mangaName = mangaName.replaceAll('%20', '\ ')
+//     console.log(path)
+//     console.log(message)
+//     return mangaName
+// }
 
 
 function getNextAndPrev(chapterList, currentChapter) {
