@@ -98,9 +98,12 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     var mangaName = req.params.mangaName,
         chapName = req.params.chapName;
 
-console.log(req.params.chapName, '\n\n\n')
 
-chapName = decodeURIComponent(chapName)
+    console.log('chap name: ', chapName)
+
+    chapName = chapName.replace(/%([^%]*)$/, '%2525');
+    chapName = decodeURIComponent(chapName)
+    // chapName = chapName+'%'
     //gets and sorts page list
     var pageList = getPages(mangaName, chapName);
     pageList = pageList.sort(function (a, b) { return a - b });
@@ -242,7 +245,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     // var mangaName = getMangaName(url.parse(req.url).pathname)
     var mangaName = req.params.mangaName;
 
-    
+
     mangaName = mangaName.replaceAll('%20', '\ ')
     mangaName = decodeURIComponent(mangaName)
     var chapterList = getList(decodeURIComponent(mangaName))
