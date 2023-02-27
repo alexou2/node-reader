@@ -132,7 +132,7 @@ module.exports = {
             for (let i = 0; i < 2; i++) {
                 const resp = await axios({
                     method: 'GET',
-                    url: `${baseUrl}/manga/${mangaID}/feed`,
+                    url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
 
                     // parameters to filter the mangas
@@ -336,7 +336,7 @@ module.exports = {
             for (let i = 0; i < 3; i++) {
                 const resp = await axios({
                     method: 'GET',
-                    url: `${baseUrl}/manga/${mangaID}/feed`,
+                    url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
 
                     // parameters to filter the mangas
@@ -344,6 +344,7 @@ module.exports = {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
                         "offset": 100 * i + baseOffset,
+                        
                     },
 
                 });
