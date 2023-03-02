@@ -7,9 +7,9 @@ var url = require('url');
 const parse = require('./utilities/parser');
 const mangadex = require('./utilities/mangadex')
 const { JSHandle } = require('puppeteer');
+const form = require('./utilities/formsManager')
 
 const writeJson = require('./utilities/jsonWriter');
-const jsonWriter = require('./utilities/jsonWriter');
 
 app.use(bodyParser.json());
 
@@ -57,30 +57,32 @@ app.post(`/new`, (req, res) => {
     console.log(req.body)
     console.log(req.body.baseOffset)
 
-    try {
-        switch (req.body.source) {
+form.downloadManga(req)
 
-            //if mangadex is the source
-            case 'Mangadex':
-                mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset))
-                console.log('mangadex in ', req.body.translatedLanguages)
-                break;
+    // try {
+    //     switch (req.body.source) {
 
-            // if manganato is the source
-            case 'Manganato':
-                parse.parse(req.body.mangaName)
-                // parse.searchByName(req.body.mangaName)
-                console.log(`manganato in ${req.body.translatedLanguages}`)
-                break;
+    //         //if mangadex is the source
+    //         case 'Mangadex':
+    //             mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset))
+    //             console.log('mangadex in ', req.body.translatedLanguages)
+    //             break;
 
-            //if no match is found
-            default: console.log(`no valid matches were found for ${req.body.mangaList}`)
-        }
-    } catch {
-        console.error('An error occured. Please check your connection with the site.')
-        console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
-        console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
-    }
+    //         // if manganato is the source
+    //         case 'Manganato':
+    //             parse.parse(req.body.mangaName)
+    //             // parse.searchByName(req.body.mangaName)
+    //             console.log(`manganato in ${req.body.translatedLanguages}`)
+    //             break;
+
+    //         //if no match is found
+    //         default: console.log(`no valid matches were found for ${req.body.mangaList}`)
+    //     }
+    // } catch {
+    //     console.error('An error occured. Please check your connection with the site.')
+    //     console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
+    //     console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
+    // }
 
 
     // redirects the user to the homepage after adding the manga
