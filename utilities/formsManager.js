@@ -7,7 +7,8 @@ const mangaInfo = require('./jsonWriter');
 module.exports = {
 
     // for the add manga form
-    downloadManga: function () {
+    // it will call the function that downloads from the secific site
+    addManga: function () {
 
     },
 
@@ -18,7 +19,16 @@ module.exports = {
     },
 
 
+    // handles the form to change json attributes
+    // will call a function in jsonWriter to modify the json data for the manga
+    changeMangaAttributes: function () {
 
+    },
+
+    // will handle the bookmarking of chapters
+    bookmarkChap: function () {
+
+    }
 
 
 
