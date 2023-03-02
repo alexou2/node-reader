@@ -98,7 +98,7 @@ module.exports = {
 
 
             // downloads the chapters
-            // this.getChapters(mangaID[0], mangaName, languages, baseOffset)
+            this.getChapters(mangaID[0], mangaName, languages, baseOffset)
 
 
 
