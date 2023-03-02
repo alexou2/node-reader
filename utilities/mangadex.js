@@ -5,7 +5,7 @@
 
 
 const axios = require('axios');
-const  searchByName = require('./parser');
+const searchByName = require('./parser');
 const fs = require('fs');
 const { text } = require('body-parser');
 const https = require('https')
@@ -42,7 +42,9 @@ module.exports = {
             console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
 
 
-            var mangaID = resp.data.data.map(manga => manga.id)
+            let mangaID = resp.data.data.map(manga => manga.id)
+
+
 
             // fetches the first manga name in the mangadex list
             let mangaName = resp.data.data.map(manga => manga.attributes.title)
@@ -59,20 +61,22 @@ module.exports = {
             mangaName = mangaName.replaceAll('%', '%25')
 
             // fetches the alternative titles for the manga
-            let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
+            // let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
+            let altTitles = resp.data.data.map(manga => manga.attributes.altTitles.map(altTitle => altTitle))
+
+
+
+            // gets informations about the manga like status, tags, demographic
             console.log(altTitles)
+            let tags = resp.data.data.map(manga => manga.attributes.tags.map(attributes => attributes.attributes.name.en))
+            let status = resp.data.data.map(manga => manga.attributes.status)
+            let description = resp.data.data.map(manga => manga.attributes.description.en)
+            console.log(altTitles, tags, status, description)
 
-
-
-
-
-
-            // let baseOffset = 0
-            console.log(typeof baseOffset);
 
 
             // gets all of the informations from mangadex
-            this.writeJson(mangaID[0], mangaName, languages, baseOffset)
+            this.writeJson(mangaID[0], mangaName, languages, baseOffset, tags, status, description)
 
 
 
@@ -94,7 +98,7 @@ module.exports = {
 
 
             // downloads the chapters
-            this.getChapters(mangaID[0], mangaName, languages, baseOffset)
+            // this.getChapters(mangaID[0], mangaName, languages, baseOffset)
 
 
 
@@ -173,8 +177,8 @@ module.exports = {
                     console.log('chapters:', chapterName[k])
                 }
                 chapterName[k] = chapterName[k].trim()
-               
-            //    replaces all of the % in order to avoid problkems (% is used to encode strings)
+
+                //    replaces all of the % in order to avoid problkems (% is used to encode strings)
                 chapterName[k] = chapterName[k].replaceAll('%', '%25')
 
 
@@ -196,7 +200,7 @@ module.exports = {
 
                 sem.take(() => {
 
-                    this.getInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
+                    this.getChapterInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
                     console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
 
                 })
@@ -207,7 +211,7 @@ module.exports = {
 
 
     //gets all of the informations from mangadex in order to download chapters
-    getInfos: function (chapterID, mangaName, chapterName, sem, j, mangaID) {
+    getChapterInfos: function (chapterID, mangaName, chapterName, sem, j, mangaID) {
 
 
         let host, chapterHash, data, dataSaver;
@@ -315,13 +319,14 @@ module.exports = {
             })();
 
         } catch {
-            console.log('error when downloading covre drom mangadex')
+            console.log('error when downloading cover drom mangadex')
         }
 
     },
 
+
     // gets informations and sends them to be written in a json file
-    writeJson: function (mangaID, mangaName, languages, baseOffset) {
+    writeJson: function (mangaID, mangaName, languages, baseOffset, tags, status, description) {
 
         const mangaJSON = require('./jsonWriter');
         let chapterName = [];
@@ -344,7 +349,7 @@ module.exports = {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
                         "offset": 100 * i + baseOffset,
-                        
+
                     },
 
                 });
@@ -355,6 +360,8 @@ module.exports = {
 
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
 
+
+
                 //creates formatted chapter name
             }
             for (let k = 0; k < chapterID.length; k++) {
@@ -364,7 +371,7 @@ module.exports = {
             // path = path.replaceAll(' ', '\ ')
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterName, "n/a", "n/a")
+            mangaJSON.addManga(mangaName, path, chapterName, chapterName, tags, description)
 
         })();
     }
