@@ -13,6 +13,7 @@ const sem = require('semaphore')(5);// I would recomend 5 to 10 with 16gb of ram
 const request = require('request');
 const { download } = require('./downloader.js');
 const ddl = require('./downloader.js')
+const sanitizeFilename = require('sanitize-filename');
 
 
 
@@ -25,6 +26,7 @@ module.exports = {
         let coverImage
         let mangaName
         let chapterName = []
+        let tags = []
 
 
         // mangaLink = 'https://manganato.com/manga-mi989765'
@@ -62,13 +64,17 @@ module.exports = {
                 chapterName.push($(element).attr('title'));
             });
 
-
+            $('story-info-right').each((index, element) => {
+                tags.push($(element).attr('td'));
+            });
+            tags.push('lul')
+console.log('tags: ',tags)
 
             // prints the informations to debug
             links = links.reverse()
-            console.log("inks: ", links);
-            console.log("cover image: ", coverImage);
-            console.log("mangaName: ", mangaName)
+            // console.log("inks: ", links);
+            // console.log("cover image: ", coverImage);
+            // console.log("mangaName: ", mangaName)
             chapterName = chapterName.reverse()
 
             //replaces problematic characters to avoid causing problems
@@ -76,9 +82,10 @@ module.exports = {
                 chapterName[i] = chapterName[i].trim()
                      
                 //replaces problematic characters
-                chapterName[i] = chapterName[i].replaceAll(':', '_')
-                chapterName[i] = chapterName[i].replaceAll('?', '_')
-                chapterName[i] = chapterName[i].replaceAll('!', '_')
+                // chapterName[i] = chapterName[i].replaceAll(':', '_')
+                // chapterName[i] = chapterName[i].replaceAll('?', '_')
+                // chapterName[i] = chapterName[i].replaceAll('!', '_')
+                chapterName[i] = sanitizeFilename( chapterName[i])
 
                 // removes all of the unwanted characters at the end of the string
                 if (chapterName[i].endsWith('_')) {
@@ -94,7 +101,7 @@ module.exports = {
             for (let i = 0; i < links.length; i++) {
                 sem.take(() => {
                     //calls download function to download the chapters
-                    ddl.download(links[i], chapterName[i], mangaName, sem)
+                    // ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
         })
