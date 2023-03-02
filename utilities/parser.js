@@ -64,11 +64,11 @@ module.exports = {
                 chapterName.push($(element).attr('title'));
             });
 
-            $('story-info-right').each((index, element) => {
-                tags.push($(element).attr('td'));
+            $('.panel-story-info-description').each((index, element) => {
+                tags.push($(element).attr('title'));
             });
             tags.push('lul')
-console.log('tags: ',tags)
+            console.log('tags: ', tags)
 
             // prints the informations to debug
             links = links.reverse()
@@ -80,19 +80,19 @@ console.log('tags: ',tags)
             //replaces problematic characters to avoid causing problems
             for (let i = 0; i < chapterName.length; i++) {
                 chapterName[i] = chapterName[i].trim()
-                     
+
                 //replaces problematic characters
                 // chapterName[i] = chapterName[i].replaceAll(':', '_')
                 // chapterName[i] = chapterName[i].replaceAll('?', '_')
                 // chapterName[i] = chapterName[i].replaceAll('!', '_')
-                chapterName[i] = sanitizeFilename( chapterName[i])
+                chapterName[i] = sanitizeFilename(chapterName[i])
 
                 // removes all of the unwanted characters at the end of the string
                 if (chapterName[i].endsWith('_')) {
-                    chapterName[i] = chapterName[i].slice(0,-1)
+                    chapterName[i] = chapterName[i].slice(0, -1)
                 }
             }
-            console.log("chapters: ", chapterName)
+            // console.log("chapters: ", chapterName)
 
 
             //calls download function
