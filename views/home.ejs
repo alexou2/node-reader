@@ -18,7 +18,7 @@
 
         <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
         </a>
-        
+
 
     </div>
 
@@ -28,7 +28,7 @@
         </a>
     </div>
 
-   
+
     <div id="manga-list">
         <% for (var i=0; i < mangaList.length; i++) { %>
             <div class="manga-item">
@@ -38,15 +38,18 @@
                 <%= mangaList[i] %>
             </div>
             <% } %>
+
+                <div class="add-chapter">
+                    <a href="/new"><img class="manga-image"
+                        src="/add-manga_image.svg" /></a>
+                </div>
+
     </div>
 
 
 
 
 
-    <div class="add-chapter">
-        <a href="/new">add a chapter or manga</a>
-    </div>
 
 
 </body>
