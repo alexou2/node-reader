@@ -107,7 +107,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     
     // potential issue
-    // chapName = decodeURIComponent(chapName)
+    chapName = decodeURIComponent(chapName)
 
 
 
