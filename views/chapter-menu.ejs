@@ -15,7 +15,8 @@
     <div class="top-bar">
 
         <div class="page-name">
-            <h2>Reading <%= mangaName %> </h2>
+            <h2>Reading <%= mangaName %>
+            </h2>
         </div>
 
         <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
@@ -46,7 +47,24 @@
                 <%= chapterList[i] %>
             </a><br>
             <% } %>
-            <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
+                <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
+                <button onclick="sendData()">Update Chapters</button>
+
+                <script>
+                    function sendData() {
+                        const data = {
+                            name: 'John',
+                            age: 30,
+                            email: 'john@example.com'
+                        };
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', '/myroute');
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        xhr.send(JSON.stringify(data));
+                    }
+                </script>
+
     </div>
 
 </body>
