@@ -259,7 +259,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     mangaName = decodeURIComponent(mangaName)
     var chapterList = getList(decodeURIComponent(mangaName))
     // var chapterList = getList(mangaName)
-
+writeJson.checkJson(mangaName);
 
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
@@ -269,16 +269,16 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
 
     //rendres chapter-menu.ejs with the arguments
-    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc });
 
-    res.render("../views/chapter-menu", { mangaName: writeJson.getName(mangaName), chapterList: chapterList, mangaDesc: mangaDesc });
+    // res.render("../views/test", { mangaName: writeJson.getName(mangaName), chapterList: writeJson.getChapterPath(mangaName), mangaDesc: mangaDesc, chapterName: writeJson.getchapterNames(mangaName)});
 
     console.log(mangaName)
     console.log("chapter page is running")
     console.log('outputting')
     // writeJson.outputJson(mangaName)
 
-    writeJson.checkJson();
+    
 });
 
 

@@ -78,7 +78,7 @@ module.exports = {
     },
 
     // gets the description of the manga
-    getMangaDesc: function(path){
+    getMangaDesc: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
         data = JSON.parse(data);
         let mangaDesc = data.description
@@ -103,7 +103,6 @@ module.exports = {
             }
 
             chapterNameList[j] = chapterNameList[j].trim()
-            chapterNameList[j] = sanitizeFilename(chapterNameList[j])
 
 
             // removes : from the end of the chapter
@@ -121,7 +120,7 @@ module.exports = {
             chapters.push({
                 chapterName: chapterNameList[i],
                 sorting_order: i + 1,
-                chapterPath: path + "/" + chapterPathList[i],
+                chapterPath: chapterPathList[i],
             })
         }
         console.log('chapter paths:', chapterPathList)
@@ -163,7 +162,7 @@ module.exports = {
                 mangaName: mangaName,
                 jsonPath: jsonPath,
                 coverImage: `manga/${mangaName}/cover.jpg`,
-                path: `manga/${mangaName}`
+                path: `${mangaName}`
             }
         )
 
@@ -186,24 +185,25 @@ module.exports = {
 
 
     // is called if a manga doesn't have a json
-    checkJson: function () {
+    checkJson: function (mangaName) {
 
         let mangaFiles = fs.readdirSync("manga");
         let jsonFiles = fs.readdirSync("jsonFiles")
 
-        for (let i = 0; i < mangaFiles.length; i++) {
-            if (!fs.existsSync(`jsonFiles/${mangaFiles[i]}.json`)) {
-                this.createMangaJson(mangaFiles[i])
+        // for (let i = 0; i < mangaFiles.length; i++) {
+            if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
+                console.log(__dirname)
+                this.createMangaJson(mangaName)
                 console.log('created missing jsons for manga')
             }
-
-        }
+// 
+        // }
 
 
     },
 
 
-    // scans files and looks for informations for the manga
+    // scans files and looks for informations for the  if there is no json for th manga
     createMangaJson: function (mangaName) {
 
         let chapterNameList

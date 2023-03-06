@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
+
+    <title>reading <%= mangaName %>
+    </title>
+</head>
+
+<body>
+    <div class="top-bar">
+
+        <div class="page-name">
+            <h2>Reading <%= mangaName %>
+            </h2>
+        </div>
+
+        <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
+            </a><br>
+        </p>
+    </div>
+
+    <!-- shows current path -->
+    <div class="currentPath">
+        <a href="/">Home </a><a href="/manga/<%= mangaName %>">
+            <%= mangaName %>
+        </a>
+    </div>
+    <div class="manga-infos">
+        <div class="cover-page">
+            <img src="cover.jpg">
+        </div>
+        <div class="description">
+            <%= mangaDesc %>
+        </div>
+        <div class="text-box">
+            <%= mangaName %>
+
+        </div>
+    </div>
+
+    <div class="list chapterList">
+        <% for(var i=0; i<chapterList.length; i++) {%>
+            <a href="<%= chapterList[i] %>">
+                <%= chapterName[i] %>
+            </a><br>
+            <% } %>
+                <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
+
+    </div>
+
+</body>
+
+</html>
+<!-- todo
+be able to see reading progress
+add continue reading button
+view bookmarked chapters
+add option to compress manga into cbz for ipad
+-->

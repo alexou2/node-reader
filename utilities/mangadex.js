@@ -94,8 +94,8 @@ module.exports = {
 
 
 
-                // downloads the chapters
-                this.getChapters(mangaID[0], mangaName, languages, baseOffset)
+            // downloads the chapters
+            this.getChapters(mangaID[0], mangaName, languages, baseOffset)
 
 
 
@@ -334,7 +334,7 @@ module.exports = {
             let chapterID = []
             let chapterTitle = []
             let chapter = []
-
+            let chapterPath = []
 
             for (let i = 0; i < 3; i++) {
                 const resp = await axios({
@@ -364,12 +364,14 @@ module.exports = {
             }
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
+                chapterPath[k] = chapterName[k].replaceAll(':', '_');
+                chapterPath[k] = sanitizeFilename(chapterPath[k])
             }
             let path = `manga/${mangaName}`
             // path = path.replaceAll(' ', '\ ')
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterName, tags, description)
+            mangaJSON.addManga(mangaName, path, chapterName, chapterPath, tags, description)
 
         })();
     }
