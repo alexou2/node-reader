@@ -93,7 +93,7 @@ a {
     /* Adjust this value to control the size of each item */
     text-align: center;
     margin: 1em;
-    transition: transform .2s;
+    transition: transform .5s;
 
 }
 
@@ -106,7 +106,6 @@ a {
     /* height: 100%; */
     /* width: auto; */
     box-shadow: 0 0 24px -4px black;
-    transition: transform .2s;
 }
 
 .cover-page img {
