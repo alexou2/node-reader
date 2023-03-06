@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/node-reader-icon.svg" type="image/x-icon" />
+
     <title>
         <%= chapName %>
     </title>
@@ -16,7 +18,9 @@
 
     <div class="top-bar">
         <div class="page-name">
-            <h2><%=chapName%></h2>
+            <h2>
+                <%=chapName%>
+            </h2>
         </div>
 
 
@@ -28,8 +32,8 @@
 
     <!-- shows current path -->
     <div class="currentPath">
-        <a href="/">Home ></a><a href="/manga/<%= mangaName %>">
-            <%= mangaName %> >
+        <a href="/">Home </a><a href="/manga/<%= mangaName %>">
+            <%= mangaName %>
         </a> <a href="/manga/<%= mangaName %>/<%= chapName %>">
             <%= chapName %>
         </a>
@@ -45,7 +49,7 @@
     <div class="change-chapter top-buttons">
         <a class="prev-chap" href="../<%=prevChapter%>">◄◄ Previous </a>
 
-            <a class="next-chap" href="../<%=nextChapter%>">Next ►►</a>
+        <a class="next-chap" href="../<%=nextChapter%>">Next ►►</a>
 
     </div>
 
@@ -53,7 +57,7 @@
 
 
     <div class="page">
-        <% for(var i=0; i<path_to_image.length; i++) {%>
+        <% for(var i=0; i<path_to_image.length; i++) { %>
             <img src="<%= path_to_image[i] %>">
             <% } %>
     </div>
@@ -61,7 +65,7 @@
     <div class="change-chapter bottom-buttons">
         <a class="prev-chap" href="../<%=prevChapter%>">◄◄ Previous </a>
 
-            <a class="next-chap" href="../<%=nextChapter%>">Next ►►</a>
+        <a class="next-chap" href="../<%=nextChapter%>">Next ►►</a>
 
     </div>
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/node-reader-icon.svg" type="image/x-icon" />
     <title>Homepage</title>
 </head>
 
@@ -30,7 +31,7 @@
 
 
     <div id="manga-list">
-        <% for (var i=0; i < mangaList.length; i++) { %>
+        <% for (let i=0; i < mangaList.length; i++) { %>
             <div class="manga-item">
                 <a href="manga/<%= mangaList[i] %>"><img class="manga-image"
                         src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
@@ -40,7 +41,7 @@
             <% } %>
 
                 <div class="add-chapter">
-                    <a href="/new"><img class="manga-image" src="/add-manga_image.svg" /></a>
+                    <a href="/new"><img class="manga-image" src="/add-manga-image.svg" /></a>
                     <br>
                     Add a new manga
                 </div>
