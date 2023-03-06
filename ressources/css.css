@@ -43,7 +43,7 @@ a {
 
 .lastReadChapter {
     background-color: rgb(100, 100, 100);
-    color:black;
+    color: black;
     border-radius: 10px;
     padding-left: 3px;
     padding-right: 3px;
@@ -104,18 +104,21 @@ a {
     /* height: 100%; */
     /* width: auto; */
     box-shadow: 0 0 24px -4px black;
+    transition: transform .2s;
 }
 
 .cover-page img {
     /* border-radius: 0.35rem; */
     border-radius: 5px;
     box-shadow: 0 0 24px -4px black;
+
+
 }
 
 
 
 
-.add-chapter{
+.add-chapter {
     text-align: center;
 }
 
@@ -133,6 +136,9 @@ a {
 
 }
 
+.manga-image:hover {
+    transform: scale(1.2);
+}
 
 
 
