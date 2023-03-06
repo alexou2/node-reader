@@ -93,6 +93,8 @@ a {
     /* Adjust this value to control the size of each item */
     text-align: center;
     margin: 1em;
+    transition: transform .2s;
+
 }
 
 .manga-image {
@@ -136,7 +138,7 @@ a {
 
 }
 
-.manga-image:hover {
+#manga-image:hover {
     transform: scale(1.2);
 }
 

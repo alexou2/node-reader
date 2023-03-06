@@ -32,8 +32,8 @@
 
     <div id="manga-list">
         <% for (let i=0; i < mangaList.length; i++) { %>
-            <div class="manga-item">
-                <a href="manga/<%= mangaList[i] %>"><img id="manga-image" class="manga-image"
+            <div class="manga-item"id="manga-image">
+                <a href="manga/<%= mangaList[i] %>"><img  class="manga-image"
                         src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
                 <br>
                 <%= mangaList[i] %>
