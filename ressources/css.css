@@ -141,8 +141,13 @@ a {
     transform: scale(1.2);
 }
 
+.manga-infos{
+    display: block;
+}
 
-
+.description{
+    right:3em
+}
 
 .prev-chap {
     width: 49%;

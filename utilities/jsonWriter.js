@@ -77,6 +77,15 @@ module.exports = {
         return AllMangaNames
     },
 
+    // gets the description of the manga
+    getMangaDesc: function(path){
+        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
+        data = JSON.parse(data);
+        let mangaDesc = data.description
+
+        return mangaDesc
+    },
+
 
 
     // writes a new json file for each manga

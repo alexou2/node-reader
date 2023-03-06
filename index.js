@@ -57,7 +57,7 @@ app.post(`/new`, (req, res) => {
     console.log(req.body)
     console.log(req.body.baseOffset)
 
-form.downloadManga(req)
+    form.downloadManga(req)
 
     // try {
     //     switch (req.body.source) {
@@ -105,7 +105,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
 
 
-    
+
     // potential issue
     chapName = decodeURIComponent(chapName)
 
@@ -129,8 +129,10 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     console.group(prevAndNext)
     console.log('list of of pages for this chapter: ', pageList)
 
+    
+
     //sends the informations to the page used to render the chapters
-    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter});
 
 
 });
@@ -262,8 +264,12 @@ app.get(`/manga/:mangaName`, (req, res) => {
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
 
+    let mangaDesc = writeJson.getMangaDesc(mangaName)
+    console.log('desc',mangaDesc);
+
+
     //rendres chapter-menu.ejs with the arguments
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc });
     console.log(mangaName)
     console.log("chapter page is running")
     console.log('outputting')

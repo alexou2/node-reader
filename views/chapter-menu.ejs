@@ -28,20 +28,22 @@
 
     <!-- shows current path -->
     <div class="currentPath">
-        <a href="/">Home ></a><a href="/manga/<%= mangaName %>">
+        <a href="/">Home </a><a href="/manga/<%= mangaName %>">
             <%= mangaName %>
         </a>
     </div>
+    <div class="manga-infos">
+        <div class="cover-page">
+            <img src="cover.jpg">
+        </div>
+        <div class="description">
+            <%= mangaDesc %>
+        </div>
+        <div class="text-box">
+            <%= mangaName %>
 
-    <div class="cover-page">
-        <img src="cover.jpg">
+        </div>
     </div>
-
-    <div class="text-box">
-        <%= mangaName %>
-
-    </div>
-
 
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length; i++) {%>
@@ -50,22 +52,6 @@
             </a><br>
             <% } %>
                 <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
-                <button onclick="sendData()">Update Chapters</button>
-
-                <script>
-                    function sendData() {
-                        const data = {
-                            name: 'John',
-                            age: 30,
-                            email: 'john@example.com'
-                        };
-
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('POST', '/myroute');
-                        xhr.setRequestHeader('Content-Type', 'application/json');
-                        xhr.send(JSON.stringify(data));
-                    }
-                </script>
 
     </div>
 
