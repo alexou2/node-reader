@@ -17,37 +17,30 @@
     <div class="top-bar">
 
         <div class="page-name">
-            <h2>Reading <%= mangaName %>
-            </h2>
+            <h1>Reading <%= mangaName %>
+            </h1>
         </div>
-
-        <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
-            </a><br>
-        </p>
-    </div>
-
-    <!-- shows current path -->
-    <div class="currentPath">
-        <a href="/">Home </a><a href="/manga/<%= mangaName %>">
+ <div class="currentPath">
+        <a href="/">Home > </a><a href="/manga/<%= mangaName %>">
             <%= mangaName %>
         </a>
     </div>
+    </div>
+
+    <!-- shows current path -->
+   
     <div class="manga-infos">
-        <div class="cover-page">
-            <img src="cover.jpg">
-        </div>
+
+        <img class="cover-page" src="cover.jpg">
+
         <div class="description">
             <%= mangaDesc %>
-        </div>
-        <div class="text-box">
-            <%= mangaName %>
-
         </div>
     </div>
 
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length; i++) {%>
-            <a href="<%= chapterList[i] %>">
+            <a class="chapter" href="<%= chapterList[i] %>">
                 <%= chapterList[i] %>
             </a><br>
             <% } %>

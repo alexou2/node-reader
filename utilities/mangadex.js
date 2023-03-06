@@ -71,13 +71,13 @@ module.exports = {
             let tags = resp.data.data.map(manga => manga.attributes.tags.map(attributes => attributes.attributes.name.en))
             let status = resp.data.data.map(manga => manga.attributes.status)
             let description = resp.data.data.map(manga => manga.attributes.description.en)
-            console.log(altTitles, tags, status, description)
+            console.log(altTitles, tags[0], status, description[0])
 
 
 
 
             // gets all of the informations from mangadex
-            this.writeJson(mangaID[0], mangaName, languages, baseOffset, tags, status, description)
+            this.writeJson(mangaID[0], mangaName[0], languages, baseOffset, tags[0], status[0], description[0], altTitles[0])
 
 
 

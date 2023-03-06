@@ -1,15 +1,11 @@
 body {
     background-color: rgb(40, 40, 40);
-    color: rgb(255, 255, 255)
+    color: rgb(255, 255, 255);
+    transition: transform .5s;
 }
 
 .top-bar {
     background-color: rgb(60, 60, 60);
-}
-
-
-.add-chapter-by-name {
-    text-align: right;
 }
 
 
@@ -108,15 +104,30 @@ a {
     box-shadow: 0 0 24px -4px black;
 }
 
-.cover-page img {
+.cover-page {
     /* border-radius: 0.35rem; */
     border-radius: 5px;
     box-shadow: 0 0 24px -4px black;
-
-
+    margin: 1em;
 }
 
+.chapter {
+    border-radius: 10px;
+    padding-left: .5em;
+    padding-right: .5em;
+    padding-top: .25em;
+    padding-bottom: .25em;
+transition: .15s;
+transition: background-color none;
+}
 
+.chapter:hover {
+    background-color: rgb(60, 60, 60);
+    
+    margin-left: .5em;
+    padding-left: 1em;
+
+}
 
 
 .add-chapter {
@@ -141,19 +152,17 @@ a {
     transform: scale(1.2);
 }
 
-.manga-infos{
-    display: block;
+
+.manga-infos {
+    display: inline-block;
 }
 
-.description{
+.description {
+    display: inline-block;
     text-align: justify;
-    width:25%;
-    display: block;
-    margin: 5px auto 0;
-    /* margin-top: 5px; */
-    top: 1em;
-    max-width: 100%;
-
+    width: 50%;
+    font-size: 1.2em;
+    left: 50%
 }
 
 .prev-chap {
