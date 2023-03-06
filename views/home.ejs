@@ -17,29 +17,29 @@
             <h2>Home</h2>
         </div>
 
-       <!-- shows current path -->
-    <div class="currentPath">
-        <a href="/">Home >
-        </a>
-    </div>
+        <!-- shows current path -->
+        <div class="currentPath" id="currentPath">
+            <a href="/">Home >
+            </a>
+        </div>
 
 
     </div>
 
-    
+
 
 
     <div id="manga-list">
         <% for (let i=0; i < mangaList.length; i++) { %>
-            <div class="manga-item"id="manga-image">
-                <a href="manga/<%= mangaList[i] %>"><img  class="manga-image"
+            <div class="manga-item" id="manga-image">
+                <a href="manga/<%= mangaList[i] %>"><img class="manga-image"
                         src="manga/<%= mangaList[i] %>/cover.jpg" /></a>
                 <br>
                 <%= mangaList[i] %>
             </div>
             <% } %>
 
-                <div class="add-chapter">
+                <div class="add-chapter manga-item" id="manga-image">
                     <a href="/new"><img class="manga-image" src="/add-manga-image.svg" /></a>
                     <br>
                     Add a new manga

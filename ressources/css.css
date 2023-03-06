@@ -1,7 +1,6 @@
 body {
     background-color: rgb(40, 40, 40);
     color: rgb(255, 255, 255);
-    transition: transform .5s;
 }
 
 .top-bar {
@@ -26,6 +25,11 @@ a {
 
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
+    transition: .5s;
+}
+
+#currentPath:hover {
+font-size: 1.5em;
 }
 
 .list {
@@ -117,13 +121,13 @@ a {
     padding-right: .5em;
     padding-top: .25em;
     padding-bottom: .25em;
-transition: .15s;
-transition: background-color none;
+    transition: .15s;
+    transition: background-color none;
 }
 
 .chapter:hover {
     background-color: rgb(60, 60, 60);
-    
+
     margin-left: .5em;
     padding-left: 1em;
 
