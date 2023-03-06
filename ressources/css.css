@@ -146,7 +146,14 @@ a {
 }
 
 .description{
-    right:3em
+    text-align: justify;
+    width:25%;
+    display: block;
+    margin: 5px auto 0;
+    /* margin-top: 5px; */
+    top: 1em;
+    max-width: 100%;
+
 }
 
 .prev-chap {
