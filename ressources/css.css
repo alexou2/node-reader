@@ -89,8 +89,8 @@ a {
     /* Adjust this value to control the size of each item */
     text-align: center;
     margin: 1em;
-    transition: transform .5s;
-    font-size: 1.1em;
+    transition: transform .3s;
+    font-size: 1.15em;
 
 }
 
@@ -112,7 +112,8 @@ a {
     margin: 1em;
     transition: .2s;
 }
-.cover-page:hover{
+
+.cover-page:hover {
     transform: scale(1.1);
 }
 
@@ -122,7 +123,7 @@ a {
     padding-right: .5em;
     padding-top: .25em;
     padding-bottom: .25em;
-    transition: .2s;
+    transition: .15s;
     transition: background-color none;
 }
 
@@ -187,104 +188,104 @@ a {
     box-shadow: 0 0 24px -8px blue;
 }
 
-.zoom img{
-width: 3em;
+.zoom img {
+    width: 3em;
 }
-.zoom{
+
+.zoom {
     text-align: right;
     margin-top: 1em;
     margin-right: 5%;
 }
 
-   /* for the overlay form */
+/* for the overlay form */
 
-.form-description{
-    color:rgba(0, 0, 0, 0.7)
+.form-description {
+    color: rgba(0, 0, 0, 0.7)
 }
 
-        .wrap {
-            max-width: 350px;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
-            margin-top: 100px;
-            border-radius: 20px;
-            color:black
-        }
+.wrap {
+    max-width: 350px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    margin-top: 100px;
+    border-radius: 20px;
+    color: black
+}
 
-        form {
-            margin-top: 50px;
-            color:rgba(0, 0, 0, 0.7)
+form {
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.7)
+}
 
-        }
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    border: 1px solid grey;
+    font-size: 15px;
+    border-radius: 5px;
+}
 
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-            border: none;
-            outline: none;
-            border: 1px solid grey;
-            font-size: 15px;
-            border-radius: 5px;
-        }
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    text-align: center;
+}
 
-        h2 {
-            margin: 0;
-            padding: 0;
-            font-size: 2em;
-            text-align: center;
-        }
+input[type=submit] {
+    font-size: 16px;
+    margin-top: 30px;
+    color: #fff;
+    font-weight: bold;
+    background: #cc0033;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
 
-        input[type=submit] {
-            font-size: 16px;
-            margin-top: 30px;
-            color: #fff;
-            font-weight: bold;
-            background: #cc0033;
-            border: 1px solid #fff;
-            cursor: pointer;
-        }
+input[type=submit]:hover {
+    background: orange;
 
-        input[type=submit]:hover {
-            background: orange;
+}
 
-        }
+.openbtn {
+    background: f1f1f1;
+    border: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+}
 
-        .openbtn {
-            background: f1f1f1;
-            border: none;
-            padding: 10px 15px;
-            font-size: 20px;
-            cursor: pointer;
-            float: right;
-        }
+.openbtn:hover {
+    background: #bbb;
+}
 
-        .openbtn:hover {
-            background: #bbb;
-        }
+.overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
 
-        .overlay {
-            height: 100%;
-            width: 100%;
-            display: none;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.7);
-        }
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    cursor: pointer;
+    color: #fff;
+}
 
-        .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 45px;
-            font-size: 60px;
-            cursor: pointer;
-            color: #fff;
-        }
-
-        .closebtn:hover {
-            color: #ccc;
-        }
+.closebtn:hover {
+    color: #ccc;
+}
