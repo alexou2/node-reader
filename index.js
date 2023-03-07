@@ -129,10 +129,10 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     console.group(prevAndNext)
     console.log('list of of pages for this chapter: ', pageList)
 
-    
+
 
     //sends the informations to the page used to render the chapters
-    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter});
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
 
 
 });
@@ -247,6 +247,16 @@ app.get(`/`, (req, res) => {
     console.log("homepage is running")
 });
 
+app.post(`/`, (req, res) => {
+    console.log('req', req)
+    console.log(req.body)
+    console.log(req.body.baseOffset)
+
+
+    form.downloadManga(req)
+    res.redirect(`.`)
+})
+
 
 //renders the page where all of a manga's chapters are displayed
 
@@ -259,13 +269,13 @@ app.get(`/manga/:mangaName`, (req, res) => {
     mangaName = decodeURIComponent(mangaName)
     var chapterList = getList(decodeURIComponent(mangaName))
     // var chapterList = getList(mangaName)
-writeJson.checkJson(mangaName);
+    writeJson.checkJson(mangaName);
 
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
 
     let mangaDesc = writeJson.getMangaDesc(mangaName)
-    console.log('desc',mangaDesc);
+    console.log('desc', mangaDesc);
 
 
     //rendres chapter-menu.ejs with the arguments
@@ -278,7 +288,7 @@ writeJson.checkJson(mangaName);
     console.log('outputting')
     // writeJson.outputJson(mangaName)
 
-    
+
 });
 
 

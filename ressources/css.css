@@ -197,6 +197,11 @@ width: 3em;
 }
 
    /* for the overlay form */
+
+.form-description{
+    color:rgba(0, 0, 0, 0.7)
+}
+
         .wrap {
             max-width: 350px;
             margin: auto;
@@ -204,10 +209,12 @@ width: 3em;
             background: #fff;
             margin-top: 100px;
             border-radius: 20px;
+            color:black
         }
 
         form {
             margin-top: 50px;
+            color:rgba(0, 0, 0, 0.7)
 
         }
 

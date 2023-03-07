@@ -23,6 +23,7 @@
             </a>
         </div>
 
+        <button class="openbtn" onclick="openForm()">click Here to Download a new Manga</button>
 
     </div>
 
@@ -51,37 +52,29 @@
 
 
 
-
-
     <div id="myOverlay" class="overlay">
         <span class="closebtn" onclick="closeForm()" title="Close Overlay">&#215</span>
 
         <div class="wrap">
             <h2>Download new manga</h2>
-            <form>
-                <input type="text" placeholder="Manga Name">
-                <input type="number" placeholder="Base Offset">
+            <form action="/new" method="post">
+                Manga Name
+                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name">
+                Base Offset
+                <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
+                Translated language
                 <input type="text" placeholder="Translated Language">
 
 
 
-                <div id="translatedLanguages">
-                    translated language
-                    <select class="translatedLanguages" name="translatedLanguages">
-                        <option data-c="en" value="en" selected="">English</option>
-                        <option data-c="fr" value="fr">Fançais</option>
-                        <option data-c="it" value="it">Italiano</option>
-                        <option data-c="ru" value="ru">Russian</option>
-                    </select>
-                </div>
 
 
-                <input type="submit" value="Download manga">
+
+                <input type="submit" value="Submit">
             </form>
 
         </div>
     </div>
-    <!-- <button class="openbtn" onclick="openForm()">click Here to Download a new Manga</button> -->
 
 
 
