@@ -40,7 +40,9 @@
             <% } %>
 
                 <div class="add-chapter manga-item" id="manga-image">
-                    <a href="/new"><img class="manga-image" src="/add-manga-image.svg" /></a>
+                    <!-- <a href="/new"><img class="manga-image" src="/add-manga-image.svg" /></a> -->
+                    <img class="manga-image" onclick="openForm()" src="/add-manga-image.svg" />
+
                     <br>
                     Add a new manga
                 </div>
@@ -49,6 +51,49 @@
 
 
 
+
+
+    <div id="myOverlay" class="overlay">
+        <span class="closebtn" onclick="closeForm()" title="Close Overlay">&#215</span>
+
+        <div class="wrap">
+            <h2>Download new manga</h2>
+            <form>
+                <input type="text" placeholder="Manga Name">
+                <input type="number" placeholder="Base Offset">
+                <input type="text" placeholder="Translated Language">
+
+
+
+                <div id="translatedLanguages">
+                    translated language
+                    <select class="translatedLanguages" name="translatedLanguages">
+                        <option data-c="en" value="en" selected="">English</option>
+                        <option data-c="fr" value="fr">Fançais</option>
+                        <option data-c="it" value="it">Italiano</option>
+                        <option data-c="ru" value="ru">Russian</option>
+                    </select>
+                </div>
+
+
+                <input type="submit" value="Download manga">
+            </form>
+
+        </div>
+    </div>
+    <!-- <button class="openbtn" onclick="openForm()">click Here to Download a new Manga</button> -->
+
+
+
+    <script>
+        function openForm() {
+            document.getElementById('myOverlay').style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById('myOverlay').style.display = "none";
+        }
+    </script>
 
 
 
