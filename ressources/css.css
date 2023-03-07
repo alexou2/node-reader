@@ -22,10 +22,11 @@ a {
     padding-right: 0.5em;
     margin: 0;
     color: white;
+    margin-top: 2em;
 
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .list {

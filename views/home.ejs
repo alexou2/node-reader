@@ -14,7 +14,7 @@
 <body>
     <div class="top-bar">
         <div class="page-name">
-            <h2>Home</h2>
+            <h1>Home</h1>
         </div>
 
         <!-- shows current path -->
@@ -56,16 +56,28 @@
         <span class="closebtn" onclick="closeForm()" title="Close Overlay">&#215</span>
 
         <div class="wrap">
+            <button class="close" onclick="closeForm()" title="Close Overlay">&#215</button>
             <h2>Download new manga</h2>
             <form action="/new" method="post">
+
                 Manga Name
                 <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name">
                 Base Offset
                 <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
                 Translated language
-                <input type="text" placeholder="Translated Language">
+                <!-- <input type="text" placeholder="Translated Language"> -->
+                <select class="translatedLanguages" name="translatedLanguages">
+                    <option data-c="en" value="en" selected="">English</option>
+                    <option data-c="fr" value="fr">Fançais</option>
+                    <option data-c="it" value="it">Italiano</option>
+                    <option data-c="ru" value="ru">Russian</option>
+                </select><br>
+                Source
+                <select class="select_source" name="source">
+                    <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                    <option id="manganato" data-c="manganato">Manganato</option>
 
-
+                </select>
 
 
 
