@@ -77,7 +77,7 @@ module.exports = {
 
 
             // gets all of the informations from mangadex
-            this.writeJson(mangaID[0], mangaName[0], languages, baseOffset, tags[0], status[0], description[0], altTitles[0])
+            this.writeJson(mangaID[0], mangaName, languages, baseOffset, tags[0], status[0], description[0], altTitles[0])
 
 
 

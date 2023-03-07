@@ -25,11 +25,7 @@ a {
 
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
-    transition: .5s;
-}
-
-#currentPath:hover {
-font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 .list {
@@ -94,6 +90,7 @@ font-size: 1.5em;
     text-align: center;
     margin: 1em;
     transition: transform .5s;
+    font-size: 1.1em;
 
 }
 
@@ -113,6 +110,10 @@ font-size: 1.5em;
     border-radius: 5px;
     box-shadow: 0 0 24px -4px black;
     margin: 1em;
+    transition: .2s;
+}
+.cover-page:hover{
+    transform: scale(1.1);
 }
 
 .chapter {
@@ -121,7 +122,7 @@ font-size: 1.5em;
     padding-right: .5em;
     padding-top: .25em;
     padding-bottom: .25em;
-    transition: .15s;
+    transition: .2s;
     transition: background-color none;
 }
 
@@ -153,7 +154,7 @@ font-size: 1.5em;
 }
 
 #manga-image:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 
@@ -165,7 +166,7 @@ font-size: 1.5em;
     display: inline-block;
     text-align: justify;
     width: 50%;
-    font-size: 1.2em;
+    font-size: 1.3em;
     left: 50%
 }
 
@@ -184,4 +185,13 @@ font-size: 1.5em;
     background-color: white;
     border-radius: 25px;
     box-shadow: 0 0 24px -8px blue;
+}
+
+.zoom img{
+width: 3em;
+}
+.zoom{
+    text-align: right;
+    margin-top: 1em;
+    margin-right: 5%;
 }
