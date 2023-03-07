@@ -302,10 +302,11 @@ module.exports = {
                 cover_fileName = cover_fileName[0]
 
 
-                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}.256.jpg`;
+                const coverLink = `https://uploads.mangadex.org/covers/${mangaID}/${cover_fileName}.256.jpg `;
+                console.log(coverLink)
 
                 let coverName = cover_fileName.split('.')
-                coverName = `cover.${coverName[1]}`
+                coverName = `cover.jpg`
 
                 const file = fs.createWriteStream(`${folderPath}/${coverName}`);
                 https.get(coverLink, function (response) {
