@@ -58,7 +58,7 @@ module.exports = {
             // removes the space at the end of the name
             mangaName = mangaName.trim()
             mangaName = sanitizeFilename(mangaName)
-            mangaName = mangaName.replaceAll('%', '%25')
+            // mangaName = mangaName.replaceAll('%', '%25')
 
             // fetches the alternative titles for the manga
             // let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
@@ -177,7 +177,7 @@ module.exports = {
                 chapterName[k] = chapterName[k].trim()
 
                 //    replaces all of the % in order to avoid problkems (% is used to encode strings)
-                chapterName[k] = chapterName[k].replaceAll('%', '%25')
+                // chapterName[k] = chapterName[k].replaceAll('%', '%25')
 
 
             }

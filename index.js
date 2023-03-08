@@ -59,32 +59,6 @@ app.post(`/new`, (req, res) => {
 
     form.downloadManga(req)
 
-    // try {
-    //     switch (req.body.source) {
-
-    //         //if mangadex is the source
-    //         case 'Mangadex':
-    //             mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset))
-    //             console.log('mangadex in ', req.body.translatedLanguages)
-    //             break;
-
-    //         // if manganato is the source
-    //         case 'Manganato':
-    //             parse.parse(req.body.mangaName)
-    //             // parse.searchByName(req.body.mangaName)
-    //             console.log(`manganato in ${req.body.translatedLanguages}`)
-    //             break;
-
-    //         //if no match is found
-    //         default: console.log(`no valid matches were found for ${req.body.mangaList}`)
-    //     }
-    // } catch {
-    //     console.error('An error occured. Please check your connection with the site.')
-    //     console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
-    //     console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
-    // }
-
-
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
 })
@@ -97,23 +71,27 @@ app.post(`/new`, (req, res) => {
 
 // loads the page where the chapters are read
 app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
-    var mangaName = req.params.mangaName,
+   console.log
+    let mangaName = req.params.mangaName,
         chapName = req.params.chapName;
 
 
     console.log('chap name: ', chapName)
 
 
-
-
     // potential issue
-    chapName = decodeURIComponent(chapName)
+    // chapName = decodeURIComponent(chapName)
 
+    // if (chapName.contains('%25')){
+        console.log('fuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\n')
+        // chapName = chapName.replaceAll('%', '%25')
+        console.log(chapName)
+    // }
 
 
     //gets and sorts page list
-    var pageList = getPages(mangaName, chapName);
-    pageList = pageList.sort(function (a, b) { return a - b });
+    let pageList = getPages(mangaName, chapName);
+    // pageList = pageList.sort(function (a, b) { return a - b });
     pageList = sortList(pageList, 'pages')
 
 
@@ -277,6 +255,10 @@ app.get(`/manga/:mangaName`, (req, res) => {
     let mangaDesc = writeJson.getMangaDesc(mangaName)
     console.log('desc', mangaDesc);
 
+for (i in chapterList){
+    chapterList[i] = chapterList[i].replaceAll('%', '%25')
+}
+
 
     //rendres chapter-menu.ejs with the arguments
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc });
@@ -313,17 +295,6 @@ function getList(mangaName) {
     return contentList;
 }
 
-//extracts the manga name by getting the url and then removing what is not part of the manga's name
-// function getMangaName(path) {
-//     var mangaName = path.toString().split("/");
-//     mangaName = mangaName[2]
-//     var message = ("reading:" + mangaName)
-//     mangaName = mangaName.replaceAll('%20', '\ ')
-//     console.log(path)
-//     console.log(message)
-//     return mangaName
-// }
-
 
 function getNextAndPrev(chapterList, currentChapter) {
     let prevChapter
@@ -337,8 +308,8 @@ function getNextAndPrev(chapterList, currentChapter) {
             break
         }
     }
-    prevAndNext[0] = (chapterList[i - 1])
-    prevAndNext[1] = (chapterList[i + 1])
+    prevAndNext[0] = (chapterList[i - 1]).replaceAll('%', '%25')
+    prevAndNext[1] = (chapterList[i + 1]).replaceAll('%', '%25')
     console.log(prevAndNext)
 
     return prevAndNext
