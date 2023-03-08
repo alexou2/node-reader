@@ -1,9 +1,12 @@
+
+
 // page interactions that run on the client side
 
 
 // adds a bookmark to the chapter
 function addBookmark(mangaName, chapter) {
-
+        const jsonWriter = require("../utilities/jsonWriter");
+    jsonWriter.setBookmark(mangaName, chapter)
 }
 
 // removes the bookmark

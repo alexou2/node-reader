@@ -77,7 +77,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
 
 // writeJson.setBookmark(mangaName, chapName, 'true')
-writeJson.getBookmark(mangaName)
+// writeJson.getBookmark(mangaName)
 
 
 
@@ -282,6 +282,8 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
     form.deleteManga('test')
 });
+
+app.post()
 
 
 
