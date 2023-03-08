@@ -288,7 +288,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     console.log('outputting')
     // writeJson.outputJson(mangaName)
 
-
+    form.deleteManga('test')
 });
 
 

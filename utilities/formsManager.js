@@ -3,6 +3,7 @@
 const mangadex = require('./mangadex');
 const manganato = require('./parser');
 const mangaInfo = require('./jsonWriter');
+const fs = require('fs');
 
 module.exports = {
 
@@ -11,20 +12,20 @@ module.exports = {
     downloadManga: function (req) {
         try {
             switch (req.body.source) {
-    
+
                 //if mangadex is the source
                 case 'Mangadex':
                     mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset))
                     console.log('mangadex in ', req.body.translatedLanguages)
                     break;
-    
+
                 // if manganato is the source
                 case 'Manganato':
                     parse.parse(req.body.mangaName)
                     // parse.searchByName(req.body.mangaName)
                     console.log(`manganato in ${req.body.translatedLanguages}`)
                     break;
-    
+
                 //if no match is found
                 default: console.log(`no valid matches were found for ${req.body.mangaList}`)
             }
@@ -35,6 +36,27 @@ module.exports = {
         }
 
     },
+
+
+    deleteManga: function (mangaName) {
+
+        // a timer of 15 seconds before deleting the folder
+        // console.log('THE FILE WILL BE DELETED IN 15 SECONDS.\u0007\u0007')
+
+        console.log(__dirname)
+        // deletes the file
+        fs.rmdirSync(__dirname+`/../manga/${mangaName}/`);
+        
+        console.log('FILE DELETED')
+
+
+
+
+        // let content = fs.readdirSync(__dirname+'/../manga/'+mangaName)
+        // console.log(content)
+    },
+
+
 
     // will only update chapters for a manga from the form inside the manga page (not available yet)
     // it will download chapters that are newer than the last chapter downloaded
