@@ -86,17 +86,25 @@ module.exports = {
         return mangaDesc
     },
 
+    // bookmarks or un-bookmarks chapters
     setBookmark: function (path, chapter, value) {
 
 
-        let existingData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
 
-        let bookmarkedChap = existingData.chapters.find(obj => obj.chapterPath === chapter);
+        let bookmarkedChap = mangaData.chapters.find(obj => obj.chapterPath === chapter);
 
         bookmarkedChap.bookmarked = value;
         console.log('data ', existingData)
 
-        fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(existingData, 'null', 2));
+        fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(mangaData, 'null', 2));
+    },
+
+
+    getBookmarks: function (path) {
+        let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        let bookmarks = mangaData.chapters.map(book => book.bookmarked)
+        console.log(bookmarks)
     },
 
 
