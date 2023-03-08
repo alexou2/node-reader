@@ -105,6 +105,7 @@ module.exports = {
         let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
+        return bookmarks
     },
 
 

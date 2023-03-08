@@ -77,7 +77,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
 
 // writeJson.setBookmark(mangaName, chapName, 'true')
-writeJson.getBookmark(mangaName, chapName, 'true')
+writeJson.getBookmark(mangaName)
 
 
 
