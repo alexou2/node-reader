@@ -86,6 +86,19 @@ module.exports = {
         return mangaDesc
     },
 
+    setBookmark: function (path, chapter, value) {
+
+
+        let existingData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+
+        let bookmarkedChap = existingData.chapters.find(obj => obj.chapterPath === chapter);
+
+        bookmarkedChap.bookmarked = value;
+        console.log('data ', existingData)
+
+        fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(existingData, 'null', 2));
+    },
+
 
 
     // writes a new json file for each manga
@@ -97,21 +110,25 @@ module.exports = {
         //formats each chapter's name 
         for (let j = 0; j < chapterNameList.length; j++) {
             chapterNameList[j] = chapterNameList[j].trim()
+            chapterPathList[j] = chapterPathList[j].trim()
 
             //removes th null if there is one
             if (chapterNameList[j].endsWith('null')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
+                chapterPathList[j] = chapterPathList[j].slice(0, -6) + '.1'
             }
 
             chapterNameList[j] = chapterNameList[j].trim()
-
+            chapterPathList[j] = chapterPathList[j].trim()
 
             // removes : from the end of the chapter
             if (chapterNameList[j].endsWith(':')) {
                 chapterNameList[j] = chapterNameList[j].slice(0, -1)
+                chapterPathList[j] = chapterPathList[j].slice(0, -1)
             }
 
             chapterNameList[j] = chapterNameList[j].trim()
+            chapterPathList[j] = chapterPathList[j].trim()
 
         }
         console.log('chapters: ', chapterNameList)
@@ -122,7 +139,7 @@ module.exports = {
                 chapterName: chapterNameList[i],
                 sorting_order: i + 1,
                 chapterPath: chapterPathList[i],
-                bookmarked:'false',
+                bookmarked: 'false',
             })
         }
         console.log('chapter paths:', chapterPathList)
@@ -172,9 +189,6 @@ module.exports = {
         // updates th file
         let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
 
-        existingData.list_of_mangas.push(mangaStats)
-
-        fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
     },
 
