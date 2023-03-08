@@ -114,9 +114,9 @@ a {
     transition: .2s;
 }
 
-.cover-page:hover {
+/* .cover-page:hover {
     transform: scale(1.1);
-}
+} */
 
 .chapter {
     border-radius: 10px;
@@ -129,7 +129,7 @@ a {
 }
 
 .chapter:hover {
-    background-color: rgb(60, 60, 60);
+    background-color: #3c3c3c;
 
     margin-left: .5em;
     padding-left: 1em;
@@ -165,11 +165,16 @@ a {
 }
 
 .description {
-    display: inline-block;
+    /* display: inline-block; */
     text-align: justify;
-    width: 50%;
+    width: 70%;
     font-size: 1.3em;
-    left: 50%
+    margin-left: 2em;
+    margin-top: .5em;
+    background: #444;
+    padding-left:.5em;
+    padding-right: .5em;
+border-radius: 5px;
 }
 
 .prev-chap {
@@ -211,7 +216,7 @@ a {
     padding: 20px;
     background: #fff;
     /* margin-top: 100px; */
-    margin-top:10%;
+    margin-top: 10%;
     border-radius: 20px;
     color: black
 }
@@ -232,7 +237,8 @@ input {
     font-size: 15px;
     border-radius: 5px;
 }
-select{
+
+select {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
