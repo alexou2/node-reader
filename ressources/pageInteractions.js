@@ -5,8 +5,18 @@
 
 // adds a bookmark to the chapter
 function addBookmark(mangaName, chapter) {
-        const jsonWriter = require("../utilities/jsonWriter");
-    jsonWriter.setBookmark(mangaName, chapter)
+    const data = {
+        mangaName,
+        chapter,
+      };
+      
+      const xhr = new XMLHttpRequest();
+      
+      xhr.open('POST', '/send-data');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(data));
+      console.log(data)
+      
 }
 
 // removes the bookmark

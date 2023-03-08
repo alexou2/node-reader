@@ -45,8 +45,8 @@ module.exports = {
 
         console.log(__dirname)
         // deletes the file
-        fs.rmdirSync(__dirname+`/../manga/${mangaName}/`);
-        
+        fs.rmdirSync(__dirname + `/../manga/${mangaName}/`);
+
         console.log('FILE DELETED')
 
 
@@ -72,8 +72,9 @@ module.exports = {
     },
 
     // will handle the bookmarking of chapters
-    bookmarkChap: function () {
-
+    bookmarkChap: function (req) {
+        console.log(req.body.mangaName)
+        console.log(req.body.chapter)
     },
 
     // will manage the progress tracking for each manga

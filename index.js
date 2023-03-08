@@ -10,6 +10,7 @@ const { JSHandle } = require('puppeteer');
 const form = require('./utilities/formsManager')
 
 const writeJson = require('./utilities/jsonWriter');
+const jsonWriter = require('./utilities/jsonWriter');
 
 app.use(bodyParser.json());
 
@@ -76,8 +77,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
         chapName = req.params.chapName;
 
 
-// writeJson.setBookmark(mangaName, chapName, 'true')
-// writeJson.getBookmark(mangaName)
+    // writeJson.setBookmark(mangaName, chapName, 'true')
+    // writeJson.getBookmark(mangaName)
 
 
 
@@ -280,10 +281,16 @@ app.get(`/manga/:mangaName`, (req, res) => {
     console.log('outputting')
     // writeJson.outputJson(mangaName)
 
-    form.deleteManga('test')
 });
 
-app.post()
+// app.post(`/manga/:mangaName`, (req, res) => {
+app.post(`/send-data`, (req, res) => {
+
+    // let mangaName = req.params.mangaName
+    console.log('data: ', req)
+    form.bookmarkChap(req)
+    res.sendStatus(200)
+})
 
 
 
