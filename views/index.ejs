@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css.css">
     <!-- <link rel="script" href="/pageInteractions.js"> -->
-    <script type = "text/javascript" src="/pageInteractions.js"></script>
+    <script type="text/javascript" src="/pageInteractions.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
 
@@ -37,9 +37,11 @@
 
 
     <div class="zoom">
-
+        <img class="reset" onclick="resetZoom()" src="/reset-icon.svg">
         <img onclick="zoomout()" src="/zoom_out-icon.svg">
         <img onclick="zoomIn()" src="/zoom_in-icon.svg">
+
+
     </div>
 
     <div class="change-chapter top-buttons">
@@ -84,6 +86,13 @@
         var images = document.getElementsByClassName("chapterPages");
         for (var i = 0; i < images.length; i++) {
             images[i].width -= 200;
+        }
+    }
+    
+    function resetZoom() {
+        var images = document.getElementsByClassName("chapterPages");
+        for (var i = 0; i < images.length; i++) {
+            images[i].width = "300%";
         }
     }
 
