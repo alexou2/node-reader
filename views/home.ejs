@@ -51,6 +51,7 @@
     </div>
 
 
+    <!-- the overlaid form -->
 
     <div id="myOverlay" class="overlay">
         <span class="closebtn" onclick="closeForm()" title="Close Overlay">&#215</span>
@@ -59,13 +60,13 @@
             <button class="close" onclick="closeForm()" title="Close Overlay">&#215</button>
             <h2>Download new manga</h2>
             <form action="/new" method="post">
-
+                <!-- text inputs -->
                 Manga Name
                 <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name">
                 Base Offset
                 <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
+                <!-- selector input -->
                 Translated language
-                <!-- <input type="text" placeholder="Translated Language"> -->
                 <select class="translatedLanguages" name="translatedLanguages">
                     <option data-c="en" value="en" selected="">English</option>
                     <option data-c="fr" value="fr">Fançais</option>
@@ -82,7 +83,7 @@
 
 
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Download">
             </form>
 
         </div>
