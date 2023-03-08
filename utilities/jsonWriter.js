@@ -89,6 +89,7 @@ module.exports = {
 
 
     // writes a new json file for each manga
+    // called when downloading a new manga and if there is no json for the manga
     addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
         let chapters = []
         console.log("started creating json to manga")
@@ -121,6 +122,7 @@ module.exports = {
                 chapterName: chapterNameList[i],
                 sorting_order: i + 1,
                 chapterPath: chapterPathList[i],
+                bookmarked:'false',
             })
         }
         console.log('chapter paths:', chapterPathList)
@@ -167,11 +169,6 @@ module.exports = {
         )
 
 
-        // let allManga = {
-        //     list_of_mangas: mangaStats
-        // }
-
-
         // updates th file
         let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
 
@@ -179,7 +176,6 @@ module.exports = {
 
         fs.writeFileSync('jsonFiles/mangaList.json', JSON.stringify(existingData, 'null', 2));
 
-        // this.outputJson(mangaName)
     },
 
 
@@ -191,13 +187,11 @@ module.exports = {
         let jsonFiles = fs.readdirSync("jsonFiles")
 
         // for (let i = 0; i < mangaFiles.length; i++) {
-            if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
-                console.log(__dirname)
-                this.createMangaJson(mangaName)
-                console.log('created missing jsons for manga')
-            }
-// 
-        // }
+        if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
+            console.log(__dirname)
+            this.createMangaJson(mangaName)
+            console.log('created missing jsons for manga')
+        }
 
 
     },
