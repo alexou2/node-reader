@@ -71,9 +71,10 @@ app.post(`/new`, (req, res) => {
 
 // loads the page where the chapters are read
 app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
-   console.log
+    console.log
     let mangaName = req.params.mangaName,
         chapName = req.params.chapName;
+
 
 
     console.log('chap name: ', chapName)
@@ -83,9 +84,9 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     // chapName = decodeURIComponent(chapName)
 
     // if (chapName.contains('%25')){
-        console.log('fuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\n')
-        // chapName = chapName.replaceAll('%', '%25')
-        console.log(chapName)
+    console.log('fuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\n')
+    chapName = chapName.replaceAll('%', '%25')
+    console.log(chapName)
     // }
 
 
@@ -107,7 +108,7 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     console.group(prevAndNext)
     console.log('list of of pages for this chapter: ', pageList)
 
-
+    mangaName = mangaName.replaceAll('%', '%25')
 
     //sends the informations to the page used to render the chapters
     res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
@@ -220,7 +221,9 @@ function sortList(arr, type) {
 app.get(`/`, (req, res) => {
     let mangaName = "."
     let mangaList = getList(mangaName)
-
+    for (i in mangaList) {
+        mangaList[i] = mangaList[i].replaceAll('%', '%25')
+    }
     res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
     console.log("homepage is running")
 });
@@ -244,8 +247,10 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
 
     mangaName = mangaName.replaceAll('%20', '\ ')
-    mangaName = decodeURIComponent(mangaName)
-    var chapterList = getList(decodeURIComponent(mangaName))
+    // mangaName = decodeURIComponent(mangaName)
+    // var chapterList = getList(decodeURIComponent(mangaName))
+    var chapterList = getList(mangaName)
+
     // var chapterList = getList(mangaName)
     writeJson.checkJson(mangaName);
 
@@ -255,9 +260,9 @@ app.get(`/manga/:mangaName`, (req, res) => {
     let mangaDesc = writeJson.getMangaDesc(mangaName)
     console.log('desc', mangaDesc);
 
-for (i in chapterList){
-    chapterList[i] = chapterList[i].replaceAll('%', '%25')
-}
+    for (i in chapterList) {
+        chapterList[i] = chapterList[i].replaceAll('%', '%25')
+    }
 
 
     //rendres chapter-menu.ejs with the arguments
@@ -308,8 +313,12 @@ function getNextAndPrev(chapterList, currentChapter) {
             break
         }
     }
-    prevAndNext[0] = (chapterList[i - 1]).replaceAll('%', '%25')
-    prevAndNext[1] = (chapterList[i + 1]).replaceAll('%', '%25')
+    try {
+        prevAndNext[1] = (chapterList[i + 1]).replace('%', '%25')
+        prevAndNext[0] = (chapterList[i - 1]).replace('%', '%25')
+    } catch {
+        console.error('first chap')
+    }
     console.log(prevAndNext)
 
     return prevAndNext
