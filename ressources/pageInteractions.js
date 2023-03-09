@@ -7,14 +7,6 @@
 function addBookmark(mangaName, chapter, value) {
 
 
-//   if (value == "true") {
-
-//     document.getElementById(`bookmark ${chapter}`).innerHTML = `
-// // <img src=" /red-bookmark.svg">
-// <img  onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','false')" src=" /red-bookmark.svg">
-// `
-//   }
-
 
 if (value == "true") {
   console.log('get fucked')
@@ -26,7 +18,7 @@ if (value == "true") {
   if (value == "false") {
     console.log('get fucked')
     document.getElementById(`bookmark ${chapter}`).innerHTML = `
-    <img  onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /blank-bookmark.svg">
+    <img  onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
     `
   }
   console.log("text changed")
@@ -36,6 +28,7 @@ if (value == "true") {
     chapter,
     value,
   };
+  console.log(data)
 
   const xhr = new XMLHttpRequest();
 

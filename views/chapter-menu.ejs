@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css.css">
-    <script type = "text/javascript" src="/pageInteractions.js"></script>
+    <script type="text/javascript" src="/pageInteractions.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
 
@@ -18,7 +18,8 @@
     <div class="top-bar">
 
         <div class="page-name">
-            <h1>Reading <%= mangaName %></h1>
+            <h1>Reading <%= mangaName %>
+            </h1>
         </div>
         <div class="currentPath" id="currentPath">
             <a href="/">Home > </a><a href="/manga/<%= mangaName %>">
@@ -31,28 +32,32 @@
 
     <div class="manga-infos">
 
-        <a  href="<%= chapterList[0] %>"><img class="cover-page" src="cover.jpg"></a>
+        <a href="<%= chapterList[0] %>"><img class="cover-page" src="cover.jpg"></a>
 
         <div class="description">
             <%= mangaDesc %>
         </div>
     </div>
-<!--  -->
+    <!--  -->
     <!-- list of chapters -->
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length; i++) {%>
 
-            <div id="bookmark <%=chapterList[i]%>"><img  onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')" src=" /blank-bookmark.svg"></div>
+            <div id="bookmark <%=chapterList[i]%>"><img  onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')" src=" /dark-bookmark.svg"></div>
+            <div id="bookmark <%=chapterList[i]%>"><script>onclick="Bookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')"</script>
+
+            </div>
             <a class="chapter" href="<%= chapterList[i] %>">
                 <%= chapterList[i] %>
             </a><br>
             <% } %>
                 <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
 
-    </div>   
-<div id="bookmark">
-    <img onclick="updateChapters('Real no Heroine wa Irimasen!', 'Chapter 0_ Prolouge', 'false')" src=" /zoom_in-icon.svg">
-</div>
+    </div>
+    <div id="bookmark">
+        <img onclick="updateChapters('Real no Heroine wa Irimasen!', 'Chapter 0_ Prolouge', 'false')"
+            src=" /zoom_in-icon.svg">
+    </div>
 
 </body>
 
