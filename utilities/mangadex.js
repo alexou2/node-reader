@@ -25,7 +25,7 @@ module.exports = {
 
 
     //does a search on mangadex.org and returns the 
-    getMangaID: async function (title, languages, baseOffset, download) {
+    getMangaID: async function (title, languages, baseOffset, updateJson) {
 
 
         (async () => {
@@ -93,10 +93,10 @@ module.exports = {
 
 
 
-
-            // downloads the chapters
-            this.getChapters(mangaID[0], mangaName, languages, baseOffset)
-
+            if (updateJson){
+                // downloads the chapters
+                this.getChapters(mangaID[0], mangaName, languages, baseOffset)
+            }
 
 
 

@@ -51,6 +51,9 @@
     </div>
 
 
+
+
+
     <!-- the overlaid form -->
 
     <div id="myOverlay" class="overlay">
@@ -62,7 +65,7 @@
             <form action="/new" method="post">
                 <!-- text inputs -->
                 Manga Name
-                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name">
+                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus>
                 Base Offset
                 <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
                 <!-- selector input -->
@@ -80,7 +83,13 @@
 
                 </select>
 
+                <label for="updateJson">Only Update JSON</label>
+                <input type="checkbox" id="updateJson"  value="true">
 
+
+                <!-- <select class="json" name="updateJson">
+    <option id="mangadex" value="true" >Only Update JSON</option>
+</select> -->
 
 
                 <input type="submit" value="Download">
@@ -94,6 +103,7 @@
     <script>
         function openForm() {
             document.getElementById('myOverlay').style.display = "block";
+            document.getElementById('mangaName').focus();
         }
 
         function closeForm() {
