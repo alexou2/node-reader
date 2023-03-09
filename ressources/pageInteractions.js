@@ -16,7 +16,7 @@ if (value == "true") {
 }
 
   if (value == "false") {
-    console.log('get fucked')
+    console.log('get un-fucked')
     document.getElementById(`bookmark ${chapter}`).innerHTML = `
     <img  onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
     `
