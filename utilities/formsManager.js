@@ -75,15 +75,11 @@ module.exports = {
     bookmarkChap: function (req) {
         console.log(req.body.mangaName)
         console.log(req.body.chapter)
+        console.log(req.body.value)
     },
 
     // will manage the progress tracking for each manga
     updateReadingProgress: function () {
 
     }
-
-
-
-
-
 }

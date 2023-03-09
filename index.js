@@ -287,7 +287,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
 app.post(`/send-data`, (req, res) => {
 
     // let mangaName = req.params.mangaName
-    console.log('data: ', req)
+    // console.log('data: ', req)
     form.bookmarkChap(req)
     res.sendStatus(200)
 })

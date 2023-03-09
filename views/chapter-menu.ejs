@@ -38,8 +38,11 @@
         </div>
     </div>
 
+    <!-- list of chapters -->
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length; i++) {%>
+
+            <div id="bookmark <%=chapterList[i]%>"><img  onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')" src=" /blank-bookmark.svg"></div>
             <a class="chapter" href="<%= chapterList[i] %>">
                 <%= chapterList[i] %>
             </a><br>

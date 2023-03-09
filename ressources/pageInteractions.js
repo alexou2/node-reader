@@ -4,15 +4,16 @@
 
 
 // adds a bookmark to the chapter
-function addBookmark(mangaName, chapter) {
-document.getElementById("bookmark").innerHTML = `
-<img class="bookmark"onclick="addBookmark('Real no Heroine wa Irimasen!', 'Chapter 0_ Prolouge', 'false')" src=" /red-bookmark.svg">
+function addBookmark(mangaName, chapter, value) {
+document.getElementById(`bookmark ${chapter}`).innerHTML = `
+<img class="bookmark"src=" /red-bookmark.svg">
 `
 console.log("text changed")
 
     const data = {
         mangaName,
         chapter,
+        value,
       };
       
       const xhr = new XMLHttpRequest();
