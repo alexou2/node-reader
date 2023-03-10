@@ -8,12 +8,12 @@ function addBookmark(mangaName, chapter, value) {
 
 
 
-if (value == "true") {
-  console.log('get fucked')
-  document.getElementById(`bookmark ${chapter}`).innerHTML = `
+  if (value == "true") {
+    console.log('get fucked')
+    document.getElementById(`bookmark ${chapter}`).innerHTML = `
   <img class ="bookmark" onclick="addBookmark('${mangaName}', '${chapter}','false')" src=" /red-bookmark.svg">
   `
-}
+  }
 
   if (value == "false") {
     console.log('get un-fucked')
