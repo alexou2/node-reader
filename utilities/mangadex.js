@@ -336,8 +336,8 @@ module.exports = {
             let chapterTitle = []
             let chapter = []
             let chapterPath = []
-
-            for (let i = 0; i < 3; i++) {
+// will need to change the number of requests made
+            for (let i = 0; i < 10; i++) {
                 const resp = await axios({
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
