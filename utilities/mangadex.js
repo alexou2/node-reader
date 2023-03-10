@@ -93,7 +93,7 @@ module.exports = {
 
 
 
-            if (updateJson){
+            if (!updateJson){
                 // downloads the chapters
                 this.getChapters(mangaID[0], mangaName, languages, baseOffset)
             }

@@ -11,6 +11,7 @@ module.exports = {
     // it will call the function that downloads from the secific site
     downloadManga: function (req) {
         try {
+            console.log(req.body.updateJson)
 
             switch (req.body.source) {
 

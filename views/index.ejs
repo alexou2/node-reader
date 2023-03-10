@@ -37,7 +37,8 @@
 
 
     <div class="zoom">
-        <img class="reset" onclick="resetZoom()" src="/maximize-width.svg">
+        <img class="reset" onclick="fullWidth()" src="/maximize-width.svg">
+        <img class="reset" onclick="fullHeight()" src="/maximize-height.svg">
         <img onclick="zoomout()" src="/zoom_out-icon.svg">
         <img onclick="zoomIn()" src="/zoom_in-icon.svg">
 
@@ -96,11 +97,19 @@
     }
   
     // reset button
-    function resetZoom() {
+    function fullWidth() {
         var images = document.getElementsByClassName("chapterPages");
         for (var i = 0; i < images.length; i++) {
             images[i].width = 10000;
         }
+    }
+
+    function fullHeight() {
+        var images = document.getElementsByClassName("chapterPages");
+        for (var i = 0; i < images.length; i++) {
+            images[i].width = 1000;
+        }
+    
     }
 
 </script>
