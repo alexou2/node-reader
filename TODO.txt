@@ -2,25 +2,31 @@ this is  a list of the features that I am planning on adding
 
 
     features:
+        add bookmarks to chapters
+        map actions to ey presses
+            = : zoom in
+            - : zoom out
+            / : open form to add manga
+            1 : read first chapter
+
+
         remove useles console.log() and give context for the ones that are useful
         creating a database for users to continue their progress
         adding a "start reading" button
         add metadata for each manga
         add search by name functionnality to manganato
         add more sites like asura scans
-        fix cover images that won't display properly after refreching the page
         improve UX
-        add javascript to resize image sizes
-        hide the cover image link from the chapter list
         cleanup code
         add a progress bar in the top-bar to see when a manga has finished downloading
         give advanced options for downloading mangas (change name, download only a certain ammount of chapters, download only new chapters)
-        create an app compatible with android
+        create an app with electron
+        make mobile app
+
 
 
     bug fixes:
-        fix bug where the path can't be accessed because it finishes with a problematic character
         fix axios errors when downloading pages
         catch error when no match is found when downloading chapters
         add a timeout to fix error 429 when downloading from mangadex (max 40 requests/ min)
-        make server more resiliant to crashing
+        server crashes when updating non-exsistant chapters from mangadex
