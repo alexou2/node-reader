@@ -3,11 +3,9 @@
 // page interactions that run on the client side
 
 
-// adds a bookmark to the chapter
+// modifies the bookmark attribute of the chapter
 function addBookmark(mangaName, chapter, value) {
-
-
-
+  // when chapter is bookmarked
   if (value == "true") {
     console.log('get fucked')
     document.getElementById(`bookmark ${chapter}`).innerHTML = `
@@ -15,6 +13,7 @@ function addBookmark(mangaName, chapter, value) {
   `
   }
 
+  // when chapter is un-bookmarked
   if (value == "false") {
     console.log('get un-fucked')
     document.getElementById(`bookmark ${chapter}`).innerHTML = `
@@ -23,6 +22,7 @@ function addBookmark(mangaName, chapter, value) {
   }
   console.log("text changed")
 
+  // sends data to server
   var data = {
     mangaName,
     chapter,
@@ -39,22 +39,17 @@ function addBookmark(mangaName, chapter, value) {
 
 }
 
-// removes the bookmark
-function removeBookmark(mangaName, chapter) {
-
-}
-
-// finds which chapter is bokmarked and returns it as a list
-function getBookmark(mangaName) {
-
-}
 
 // saves the progress in the manga to resube later
 function followProgress(mangaName, chapter) {
 
 }
+
 // when the button is clicked, it will download the newest chapters for the manga
-function updateChapters(mangaName) {
+function updateChapters(mangaName, offset) {
+  console.log(mangaName)
+  console.log(offset)
+
   console.log("fuck off")
 }
 
