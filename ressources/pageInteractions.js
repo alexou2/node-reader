@@ -32,7 +32,7 @@ function addBookmark(mangaName, chapter, value) {
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open('POST', '/send-data');
+  xhr.open('POST', '/bookmark-chap');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(data));
   console.log(data)
@@ -49,6 +49,22 @@ function followProgress(mangaName, chapter) {
 function updateChapters(mangaName, offset) {
   console.log(mangaName)
   console.log(offset)
+
+
+  // sends data to server
+  var data = {
+    mangaName,
+    offset,
+  };
+  console.log(data)
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('POST', '/update-chapters');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify(data));
+  console.log(data)
+
 
   console.log("fuck off")
 }

@@ -23,8 +23,9 @@ module.exports = {
 
                 // if manganato is the source
                 case 'Manganato':
-                    parse.parse(req.body.mangaName)
-                    parse.searchByName(req.body.mangaName)
+                    // parse.parse(req.body.mangaName)
+                    // parse.searchByName(req.body.mangaName)
+                    manganato.parse(req.body.mangaName)
                     console.log(`manganato in ${req.body.translatedLanguages}`)
                     break;
 
@@ -66,7 +67,11 @@ module.exports = {
 
     // will only update chapters for a manga from the form inside the manga page (not available yet)
     // it will download chapters that are newer than the last chapter downloaded
-    addChapters: function () {
+    updateChapterList: function (req) {
+        console.log(req.body.mangaName)
+        console.log(req.body.offset)
+
+        mangadex.getMangaID(req.body.mangaName+" ", 'en', req.body.offset)
 
     },
 
@@ -90,4 +95,5 @@ module.exports = {
     updateReadingProgress: function () {
 
     }
+
 }

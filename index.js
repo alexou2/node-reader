@@ -284,11 +284,20 @@ app.get(`/manga/:mangaName`, (req, res) => {
 });
 
 // app.post(`/manga/:mangaName`, (req, res) => {
-app.post(`/send-data`, (req, res) => {
+app.post(`/bookmark-chap`, (req, res) => {
 
     // let mangaName = req.params.mangaName
     // console.log('data: ', req)
     form.bookmarkChap(req)
+    // console.log(req.body.updateJson)
+    res.sendStatus(200)
+})
+
+app.post(`/update-chapters`, (req, res) => {
+
+    // let mangaName = req.params.mangaName
+    // console.log('data: ', req)
+    form.updateChapterList(req)
     // console.log(req.body.updateJson)
     res.sendStatus(200)
 })
