@@ -43,16 +43,14 @@
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length; i++) {%>
            
-            <span class="chapter-item" id="chapter-item">
-                <div id="bookmark <%=chapterList[i]%>">
+                <span id="bookmark <%=chapterList[i]%>">
                     <img class="bookmark <%=chapterList[i]%>"
                         onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')"
                         src=" /dark-bookmark.svg">
-                </div>
+                </span>
                 <a class="chapter" href="<%= chapterList[i] %>">
                     <%= chapterList[i] %>
-                </a>
-            </span>
+                </a><br>
 
             <% } %>
                 <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
