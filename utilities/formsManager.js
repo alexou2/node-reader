@@ -2,8 +2,8 @@
 
 const mangadex = require('./mangadex');
 const manganato = require('./parser');
-const mangaInfo = require('./jsonWriter');
 const fs = require('fs');
+const jsonWriter = require('./jsonWriter');
 
 module.exports = {
 
@@ -24,7 +24,7 @@ module.exports = {
                 // if manganato is the source
                 case 'Manganato':
                     parse.parse(req.body.mangaName)
-                    // parse.searchByName(req.body.mangaName)
+                    parse.searchByName(req.body.mangaName)
                     console.log(`manganato in ${req.body.translatedLanguages}`)
                     break;
 
@@ -82,6 +82,8 @@ module.exports = {
         console.log(req.body.mangaName)
         console.log(req.body.chapter)
         console.log(req.body.value)
+
+        jsonWriter.setBookmark(req.body.mangaName, req.body.chapter, req.body.value)
     },
 
     // will manage the progress tracking for each manga

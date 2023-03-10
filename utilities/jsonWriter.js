@@ -95,7 +95,7 @@ module.exports = {
         let bookmarkedChap = mangaData.chapters.find(obj => obj.chapterPath === chapter);
 
         bookmarkedChap.bookmarked = value;
-        console.log('data ', existingData)
+        // console.log('data ', existingData)
 
         fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(mangaData, 'null', 2));
     },
