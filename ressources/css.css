@@ -114,10 +114,6 @@ a {
     transition: .2s;
 }
 
-/* .cover-page:hover {
-    transform: scale(1.1);
-} */
-
 .chapter {
     border-radius: 10px;
     padding-left: .5em;
@@ -140,8 +136,6 @@ a {
 .add-chapter {
     text-align: center;
 }
-
-
 
 
 .change-chapter {
@@ -172,9 +166,9 @@ a {
     margin-left: 2em;
     margin-top: .5em;
     background: #444;
-    padding-left:.5em;
+    padding-left: .5em;
     padding-right: .5em;
-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .prev-chap {
@@ -205,12 +199,15 @@ border-radius: 5px;
     margin-right: 5%;
 }
 
-.list img{
+.list img {
     width: 1.5em;
-
+    /* display: inline-block; */
+    float: left;
+    clear: left;
 }
-.bookmark{
-    height:2em
+
+.bookmark {
+    height: 2em
 }
 
 /* for the overlay form */
@@ -246,11 +243,12 @@ input {
     font-size: 15px;
     border-radius: 5px;
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
     margin-top: 20px;
     margin-left: 10px;
     text-align: right;
-    width:auto;
+    width: auto;
 }
 
 select {
