@@ -9,7 +9,7 @@ function addBookmark(mangaName, chapter, value) {
   if (value == "true") {
     console.log('get fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-  <img class ="bookmark" onclick="addBookmark('${mangaName}', '${chapter}','false')" src=" /red-bookmark.svg">
+  <img class ="bookmark-${chapter}" onclick="addBookmark('${mangaName}', '${chapter}','false')" src=" /red-bookmark.svg">
   `
   }
 
@@ -17,7 +17,7 @@ function addBookmark(mangaName, chapter, value) {
   if (value == "false") {
     console.log('get un-fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-    <img class ="bookmark" onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
+    <img class ="bookmark-${chapter}" onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
     `
   }
   console.log("text changed")
