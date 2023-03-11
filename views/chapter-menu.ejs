@@ -43,8 +43,9 @@
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length-1; i++) {%>
            
-                <span id="bookmark <%=chapterList[i]%>">
-                    <img class="bookmark <%=chapterList[i]%>"
+                <span id="bookmark-<%=chapterList[i]%>">
+
+                    <img class="bookmark-<%=chapterList[i]%>"
                         onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')"
                         src=" /dark-bookmark.svg">
                 </span>

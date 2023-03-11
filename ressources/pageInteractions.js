@@ -8,7 +8,7 @@ function addBookmark(mangaName, chapter, value) {
   // when chapter is bookmarked
   if (value == "true") {
     console.log('get fucked')
-    document.getElementById(`bookmark ${chapter}`).innerHTML = `
+    document.getElementById(`bookmark-${chapter}`).innerHTML = `
   <img class ="bookmark" onclick="addBookmark('${mangaName}', '${chapter}','false')" src=" /red-bookmark.svg">
   `
   }
@@ -16,7 +16,7 @@ function addBookmark(mangaName, chapter, value) {
   // when chapter is un-bookmarked
   if (value == "false") {
     console.log('get un-fucked')
-    document.getElementById(`bookmark ${chapter}`).innerHTML = `
+    document.getElementById(`bookmark-${chapter}`).innerHTML = `
     <img class ="bookmark" onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
     `
   }
