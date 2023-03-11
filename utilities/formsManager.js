@@ -12,6 +12,7 @@ module.exports = {
     downloadManga: function (req) {
         try {
             console.log(req.body.updateJson)
+            console.log(req.body)
 
             switch (req.body.source) {
 
@@ -68,10 +69,9 @@ module.exports = {
     // will only update chapters for a manga from the form inside the manga page (not available yet)
     // it will download chapters that are newer than the last chapter downloaded
     updateChapterList: function (req) {
-        console.log(req.body.mangaName)
-        console.log(req.body.offset)
+        console.log(req.body)
 
-        mangadex.getMangaID(req.body.mangaName+" ", 'en', req.body.offset)
+        mangadex.getMangaID(req.body.mangaName+" ", 'en',parseInt(req.body.offset))
 
     },
 
