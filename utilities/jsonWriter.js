@@ -105,19 +105,37 @@ module.exports = {
         // reads the json file
         let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
 
-        // reads the chapters of the manga
-        let mangaChaps = fs.readdirSync(`manga/${path}`)
-
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
 
-// for (i in bookmarks){
-//     if()
-// }
+        this.removeDummyChapters(path)
 
         return bookmarks
     },
 
+    // will remove any chapter from json if there is no chapter that matches in the json
+    removeDummyChapters: function (path) {
+        // reads the json file and extracts the list of chapters
+        let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        mangaData = mangaData.chapters
+        let chapterData = mangaData.map(path => path.chapterPath)
+        
+        // reads the chapters of the manga
+        let mangaChaps = fs.readdirSync(`manga/${path}`)
+
+        console.log('Downloaded chapters:', mangaChaps)
+        console.log('json chapters:', mangaData)
+
+        let match = false;
+
+        // searches for each chapter
+        for (let i in chapterData) {
+            if (!fs.existsSync(`manga/${path}/${chapterData[i]}`)) {
+                console.log(mangaData[i], 'nees to delete')
+            }
+
+        }
+    },
 
 
     // writes a new json file for each manga
