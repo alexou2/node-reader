@@ -43,7 +43,7 @@
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length-1; i++) {%>
 <%let bookStyle = []%> 
-            <% if (bookmarks[i]) { %>
+            <% if (bookmarks[i]== "true") { %>
              <% bookStyle[i] = 'red-bookmark.svg'%>
             <% }else{ %>
                 <% bookStyle[i] = 'dark-bookmark.svg'%>
