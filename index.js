@@ -116,6 +116,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
     mangaName = mangaName.replaceAll('%', '%25')
 
+
+
     //sends the informations to the page used to render the chapters
     res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
 
@@ -270,9 +272,10 @@ app.get(`/manga/:mangaName`, (req, res) => {
         chapterList[i] = chapterList[i].replaceAll('%', '%25')
     }
 
+    let bookmarks = jsonWriter.getBookmarks(mangaName)
 
     //rendres chapter-menu.ejs with the arguments
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks });
 
     // res.render("../views/test", { mangaName: writeJson.getName(mangaName), chapterList: writeJson.getChapterPath(mangaName), mangaDesc: mangaDesc, chapterName: writeJson.getchapterNames(mangaName)});
 

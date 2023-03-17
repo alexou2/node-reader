@@ -102,9 +102,19 @@ module.exports = {
 
 
     getBookmarks: function (path) {
+        // reads the json file
         let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+
+        // reads the chapters of the manga
+        let mangaChaps = fs.readdirSync(`manga/${path}`)
+
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
+
+// for (i in bookmarks){
+//     if()
+// }
+
         return bookmarks
     },
 
@@ -265,7 +275,7 @@ module.exports = {
             console.log("all manga names:", this.getAllMangaNames());
         }
 
-    }
+    },
 
 
 }
