@@ -119,14 +119,13 @@ module.exports = {
         let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         mangaData = mangaData.chapters
         let chapterData = mangaData.map(path => path.chapterPath)
-        
+
         // reads the chapters of the manga
         let mangaChaps = fs.readdirSync(`manga/${path}`)
 
         console.log('Downloaded chapters:', mangaChaps)
         console.log('json chapters:', mangaData)
 
-        let match = false;
 
         // searches for each chapter
         for (let i in chapterData) {
