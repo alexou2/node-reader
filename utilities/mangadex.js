@@ -28,6 +28,8 @@ module.exports = {
     getMangaID: async function (title, languages, baseOffset, updateJson) {
 
 
+
+
         (async () => {
             const resp = await axios({
                 method: 'GET',
@@ -35,7 +37,8 @@ module.exports = {
                 maxContentLength: Infinity,
                 params: {
                     title: title,
-                    "order[relevance]": "desc",
+                    // "order[relevance]": "desc",
+                    "order[followedCount]": "desc",
                 }
 
             });
@@ -72,7 +75,6 @@ module.exports = {
             let status = resp.data.data.map(manga => manga.attributes.status)
             let description = resp.data.data.map(manga => manga.attributes.description.en)
             console.log(altTitles, tags[0], status, description[0])
-
 
 
 

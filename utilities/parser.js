@@ -79,18 +79,19 @@ module.exports = {
 
             //replaces problematic characters to avoid causing problems
             for (let i = 0; i < chapterName.length; i++) {
-                chapterName[i] = chapterName[i].trim()
+                chapterName[i] = chapterName[i].trim();
 
                 //replaces problematic characters
-                // chapterName[i] = chapterName[i].replaceAll(':', '_')
-                // chapterName[i] = chapterName[i].replaceAll('?', '_')
-                // chapterName[i] = chapterName[i].replaceAll('!', '_')
                 chapterName[i] = sanitizeFilename(chapterName[i])
 
                 // removes all of the unwanted characters at the end of the string
+                chapterName[i] = chapterName[i].trim();
                 if (chapterName[i].endsWith('_')) {
                     chapterName[i] = chapterName[i].slice(0, -1)
                 }
+                // if (chapterName[i].contains('chapter Chapter')) {
+                    chapterName[i] = chapterName[i].replaceAll('chapter ', '');
+                // }
             }
             // console.log("chapters: ", chapterName)
 
@@ -101,7 +102,7 @@ module.exports = {
             for (let i = 0; i < links.length; i++) {
                 sem.take(() => {
                     //calls download function to download the chapters
-                    // ddl.download(links[i], chapterName[i], mangaName, sem)
+                    ddl.download(links[i], chapterName[i], mangaName, sem)
                 })
             }
         })
