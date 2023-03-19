@@ -25,16 +25,18 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // insures that the program won't crash because there is a folder or essential file missing
+// creates the manga directory if it doesn't exist
 if (!fs.existsSync(`manga`)) {
     fs.mkdirSync(`manga`)
 }
+// creates the diretcory for json files
 if (!fs.existsSync(`jsonFiles`)) {
     fs.mkdirSync(`jsonFiles`)
 }
-if (!fs.existsSync(`jsonFiles/mangaList.json`)) {
-    const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
-    fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
-}
+// if (!fs.existsSync(`jsonFiles/mangaList.json`)) {
+//     const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
+//     fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
+// }
 
 
 

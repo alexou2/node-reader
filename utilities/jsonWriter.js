@@ -170,9 +170,6 @@ module.exports = {
     // is called if a manga doesn't have a json
     checkJson: function (mangaName) {
 
-        let mangaFiles = fs.readdirSync("manga");
-        let jsonFiles = fs.readdirSync("jsonFiles")
-
         // for (let i = 0; i < mangaFiles.length; i++) {
         if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
             console.log(__dirname)
