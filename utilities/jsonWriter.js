@@ -127,11 +127,14 @@ module.exports = {
         console.log('json chapters:', mangaData)
 
 
-        // searches for each chapter
+        // searches for each chapter from the json and finds a match in the files
         for (let i in chapterData) {
             if (!fs.existsSync(`manga/${path}/${chapterData[i]}`)) {
-                console.log(mangaData[i], 'nees to delete')
-            }
+                console.log(chapterData[i], 'nees to delete')
+                delete mangaData[i];
+                console.log(mangaData)
+            }else
+            console.log(chapterData[i], "is fine")
 
         }
     },
