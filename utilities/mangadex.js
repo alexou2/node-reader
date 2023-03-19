@@ -161,7 +161,7 @@ module.exports = {
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
 
-                chapterName[k] = `Chapter ${chapter[k]}_ ${chapterTitle[k]}`;
+                chapterName[k] = `Chapter ${chapter[k]} ${chapterTitle[k]}`;
                 chapterName[k] = chapterName[k].trim()
                 chapterName[k] = sanitizeFilename(chapterName[k])
 
@@ -376,7 +376,7 @@ module.exports = {
             // path = path.replaceAll(' ', '\ ')
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterName, tags, description)
+            mangaJSON.addManga(mangaName, path, chapterName, tags, description)
 
         })();
     }

@@ -93,7 +93,7 @@ module.exports = {
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
 
-        this.removeDummyChapters(path)
+        // this.removeDummyChapters(path)
 
         return bookmarks
     },
@@ -173,7 +173,7 @@ module.exports = {
         // for (let i = 0; i < mangaFiles.length; i++) {
         if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
             console.log(__dirname)
-            this.createMangaJson(mangaName)
+            this.createJsonFromFiles(mangaName)
             console.log('created missing jsons for manga')
         }
 
@@ -182,7 +182,7 @@ module.exports = {
 
 
     // scans files and looks for informations for the  if there is no json for th manga
-    createMangaJson: function (mangaName) {
+    createJsonFromFiles: function (mangaName) {
 
         let chapterNameList
         let path
@@ -196,7 +196,7 @@ module.exports = {
 
 
 
-        // // creates the json file for this manga
+        // creates the json file for this manga
         this.addManga(mangaName, path, chapterNameList, "n/a", "n/a")
     },
 
