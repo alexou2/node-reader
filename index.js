@@ -3,10 +3,6 @@ let app = express();
 
 const bodyParser = require('body-parser')
 const fs = require('fs');
-var url = require('url');
-const parse = require('./utilities/parser');
-const mangadex = require('./utilities/mangadex')
-const { JSHandle } = require('puppeteer');
 const form = require('./utilities/formsManager')
 
 const writeJson = require('./utilities/jsonWriter');
@@ -53,6 +49,7 @@ app.get(`/new/`, (req, res) => {
 
 
 //prints the content of the form and redirects to the homepage 
+// obselete since there is a better form for downloading
 app.post(`/new`, (req, res) => {
 
     console.log(req.body)
@@ -63,9 +60,6 @@ app.post(`/new`, (req, res) => {
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
 })
-
-
-
 
 
 
@@ -90,7 +84,6 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     // chapName = decodeURIComponent(chapName)
 
     // if (chapName.contains('%25')){
-    console.log('fuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\nfuck\n')
     chapName = chapName.replaceAll('%', '%25')
     console.log(chapName)
     // }
@@ -147,7 +140,10 @@ function getPages(mangaName, chapName) {
         fs.readdirSync(testFolder).forEach(file => {
             pageList.push(file);
         });
-        return pageList;
+        // return pageList;
+        // pageList = ((pageList.includes('.jpg')) || (pageList.includes('.png')))
+        // console.log('page list:',pageList)
+        return pageList
     }
 
 
@@ -189,6 +185,7 @@ function sortList(arr, type) {
 
     }
     else {
+        // sorting chapters
         const regex = /Chapter\s*(\d+(?:\.\d+)?)/i;
 
         arr.sort((a, b) => {
@@ -215,7 +212,7 @@ function sortList(arr, type) {
 
 
 
-    console.log(arr); // ["Comic Girls Vol.1 Chapter 0 - Manganelo_files", "Comic Girls Vol.1 Chapter 1 - Manganelo_files", "Comic Girls Chapter 2 - Manganelo_files", "[1-n]", "[2-n]", "[10-n]"]
+    console.log(arr);
     return arr
 }
 
@@ -225,7 +222,6 @@ function sortList(arr, type) {
 
 
 //renders the homepage accessible at localhost:3000
-
 app.get(`/`, (req, res) => {
     let mangaName = "."
     let mangaList = getList(mangaName)
@@ -236,27 +232,26 @@ app.get(`/`, (req, res) => {
     console.log("homepage is running")
 });
 
+// post request when adding a new manga
 app.post(`/`, (req, res) => {
     console.log('req', req)
     console.log(req.body)
     console.log(req.body.baseOffset)
 
-
+    // calls the form manager to take care of the request
     form.downloadManga(req)
-    res.redirect(`.`)
+    // res.redirect(`.`)
+    res.sendStatus(200)
 })
 
 
 //renders the page where all of a manga's chapters are displayed
-
 app.get(`/manga/:mangaName`, (req, res) => {
     // var mangaName = getMangaName(url.parse(req.url).pathname)
     var mangaName = req.params.mangaName;
 
 
     mangaName = mangaName.replaceAll('%20', '\ ')
-    // mangaName = decodeURIComponent(mangaName)
-    // var chapterList = getList(decodeURIComponent(mangaName))
     var chapterList = getList(mangaName)
 
     // var chapterList = getList(mangaName)
@@ -272,21 +267,15 @@ app.get(`/manga/:mangaName`, (req, res) => {
         chapterList[i] = chapterList[i].replaceAll('%', '%25')
     }
 
+    // list of bookmarks 
     let bookmarks = jsonWriter.getBookmarks(mangaName)
 
-    //rendres chapter-menu.ejs with the arguments
+    //renders the chapter-menu.ejs with the arguments
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks });
-
-    // res.render("../views/test", { mangaName: writeJson.getName(mangaName), chapterList: writeJson.getChapterPath(mangaName), mangaDesc: mangaDesc, chapterName: writeJson.getchapterNames(mangaName)});
-
-    console.log(mangaName)
-    console.log("chapter page is running")
-    console.log('outputting')
-    // writeJson.outputJson(mangaName)
 
 });
 
-// app.post(`/manga/:mangaName`, (req, res) => {
+// post request for bookmarking chapters
 app.post(`/bookmark-chap`, (req, res) => {
 
     // let mangaName = req.params.mangaName
@@ -296,12 +285,13 @@ app.post(`/bookmark-chap`, (req, res) => {
     res.sendStatus(200)
 })
 
+// post request when updating chapter list from html page
 app.post(`/update-chapters`, (req, res) => {
 
     // let mangaName = req.params.mangaName
     // console.log('data: ', req)
     form.updateChapterList(req)
-    // console.log(req.body.updateJson)
+    // redirects with status code 200 (ok)
     res.sendStatus(200)
 })
 
@@ -327,7 +317,7 @@ function getList(mangaName) {
     return contentList;
 }
 
-
+// finds the previous chapter and the next chapter
 function getNextAndPrev(chapterList, currentChapter) {
     let prevChapter
     let nextChapter
@@ -340,6 +330,7 @@ function getNextAndPrev(chapterList, currentChapter) {
             break
         }
     }
+    // replaces the % in the url by %25 to avoid URI decoding errors
     try {
         prevAndNext[1] = (chapterList[i + 1]).replace('%', '%25')
         prevAndNext[0] = (chapterList[i - 1]).replace('%', '%25')
@@ -350,3 +341,4 @@ function getNextAndPrev(chapterList, currentChapter) {
 
     return prevAndNext
 }
+module.exports = { sortList }

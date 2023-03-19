@@ -369,14 +369,14 @@ module.exports = {
             }
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
-                chapterPath[k] = chapterName[k].replaceAll(':', '_');
-                chapterPath[k] = sanitizeFilename(chapterPath[k])
+                // chapterPath[k] = chapterName[k].replaceAll(':', '_');
+                // chapterPath[k] = sanitizeFilename(chapterPath[k])
             }
             let path = `manga/${mangaName}`
             // path = path.replaceAll(' ', '\ ')
 
 
-            mangaJSON.addManga(mangaName, path, chapterName, chapterPath, tags, description)
+            mangaJSON.addManga(mangaName, path, chapterName, chapterName, tags, description)
 
         })();
     }

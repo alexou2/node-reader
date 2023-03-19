@@ -46,25 +46,6 @@ module.exports = {
     },
 
 
-    deleteManga: function (mangaName) {
-
-        // a timer of 15 seconds before deleting the folder
-        // console.log('THE FILE WILL BE DELETED IN 15 SECONDS.\u0007\u0007')
-
-        console.log(__dirname)
-        // deletes the file
-        fs.rmdirSync(__dirname + `/../manga/${mangaName}/`);
-
-        console.log('FILE DELETED')
-
-
-
-
-        // let content = fs.readdirSync(__dirname+'/../manga/'+mangaName)
-        // console.log(content)
-    },
-
-
 
     // will only update chapters for a manga from the form inside the manga page (not available yet)
     // it will download chapters that are newer than the last chapter downloaded
@@ -77,12 +58,6 @@ module.exports = {
     },
 
 
-    // handles the form to change json attributes
-    // will call a function in jsonWriter to modify the json data for the manga
-    changeMangaAttributes: function () {
-
-    },
-
     // will handle the bookmarking of chapters
     bookmarkChap: function (req) {
         console.log(req.body.mangaName)
@@ -90,11 +65,6 @@ module.exports = {
         console.log(req.body.value)
 
         jsonWriter.setBookmark(req.body.mangaName, req.body.chapter, req.body.value)
-    },
-
-    // will manage the progress tracking for each manga
-    updateReadingProgress: function () {
-
     }
 
 }

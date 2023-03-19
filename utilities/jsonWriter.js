@@ -17,6 +17,7 @@ const sanitizeFilename = require('sanitize-filename');
 
 
 module.exports = {
+    // getters and setters
 
     // gets the name of the manga 
     getName: function (path) {
@@ -48,33 +49,13 @@ module.exports = {
         return chapterPath
     },
 
-    // gets the chapter's names 
+    // gets the chapter's names for a manga 
     getchapterNames: function (path) {
         let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
         data = JSON.parse(data);
         let chapterNames = data.chapters.map(path => path.chapterName)
 
         return chapterNames
-    },
-
-    // gets the 
-    getAllMangaPath: function () {
-        let data = fs.readFileSync(`jsonFiles/mangaList.json`, 'utf8');
-        data = JSON.parse(data);
-
-        let AllMangaPath = data.list_of_mangas.map(path => path.path)
-
-        return AllMangaPath
-    },
-
-    // gets all manga names
-    getAllMangaNames: function () {
-        let data = fs.readFileSync(`jsonFiles/mangaList.json`, 'utf8');
-        data = JSON.parse(data)
-
-        let AllMangaNames = data.list_of_mangas.map(name => name.mangaName)
-
-        return AllMangaNames
     },
 
     // gets the description of the manga
@@ -93,12 +74,16 @@ module.exports = {
         let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
 
         let bookmarkedChap = mangaData.chapters.find(obj => obj.chapterPath === chapter);
+        console.log('searching for:', chapter)
+        console.log('search result:', bookmarkedChap.chapterPath, bookmarkedChap.bookmarked)
 
         bookmarkedChap.bookmarked = value;
         // console.log('data ', existingData)
+        console.log('data to write:', mangaData)
 
         fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(mangaData, 'null', 2));
     },
+
 
 
     getBookmarks: function (path) {
@@ -116,48 +101,45 @@ module.exports = {
 
 
 
-    // writes a new json file for each manga
-    // called when downloading a new manga and if there is no json for the manga
-    addManga: function (mangaName, path, chapterNameList, chapterPathList, tags, description) {
+    // adds the manga's informations to a json file
+    addManga: function (mangaName, path, chapterName, tags, description) {
         let chapters = []
+        let chapterPath = []
         console.log("started creating json to manga")
 
-        //formats each chapter's name 
-        for (let j = 0; j < chapterNameList.length; j++) {
-            chapterNameList[j] = chapterNameList[j].trim()
-            chapterPathList[j] = chapterPathList[j].trim()
+        //formats each chapter's name and path
+        for (let j = 0; j < chapterName.length; j++) {
+            chapterName[j] = chapterName[j].trim()
 
             //removes th null if there is one
-            if (chapterNameList[j].endsWith('null')) {
-                chapterNameList[j] = chapterNameList[j].slice(0, -6) + '.1'
-                chapterPathList[j] = chapterPathList[j].slice(0, -6) + '.1'
+            if (chapterName[j].endsWith('null')) {
+                chapterName[j] = chapterName[j].slice(0, -6) + '.1'
             }
 
-            chapterNameList[j] = chapterNameList[j].trim()
-            chapterPathList[j] = chapterPathList[j].trim()
+            chapterName[j] = chapterName[j].trim()
 
             // removes : from the end of the chapter
-            if (chapterNameList[j].endsWith(':')) {
-                chapterNameList[j] = chapterNameList[j].slice(0, -1)
-                chapterPathList[j] = chapterPathList[j].slice(0, -1)
+            if (chapterName[j].endsWith(':')) {
+                chapterName[j] = chapterName[j].slice(0, -1)
             }
 
-            chapterNameList[j] = chapterNameList[j].trim()
-            chapterPathList[j] = chapterPathList[j].trim()
+            chapterName[j] = chapterName[j].trim()
 
+            chapterPath[j] = sanitizeFilename(chapterName[j])
         }
-        console.log('chapters: ', chapterNameList)
+        console.log('chapters: ', chapterName)
+        
 
-        // gives attributes to each chapter
-        for (let i = 0; i < chapterNameList.length; i++) {
+        // creates json object for each chapter
+        for (let i = 0; i < chapterName.length; i++) {
             chapters.push({
-                chapterName: chapterNameList[i],
+                chapterName: chapterName[i],
                 sorting_order: i + 1,
-                chapterPath: chapterPathList[i],
+                chapterPath: chapterPath[i],
                 bookmarked: 'false',
             })
         }
-        console.log('chapter paths:', chapterPathList)
+        console.log('chapter paths:', chapterPath)
 
         // the attributes of the file
         let mangaJSON = {
@@ -171,7 +153,7 @@ module.exports = {
         }
 
 
-        // convert JSON object to a string
+        // convert JSON object to a string to write in the json
         const manga = JSON.stringify(mangaJSON, 'null', 2)
 
         //writes the files
@@ -183,31 +165,7 @@ module.exports = {
             }
         })
 
-        // this.newManga(mangaName, `jsonFiles/${mangaName}.json`)
     },
-
-
-
-    // creates a json that lists all mangas that are available
-    newManga: function (mangaName, jsonPath) {
-
-        let mangaStats = (
-            {
-                mangaName: mangaName,
-                jsonPath: jsonPath,
-                coverImage: `manga/${mangaName}/cover.jpg`,
-                path: `${mangaName}`
-            }
-        )
-
-
-        // updates th file
-        let existingData = JSON.parse(fs.readFileSync('jsonFiles/mangaList.json', 'utf-8'));
-
-
-    },
-
-
 
     // is called if a manga doesn't have a json
     checkJson: function (mangaName) {
@@ -232,7 +190,6 @@ module.exports = {
         let chapterNameList
         let path
         let jsonPath
-        let chapterPathList
 
         jsonPath = `jsonFiles/${mangaName}.json`
         path = `manga/${mangaName}`
@@ -240,37 +197,10 @@ module.exports = {
 
         chapterNameList = fs.readdirSync(`manga/${mangaName}`)
 
-        chapterPathList = fs.readdirSync(`manga/${mangaName}`)
-        for (let i = 0; i < chapterPathList.length; i++) {
-            chapterPathList[i] = `${chapterPathList[i]}`
-        }
 
 
-        // // adds the manga to the manga list
-        this.newManga(mangaName, jsonPath)
         // // creates the json file for this manga
-        this.addManga(mangaName, path, chapterNameList, chapterPathList, "n/a", "n/a")
-    },
-
-
-    // mainly for testing and debugging, outouts informations when a manga page is loaded
-    outputJson: function (req) {
-
-        // if the manga doesn't have a json file: create it, else: output infos on the manga
-        console.log(req)
-        if (!fs.existsSync(`jsonFiles/${req}`)) {
-            this.createMangaJson(req)
-            console.log('finished creating json')
-        } else {
-
-            console.log("name:", this.getName(req));
-            console.log("chapterList:", this.getchapterNames(req));
-            console.log("cover file:", this.getCoverPath(req));
-            console.log("chapter paths:", this.getChapterPath(req));
-            console.log("all manga paths:", this.getAllMangaPath());
-            console.log("all manga names:", this.getAllMangaNames());
-        }
-
+        this.addManga(mangaName, path, chapterNameList, "n/a", "n/a")
     },
 
 
@@ -297,9 +227,9 @@ module.exports = {
             }
 
         }
-        for (let j in elementsToDelete){
+        for (let j in elementsToDelete) {
             delete data.chapters[elementsToDelete[j]]
-        data.chapters.splice(elementsToDelete[j])
+            data.chapters.splice(elementsToDelete[j])
         }
         // console.log(mangaData)
         fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(data, 'null', 2));

@@ -5,11 +5,9 @@
 
 // modifies the bookmark attribute of the chapter
 function addBookmark(mangaName, chapter, value) {
-console.log(mangaName, chapter, value)
 
   // when chapter is bookmarked
   if (value == "true") {
-    console.log('get fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
   <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'false')" src=" /red-bookmark.svg">
   `
@@ -17,12 +15,11 @@ console.log(mangaName, chapter, value)
 
   // when chapter is un-bookmarked
   if (value == "false") {
-    console.log('get un-fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
     <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'true')" src=" /dark-bookmark.svg">
     `
   }
-  console.log("text changed")
+  console.log("bookmark icon changed")
 
   // sends data to server
   var data = {
@@ -30,7 +27,6 @@ console.log(mangaName, chapter, value)
     chapter,
     value,
   };
-  console.log(data)
 
   const xhr = new XMLHttpRequest();
 
@@ -38,12 +34,6 @@ console.log(mangaName, chapter, value)
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(data));
   console.log(data)
-
-}
-
-
-// saves the progress in the manga to resube later
-function followProgress(mangaName, chapter) {
 
 }
 
@@ -66,8 +56,5 @@ function updateChapters(mangaName, offset) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(data));
   console.log(data)
-
-
-  console.log("fuck off")
 }
 
