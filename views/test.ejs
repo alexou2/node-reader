@@ -64,3 +64,27 @@ add continue reading button
 view bookmarked chapters
 add option to compress manga into cbz for ipad
 -->
+
+
+
+
+const paragraph = 'ch1 ch12';
+const regex = /(Ch\d+(\.\d)*)/ig;
+const found = paragraph.match(regex);
+
+console.log(found);
+// Expected output: Array ["T", "I"]
+
+
+
+const paragraph = 'ch12 ch1';
+const regex = /(Ch\d+(\.\d)*)/ig;
+const found = paragraph.match(regex);
+
+if (found[0]<found[1])
+  console.log('0 is largest')
+else
+  console.log('1 is largest')
+
+console.log(found);
+// Expected output: Array ["T", "I"]
