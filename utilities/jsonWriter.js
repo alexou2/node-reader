@@ -75,6 +75,7 @@ module.exports = {
 
         let bookmarkedChap = mangaData.chapters.find(obj => obj.chapterPath === chapter);
         console.log('searching for:', chapter)
+        console.log(bookmarkedChap)
         console.log('search result:', bookmarkedChap.chapterPath, bookmarkedChap.bookmarked)
 
         bookmarkedChap.bookmarked = value;

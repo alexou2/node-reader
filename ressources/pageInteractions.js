@@ -19,7 +19,7 @@ function addBookmark(mangaName, chapter, value) {
     <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'true')" src=" /dark-bookmark.svg">
     `
   }
-  console.log("bookmark icon changed")
+  console.log("bookmark icon changed");
 
   // sends data to server
   var data = {
@@ -33,7 +33,7 @@ function addBookmark(mangaName, chapter, value) {
   xhr.open('POST', '/bookmark-chap');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(data));
-  console.log(data)
+  console.log('data:',data);
 
 }
 

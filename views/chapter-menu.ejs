@@ -63,8 +63,10 @@
         <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
 
     </div>
-    <div id="bookmark">
-        <img onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')" src=" /zoom_in-icon.svg">
+    <div id="bookmark" >
+        <!-- <img onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')" src=" /zoom_in-icon.svg"> -->
+        
+        <button class="updateChapters" onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')"title="download new chapters">&#8634;</button>
     </div>
 
 </body>

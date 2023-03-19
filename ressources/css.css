@@ -326,3 +326,19 @@ input[type=submit]:hover {
 .closebtn:hover {
     color: #ccc;
 }
+
+.updateChapters{
+    background-color:#44444400;
+    border-color: #44444400;
+    font-size:5em;
+    padding-left: .5em;
+    color:#fff;
+    text-align: center;
+    border: none;
+    background-color: none;
+    
+}
+.updateChapters button{
+    height: fit-content;
+    width: fit-content;
+}
