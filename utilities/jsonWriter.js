@@ -242,7 +242,7 @@ module.exports = {
 
         chapterPathList = fs.readdirSync(`manga/${mangaName}`)
         for (let i = 0; i < chapterPathList.length; i++) {
-            chapterPathList[i] = `manga/${chapterPathList[i]}`
+            chapterPathList[i] = `${chapterPathList[i]}`
         }
 
 
