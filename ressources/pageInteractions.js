@@ -5,11 +5,13 @@
 
 // modifies the bookmark attribute of the chapter
 function addBookmark(mangaName, chapter, value) {
+console.log(mangaName, chapter, value)
+
   // when chapter is bookmarked
   if (value == "true") {
     console.log('get fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-  <img id ="bookmark-img" onclick="addBookmark('${mangaName}', '${chapter}','false')" src=" /red-bookmark.svg">
+  <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'false')" src=" /red-bookmark.svg">
   `
   }
 
@@ -17,7 +19,7 @@ function addBookmark(mangaName, chapter, value) {
   if (value == "false") {
     console.log('get un-fucked')
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-    <img id ="bookmark-img" onclick="addBookmark('${mangaName}', '${chapter}','true')" src=" /dark-bookmark.svg">
+    <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'true')" src=" /dark-bookmark.svg">
     `
   }
   console.log("text changed")

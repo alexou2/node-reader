@@ -113,28 +113,7 @@ module.exports = {
         return bookmarks
     },
 
-    // will remove any chapter from json if there is no chapter that matches in the json
-    removeDummyChapters: function (path) {
-        // reads the json file and extracts the list of chapters
-        let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
-        mangaData = mangaData.chapters
-        let chapterData = mangaData.map(path => path.chapterPath)
 
-        // reads the chapters of the manga
-        let mangaChaps = fs.readdirSync(`manga/${path}`)
-
-        console.log('Downloaded chapters:', mangaChaps)
-        console.log('json chapters:', mangaData)
-
-
-        // searches for each chapter
-        for (let i in chapterData) {
-            if (!fs.existsSync(`manga/${path}/${chapterData[i]}`)) {
-                console.log(mangaData[i], 'nees to delete')
-            }
-
-        }
-    },
 
 
     // writes a new json file for each manga
@@ -294,5 +273,36 @@ module.exports = {
 
     },
 
+
+    // will remove any chapter from json if there is no chapter that matches in the json
+    removeDummyChapters: function (path) {
+        // reads the json file and extracts the list of chapters
+        let data = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        mangaData = data.chapters
+        let chapterData = mangaData.map(path => path.chapterPath)
+
+        // reads the chapters of the manga
+        let mangaChaps = fs.readdirSync(`manga/${path}`)
+
+        // console.log('Downloaded chapters:', mangaChaps)
+        // console.log('json chapters:', mangaData)
+
+        let elementsToDelete = []
+        // searches for each chapter
+        for (let i in chapterData) {
+            if (!fs.existsSync(`manga/${path}/${chapterData[i]}`)) {
+                console.log(data.chapters[i], 'nees to delete')
+                elementsToDelete.push(i)
+
+            }
+
+        }
+        for (let j in elementsToDelete){
+            delete data.chapters[elementsToDelete[j]]
+        data.chapters.splice(elementsToDelete[j])
+        }
+        // console.log(mangaData)
+        fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(data, 'null', 2));
+    },
 
 }
