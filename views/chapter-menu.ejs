@@ -42,28 +42,29 @@
     <!-- list of chapters -->
     <div class="list chapterList">
         <% for(var i=0; i<chapterList.length-1; i++) {%>
-<%let bookStyle = []%> 
-            <% if (bookmarks[i]== "true") { %>
-             <% bookStyle[i] = 'red-bookmark.svg'%>
+            <%let bookStyle=[]%>
+            <% if (bookmarks[i]=="true" ) { %>
+                <% bookStyle[i]='red-bookmark.svg' %>
             <% }else{ %>
-                <% bookStyle[i] = 'dark-bookmark.svg'%>
-           <%}%>
-                <span id="bookmark-<%=chapterList[i]%>">
-                    <img id="bookmark-img"
-                        onclick="addBookmark('<%= mangaName %>', '<%=chapterList[i]%>','true')"
-                        src=" /<%= bookStyle[i]%>">
-                </span>
-                <a class="chapter" href="<%= chapterList[i] %>">
-                    <%= chapterList[i] %>
-                </a><br>
+            <% bookStyle[i]='dark-bookmark.svg' %>
+        <%}%>
 
-            <% } %>
-                <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
+                                    <span id="bookmark-<%=chapterList[i]%>">
+                                        <img id="bookmark-img"
+                                        onclick="addBookmark(`<%= mangaName %>`, `<%=chapterList[i]%>`,'<%=bookmarks[i]==false%>')"
+                                            src=" /<%= bookStyle[i]%>">
+                                            <%=bookmarks[i]%>
+                                    </span>
+                                    <a class="chapter" href="<%= chapterList[i] %>">
+                                        <%= chapterList[i] %>
+                                    </a><br>
+
+                                    <% } %>
+                                        <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
 
     </div>
     <div id="bookmark">
-        <img onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')"
-            src=" /zoom_in-icon.svg">
+        <img onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')" src=" /zoom_in-icon.svg">
     </div>
 
 </body>
