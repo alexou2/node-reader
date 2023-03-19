@@ -51,10 +51,10 @@
 
                                     <span id="bookmark-<%=chapterList[i]%>">
                                         <img id="bookmark-img"
-                                        onclick="addBookmark(`<%= mangaName %>`, `<%=chapterList[i]%>`,'<%=bookmarks[i]==false%>')"
+                                        onclick="addBookmark(`<%= mangaName %>`, `<%=chapterList[i]%>`,`<%=bookmarks[i]=='false'%>`)"
                                             src=" /<%= bookStyle[i]%>">
-                                            <%=bookmarks[i]%>
                                     </span>
+                                    will set chapter to <%=bookmarks[i]=='false'%>
                                     <a class="chapter" href="<%= chapterList[i] %>">
                                         <%= chapterList[i] %>
                                     </a><br>
