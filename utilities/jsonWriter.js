@@ -94,8 +94,6 @@ module.exports = {
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
 
-        this.removeDummyChapters(path)
-
         return bookmarks
     },
 
@@ -129,7 +127,7 @@ module.exports = {
             chapterPath[j] = sanitizeFilename(chapterName[j])
         }
         console.log('chapters: ', chapterName)
-        
+
 
         // creates json object for each chapter
         for (let i = 0; i < chapterName.length; i++) {
@@ -202,13 +200,13 @@ module.exports = {
     },
 
 
-    // will remove any chapter from json if there is no chapter that matches in the json
-    removeDummyChapters: function (path) {
+    // will return the informations for the requested manga, without informations for chapters that are not available
+    getMangaJson: function (path) {
         // reads the json file and extracts the list of chapters
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
 
-console.log(chapterPath)
+        console.log(chapterPath)
         let elementsToDelete = []
         // searches for each chapter
         for (let i in chapterPath) {
@@ -222,8 +220,14 @@ console.log(chapterPath)
             delete jsonData.chapters[elementsToDelete[j]]
             jsonData.chapters.splice(elementsToDelete[j])
         }
-        console.log('new data:',jsonData)
 
+        
+        // jsonData = JSON.stringify(jsonData)
+
+        // jsonData = JSON.stringify(jsonData, 'null', 2)
+        console.log('new data:', typeof(jsonData))
+
+        return jsonData
     },
 
 }

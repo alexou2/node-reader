@@ -262,24 +262,31 @@ app.get(`/manga/:mangaName`, (req, res) => {
     chapterList = sortList(chapterList, 'chapters')
     // console.log("chapterList ",chapterList)
 
-    let mangaDesc = writeJson.getMangaDesc(mangaName)
-    console.log('desc', mangaDesc);
+    // let mangaDesc = writeJson.getMangaDesc(mangaName)
+    // console.log('desc', mangaDesc);
 
     for (i in chapterList) {
         chapterList[i] = chapterList[i].replaceAll('%', '%25')
     }
 
-// getting informations from json file
+    // getting informations from json file
+    let data = jsonWriter.getMangaJson(mangaName);
+
+    console.log('type:', typeof (data))
+
+    let tags = data.tags;
+    let mangaDesc = data.description;
+    let chapterName = data.chapters.map(name => name.chapterName);
+    let bookmarks = data.chapters.map(book => book.bookmarked);
 
 
+    // let bookmarks = jsonWriter.getBookmarks(mangaName)
 
-    let bookmarks = jsonWriter.getBookmarks(mangaName)
-    
 
 
 
     //renders the chapter-menu.ejs with the arguments
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
 
 });
 
