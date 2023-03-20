@@ -210,24 +210,22 @@ module.exports = {
         let elementsToDelete = []
         // searches for each chapter
         for (let i in chapterPath) {
+            // searches for each chapter in the files
             if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
                 elementsToDelete.push(i)
                 console.log(chapterPath[i])
             }
 
+            
         }
-        for (let j in elementsToDelete) {
-            delete jsonData.chapters[elementsToDelete[j]]
-            jsonData.chapters.splice(elementsToDelete[j])
-        }
+            // deletes the extra chapters in the json object
+            for (let j in elementsToDelete) {
+                delete jsonData.chapters[elementsToDelete[j]]
+                jsonData.chapters.splice(elementsToDelete[j])
+            }
 
-        
-        // jsonData = JSON.stringify(jsonData)
 
-        // jsonData = JSON.stringify(jsonData, 'null', 2)
-        console.log('new data:', typeof(jsonData))
+            return jsonData
+        },
 
-        return jsonData
-    },
-
-}
+    }

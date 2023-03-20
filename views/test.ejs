@@ -77,14 +77,13 @@ console.log(found);
 
 
 
-const paragraph = 'ch12 ch1';
-const regex = /(Ch\d+(\.\d)*)/ig;
+const paragraph = 'ch-1_p1 ch12 ch 2';
+const regex = /(Ch.?.?.?.?.?.?\d+(\.\d)*.*)/ig;
 const found = paragraph.match(regex);
 
-if (found[0]<found[1])
-  console.log('0 is largest')
-else
-  console.log('1 is largest')
-
 console.log(found);
+
+//let matches = found.split(' ')
+for (let i in found)
+console.log(found[0]+'\n')
 // Expected output: Array ["T", "I"]
