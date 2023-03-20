@@ -94,7 +94,7 @@ module.exports = {
         let bookmarks = mangaData.chapters.map(book => book.bookmarked)
         console.log(bookmarks)
 
-        // this.removeDummyChapters(path)
+        this.removeDummyChapters(path)
 
         return bookmarks
     },
@@ -205,32 +205,25 @@ module.exports = {
     // will remove any chapter from json if there is no chapter that matches in the json
     removeDummyChapters: function (path) {
         // reads the json file and extracts the list of chapters
-        let data = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
-        mangaData = data.chapters
-        let chapterData = mangaData.map(path => path.chapterPath)
+        let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        let chapterPath = jsonData.chapters.map(path => path.chapterPath)
 
-        // reads the chapters of the manga
-        let mangaChaps = fs.readdirSync(`manga/${path}`)
-
-        // console.log('Downloaded chapters:', mangaChaps)
-        // console.log('json chapters:', mangaData)
-
+console.log(chapterPath)
         let elementsToDelete = []
         // searches for each chapter
-        for (let i in chapterData) {
-            if (!fs.existsSync(`manga/${path}/${chapterData[i]}`)) {
-                console.log(data.chapters[i], 'nees to delete')
+        for (let i in chapterPath) {
+            if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
                 elementsToDelete.push(i)
-
+                console.log(chapterPath[i])
             }
 
         }
         for (let j in elementsToDelete) {
-            delete data.chapters[elementsToDelete[j]]
-            data.chapters.splice(elementsToDelete[j])
+            delete jsonData.chapters[elementsToDelete[j]]
+            jsonData.chapters.splice(elementsToDelete[j])
         }
-        // console.log(mangaData)
-        fs.writeFileSync(`jsonFiles/${path}.json`, JSON.stringify(data, 'null', 2));
+        console.log('new data:',jsonData)
+
     },
 
 }

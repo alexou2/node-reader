@@ -269,8 +269,14 @@ app.get(`/manga/:mangaName`, (req, res) => {
         chapterList[i] = chapterList[i].replaceAll('%', '%25')
     }
 
-    // list of bookmarks 
+// getting informations from json file
+
+
+
     let bookmarks = jsonWriter.getBookmarks(mangaName)
+    
+
+
 
     //renders the chapter-menu.ejs with the arguments
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks });
