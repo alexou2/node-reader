@@ -216,7 +216,7 @@ module.exports = {
                 console.log(chapterPath[i])
             }
 
-            
+
         }
             // deletes the extra chapters in the json object
             for (let j in elementsToDelete) {
