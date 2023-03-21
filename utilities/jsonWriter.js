@@ -219,10 +219,10 @@ module.exports = {
 
         }
             // deletes the extra chapters in the json object
-            for (let j in elementsToDelete) {
-                delete jsonData.chapters[elementsToDelete[j]]
-                jsonData.chapters.splice(elementsToDelete[j])
-            }
+            // for (let j in elementsToDelete) {
+            //     delete jsonData.chapters[elementsToDelete[j]]
+            //     jsonData.chapters.splice(elementsToDelete[j])
+            // }
 
 
             return jsonData
