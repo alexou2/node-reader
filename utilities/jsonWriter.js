@@ -208,24 +208,42 @@ module.exports = {
 
         console.log(chapterPath)
         let elementsToDelete = []
+
+    
         // searches for each chapter
         for (let i in chapterPath) {
+
+            // finds the chapter number and its name to make a regex
+            let chapterNumber = chapterPath[i].split(' ')[1]
+            // let chapterNumber = chapterPath[i].split(/Chapter.?.?\d+(\.\d)/ig)
+            let name = chapterPath[i].replaceAll(/Chapter.?.?\d*(\.[1-9])?/ig, '')
+
+// let regex = /ch.?.?.?.?.?.?.?/ig+chapterNumber+/.*/ig+name;
+let regex = new RegExp("ch.?.?.?.?.?.?.?"+chapterNumber+".*"+name, "ig")
+// let regex = new RegExp(/.*/)
+console.log(typeof(regex))
+            console.log('name+ chNumber:',name, chapterNumber)
+
             // searches for each chapter in the files
-            if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
+            // if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
+            if (!fs.existsSync(`manga/${path}/${regex}`)) {
+
                 elementsToDelete.push(i)
-                console.log(chapterPath[i])
+                // console.log(chapterPath[i])
             }
 
 
         }
-            // deletes the extra chapters in the json object
-            // for (let j in elementsToDelete) {
-            //     delete jsonData.chapters[elementsToDelete[j]]
-            //     jsonData.chapters.splice(elementsToDelete[j])
-            // }
 
 
-            return jsonData
-        },
+        // deletes the extra chapters in the json object
+        for (let j in elementsToDelete) {
+            delete jsonData.chapters[elementsToDelete[j]]
+            jsonData.chapters.splice(elementsToDelete[j])
+        }
 
-    }
+
+        return jsonData
+    },
+
+}

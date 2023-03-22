@@ -12,7 +12,12 @@ let mangaDesc = data.description;
  paragraph = data.chapters.map(name => name.chapterPath);
 let bookmarks = data.chapters.map(book => book.bookmarked);
 
-const regex = /(Ch.?.?.?.?.?.?.?\d+(\.\d)*.*)/ig;
+let t = "Chapter .*"
+
+// const regex = /(Ch.?.?.?.?.?.?.?\d+(\.\d)*.*)/ig;
+ let regex = new RegExp(`${t}.?.?.?.?.?.?.?\d+(\.\d)*.*`,"ig")
+ regex = new RegExp(`${t}`, 'ig')
+
 // const regex = /Chapter\s*(\d+(?:\.\d+)?)/i;
 
 console.log('para:',paragraph);
@@ -22,7 +27,7 @@ found.push(paragraph[i].match(regex))
 console.log('matches:',paragraph[i].match(regex))
 
 }
-console.log(found);
+// console.log(found);
 
 
 // found = JSON.stringify(found)
