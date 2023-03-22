@@ -342,3 +342,7 @@ input[type=submit]:hover {
     height: fit-content;
     width: fit-content;
 }
+
+.dropdown-content{
+display: "none"
+}
