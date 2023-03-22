@@ -110,14 +110,26 @@
 
 
     <script>
+        //opens the overlay form
         function openForm() {
             document.getElementById('myOverlay').style.display = "block";
             document.getElementById('mangaName').focus();
         }
-
+        //closes the overlay form
         function closeForm() {
             document.getElementById('myOverlay').style.display = "none";
         }
+        
+        //shows or hide dropdown options
+        function toggleAdvancedOptions() {  
+          //shows menu if it is hidden or hides it if its displayed
+          if( document.getElementById("advancedOptions").style.display == "none")
+                document.getElementById("advancedOptions").style.display = "block"
+            else
+                document.getElementById("advancedOptions").style.display = "none"
+}
+        
+        
     </script>
 
 
