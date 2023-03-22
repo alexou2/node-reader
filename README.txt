@@ -1,4 +1,4 @@
-A simple web server to read mangas 
+A simple web server to read mangas. works on pc and on android p
 
 
 I am using the mangadex api to download part of the mangas. you can find at https://api.mangadex.org.
