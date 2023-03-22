@@ -42,7 +42,7 @@
 
                 <div class="add-chapter manga-item" id="manga-image">
                     <!-- <a href="/new"><img class="manga-image" src="/add-manga-image.svg" /></a> -->
-                    <img class="manga-image" onclick="openForm()"title="add manga" src="/add-manga-image.svg" />
+                    <img class="manga-image" onclick="openForm()" title="add manga" src="/add-manga-image.svg" />
 
                     <br>
                     Add a new manga
@@ -65,50 +65,49 @@
             <form action="/new" method="post">
                 <!-- text inputs -->
                 Manga Name
-                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus>
-                
+                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus required>
+
                 Source
                 <select class="select_source" name="source">
                     <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
                     <option id="manganato" data-c="manganato">Manganato</option>
                 </select>
-                
-                
-             <div class="dropdown">
-             <button onclick="toggleAdvancedOptions()" class="dropdown">Show Other Options</button>
-             <div id="advancedOptions" class="dropdown-content"display="none">
-                
-                Base Offset
-                <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
-                <!-- selector input -->
-                Translated language
-                <select class="translatedLanguages" name="translatedLanguages">
-                    <option data-c="en" value="en" selected="">English</option>
-                    <option data-c="fr" value="fr">Fançais</option>
-                    <option data-c="it" value="it">Italiano</option>
-                    <option data-c="ru" value="ru">Russian</option>
-                </select><br>
-                
-               <!-- Source
-                <select class="select_source" name="source">
-                    <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
-                    <option id="manganato" data-c="manganato">Manganato</option>
 
-                </select> -->
-                
-                <!-- sort returned mangas by popularity or by relevance for mangadex -->
-                Sort Manga By
-                <select class="sortBy" name="sortBy">
-                    <option id="relevance" data-c="relevance" selected="">Relevance</option>
-                    <option id="popularity" data-c="followedCount">Popularity</option>
-                    <option id="latestUpdate" data-c="latestUploadedChapter">Latest update</option>
+                <button type="button" onclick="toggleAdvancedOptions()" class="dropdown-button">Show Other Options</button>
+                <div class="dropdown"id="showOptions">
+                    <div id="advancedOptions" class="dropdown-content"style="display: none;">
 
-                </select>
+                        Base Offset
+                        <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
+                        <!-- selector input -->
+                        Translated language
+                        <select class="translatedLanguages" name="translatedLanguages">
+                            <option data-c="en" value="en" selected="">English</option>
+                            <option data-c="fr" value="fr">Fançais</option>
+                            <option data-c="it" value="it">Italiano</option>
+                            <option data-c="ru" value="ru">Russian</option>
+                        </select><br>
 
-                <label for="updateJson"name="updateJson">Only Update JSON</label>
-                <input type="checkbox" id="updateJson" name="updateJson" data-c="true" value="true">
-</div>
-</div>
+                        <!-- Source
+                        <select class="select_source" name="source">
+                        <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                        <option id="manganato" data-c="manganato">Manganato</option>
+
+                            </select> -->
+
+                        <!-- sort returned mangas by popularity or by relevance for mangadex -->
+                        Sort Manga By
+                        <select class="sortBy" name="sortBy">
+                            <option id="relevance" data-c="relevance" selected="">Relevance</option>
+                            <option id="popularity" data-c="followedCount">Popularity</option>
+                            <option id="latestUpdate" data-c="latestUploadedChapter">Latest update</option>
+
+                        </select>
+
+                        <label for="updateJson" name="updateJson">Only Update JSON</label>
+                        <input type="checkbox" id="updateJson" name="updateJson" data-c="true" value="true">
+                    </div>
+                </div>
 
                 <!-- <select class="json" name="updateJson">
     <option id="mangadex" value="true" >Only Update JSON</option>
@@ -133,17 +132,31 @@
         function closeForm() {
             document.getElementById('myOverlay').style.display = "none";
         }
-        
+
         //shows or hide dropdown options
-        function toggleAdvancedOptions() {  
-          //shows menu if it is hidden or hides it if its displayed
-          if( document.getElementById("advancedOptions").style.display == "none")
-                document.getElementById("advancedOptions").style.display = "block"
-            else
-                document.getElementById("advancedOptions").style.display = "none"
-}
-        
-        
+        function toggleAdvancedOptions() {
+            
+            //shows menu if it is hidden or hides it if its displayed
+            var advancedOptions = document.getElementById("advancedOptions");
+            
+            if (advancedOptions.style.display === "none") {
+            advancedOptions.style.display = "block";
+        } else {
+            advancedOptions.style.display = "none";
+        }
+
+
+            // if (document.getElementById("showOptions").style.display == "none"){
+            //     document.getElementById("showOptions").style.display = "block"
+            //     console.log('sjowing element')
+            // }
+            // else{
+            //     document.getElementById("showOptions").style.display = "none"
+            //     console.log('hiding element')
+            // }
+        }
+
+
     </script>
 
 
