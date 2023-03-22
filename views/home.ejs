@@ -66,6 +66,18 @@
                 <!-- text inputs -->
                 Manga Name
                 <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus>
+                
+                Source
+                <select class="select_source" name="source">
+                    <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                    <option id="manganato" data-c="manganato">Manganato</option>
+                </select>
+                
+                
+             <div class="dropdown">
+             <button onclick="myFunction()" class="dropdown">Show Other Options</button>
+             <div id="advancedOptions" class="dropdown-content">
+                
                 Base Offset
                 <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
                 <!-- selector input -->
@@ -76,12 +88,13 @@
                     <option data-c="it" value="it">Italiano</option>
                     <option data-c="ru" value="ru">Russian</option>
                 </select><br>
-                Source
+                
+               <!-- Source
                 <select class="select_source" name="source">
                     <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
                     <option id="manganato" data-c="manganato">Manganato</option>
 
-                </select>
+                </select> -->
                 
                 <!-- sort returned mangas by popularity or by relevance for mangadex -->
                 Sort Manga By
@@ -94,7 +107,8 @@
 
                 <label for="updateJson"name="updateJson">Only Update JSON</label>
                 <input type="checkbox" id="updateJson" name="updateJson" data-c="true" value="true">
-
+</div>
+</div>
 
                 <!-- <select class="json" name="updateJson">
     <option id="mangadex" value="true" >Only Update JSON</option>
