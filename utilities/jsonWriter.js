@@ -209,7 +209,7 @@ module.exports = {
         console.log(chapterPath)
         let elementsToDelete = []
 
-    
+
         // searches for each chapter
         for (let i in chapterPath) {
 
@@ -218,19 +218,26 @@ module.exports = {
             // let chapterNumber = chapterPath[i].split(/Chapter.?.?\d+(\.\d)/ig)
             let name = chapterPath[i].replaceAll(/Chapter.?.?\d*(\.[1-9])?/ig, '')
 
-// let regex = /ch.?.?.?.?.?.?.?/ig+chapterNumber+/.*/ig+name;
-let regex = new RegExp("ch.?.?.?.?.?.?.?"+chapterNumber+".*"+name, "ig")
-// let regex = new RegExp(/.*/)
-console.log(typeof(regex))
-            console.log('name+ chNumber:',name, chapterNumber)
+            // let regex = /ch.?.?.?.?.?.?.?/ig+chapterNumber+/.*/ig+name;
+            let regex = new RegExp("ch.?.?.?.?.?.?.?" + chapterNumber + ".*" + name, "ig")
+            // let regex = new RegExp(/.*/)
+            console.log(typeof (regex))
+            console.log('name+ chNumber:', name, chapterNumber)
+
+
+            let folderContent = (fs.readdirSync(`manga/${path}`))
+            regex = /.*/ig
+
+            if (!folderContent.some(chapter => regex.test(chapter)))
+                elementsToDelete.push(i)
 
             // searches for each chapter in the files
             // if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
-            if (!fs.existsSync(`manga/${path}/${regex}`)) {
+            // if (!fs.existsSync(`manga/${path}/${regex}`)) {
 
-                elementsToDelete.push(i)
-                // console.log(chapterPath[i])
-            }
+            //     elementsToDelete.push(i)
+            //     // console.log(chapterPath[i])
+            // }
 
 
         }
