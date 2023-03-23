@@ -206,7 +206,7 @@ module.exports = {
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
         let folderContent = (fs.readdirSync(`manga/${path}`))
-        
+
         console.log(chapterPath)
         let elementsToDelete = []
 
@@ -232,19 +232,20 @@ module.exports = {
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
             if (!match) {
-                console.log(match)
+                // console.log(match)
                 elementsToDelete.push(i)
+                console.log('push',jsonData.chapters[i])
             }
 
         }
 
 
         // deletes the extra chapters in the json object
-        if (elementsToDelete > 0) {
+        if (elementsToDelete.length > 0) {
             for (let j in elementsToDelete) {
-                delete jsonData.chapters[elementsToDelete[j]]
-                jsonData.chapters.splice([elementsToDelete[j]], [elementsToDelete[j]]);
-                console.log('deleted', jsonData.chapters[elementsToDelete[j]])
+                // delete jsonData.chapters[elementsToDelete[j]]
+                jsonData.chapters.splice(([elementsToDelete[j]]-j), 1);
+                // console.log('deleted', jsonData.chapters[elementsToDelete[j]])
             }
         }
 
