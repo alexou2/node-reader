@@ -233,21 +233,16 @@ module.exports = {
             // regex = /.*/ig
 
             let match = folderContent.some(chapter => regex.test(chapter));
-            // if (match) {
-            //     // console.log(folderContent.some(chapter => regex.test(chapter)))
-            //     // elementsToDelete.push(i)
-            //     console.log(match)
-            //     // this.deleteJsonChapter(folderContent[i], jsonData)
-            // }else{
-            //     elementsToDelete.push(i)
-            // }
-
-            let t = folderContent.some(chapter => regex.exec(chapter));
-            console.log("match ; ",t)
-            if(!t){
+            if (!match) {
+                console.log(match)
                 elementsToDelete.push(i)
-                console.log('push', folderContent[i])
             }
+            // let t = folderContent.some(chapter => regex.exec(chapter));
+            // console.log("match ; ",t)
+            // if(!t){
+            //     elementsToDelete.push(i)
+            //     console.log('push', folderContent[i])
+            // }
 
 
             // searches for each chapter in the files
@@ -264,8 +259,8 @@ module.exports = {
 
         // deletes the extra chapters in the json object
         for (let j in elementsToDelete) {
-            // delete jsonData.chapters[elementsToDelete[j]]
-            jsonData.chapters.splice([elementsToDelete[j]], ([elementsToDelete[j]]));
+            delete jsonData.chapters[elementsToDelete[j]]
+            jsonData.chapters.splice([elementsToDelete[j]], [elementsToDelete[j]]);
             console.log('deleted',jsonData.chapters[elementsToDelete[j]])
             console.log(elementsToDelete)
         }
