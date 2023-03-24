@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css.css">
+    <script type="text/javascript" src="/pageInteractions.js"></script>
+    <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
+    <title>Bookmarks</title>
 </head>
 
 <body>
@@ -22,15 +25,28 @@
         </div>
     </div>
 
-<!-- for each manga, display every bokmarked chapter with the manga cover -->
+    <!-- for each manga, display every bokmarked chapter with the manga cover -->
     <% for( let i=0; i < mangaName.length; i++ ) { %>
 
-<a href="manga/<%=mangaName %>"><img src="" </a>
+        <div class="bookmarked-manga"></div>
+            <a href="manga/<%=mangaName[i] %>"><img class="cover-page" src="cover.jpg"></a>
+        
+            <!-- the list of bookmarked chapters -->
+            <% for (j in chapterList){ %>
 
-
-
-        <% } %>
-
+            
+                <span id="bookmark-<%=chapterList[j]%>">
+                    <img id="bookmark-img"
+                        onclick="addBookmark(`<%= mangaName[i] %>`, `<%=chapterList[j]%>`,`false`)"
+                        src=" /red-bookmark.svg">
+                </span>
+                <a class="chapter" href="<%= chapterList[j] %>">
+                    <%= chapterName[j] %>
+                </a>
+                <br>
+            <% } %>
+        </div>
+    <% } %>
 
 </body>
 
