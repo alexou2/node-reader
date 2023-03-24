@@ -1,0 +1,47 @@
+<!-- a page that lets users chose whic manga to download if there is more that 1 manga returned that has the same name -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css.css">
+    <script type="text/javascript" src="/pageInteractions.js"></script>
+    <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
+    <title>
+        <%= errorStatement %>
+    </title>
+</head>
+
+<body>
+
+    <div class="top-bar">
+
+        <div class="page-name">
+            <h1>Choose What You Want to Download
+            </h1>
+        </div>
+        <div class="currentPath" id="currentPath">
+            <a href="/">Home > </a><a href="/mangadex">
+                Mangadex
+            </a>
+        </div>
+    </div>
+
+    <!-- displays the list of manga -->
+    <% for( let index=0; index < array.length; index++ ) { %>
+       
+        Option <%= i %>: <br>
+            Manga name: <%= mangaName[i] %><br>
+            Manga ID: <%= mangaID[i] %><br>
+            Available languages: <%= languages[i] %><br>
+        <button class="download-manga" type="button"onclick="downloadManga(<%=mangaID[i]%>)"></button>
+
+        ------------------------------------------------------------------------<br>
+    <% } %>
+
+
+</body>
+
+</html>
