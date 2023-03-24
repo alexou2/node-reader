@@ -253,7 +253,8 @@ input {
 
 .show-options{
     margin-top: 7px;
-    padding:6px
+    padding:6px;
+    margin-bottom: 0px;
 }
 
 input[type=checkbox] {
