@@ -66,57 +66,7 @@ if (!fs.existsSync(`jsonFiles`)) {
 
 
 
-// loads the page where the chapters are read
-app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
-    console.log
-    let mangaName = req.params.mangaName,
-        chapName = req.params.chapName;
 
-
-    // writeJson.setBookmark(mangaName, chapName, 'true')
-    // writeJson.getBookmark(mangaName)
-
-
-
-
-    console.log('chap name: ', chapName)
-
-
-    // potential issue
-    // chapName = decodeURIComponent(chapName)
-
-    // if (chapName.contains('%25')){
-    chapName = chapName.replaceAll('%', '%25')
-    console.log(chapName)
-    // }
-
-
-    //gets and sorts page list
-    let pageList = getPages(mangaName, chapName);
-    // pageList = pageList.sort(function (a, b) { return a - b });
-    pageList = sortList(pageList, 'pages')
-
-
-    //gets the chapter list in order to determine what is the next and previous chapter
-    var chapterList = getList(mangaName)
-    chapterList = sortList(chapterList, 'chapters')
-    // console.log(chapterList)
-
-    //gets the previpus chapter and the next chapter
-    let prevAndNext = getNextAndPrev(chapterList, chapName)
-    let prevChapter = prevAndNext[0]
-    let nextChapter = prevAndNext[1]
-    console.group(prevAndNext)
-
-    mangaName = mangaName.replaceAll('%', '%25')
-
-
-
-    //sends the informations to the page used to render the chapters
-    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
-
-
-});
 
 
 
@@ -179,6 +129,55 @@ console.log(chapterName)
 });
 
 
+// loads the page where the chapters are read
+app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
+    console.log
+    let mangaName = req.params.mangaName,
+        chapName = req.params.chapName;
+
+
+    // writeJson.setBookmark(mangaName, chapName, 'true')
+    // writeJson.getBookmark(mangaName)
+
+
+
+
+    console.log('chap name: ', chapName)
+
+
+    // potential issue
+    // chapName = decodeURIComponent(chapName)
+
+    // if (chapName.contains('%25')){
+    chapName = chapName.replaceAll('%', '%25')
+    console.log(chapName)
+    // }
+
+
+    //gets and sorts page list
+    let pageList = getPages(mangaName, chapName);
+    // pageList = pageList.sort(function (a, b) { return a - b });
+    pageList = sortList(pageList, 'pages')
+
+
+    //gets the chapter list in order to determine what is the next and previous chapter
+    var chapterList = getList(mangaName)
+    chapterList = sortList(chapterList, 'chapters')
+    // console.log(chapterList)
+
+    //gets the previpus chapter and the next chapter
+    let prevAndNext = getNextAndPrev(chapterList, chapName)
+    let prevChapter = prevAndNext[0]
+    let nextChapter = prevAndNext[1]
+    console.group(prevAndNext)
+
+    mangaName = mangaName.replaceAll('%', '%25')
+
+
+
+    //sends the informations to the page used to render the chapters
+    res.render("../views/index", { path_to_image: pageList, chapName: chapName, mangaName: mangaName, prevChapter: prevChapter, nextChapter: nextChapter });
+});
 
 
 
