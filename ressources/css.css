@@ -237,6 +237,7 @@ form {
     color: rgba(0, 0, 0, 0.7)
 }
 
+.show-options,
 input {
     width: 100%;
     padding: 10px;
@@ -247,6 +248,12 @@ input {
     border: 1px solid grey;
     font-size: 15px;
     border-radius: 5px;
+}
+
+
+.show-options{
+    margin-top: 7px;
+    padding:6px
 }
 
 input[type=checkbox] {
