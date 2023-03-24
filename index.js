@@ -107,7 +107,6 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
     let prevChapter = prevAndNext[0]
     let nextChapter = prevAndNext[1]
     console.group(prevAndNext)
-    console.log('list of of pages for this chapter: ', pageList)
 
     mangaName = mangaName.replaceAll('%', '%25')
 
@@ -214,7 +213,7 @@ function sortList(arr, type) {
 
 
 
-    console.log(arr);
+    // console.log(arr);
     return arr
 }
 
@@ -272,17 +271,19 @@ app.get(`/manga/:mangaName`, (req, res) => {
     // getting informations from json file
     let data = jsonWriter.getMangaJson(mangaName);
 
-    console.log('type:', typeof (data))
 
     let tags = data.tags;
     let mangaDesc = data.description;
     let chapterName = data.chapters.map(name => name.chapterName);
     let bookmarks = data.chapters.map(book => book.bookmarked);
 
+    // will cause problems!!!
+    chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
 
     // let bookmarks = jsonWriter.getBookmarks(mangaName)
 
-
+// console.log(data)
+console.log(chapterName)
 
 
     //renders the chapter-menu.ejs with the arguments
@@ -327,7 +328,7 @@ function getList(mangaName) {
 
     //removes all elements that contains ".ht" in them
     contentList = contentList.filter(function (p) {
-        console.log(!p.includes('.ht'))
+        // console.log(!p.includes('.ht'))
         return !p.includes(`.ht`);
     });
 

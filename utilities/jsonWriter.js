@@ -205,6 +205,7 @@ module.exports = {
         // reads the json file and extracts the list of chapters
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
+        let folderContent = (fs.readdirSync(`manga/${path}`))
 
         console.log(chapterPath)
         let elementsToDelete = []
@@ -213,51 +214,38 @@ module.exports = {
         // searches for each chapter
         for (let i in chapterPath) {
 
-            // finds the chapter number and its name to make a regex
+            // finds the chapter number 
             let chapterNumber = chapterPath[i].split(' ')[1]
-            // let chapterNumber = chapterPath[i].split(/Chapter.?.?/ig)[1]
-            // chapterNumber = chapterPath[i].replaceAll('.*Chapter.?.?\d', '')
-            // chapterNumber = chapterNumber.replaceAll('_', '')
-            console.log(typeof (chapterNumber))
-            // let chapterNumber = chapterPath[i].split(/Chapter.?.?\d+(\.\d)/ig)
+
+            // finds each chapter's name
             let name = chapterPath[i].replaceAll(/Chapter.?.?.?\d*(\.[1-9])?/ig, '')
             name = name.replaceAll('_', '')
-            
-            
-            // let regex = new RegExp("Ch.?.?.?.?.?.?.?.?" + chapterNumber + ".*" + name+"", "ig")
+            name = name.replaceAll(':', '')
+            name = name.trim()
+
+
             let regex = new RegExp(`Ch.?.?.?.?.?.?.?.?${chapterNumber}.*${name}.*`, "ig")
-            // console.log(regex.test('Chapter 1 Ch title'))
-            // let regex = new RegExp(/.*/)
-            console.log('name+ chNumber:', name, '      ', chapterNumber)
 
 
-            let folderContent = (fs.readdirSync(`manga/${path}`))
-            // regex = /.*/ig
 
-            if (!folderContent.some(chapter => regex.test(chapter))) {
-                // console.log(folderContent.some(chapter => regex.test(chapter)))
+            // tries to match chapters in the json file to a downloaded chapter
+            let match = folderContent.some(chapter => regex.test(chapter));
+            if (!match) {
+                // console.log(match)
                 elementsToDelete.push(i)
+                // console.log('push', jsonData.chapters[i])
             }
-
-
-            // searches for each chapter in the files
-            // if (!fs.existsSync(`manga/${path}/${chapterPath[i]}`)) {
-            // if (!fs.existsSync(`manga/${path}/${regex}`)) {
-
-            //     elementsToDelete.push(i)
-            //     // console.log(chapterPath[i])
-            // }
-
 
         }
 
 
         // deletes the extra chapters in the json object
-        for (let j in elementsToDelete) {
-            delete jsonData.chapters[elementsToDelete[j]]
-            jsonData.chapters.splice(elementsToDelete[j])
+        if (elementsToDelete.length > 0) {
+            for (let j in elementsToDelete) {
+                // deletes the elements to delete
+                jsonData.chapters.splice(([elementsToDelete[j]] - j), 1);
+            }
         }
-
 
         return jsonData
     },
