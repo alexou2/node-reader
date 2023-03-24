@@ -38,8 +38,8 @@ module.exports = {
                 params: {
                     title: title,
                     "order[relevance]": "desc",
-                    // "order[followedCount]": "desc",
-                    // sortBy: "desc",                    
+                    // "order[followedCount]": "desc", 
+                    
                 }
 
             });

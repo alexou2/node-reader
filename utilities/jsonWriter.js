@@ -220,6 +220,7 @@ module.exports = {
             // finds each chapter's name
             let name = chapterPath[i].replaceAll(/Chapter.?.?.?\d*(\.[1-9])?/ig, '')
             name = name.replaceAll('_', '')
+            name = name.replaceAll(':', '')
             name = name.trim()
 
 
@@ -232,7 +233,7 @@ module.exports = {
             if (!match) {
                 // console.log(match)
                 elementsToDelete.push(i)
-                console.log('push', jsonData.chapters[i])
+                // console.log('push', jsonData.chapters[i])
             }
 
         }
