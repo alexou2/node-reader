@@ -115,7 +115,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     let bookmarks = data.chapters.map(book => book.bookmarked);
 
     // will cause problems!!!
-    chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
+    // chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
 
     // let bookmarks = jsonWriter.getBookmarks(mangaName)
 
@@ -124,8 +124,8 @@ console.log(chapterName)
 
 
     //renders the chapter-menu.ejs with the arguments
-    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
+    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
 });
 
 
