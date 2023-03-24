@@ -33,35 +33,35 @@ if (!fs.existsSync(`manga`)) {
 if (!fs.existsSync(`jsonFiles`)) {
     fs.mkdirSync(`jsonFiles`)
 }
-// if (!fs.existsSync(`jsonFiles/mangaList.json`)) {
-//     const baseMangaList = JSON.stringify({ list_of_mangas: [] }, 'null', 2)
-//     fs.writeFileSync('jsonFiles/mangaList.json', (baseMangaList))
-// }
 
 
 
-//loads the form
-app.get(`/new/`, (req, res) => {
-    res.render("../views/add-manga");
-});
+// //loads the form
+// app.get(`/new/`, (req, res) => {
+//     res.render("../views/add-manga");
+// });
 
 
 
 
 
 
-//prints the content of the form and redirects to the homepage 
-// obselete since there is a better form for downloading
-app.post(`/new`, (req, res) => {
+// //prints the content of the form and redirects to the homepage 
+// // obselete since there is a better form for downloading
+// app.post(`/new`, (req, res) => {
 
-    console.log(req.body)
-    console.log(req.body.baseOffset)
+//     console.log(req.body)
+//     console.log(req.body.baseOffset)
 
-    form.downloadManga(req)
+//     form.downloadManga(req)
 
-    // redirects the user to the homepage after adding the manga
-    res.redirect(`/`)
-})
+//     // redirects the user to the homepage after adding the manga
+//     res.redirect(`/`)
+// })
+
+
+
+
 
 
 
@@ -120,11 +120,111 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 
 
 
+//renders the homepage accessible at localhost:3000
+app.get(`/`, (req, res) => {
+    let mangaName = "."
+    let mangaList = getList(mangaName)
+    for (i in mangaList) {
+        mangaList[i] = mangaList[i].replaceAll('%', '%25')
+    }
+    res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
+    console.log("homepage is running")
+});
+
+
+
+//renders the page where all of a manga's chapters are displayed
+app.get(`/manga/:mangaName`, (req, res) => {
+    // var mangaName = getMangaName(url.parse(req.url).pathname)
+    var mangaName = req.params.mangaName;
+
+
+    mangaName = mangaName.replaceAll('%20', '\ ')
+    var chapterList = getList(mangaName)
+
+    // var chapterList = getList(mangaName)
+    writeJson.checkJson(mangaName);
+
+    chapterList = sortList(chapterList, 'chapters')
+    // console.log("chapterList ",chapterList)
+
+    // let mangaDesc = writeJson.getMangaDesc(mangaName)
+    // console.log('desc', mangaDesc);
+
+    for (i in chapterList) {
+        chapterList[i] = chapterList[i].replaceAll('%', '%25')
+    }
+
+    // getting informations from json file
+    let data = jsonWriter.getMangaJson(mangaName);
+
+
+    let tags = data.tags;
+    let mangaDesc = data.description;
+    let chapterName = data.chapters.map(name => name.chapterName);
+    let bookmarks = data.chapters.map(book => book.bookmarked);
+
+    // will cause problems!!!
+    chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
+
+    // let bookmarks = jsonWriter.getBookmarks(mangaName)
+
+// console.log(data)
+console.log(chapterName)
+
+
+    //renders the chapter-menu.ejs with the arguments
+    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
+});
+
+
+
+
+
+// post request for bookmarking chapters
+app.post(`/bookmark-chap`, (req, res) => {
+
+    // let mangaName = req.params.mangaName
+    // console.log('data: ', req)
+    form.bookmarkChap(req)
+    // console.log(req.body.updateJson)
+    res.sendStatus(200)
+})
+
+// post request when updating chapter list from html page
+app.post(`/update-chapters`, (req, res) => {
+
+    // let mangaName = req.params.mangaName
+    // console.log('data: ', req)
+    form.updateChapterList(req)
+    // redirects with status code 200 (ok)
+    res.sendStatus(200)
+})
+
+// post request when adding a new manga
+app.post(`/`, (req, res) => {
+    console.log('req', req)
+    console.log(req.body)
+    console.log(req.body.baseOffset)
+
+    // calls the form manager to take care of the request
+    form.downloadManga(req)
+    // res.redirect(`.`)
+    res.sendStatus(200)
+})
+
+
+
+
 
 // enables the server to be accessed via localhost 3000
 app.listen(3000, (req, res) => {
     console.log("Connected on port:3000");
 });
+
+
+
 
 
 
@@ -216,102 +316,6 @@ function sortList(arr, type) {
     // console.log(arr);
     return arr
 }
-
-
-
-
-
-
-//renders the homepage accessible at localhost:3000
-app.get(`/`, (req, res) => {
-    let mangaName = "."
-    let mangaList = getList(mangaName)
-    for (i in mangaList) {
-        mangaList[i] = mangaList[i].replaceAll('%', '%25')
-    }
-    res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
-    console.log("homepage is running")
-});
-
-// post request when adding a new manga
-app.post(`/`, (req, res) => {
-    console.log('req', req)
-    console.log(req.body)
-    console.log(req.body.baseOffset)
-
-    // calls the form manager to take care of the request
-    form.downloadManga(req)
-    // res.redirect(`.`)
-    res.sendStatus(200)
-})
-
-
-//renders the page where all of a manga's chapters are displayed
-app.get(`/manga/:mangaName`, (req, res) => {
-    // var mangaName = getMangaName(url.parse(req.url).pathname)
-    var mangaName = req.params.mangaName;
-
-
-    mangaName = mangaName.replaceAll('%20', '\ ')
-    var chapterList = getList(mangaName)
-
-    // var chapterList = getList(mangaName)
-    writeJson.checkJson(mangaName);
-
-    chapterList = sortList(chapterList, 'chapters')
-    // console.log("chapterList ",chapterList)
-
-    // let mangaDesc = writeJson.getMangaDesc(mangaName)
-    // console.log('desc', mangaDesc);
-
-    for (i in chapterList) {
-        chapterList[i] = chapterList[i].replaceAll('%', '%25')
-    }
-
-    // getting informations from json file
-    let data = jsonWriter.getMangaJson(mangaName);
-
-
-    let tags = data.tags;
-    let mangaDesc = data.description;
-    let chapterName = data.chapters.map(name => name.chapterName);
-    let bookmarks = data.chapters.map(book => book.bookmarked);
-
-    // will cause problems!!!
-    chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
-
-    // let bookmarks = jsonWriter.getBookmarks(mangaName)
-
-// console.log(data)
-console.log(chapterName)
-
-
-    //renders the chapter-menu.ejs with the arguments
-    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
-
-
-});
-
-// post request for bookmarking chapters
-app.post(`/bookmark-chap`, (req, res) => {
-
-    // let mangaName = req.params.mangaName
-    // console.log('data: ', req)
-    form.bookmarkChap(req)
-    // console.log(req.body.updateJson)
-    res.sendStatus(200)
-})
-
-// post request when updating chapter list from html page
-app.post(`/update-chapters`, (req, res) => {
-
-    // let mangaName = req.params.mangaName
-    // console.log('data: ', req)
-    form.updateChapterList(req)
-    // redirects with status code 200 (ok)
-    res.sendStatus(200)
-})
 
 
 
