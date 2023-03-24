@@ -287,8 +287,8 @@ console.log(chapterName)
 
 
     //renders the chapter-menu.ejs with the arguments
-    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
+    // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
 
 
 });
