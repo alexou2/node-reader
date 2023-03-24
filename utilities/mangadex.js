@@ -25,7 +25,7 @@ module.exports = {
 
 
     //does a search on mangadex.org and returns the 
-    getMangaID: async function (title, languages, baseOffset, updateJson) {
+    getMangaID: async function (title, languages, baseOffset, updateJson, sortBy) {
 
 
 
@@ -37,8 +37,9 @@ module.exports = {
                 maxContentLength: Infinity,
                 params: {
                     title: title,
-                    // "order[relevance]": "desc",
-                    "order[followedCount]": "desc",
+                    "order[relevance]": "desc",
+                    // "order[followedCount]": "desc",
+                    // sortBy: "desc",                    
                 }
 
             });
@@ -95,7 +96,7 @@ module.exports = {
 
 
 
-            if (!updateJson){
+            if (!updateJson) {
                 // downloads the chapters
                 this.getChapters(mangaID[0], mangaName, languages, baseOffset)
             }
@@ -338,7 +339,7 @@ module.exports = {
             let chapterTitle = []
             let chapter = []
             let chapterPath = []
-// will need to change the number of requests made
+            // will need to change the number of requests made
             for (let i = 0; i < 10; i++) {
                 const resp = await axios({
                     method: 'GET',

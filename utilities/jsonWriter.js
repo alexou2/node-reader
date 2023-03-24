@@ -223,18 +223,16 @@ module.exports = {
             name = name.trim()
 
 
-            // let regex = new RegExp("Ch.?.?.?.?.?.?.?.?" + chapterNumber + ".*" + name+"", "ig")
             let regex = new RegExp(`Ch.?.?.?.?.?.?.?.?${chapterNumber}.*${name}.*`, "ig")
 
 
-            // let folderContent = (fs.readdirSync(`manga/${path}`))
 
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
             if (!match) {
                 // console.log(match)
                 elementsToDelete.push(i)
-                console.log('push',jsonData.chapters[i])
+                console.log('push', jsonData.chapters[i])
             }
 
         }
@@ -243,9 +241,8 @@ module.exports = {
         // deletes the extra chapters in the json object
         if (elementsToDelete.length > 0) {
             for (let j in elementsToDelete) {
-                // delete jsonData.chapters[elementsToDelete[j]]
-                jsonData.chapters.splice(([elementsToDelete[j]]-j), 1);
-                // console.log('deleted', jsonData.chapters[elementsToDelete[j]])
+                // deletes the elements to delete
+                jsonData.chapters.splice(([elementsToDelete[j]] - j), 1);
             }
         }
 

@@ -279,6 +279,8 @@ app.get(`/manga/:mangaName`, (req, res) => {
     let chapterName = data.chapters.map(name => name.chapterName);
     let bookmarks = data.chapters.map(book => book.bookmarked);
 
+    // will cause problems!!!
+    chapterList = data.chapters.map(chapter => chapter.chapterPath) //remove this line if some chapters can't be accessed
 
     // let bookmarks = jsonWriter.getBookmarks(mangaName)
 

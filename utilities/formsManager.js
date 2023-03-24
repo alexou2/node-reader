@@ -18,7 +18,7 @@ module.exports = {
 
                 //if mangadex is the source
                 case 'Mangadex':
-                    mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset), req.body.updateJson)
+                    mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset), req.body.updateJson, req.body.sortBy)
                     console.log('mangadex in ', req.body.translatedLanguages)
                     break;
 
