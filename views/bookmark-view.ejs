@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="top-bar">
+
+        <div class="page-name">
+            <h1>Bookmarks
+            </h1>
+        </div>
+        <div class="currentPath" id="currentPath">
+            <a href="/">Home > </a><a href="/manga/Bookmarks">
+                Bookmarks
+            </a>
+        </div>
+    </div>
+
+<!-- for each manga, display every bokmarked chapter with the manga cover -->
+    <% for( let i=0; i < mangaName.length; i++ ) { %>
+
+<a href="manga/<%=mangaName %>"><img src="" </a>
+
+
+
+        <% } %>
+
+
+</body>
+
+</html>
