@@ -37,9 +37,9 @@ module.exports = {
                 maxContentLength: Infinity,
                 params: {
                     title: title,
-                    "order[relevance]": "desc",
+                    // "order[relevance]": "desc",
                     // "order[followedCount]": "desc", 
-                    
+                    [`order[${sortBy}]`]: "desc",                    
                 }
 
             });
