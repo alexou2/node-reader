@@ -43,33 +43,6 @@ if (!fs.existsSync(`jsonFiles`)) {
 
 
 
-
-
-
-// //prints the content of the form and redirects to the homepage 
-// // obselete since there is a better form for downloading
-// app.post(`/new`, (req, res) => {
-
-//     console.log(req.body)
-//     console.log(req.body.baseOffset)
-
-//     form.downloadManga(req)
-
-//     // redirects the user to the homepage after adding the manga
-//     res.redirect(`/`)
-// })
-
-
-
-
-
-
-
-
-
-
-
-
 //renders the homepage accessible at localhost:3000
 app.get(`/`, (req, res) => {
     let mangaName = "."
@@ -180,6 +153,17 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 });
 
 
+//prints the content of the form and redirects to the homepage 
+app.post(`/new`, (req, res) => {
+
+    console.log(req.body)
+    console.log(req.body.baseOffset)
+
+    form.downloadManga(req)
+
+    // redirects the user to the homepage after adding the manga
+    res.redirect(`/`)
+})
 
 // post request for bookmarking chapters
 app.post(`/bookmark-chap`, (req, res) => {
