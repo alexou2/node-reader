@@ -5,12 +5,16 @@ body {
 
 .top-bar {
     background-color: rgb(60, 60, 60);
+    position: fixed;
+    width:100%;
+    top:0px;
 }
 
 
 
 a {
-    color: rgb(150, 50, 215);
+    /* color: rgb(150, 50, 215); */
+color:#3c3c3c
     /* margin: 1em; */
 
 }
