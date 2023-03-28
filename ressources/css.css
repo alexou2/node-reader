@@ -16,6 +16,8 @@ body {
     top: 0px;
     overflow: auto;
 }
+
+
 .menu-bar{
     right: 0px;
     /* background-color: rgb(60, 60, 60); */
@@ -29,7 +31,7 @@ transition: 1s;
 
 
     height: 100%;
-    width: 15em;
+    width: 25em;
     display: none;
     position: fixed;
     z-index: 1;
@@ -37,6 +39,7 @@ transition: 1s;
     padding-top: 2em;
     /* left: 0; */
     background: rgba(0, 0, 0, 0.7);
+    text-align: center;
 }
 
 .menu-content{
