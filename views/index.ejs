@@ -21,7 +21,8 @@
     <div class="top-bar reader-bar">
         <div class="page-name">
             <h1>
-               <%=mangaName%> <%=chapName%>
+                <%=mangaName%>
+                    <%=chapName%>
             </h1>
         </div>
 
@@ -37,14 +38,13 @@
 
 
     <div class="zoom">
-        <img class="reset" onclick="fullWidth()" src="/maximize-width.svg"title="Maximize width">
-        <img class="reset" onclick="fullHeight()" src="/maximize-height.svg"title="Maximize height">
-        <img onclick="zoomout()" src="/zoom_out-icon.svg"title="Zoom out">
-        <img onclick="zoomIn()" src="/zoom_in-icon.svg"title="Zoom in">
-
-
+        <img class="reset" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width">
+        <img class="reset" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height">
+        <img onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out">
+        <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
     </div>
-<!-- buttons -->
+
+    <!-- buttons -->
     <div class="change-chapter top-buttons">
         <a class="prev-chap" href="../<%=prevChapter%>">◄◄ Previous </a>
 
@@ -54,21 +54,36 @@
 
 
 
-<!-- pages -->
+    <!-- pages -->
     <div class="page" id="page">
         <% for(var i=0; i<path_to_image.length; i++) { %>
 
-        <img id="chapterPages" class="chapterPages" src="<%= path_to_image[i] %>">
+            <img id="chapterPages" class="chapterPages" src="<%= path_to_image[i] %>">
             <% } %>
     </div>
 
-<!-- buttons -->
+    <!-- buttons -->
     <div class="change-chapter bottom-buttons">
         <a class="prev-chap" href="../<%=prevChapter%>">◄◄ Previous </a>
 
         <a class="next-chap" href="../<%=nextChapter%>">Next ►►</a>
 
     </div>
+
+    <span class="closebtn" onclick="showMenuBar()" title="Close Overlay">&#215</span>
+    <!-- <div class="menu-bar"> -->
+        <div class ="menu-bar" id="menu-bar" style="display: none;">
+
+            <div class="zoom">
+                <img class="reset" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width">
+                <img class="reset" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height">
+                <img onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out">
+                <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
+            </div>
+ws
+        </div>
+        
+    <!-- </div> -->
 
 </body>
 
@@ -79,7 +94,7 @@
 
 
 <script>
-// plus button
+    // plus button
     function zoomIn() {
         var images = document.getElementsByClassName("chapterPages");
         for (var i = 0; i < images.length; i++) {
@@ -88,14 +103,14 @@
     }
 
 
-// minus button
+    // minus button
     function zoomout() {
         var images = document.getElementsByClassName("chapterPages");
         for (var i = 0; i < images.length; i++) {
             images[i].width -= 200;
         }
     }
-  
+
     // reset button
     function fullWidth() {
         var images = document.getElementsByClassName("chapterPages");
@@ -109,7 +124,15 @@
         for (var i = 0; i < images.length; i++) {
             images[i].width = 1000;
         }
-    
+
+    }
+
+    function showMenuBar() {
+        document.getElementById('menu-bar').style.display = "block";
+    }
+
+    function closeMenuBar() {
+        document.getElementById('menu-bar').style.display = "none";
     }
 
 </script>
