@@ -34,6 +34,7 @@
                 <%= chapName %>
             </a>
         </div>
+        <span class="closebtn" onclick="showMenuBar()" title="Close Overlay">&#215</span>
     </div>
 
 
@@ -70,19 +71,20 @@
 
     </div>
 
-    <span class="closebtn" onclick="showMenuBar()" title="Close Overlay">&#215</span>
-    <!-- <div class="menu-bar"> -->
-        <div class ="menu-bar" id="menu-bar" style="display: none;">
 
+    <!-- <div class="menu-bar"> -->
+    <div class="menu-bar" id="menu-bar" style="display: none;">
+        <div class="closebtn" onclick="closeMenuBar()" title="Close Overlay">&#215</div>
+        <div class="menu-content">
             <div class="zoom">
                 <img class="reset" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width">
                 <img class="reset" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height">
                 <img onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out">
                 <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
             </div>
-ws
         </div>
-        
+    </div>
+
     <!-- </div> -->
 
 </body>
@@ -129,6 +131,9 @@ ws
 
     function showMenuBar() {
         document.getElementById('menu-bar').style.display = "block";
+        // document.getElementById('menu-bar').classList.toggle("show");
+        // document.getElementById('menu-bar').style.transform(1);
+
     }
 
     function closeMenuBar() {

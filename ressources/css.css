@@ -23,11 +23,13 @@ body {
     height: 100em;
     box-sizing: border-box;
     position: fixed;
-
+transition: linear;
+transform: translateX(23);
+transition: 1s;
 
 
     height: 100%;
-    width: 20em;
+    width: 15em;
     display: none;
     position: fixed;
     z-index: 1;
@@ -35,6 +37,10 @@ body {
     padding-top: 2em;
     /* left: 0; */
     background: rgba(0, 0, 0, 0.7);
+}
+
+.menu-content{
+    padding-top: 5em;
 }
 
 a {
