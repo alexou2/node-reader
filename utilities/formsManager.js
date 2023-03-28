@@ -53,7 +53,7 @@ module.exports = {
         console.log(req.body)
 
         // add json data to download chapters i other than english
-        mangadex.getMangaID(req.body.mangaName + " ", 'en', parseInt(req.body.offset))
+        mangadex.getMangaID(req.body.mangaName + " ", 'en', parseInt(req.body.offset),"", "relevance")
 
     },
 
