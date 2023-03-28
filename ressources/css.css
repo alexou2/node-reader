@@ -99,6 +99,7 @@ a {
 
 .page {
     text-align: center;
+    
 }
 
 
@@ -106,7 +107,6 @@ a {
     display: block;
     max-width: 100%;
     text-align: right;
-
 
     display: block;
     margin: 5px auto 0;
@@ -382,7 +382,7 @@ input[type=submit]:hover {
     text-align: center;
     border: none;
     background-color: none;
-
+cursor: pointer;
 }
 
 .updateChapters button {
