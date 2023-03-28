@@ -5,22 +5,23 @@ body {
 
 .top-bar {
     background-color: rgb(60, 60, 60);
-    position: fixed;
-    width:100%;
-    top:0px;
-    overflow:auto;
-
-
-
-    
+    /* position: sticky;
+    width: 100%;
+    top: 0px;
+    overflow: auto; */
 }
-
+.reader-bar{
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    overflow: auto;
+}
 
 
 a {
     /* color: rgb(150, 50, 215); */
-color:#3c3c3c
-    /* margin: 1em; */
+    color: #3c3c3c
+        /* margin: 1em; */
 
 }
 
@@ -260,9 +261,9 @@ input {
 }
 
 
-.show-options{
+.show-options {
     margin-top: 7px;
-    padding:6px;
+    padding: 6px;
     margin-bottom: 0px;
 }
 
@@ -344,18 +345,19 @@ input[type=submit]:hover {
     color: #ccc;
 }
 
-.updateChapters{
-    background-color:#44444400;
+.updateChapters {
+    background-color: #44444400;
     border-color: #44444400;
-    font-size:5em;
+    font-size: 5em;
     padding-left: .5em;
-    color:#fff;
+    color: #fff;
     text-align: center;
     border: none;
     background-color: none;
-    
+
 }
-.updateChapters button{
+
+.updateChapters button {
     height: fit-content;
     width: fit-content;
 }
