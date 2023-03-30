@@ -34,16 +34,16 @@
                 <%= chapName %>
             </a>
         </div>
-        <span class="closebtn" onclick="showMenuBar()" title="Close Overlay">❋</span>
+        <!-- <span class="closebtn" onclick="showMenuBar()" title="Close Overlay">❋</span> -->
     </div>
 
-❋
-    <div class="zoom">
+
+    <!-- <div class="zoom">
         <img class="reset" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width">
         <img class="reset" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height">
         <img onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out">
         <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
-    </div>
+    </div> -->
 
     <!-- buttons -->
     <div class="change-chapter top-buttons">
@@ -72,20 +72,18 @@
     </div>
 
 
-    <!-- <div class="menu-bar"> -->
-    <div class="menu-bar" id="menu-bar" style="display: none;">
-        <div class="closebtn" onclick="closeMenuBar()" title="Close Overlay">❋</div>
+    <div class="menu-bar" id="menu-bar">
+        <!-- <div class="closebtn" onclick="closeMenuBar()" title="Close Overlay"></div> -->
         <div class="menu-content">
             <div class="zoom">
-                <img class="reset" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width">
-                <img class="reset" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height">
-                <img onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out">
-                <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
+                <img class="zoom max-width" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width"><br>
+                <img class="zoom max-height" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height"><br>
+                <img class="zoom zoom-out" onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out"><br>
+                <img class="zoom zoom-in" onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in"><br>
             </div>
         </div>
     </div>
 
-    <!-- </div> -->
 
 </body>
 
@@ -129,16 +127,16 @@
 
     }
 
-    function showMenuBar() {
-        document.getElementById('menu-bar').style.display = "block";
-        // document.getElementById('menu-bar').classList.toggle("show");
-        // document.getElementById('menu-bar').style.transform(1);
+    // function showMenuBar() {
+    //     document.getElementById('menu-bar').style.display = "block";
+    //     // document.getElementById('menu-bar').classList.toggle("show");
+    //     // document.getElementById('menu-bar').style.transform(1);
 
-    }
+    // }
 
-    function closeMenuBar() {
-        document.getElementById('menu-bar').style.display = "none";
-    }
+    // function closeMenuBar() {
+    //     document.getElementById('menu-bar').style.display = "none";
+    // }
 
 </script>
 
