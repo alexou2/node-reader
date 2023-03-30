@@ -83,6 +83,8 @@ a {
     display: flex;
     flex-wrap: wrap;
     /* justify-content: center; */
+justify-content: space-around;
+
 }
 
 .manga-item {
@@ -92,8 +94,15 @@ a {
     margin: 1em;
     transition: transform .3s;
     font-size: 1.15em;
-
+    align-content: stretch;
+    align-content: baseline;
 }
+@media screen and (max-width: 500px) {
+    .manga-item {
+      width: 40%;
+    }
+  }
+  
 
 .manga-image {
     width: 100%;
