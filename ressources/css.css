@@ -6,6 +6,7 @@ body {
 .top-bar {
     background-color: rgb(60, 60, 60);
 }
+
 .top-bar {
     background-color: rgb(60, 60, 60);
     /* position: sticky; */
@@ -13,7 +14,8 @@ body {
     top: 0px;
     overflow: auto;
 }
-.reader-bar{
+
+.reader-bar {
     position: sticky;
     width: 100%;
     top: 0px;
@@ -21,7 +23,7 @@ body {
 }
 
 
-.menu-bar{
+.menu-bar {
     right: 0px;
     /* background-color: rgb(60, 60, 60); */
     /* height:100%; */
@@ -38,10 +40,10 @@ body {
     bottom: 40%;
     /* top: auto; */
     padding-bottom: 2em;
-  
+
 }
 
-.zoom img{
+.zoom img {
     margin: 5px;
     margin-right: 10px;
     /* height: 30em; */
@@ -54,7 +56,7 @@ body {
     text-align: right;
     /* margin-top: 1em;
     margin-right: 5%; */
-    
+
 }
 
 
@@ -404,8 +406,7 @@ input[type=submit]:hover {
     text-align: center;
     border: none;
     background-color: none;
-    cursor:pointer
-
+    cursor: pointer
 }
 
 .updateChapters button {
@@ -413,36 +414,54 @@ input[type=submit]:hover {
     width: fit-content;
 }
 
-.next-chap, .prev-chap{
+.next-chap,
+.prev-chap {
     white-space: nowrap;
     text-overflow: ellipsis;
-    text-overflow:unset;
+    text-overflow: unset;
     overflow: hidden;
 }
 
-
+/* screen width */
 @media screen and (max-width: 500px) {
     .manga-item {
-       width: 40%;
+        width: 40%;
     }
-    .reader-bar{
+
+    .reader-bar {
         position: relative;
     }
-    .menu-bar{
+
+    .menu-bar {
         position: relative;
         width: 100%;
     }
-    .next-chap span, .prev-chap span{
-    display:none;
+
+    .next-chap span,
+    .prev-chap span {
+        display: none;
     }
-    
+    .next-chap,
+    .prev-chap {
+        width: 40%;
+    }
+
+    .change-chapter{
+        width:auto;
+        display: block;
+        width:100%;
+    }
+
 }
-@media screen and (max-height: 900px) {
-    .reader-bar{
-            position: relative;
-        }
-        .menu-bar{
-            position: relative;
-            width: 100%;
-        }
+
+/* screen height */
+/* @media screen and (max-height: 900px) {
+    .reader-bar {
+        position: relative;
     }
+
+    .menu-bar {
+        position: relative;
+        width: 100%;
+    }
+} */
