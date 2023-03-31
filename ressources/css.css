@@ -419,6 +419,8 @@ input[type=submit]:hover {
     text-overflow:unset;
     overflow: hidden;
 }
+
+
 @media screen and (max-width: 500px) {
     .manga-item {
        width: 40%;
@@ -435,3 +437,12 @@ input[type=submit]:hover {
     }
     
 }
+@media screen and (max-height: 900px) {
+    .reader-bar{
+            position: relative;
+        }
+        .menu-bar{
+            position: relative;
+            width: 100%;
+        }
+    }
