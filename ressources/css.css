@@ -423,9 +423,11 @@ input[type=submit]:hover {
 }
 
 /* screen width */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
     .manga-item {
         width: 40%;
+        flex-grow: 1;
+
     }
 
     .reader-bar {
