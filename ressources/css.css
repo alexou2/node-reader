@@ -8,7 +8,7 @@ body {
 }
 .top-bar {
     background-color: rgb(60, 60, 60);
-    position: sticky;
+    /* position: sticky; */
     width: 100%;
     top: 0px;
     overflow: auto;
@@ -247,7 +247,7 @@ a {
     box-shadow: 0 0 24px -8px blue;
 }
 
-.zoom img {
+/* .zoom img {
     width: 3em;
     max-height: 3em;
 }
@@ -256,7 +256,7 @@ a {
     text-align: right;
     margin-top: 1em;
     margin-right: 5%;
-}
+} */
 
 .list img {
     width: 1.5em;
@@ -413,7 +413,12 @@ input[type=submit]:hover {
     width: fit-content;
 }
 
-
+.next-chap, .prev-chap{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-overflow:unset;
+    overflow: hidden;
+}
 @media screen and (max-width: 500px) {
     .manga-item {
        width: 40%;
@@ -425,5 +430,8 @@ input[type=submit]:hover {
         position: relative;
         width: 100%;
     }
-
+    .next-chap span, .prev-chap span{
+    display:none;
+    }
+    
 }
