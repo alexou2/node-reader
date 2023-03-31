@@ -476,7 +476,7 @@ input[type=submit]:hover {
 }
 
 /* screen height */
-/* @media screen and (max-height: 900px) {
+@media screen and (max-height: 900px) {
     .reader-bar {
         position: relative;
     }
@@ -485,4 +485,4 @@ input[type=submit]:hover {
         position: relative;
         width: 100%;
     }
-} */
+}
