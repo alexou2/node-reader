@@ -420,6 +420,24 @@ input[type=submit]:hover {
     text-overflow: ellipsis;
     text-overflow: unset;
     overflow: hidden;
+    border-radius: 10px;
+}
+
+.change-chapter {
+    padding-top: .5em;
+}
+
+.bottom-buttons .next-chap {
+    display: inline-block;
+    width: 100%;
+    background-color: blue;
+    /* border-radius: 2px; */
+    box-shadow: 0 0 24px -8px blue;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-top: 0;
+    text-align: center;
+    color: #fff;
 }
 
 /* screen width */
@@ -443,15 +461,16 @@ input[type=submit]:hover {
     .prev-chap span {
         display: none;
     }
+
     .next-chap,
     .prev-chap {
         width: 40%;
     }
 
-    .change-chapter{
-        width:auto;
+    .change-chapter {
+        width: auto;
         display: block;
-        width:100%;
+        width: 100%;
     }
 
 }
