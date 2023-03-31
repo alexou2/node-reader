@@ -45,6 +45,19 @@
         <img onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in">
     </div> -->
 
+    <div class="menu-bar" id="menu-bar">
+        <!-- <div class="closebtn" onclick="closeMenuBar()" title="Close Overlay"></div> -->
+        <div class="menu-content">
+            <div class="zoom">
+                <img class="zoom max-width" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width"><br>
+                <img class="zoom max-height" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height"><br>
+                <img class="zoom zoom-out" onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out"><br>
+                <img class="zoom zoom-in" onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in"><br>
+            </div>
+        </div>
+    </div>
+
+
     <!-- buttons -->
     <div class="change-chapter top-buttons">
         <a class="prev-chap" href="../<%=prevChapter%>">◄◄ Previous </a>
@@ -72,17 +85,7 @@
     </div>
 
 
-    <div class="menu-bar" id="menu-bar">
-        <!-- <div class="closebtn" onclick="closeMenuBar()" title="Close Overlay"></div> -->
-        <div class="menu-content">
-            <div class="zoom">
-                <img class="zoom max-width" onclick="fullWidth()" src="/maximize-width.svg" title="Maximize width"><br>
-                <img class="zoom max-height" onclick="fullHeight()" src="/maximize-height.svg" title="Maximize height"><br>
-                <img class="zoom zoom-out" onclick="zoomout()" src="/zoom_out-icon.svg" title="Zoom out"><br>
-                <img class="zoom zoom-in" onclick="zoomIn()" src="/zoom_in-icon.svg" title="Zoom in"><br>
-            </div>
-        </div>
-    </div>
+    
 
 
 </body>
