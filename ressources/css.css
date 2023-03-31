@@ -86,9 +86,8 @@ a {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
+    /* justify-content: flex-start; */
     justify-content: space-around;
-
 }
 
 .manga-item {
@@ -98,8 +97,9 @@ a {
     margin: 1em;
     transition: transform .3s;
     font-size: 1.15em;
-    align-content: stretch;
-    align-content: baseline;
+    /* align-content: flex-start; */
+    /* flex-grow: 1;
+    flex-shrink: 1; */
 }
 
 
@@ -353,6 +353,7 @@ input[type=submit]:hover {
     text-align: center;
     border: none;
     background-color: none;
+    cursor:pointer
 
 }
 
@@ -364,7 +365,7 @@ input[type=submit]:hover {
 
 @media screen and (max-width: 500px) {
     .manga-item {
-        width: 40%;
+       width: 40%;
     }
 
 }
