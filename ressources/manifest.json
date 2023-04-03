@@ -8,11 +8,6 @@
 	"scope": ".",
 	"description":"The pwa for Node-Reader",
 	"icons":[
-    {
-      "src":"/node-reader-icon3.svg",                     
-      "sizes":"309x383",
-      "type":"image/png"
-      }, 
       {
         "src":"/pwa-icon.svg",                     
         "sizes":"144x144",
