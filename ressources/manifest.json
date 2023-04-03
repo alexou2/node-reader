@@ -9,9 +9,21 @@
     "description": "An offline manga reader that can download from other ewbsites",
     "icons": [
         {
+            "src": "/node-reader-icon3.svg",
+            "type": "image/svg+xml",
+            "sizes": "309x383",
+            "purpose": "any"
+        },
+        {
             "src": "/pwa-icon.svg",
-            "sizes": "500x500",
+            "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "/android-pwa-icon.svg",
+            "type": "image/svg+xml",
+            "sizes": "512x512",
+            "purpose": "any"
         }
     ],
     "shortcuts": [
@@ -22,9 +34,9 @@
             "url": "/",
             "icons": [
                 {
-                    "src": "/pwa-icon.svg",
+                    "src": "/node-reader-icon3.svg",
                     "type": "image/svg+xml",
-                    "sizes": "500x500",
+                    "sizes": "309x383",
                     "purpose": "any"
                 }
             ]
