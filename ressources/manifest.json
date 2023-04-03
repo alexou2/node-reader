@@ -1,17 +1,24 @@
 {
-	"name":"Node-Reader",
-	"short_name":"Node Reader",
-	"start_url":".",
-	"display":"standalone",
-	"background_color":"#5900b3",
-	"theme_color":"#202020",
-	"scope": ".",
-	"description":"The pwa for Node-Reader",
-	"icons":[
-      {
-        "src":"/pwa-icon.svg",                     
-        "sizes":"144x144",
-        "type":"image/png"
-        }  
-]
+    "name": "NodeReader",
+    "short_name": "Node Reader",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#2c2c2c",
+    "theme_color": "#2c2c2c",
+    "scope": ".",
+    "description": "The pwa for Node-Reader",
+    "display_override": [
+        "window-controls-overlay",
+        "standalone",
+        "minimal-ui",
+        "fullscreen",
+        "browser"
+    ],
+    "icons": [
+        {
+            "src": "/pwa-icon.svg",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ]
 }
