@@ -1,24 +1,47 @@
 {
-    "name": "NodeReader",
+    "name": "Node-Reader",
     "short_name": "Node Reader",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#2c2c2c",
     "theme_color": "#2c2c2c",
     "scope": ".",
-    "description": "The pwa for Node-Reader",
-    "display_override": [
-        "window-controls-overlay",
-        "standalone",
-        "minimal-ui",
-        "fullscreen",
-        "browser"
-    ],
+    "description": "An offline manga reader that can download from other ewbsites",
     "icons": [
         {
             "src": "/pwa-icon.svg",
             "sizes": "500x500",
             "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Home",
+            "short_name": "Home",
+            "description": "Home page",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "/pwa-icon.svg",
+                    "type": "image/svg+xml",
+                    "sizes": "500x500",
+                    "purpose": "any"
+                }
+            ]
+        },
+        {
+            "name": "Bookmarks",
+            "short_name": "Bookmarks",
+            "description": "bookmarked chapters",
+            "url": "/bookmarks",
+            "icons": [
+                {
+                    "src": "/red-bookmark.svg",
+                    "type": "image/svg+xml",
+                    "sizes": "100x100",
+                    "purpose": "any"
+                }
+            ]
         }
     ]
 }
