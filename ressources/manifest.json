@@ -23,7 +23,8 @@
             "src": "/android-pwa-icon.svg",
             "type": "image/svg+xml",
             "sizes": "512x512",
-            "purpose": "any"
+            "purpose": "maskable"
+            
         }
     ],
     "shortcuts": [
