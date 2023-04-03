@@ -9,8 +9,8 @@
 	"description":"The pwa for Node-Reader",
 	"icons":[
     {
-      "src":"/node-reader-icon.svg",                     
-      "sizes":"512x512",
+      "src":"/node-reader-icon3.svg",                     
+      "sizes":"309x383",
       "type":"image/png"
       }  
 ]
