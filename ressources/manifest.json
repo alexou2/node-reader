@@ -1,0 +1,17 @@
+{
+	"name":"Node-Reader",
+	"short_name":"Node Reader",
+	"start_url":".",
+	"display":"standalone",
+	"background_color":"#5900b3",
+	"theme_color":"black",
+	"scope": ".",
+	"description":"The pwa for Node-Reader",
+	"icons":[
+    {
+      "src":"/node-reader-icon.svg",                     
+      "sizes":"512x512",
+      "type":"image/png"
+      }  
+]
+}
