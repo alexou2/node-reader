@@ -4,7 +4,7 @@
 	"start_url":".",
 	"display":"standalone",
 	"background_color":"#5900b3",
-	"theme_color":"black",
+	"theme_color":"none",
 	"scope": ".",
 	"description":"The pwa for Node-Reader",
 	"icons":[
