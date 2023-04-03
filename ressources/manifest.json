@@ -17,7 +17,7 @@
     "icons": [
         {
             "src": "/pwa-icon.svg",
-            "sizes": "144x144",
+            "sizes": "500x500",
             "type": "image/png"
         }
     ]
