@@ -1,7 +1,7 @@
 body {
     background-color: rgb(40, 40, 40);
     color: rgb(255, 255, 255);
-    max-width:100%
+    max-width: 100%
 }
 
 @viewport {
@@ -9,7 +9,7 @@ body {
     height: device-height;
     initial-scale: 1.0;
     viewport-fit: cover;
-  }
+}
 
 .top-bar {
     background-color: rgb(60, 60, 60);
@@ -90,12 +90,8 @@ a {
     font-size: 1.2em;
 }
 
-.tags{
-overflow:auto;
-}
-
-.description{
-
+.tags {
+    overflow: scroll;
 }
 
 .list {
