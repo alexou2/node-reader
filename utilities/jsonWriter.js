@@ -230,11 +230,13 @@ module.exports = {
 
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
+            // finds if there is a match in the list
             if (!match) {
                 // console.log(match)
                 elementsToDelete.push(i)
                 // console.log('push', jsonData.chapters[i])
             }
+            
 
         }
 

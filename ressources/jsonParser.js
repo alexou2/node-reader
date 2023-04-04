@@ -48,11 +48,17 @@ function filterJson(chapterList, mangaJson) {
 
       // tries to match chapters in the json file to a downloaded chapter
       let match = chapterList.some(chapter => regex.test(chapter));
+    //   finds if there is a match in the list
       if (!match) {
           // console.log(match)
           elementsToDelete.push(i)
           // console.log('push', jsonData.chapters[i])
       }
+
+    //   finds if the current cha[ter matches the current name
+    if (folderContent[i] != (chapter => regex.test(chapter))){
+        chapterPath[i] = folderContent[i];
+    }
 
   }
 
