@@ -509,3 +509,6 @@ input[type=submit]:hover {
         width: 100%;
     }
 }
+.body{
+    max-width: 100%;
+}
