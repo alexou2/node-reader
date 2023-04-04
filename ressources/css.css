@@ -486,7 +486,12 @@ input[type=submit]:hover {
         display: block;
         width: 100%;
     }
-
+.tags,
+.description{
+    left:0;
+    right:0;
+    max-width: 100%;
+}
 }
 
 /* screen height */
