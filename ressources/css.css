@@ -4,6 +4,13 @@ body {
     max-width:100%
 }
 
+@viewport {
+    width: device-width;
+    height: device-height;
+    initial-scale: 1.0;
+    viewport-fit: cover;
+  }
+
 .top-bar {
     background-color: rgb(60, 60, 60);
 }
