@@ -17,7 +17,8 @@
         {
             "src": "/pwa-icon.svg",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose":"any"
         },
         {
             "src": "/android-pwa-icon.svg",
