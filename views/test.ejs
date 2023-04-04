@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css.css">
+    <script type="text/javascript" src="/pageInteractions.js"></script>
+    <script type="text/javascript" src="/jsonParser.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
 
@@ -17,42 +19,71 @@
     <div class="top-bar">
 
         <div class="page-name">
-            <h2>Reading <%= mangaName %>
-            </h2>
+            <h1>Reading <%= mangaName %>
+            </h1>
         </div>
-
-        <p> <a button type="button" class="btn btn-warning btn-lg" href="/">◄◄ Go Home
-            </a><br>
-        </p>
+        <div class="currentPath" id="currentPath">
+            <a href="/">Home > </a><a href="/manga/<%= mangaName %>">
+                <%= mangaName %>
+            </a>
+        </div>
     </div>
+    <script>
+        mangaJson = filterJson(chapterList, mangaJson)
+        let tag = getMangaTags(mangaJson)
+        let description = getMangaDescription(mangaJson)
+        let chapterName = getChapterName(mangaJson)
+        let bookmarks = getBookmarks(mangaJson)
+    </script>
 
-    <!-- shows current path -->
-    <div class="currentPath">
-        <a href="/">Home </a><a href="/manga/<%= mangaName %>">
-            <%= mangaName %>
-        </a>
-    </div>
+    <!-- shows manga cover, description, tags, etc... -->
+
     <div class="manga-infos">
-        <div class="cover-page">
-            <img src="cover.jpg">
-        </div>
-        <div class="description">
-            <%= mangaDesc %>
-        </div>
-        <div class="text-box">
-            <%= mangaName %>
 
+        <a href="<%= chapterList[0] %>"><img class="cover-page" src="cover.jpg"></a>
+
+        <span class="tags">
+            <%=getMangaTags(mangaJson) %>
+        </span>
+
+        <div class="description">
+            <%= mangaDesc%>
         </div>
     </div>
 
-    <div class="list chapterList">
-        <% for(var i=0; i<chapterList.length; i++) {%>
-            <a href="<%= chapterList[i] %>">
-                <%= chapterName[i] %>
-            </a><br>
-            <% } %>
-                <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
 
+    <!-- list of chapters -->
+    <div class="list chapterList">
+        <% for(var i=0; i<chapterList.length-1; i++) {%>
+            <%let bookStyle=[]%>
+
+                <% if (bookmarks[i]=="true" ) { %>
+                    <% bookStyle[i]='red-bookmark.svg' %>
+                        <% }else{ %>
+                            <% bookStyle[i]='dark-bookmark.svg' %>
+                                <%}%>
+
+                                    <span id="bookmark-<%=chapterList[i]%>">
+                                        <img id="bookmark-img"
+                                            onclick="addBookmark(`<%= mangaName %>`, `<%=chapterList[i]%>`,`<%=bookmarks[i]=='false'%>`)"
+                                            src=" /<%= bookStyle[i]%>">
+                                    </span>
+                                    <a class="chapter" href="<%= chapterList[i] %>">
+                                        <%= chapterName[i] %>
+                                    </a>
+                                    <br>
+
+                                    <% } %>
+
+                                        <%= chapterList.length%> chapters in total
+                                            <!-- TODO: add an "update manga chapters" button at the end of the list to download only newer chapters -->
+
+    </div>
+    <div id="bookmark">
+        <!-- <img onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')" src=" /zoom_in-icon.svg"> -->
+
+        <span class="updateChapters" onclick="updateChapters('<%=mangaName%>', '<%= chapterList.length %>')"
+            title="download newer chapters">&#8634;</span>
     </div>
 
 </body>
@@ -64,26 +95,3 @@ add continue reading button
 view bookmarked chapters
 add option to compress manga into cbz for ipad
 -->
-
-
-
-
-const paragraph = 'ch1 ch12';
-const regex = /(Ch\d+(\.\d)*)/ig;
-const found = paragraph.match(regex);
-
-console.log(found);
-// Expected output: Array ["T", "I"]
-
-
-
-const paragraph = 'ch-1_p1 ch12 ch 2';
-const regex = /(Ch.?.?.?.?.?.?\d+(\.\d)*.*)/ig;
-const found = paragraph.match(regex);
-
-console.log(found);
-
-//let matches = found.split(' ')
-for (let i in found)
-console.log(found[0]+'\n')
-// Expected output: Array ["T", "I"]

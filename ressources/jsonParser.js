@@ -8,19 +8,6 @@ function getProgressStatus(chapterList, mangaJson) {
 function filterJson(chapterList, mangaJson) {
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   // reads the json file and extracts the list of chapters
   mangaJson = JSON.parse(mangaJson, 'utf-8');
   let chapterPath = mangaJson.chapters.map(path => path.chapterPath)
@@ -73,16 +60,6 @@ function filterJson(chapterList, mangaJson) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     return mangaJson;
 }
 
@@ -103,7 +80,7 @@ function getChapterName(mangaJson) {
 
 function getMangaDescription(mangaJson){
     let description = mangaJson.description;
-    console.log(chapterName);
+    console.log(description);
 
     return description;
 }

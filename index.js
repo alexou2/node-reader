@@ -84,7 +84,8 @@ app.get(`/`, (req, res) => {
 
 
 //renders the page where all of a manga's chapters are displayed
-app.get(`/manga/:mangaName`, (req, res) => {
+// app.get(`/manga/:mangaName`, (req, res) => {
+    app.get(`/manga/:mangaName/asdasd`, (req, res) => {
     // var mangaName = getMangaName(url.parse(req.url).pathname)
     var mangaName = req.params.mangaName;
 
@@ -127,6 +128,45 @@ console.log(chapterName)
     res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags });
     // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
 });
+
+
+
+
+
+
+
+
+app.get(`/manga/:mangaName`, (req, res) => {
+    // var mangaName = getMangaName(url.parse(req.url).pathname)
+    var mangaName = req.params.mangaName;
+
+    mangaName = mangaName.replaceAll('%20', '\ ')
+    var chapterList = getList(mangaName)
+
+
+    chapterList = sortList(chapterList, 'chapters')
+
+    for (i in chapterList) {
+        chapterList[i] = chapterList[i].replaceAll('%', '%25')
+    }
+
+    // getting informations from json file
+    let data = jsonWriter.returnJson(mangaName)
+
+
+    //renders the chapter-menu.ejs with the arguments
+    res.render("../views/test.ejs", { mangaName: mangaName, chapterList: chapterList, mangaJson: data});
+});
+
+
+
+
+
+
+
+
+
+
 
 
 // loads the page where the chapters are read

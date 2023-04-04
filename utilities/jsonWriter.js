@@ -251,5 +251,9 @@ module.exports = {
 
         return jsonData
     },
-
+    returnJson: function (path) {
+        // reads the json file and extracts the list of chapters
+        let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
+        return jsonData;
+    }
 }
