@@ -230,6 +230,7 @@ a {
 .manga-infos {
     display: inline-block;
 }
+
 .tags,
 .description {
     /* display: inline-block; */
@@ -486,12 +487,15 @@ input[type=submit]:hover {
         display: block;
         width: 100%;
     }
-.tags,
-.description{
-    left:0;
-    right:0;
-    max-width: 100%;
-}
+
+    .tags,
+    .description {
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        margin:0;
+        padding: 0;
+    }
 }
 
 /* screen height */
