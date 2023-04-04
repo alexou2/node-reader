@@ -235,7 +235,7 @@ a {
 .description {
     /* display: inline-block; */
     text-align: justify;
-    width: 70%;
+    /* width: 70%; */
     font-size: 1.3em;
     margin-left: 2em;
     margin-top: .5em;
