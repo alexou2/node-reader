@@ -230,7 +230,7 @@ a {
 .manga-infos {
     display: inline-block;
 }
-
+.tags,
 .description {
     /* display: inline-block; */
     text-align: justify;
