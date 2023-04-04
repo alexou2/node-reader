@@ -243,7 +243,7 @@ a {
     padding-right: .5em;
     border-radius: 5px;
     max-width: 100%;
-    overflow: none;
+    overflow: hidden;
 }
 
 .prev-chap {
