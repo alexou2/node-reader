@@ -231,7 +231,7 @@ a {
     display: inline-block;
 }
 
-.tags,
+/* .tags, */
 .description {
     /* display: inline-block; */
     text-align: justify;
