@@ -8,21 +8,12 @@ e.waitUntil(
 );
 });
 
-// self.addEventListener("fetch", function (event) {
-// console.log(event.request.url);
-
-// event.respondWith(
-// 	caches.match(event.request).then(function (response) {
-// 	return response || fetch(event.request);
-// 	})
-// );
-// });
 self.addEventListener("fetch", function (event) {
-	console.log(event.request.url);
-	
-	event.respondWith(
-		function (response) {
-		return response || fetch(event.request);
-		}
-	);
-	});
+console.log(event.request.url);
+
+event.respondWith(
+	caches.match(event.request).then(function (response) {
+	return response || fetch(event.request);
+	})
+);
+});
