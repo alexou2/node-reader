@@ -132,10 +132,11 @@ module.exports = {
         let chapter = [];
         let chapterTitle = [];
         let chapterID = [];
+        let resp;
 
         (async () => {
-            for (let i = 0; i < 10; i++) {
-                const resp = await axios({
+            for (let i = 0; i < 10 && resp != ""; i++) {
+                resp = await axios({
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
@@ -177,10 +178,7 @@ module.exports = {
                     chapterName[k] = chapterName[k].slice(0, -1)
                     console.log('chapters:', chapterName[k])
                 }
-                chapterName[k] = chapterName[k].trim()
-
-                //    replaces all of the % in order to avoid problkems (% is used to encode strings)
-                // chapterName[k] = chapterName[k].replaceAll('%', '%25')
+                chapterName[k] = chapterName[k].trim();
 
 
             }
@@ -339,9 +337,12 @@ module.exports = {
             let chapterTitle = []
             let chapter = []
             let chapterPath = []
+            let resp;
             // will need to change the number of requests made
-            for (let i = 0; i < 10; i++) {
-                const resp = await axios({
+            for (let i = 0; i < 10 && resp != ""; i++) {
+                // const resp = await axios({
+                resp = await axios({
+
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
@@ -350,11 +351,9 @@ module.exports = {
                     params: {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
-                        // "offset": 100 * i + baseOffset,
-                        "offset": 100 * i,
-
-
+                        "offset": 100 * i + baseOffset,
                     },
+
 
                 });
 

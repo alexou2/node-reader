@@ -17,55 +17,6 @@ const sanitizeFilename = require('sanitize-filename');
 
 
 module.exports = {
-    // getters and setters
-
-    // gets the name of the manga 
-    getName: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
-        data = JSON.parse(data)
-        return data.mangaName
-    },
-
-    // gets the path for the manga
-    getPath: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
-        data = JSON.parse(data)
-        return data.path
-    },
-
-    // gets the cover path
-    getCoverPath: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
-        data = JSON.parse(data)
-        return data.cover_path
-    },
-
-    // returns the list of chapters
-    getChapterPath: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8')
-        data = JSON.parse(data)
-
-        let chapterPath = data.chapters.map(path => path.chapterPath)
-        return chapterPath
-    },
-
-    // gets the chapter's names for a manga 
-    getchapterNames: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
-        data = JSON.parse(data);
-        let chapterNames = data.chapters.map(path => path.chapterName)
-
-        return chapterNames
-    },
-
-    // gets the description of the manga
-    getMangaDesc: function (path) {
-        let data = fs.readFileSync(`jsonFiles/${path}.json`, 'utf8');
-        data = JSON.parse(data);
-        let mangaDesc = data.description
-
-        return mangaDesc
-    },
 
     // bookmarks or un-bookmarks chapters
     setBookmark: function (path, chapter, value) {
@@ -86,16 +37,6 @@ module.exports = {
     },
 
 
-
-    getBookmarks: function (path) {
-        // reads the json file
-        let mangaData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
-
-        let bookmarks = mangaData.chapters.map(book => book.bookmarked)
-        console.log(bookmarks)
-
-        return bookmarks
-    },
 
 
 
@@ -233,13 +174,12 @@ console.log('name',name, chapterNumber)
 
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
-            if (!match) {
+            if (!match && jsonData.chapter_count > folderContent.length+1) {
                 console.log('not there',chapterPath[i])
                 elementsToDelete.push(i)
                 // console.log('push', jsonData.chapters[i])
             }
             if (folderContent[i] == (chapter => regex.test(chapter))){
-                chapterPath[i] = folderContent[i]
                 console.log('name changed')
             }
 
