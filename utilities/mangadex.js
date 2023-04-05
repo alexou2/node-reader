@@ -160,6 +160,7 @@ module.exports = {
 
             }
             chapterName = this.filterArr(chapterName)
+            chapterID = this.filterArr(chapterID)
 
 console.log('chapter names:',chapterName)
             //gets the cover image from the manga
