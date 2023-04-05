@@ -56,15 +56,17 @@ body {
     margin-right: 10px;
     /* height: 30em; */
     width: 3em;
+    height: 3em;
     /* max-height: 3em; */
     /* padding: 1em; */
 }
 
 .zoom {
     text-align: right;
-    /* margin-top: 1em;
-    margin-right: 5%; */
-
+    /* margin-top: 1em; */
+    /* margin-right: 5%; */
+    left:auto;
+    right:5em;
 }
 
 
@@ -83,7 +85,7 @@ a {
     padding-right: 0.5em;
     margin: 0;
     color: white;
-    margin-top: 2em;
+    margin-top: .5emem;    
 
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
@@ -264,10 +266,6 @@ a {
     box-shadow: 0 0 24px -8px blue;
 }
 
-/* .zoom img {
-    width: 3em;
-    max-height: 3em;
-}
 
 .zoom {
     text-align: right;
@@ -470,6 +468,9 @@ input[type=submit]:hover {
     .menu-bar {
         position: relative;
         width: 100%;
+    }
+    .zoom img{
+        display:none;
     }
 
     .next-chap span,
