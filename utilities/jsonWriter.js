@@ -201,11 +201,11 @@ module.exports = {
 
 
     // will return the informations for the requested manga, without informations for chapters that are not available
-    getMangaJson: function (path) {
+    getMangaJson: function (path, folderContent) {
         // reads the json file and extracts the list of chapters
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
-        let folderContent = (fs.readdirSync(`manga/${path}`))
+        // let folderContent = (fs.readdirSync(`manga/${path}`))
 
         // console.log(chapterPath)
         let elementsToDelete = []
@@ -237,6 +237,10 @@ console.log('name',name, chapterNumber)
                 console.log('not there',chapterPath[i])
                 elementsToDelete.push(i)
                 // console.log('push', jsonData.chapters[i])
+            }
+            if (folderContent[i] == (chapter => regex.test(chapter))){
+                chapterPath[i] = folderContent[i]
+                console.log('name changed')
             }
 
         }

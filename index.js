@@ -79,7 +79,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     }
 
     // getting informations from json file
-    let data = jsonWriter.getMangaJson(mangaName);
+    let data = jsonWriter.getMangaJson(mangaName,chapterList);
 
 
     let tags = data.tags;
