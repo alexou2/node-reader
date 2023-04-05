@@ -132,11 +132,13 @@ module.exports = {
         let chapter = [];
         let chapterTitle = [];
         let chapterID = [];
-        let resp;
+        let resp
 
         (async () => {
-            for (let i = 0; i < 10 && resp != ""; i++) {
-                resp = await axios({
+            // for (let i = 0; i < 10&& resp != ""; i++) {
+                let i =0
+                do{
+                 resp = await axios({
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
@@ -158,7 +160,9 @@ module.exports = {
                 chapterTitle = chapterTitle.concat(resp.data.data.map(chapter => chapter.attributes.title))
 
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
-            }
+
+                i++
+            }while(resp.data.data != "")
 
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
@@ -339,7 +343,9 @@ module.exports = {
             let chapterPath = []
             let resp;
             // will need to change the number of requests made
-            for (let i = 0; i < 10 && resp != ""; i++) {
+            let i = 0
+            // for (let i = 0; i < 10 && resp != ""; i++) {
+                do{
                 // const resp = await axios({
                 resp = await axios({
 
@@ -363,10 +369,10 @@ module.exports = {
 
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
 
-
+            }while (resp.data.data != "")
 
                 //creates formatted chapter name
-            }
+            
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
                 // chapterPath[k] = chapterName[k].replaceAll(':', '_');
