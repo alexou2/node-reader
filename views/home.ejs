@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
 
-        <meta name="apple-mobile-web-app-status-bar" content="#aa7700">  
-          <!-- <meta name="theme-color" content="black"> -->  
-    
-      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">  
-          <!-- Manifest File link -->  
-          <link rel="manifest" href="manifest.json"> 
-  
-     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="black">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- Manifest File link -->
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
     <title>Homepage</title>
 </head>
@@ -83,9 +83,10 @@
                     <option id="manganato" data-c="manganato">Manganato</option>
                 </select>
 
-                <button type="button" onclick="toggleAdvancedOptions()" class="dropdown-button show-options">Show Other Options</button>
-                <div class="dropdown"id="showOptions">
-                    <div id="advancedOptions" class="dropdown-content"style="display: none;">
+                <button type="button" onclick="toggleAdvancedOptions()" class="dropdown-button show-options">Show Other
+                    Options</button>
+                <div class="dropdown" id="showOptions">
+                    <div id="advancedOptions" class="dropdown-content" style="display: none;">
 
                         Base Offset
                         <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
@@ -109,8 +110,9 @@
                         Sort Manga By
                         <select class="sortBy" name="sortBy">
                             <option id="relevance" data-c="relevance" selected="" value="relevance">Relevance</option>
-                            <option id="popularity" data-c="followedCount"value="followedCount">Popularity</option>
-                            <option id="latestUpdate" data-c="latestUploadedChapter"value="latestUploadedChapter" >Latest update</option>
+                            <option id="popularity" data-c="followedCount" value="followedCount">Popularity</option>
+                            <option id="latestUpdate" data-c="latestUploadedChapter" value="latestUploadedChapter">
+                                Latest update</option>
 
                         </select>
 
@@ -145,15 +147,15 @@
 
         //shows or hide dropdown options
         function toggleAdvancedOptions() {
-            
+
             //shows menu if it is hidden or hides it if its displayed
             var advancedOptions = document.getElementById("advancedOptions");
-            
+
             if (advancedOptions.style.display === "none") {
-            advancedOptions.style.display = "block";
-        } else {
-            advancedOptions.style.display = "none";
-        }
+                advancedOptions.style.display = "block";
+            } else {
+                advancedOptions.style.display = "none";
+            }
 
 
             // if (document.getElementById("showOptions").style.display == "none"){
@@ -170,25 +172,25 @@
     </script>
 
 
-<script>
-	window.addEventListener('load', () => {
-		registerSW();
-	});
+    <script>
+        window.addEventListener('load', () => {
+            registerSW();
+        });
 
-	// Register the Service Worker
-	async function registerSW() {
-		if ('serviceWorker' in navigator) {
-			try {
-				await navigator
-					.serviceWorker
-					.register('/serviceWorker.js');
-			}
-			catch (e) {
-				console.log('SW registration failed');
-			}
-		}
-	}
-</script>
+        // Register the Service Worker
+        async function registerSW() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    await navigator
+                        .serviceWorker
+                        .register('/serviceWorker.js');
+                }
+                catch (e) {
+                    console.log('SW registration failed');
+                }
+            }
+        }
+    </script>
 
 </body>
 
