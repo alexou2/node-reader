@@ -164,7 +164,7 @@ module.exports = {
 console.log('chapter names:',chapterName)
             //gets the cover image from the manga
             try {
-                // this.getCoverImage(mangaName, mangaID)
+                this.getCoverImage(mangaName, mangaID)
             } catch {
                 console.error('couldnt get the cover image for this manga')
             }
@@ -172,15 +172,15 @@ console.log('chapter names:',chapterName)
 
 
             // calls the download function and passes each chapter
-            // for (let j = 0; j < chapterID.length; j++) {
+            for (let j = 0; j < chapterID.length; j++) {
 
-            //     sem.take(() => {
+                sem.take(() => {
 
-            //         this.getChapterInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
-            //         console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
+                    this.getChapterInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
+                    console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
 
-            //     })
-            // }
+                })
+            }
 
         })();
     },
