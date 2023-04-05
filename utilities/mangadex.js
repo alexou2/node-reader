@@ -39,7 +39,7 @@ module.exports = {
                     title: title,
                     // "order[relevance]": "desc",
                     // "order[followedCount]": "desc", 
-                    [`order[${sortBy}]`]: "desc",                    
+                    [`order[${sortBy}]`]: "desc",
                 }
 
             });
@@ -84,38 +84,11 @@ module.exports = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+            // downloads the manga
             if (!updateJson) {
                 // downloads the chapters
                 this.getChapters(mangaID[0], mangaName, languages, baseOffset)
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -136,9 +109,9 @@ module.exports = {
 
         (async () => {
             // for (let i = 0; i < 10&& resp != ""; i++) {
-                let i =0
-                do{
-                 resp = await axios({
+            let i = 0
+            do {
+                resp = await axios({
                     method: 'GET',
                     url: `${baseUrl}/manga/${mangaID}/feed?includeExternalUrl=0`,
                     maxContentLength: Infinity,
@@ -162,7 +135,7 @@ module.exports = {
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
 
                 i++
-            }while(resp.data.data != "")
+            } while (resp.data.data != "")
 
             //creates formatted chapter name
             for (let k = 0; k < chapterID.length; k++) {
@@ -172,26 +145,26 @@ module.exports = {
                 chapterName[k] = sanitizeFilename(chapterName[k])
 
                 //removes th null if there is one
-                if (chapterName[k].endsWith('null')) {
-                    chapterName[k] = chapterName[k].slice(0, -6) + '.1'
+                if (chapterName[k].endsWith(null)) {
+                    chapterName[k] = chapterName[k].slice(0, -5) + '.1'
                 }
                 chapterName[k] = chapterName[k].trim()
                 // if there is an underscore it will remove it
-                if (chapterName[k].endsWith('_')) {
-                    console.log(chapterName[k])
-                    chapterName[k] = chapterName[k].slice(0, -1)
-                    console.log('chapters:', chapterName[k])
-                }
-                chapterName[k] = chapterName[k].trim();
+                // if (chapterName[k].endsWith('_')) {
+                //     console.log(chapterName[k])
+                //     chapterName[k] = chapterName[k].slice(0, -1)
+                //     console.log('chapters:', chapterName[k])
+                // }
+                // chapterName[k] = chapterName[k].trim();
 
 
             }
+            chapterName = this.filterArr(chapterName)
 
-
-
+console.log('chapter names:',chapterName)
             //gets the cover image from the manga
             try {
-                this.getCoverImage(mangaName, mangaID)
+                // this.getCoverImage(mangaName, mangaID)
             } catch {
                 console.error('couldnt get the cover image for this manga')
             }
@@ -199,15 +172,15 @@ module.exports = {
 
 
             // calls the download function and passes each chapter
-            for (let j = 0; j < chapterID.length; j++) {
+            // for (let j = 0; j < chapterID.length; j++) {
 
-                sem.take(() => {
+            //     sem.take(() => {
 
-                    this.getChapterInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
-                    console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
+            //         this.getChapterInfos(chapterID[j], mangaName, chapterName[j], sem, j, mangaID)
+            //         console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
 
-                })
-            }
+            //     })
+            // }
 
         })();
     },
@@ -345,7 +318,7 @@ module.exports = {
             // will need to change the number of requests made
             let i = 0
             // for (let i = 0; i < 10 && resp != ""; i++) {
-                do{
+            do {
                 // const resp = await axios({
                 resp = await axios({
 
@@ -357,7 +330,7 @@ module.exports = {
                     params: {
                         "order[chapter]": "asc", //sorts the chapter list 
                         "translatedLanguage[]": languages, //will only return one specific language 
-                        "offset": 100 * i + baseOffset,
+                        "offset": 100 * i,
                     },
 
 
@@ -369,10 +342,11 @@ module.exports = {
 
                 chapter = chapter.concat(resp.data.data.map(chapter => chapter.attributes.chapter))
 
-            }while (resp.data.data != "")
+                i++
+            } while (resp.data.data != "")
 
-                //creates formatted chapter name
-            
+            //creates formatted chapter name
+
             for (let k = 0; k < chapterID.length; k++) {
                 chapterName[k] = `Chapter ${chapter[k]}: ${chapterTitle[k]}`;
                 // chapterPath[k] = chapterName[k].replaceAll(':', '_');
@@ -382,8 +356,21 @@ module.exports = {
             // path = path.replaceAll(' ', '\ ')
 
 
+
+            chapterName = this.filterArr(chapterName)
+
+
+
             mangaJSON.addManga(mangaName, path, chapterName, tags, description)
 
         })();
+    },
+    // removes duplicates in an array
+    // used to remove duplicate chapters
+    filterArr: function (arr) {
+        console.log(arr)
+
+        return arr.filter((item,
+            index) => arr.indexOf(item) == index);
     }
 }
