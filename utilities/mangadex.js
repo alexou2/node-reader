@@ -162,7 +162,7 @@ module.exports = {
             chapterName = this.filterArr(chapterName)
             chapterID = this.filterArr(chapterID)
 
-console.log('chapter names:',chapterName)
+            console.log('chapter names:', chapterName)
             //gets the cover image from the manga
             try {
                 this.getCoverImage(mangaName, mangaID)
@@ -214,7 +214,7 @@ console.log('chapter names:',chapterName)
                 i++
             }
             // console.log('pageLinks', pageLinks)
-            console.log(pageLinks.length)
+            // console.log(pageLinks.length)
 
             this.downloadPages(chapterID, mangaName, chapterName, sem, j, host, chapterHash, data)
         })();
@@ -229,7 +229,7 @@ console.log('chapter names:',chapterName)
         //creates a folder for the manga
         let folderPath = `manga/${sanitizeFilename(mangaName)}/${chapterName}`
         fs.mkdirSync(folderPath, { recursive: true });
-        console.log(folderPath);
+        // console.log(folderPath);
 
 
         //downloads the pages in the correct folderw
@@ -244,7 +244,7 @@ console.log('chapter names:',chapterName)
                     });
 
                     fs.writeFileSync(`${folderPath}/${page}`, resp.data);
-                    console.log('page downloaded: ', folderPath, page)
+                    // console.log('page downloaded: ', folderPath, page)
                 } catch {
                     console.error('\x1b[91m%s\x1b[0m', `err downloading ${page}`)
                 }
