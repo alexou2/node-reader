@@ -75,3 +75,6 @@ function fillForm(search) {
     document.getElementById("mangaName").value = search
     console.log("clicked on ", search)
 }
+
+// todo
+    // filter manga that have chapters in desired language
