@@ -383,7 +383,7 @@ module.exports = {
             maxContentLength: Infinity,
             params: {
                 title: title,
-                // [`order[${sortBy}]`]: "desc",
+                "order[relevance]": "desc",
             }
         }).then(t => t.data);
 
