@@ -1,36 +1,8 @@
-.field {
-/* background-color:blue; */
-margin:.5em;
-}
-
-/* * { box-sizing: border-box; } */
-body {
-  font: 16px Arial;
-}
-.autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
-}
-input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-}
 .complete-element{
-  margin: 1em;
-  background-color: gray;
-  padding: .5em;
-  color:blue; 
-  width: 30em;
-  cursor: pointer;
+  background-color: aqua;
+  margin: .2em;
+  white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor:pointer;
 }
