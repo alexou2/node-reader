@@ -1,4 +1,5 @@
-
+// downloads the pages from manganato usinf a headless browser
+// throws an error if puppeteer isn't installed on the device
 try {
   const puppeteer = require('puppeteer');
 } catch {
