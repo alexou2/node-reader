@@ -7,18 +7,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/auto-complete.js"></script>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css.css">
     <title>Document</title>
 </head>
 
 <body>
     hello world
 
-    <form method="post">
-        <input autocomplete="off" type="text" id="mangaName" name="mangaName" value="" autofocus>
-    </form>  
+    <button onclick="openForm()">open</button>
 
-    <div class="field" id="autocomplete">
+    <!-- <form method="post">
+        <input autocomplete="off" type="text" id="mangaName" name="mangaName" value="" autofocus>
+    </form>   -->
+
+
+    <div id="myOverlay" class="overlay">
+        <span class="closebtn" onclick="closeForm()" title="Close Overlay">&#215</span>
+
+        <div class="wrap">
+            <button class="close" onclick="closeForm()" title="Close Overlay">&#215</button>
+            <h2>Download new manga</h2>
+            <form action="/new" method="post">
+                <!-- text inputs -->
+                Manga Name
+                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus required>
+                
+
+
+                <div class="field" id="autocomplete">
+                </div>
+
+
+
+                
+                Source
+                <select class="select_source" name="source">
+                    <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                    <option id="manganato" data-c="manganato">Manganato</option>
+                </select>
+
+                <button type="button" onclick="toggleAdvancedOptions()" class="dropdown-button show-options">Show Other
+                    Options</button>
+                <div class="dropdown" id="showOptions">
+                    <div id="advancedOptions" class="dropdown-content" style="display: none;">
+
+                        Base Offset
+                        <input type="number" id="baseOffset" name="baseOffset" value="0" placeholder="Base Offset">
+                        <!-- selector input -->
+                        Translated language
+                        <select class="translatedLanguages" name="translatedLanguages">
+                            <option data-c="en" value="en" selected="">English</option>
+                            <option data-c="fr" value="fr">Fançais</option>
+                            <option data-c="it" value="it">Italiano</option>
+                            <option data-c="ru" value="ru">Russian</option>
+                        </select><br>
+
+                        <!-- Source
+                        <select class="select_source" name="source">
+                        <option id="mangadex" data-c="mangadex" selected="">Mangadex</option>
+                        <option id="manganato" data-c="manganato">Manganato</option>
+
+                            </select> -->
+
+                        <!-- sort returned mangas by popularity or by relevance for mangadex -->
+                        Sort Manga By
+                        <select class="sortBy" name="sortBy">
+                            <option id="relevance" data-c="relevance" selected="" value="relevance">Relevance</option>
+                            <option id="popularity" data-c="followedCount" value="followedCount">Popularity</option>
+                            <option id="latestUpdate" data-c="latestUploadedChapter" value="latestUploadedChapter">
+                                Latest update</option>
+
+                        </select>
+
+                        <label for="updateJson" name="updateJson">Only Update JSON</label>
+                        <input type="checkbox" id="updateJson" name="updateJson" data-c="true" value="true">
+                    </div>
+                </div>
+
+                <!-- <select class="json" name="updateJson">
+    <option id="mangadex" value="true" >Only Update JSON</option>
+</select> -->
+
+
+                <input type="submit" value="Download">
+            </form>
+
+        </div>
     </div>
+
+
+
+    <script>
+        //opens the overlay form
+        function openForm() {
+            document.getElementById('myOverlay').style.display = "block";
+            document.getElementById('mangaName').focus();
+        }
+        //closes the overlay form
+        function closeForm() {
+            document.getElementById('myOverlay').style.display = "none";
+        }
+
+        //shows or hide dropdown options
+        function toggleAdvancedOptions() {
+
+            //shows menu if it is hidden or hides it if its displayed
+            var advancedOptions = document.getElementById("advancedOptions");
+
+            if (advancedOptions.style.display === "none") {
+                advancedOptions.style.display = "block";
+            } else {
+                advancedOptions.style.display = "none";
+            }
+        }
+
+    </script>
+
+
+    <script>
+        window.addEventListener('load', () => {
+            registerSW();
+        });
+
+        // Register the Service Worker
+        async function registerSW() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    await navigator
+                        .serviceWorker
+                        .register('/serviceWorker.js');
+                }
+                catch (e) {
+                    console.log('SW registration failed');
+                }
+            }
+        }
+    </script>
+
+
+
+
+    
 </body>
 
 </html>
