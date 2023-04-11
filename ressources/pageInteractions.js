@@ -33,7 +33,7 @@ function addBookmark(mangaName, chapter, value) {
   xhr.open('POST', '/bookmark-chap');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(data));
-  console.log('data:',data);
+  console.log('data:', data);
 
 }
 
@@ -58,14 +58,14 @@ function updateChapters(mangaName, offset) {
   console.log(data)
 }
 
-function goFullscreen(){
+function goFullscreen() {
   // document.getElementsByClassName("entire").requestFullscreen();
 
   var elem = document.documentElement;
 
-/* View in fullscreen */
- 
-if (elem.requestFullscreen) {
+  /* View in fullscreen */
+
+  if (elem.requestFullscreen) {
     elem.requestFullscreen();
   } else if (elem.webkitRequestFullscreen) { /* Safari */
     elem.webkitRequestFullscreen();
@@ -73,8 +73,8 @@ if (elem.requestFullscreen) {
     elem.msRequestFullscreen();
   }
 
-// exit fullscreen
-if (document.exitFullscreen) {
+  // exit fullscreen
+  if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.webkitExitFullscreen) { /* Safari */
     document.webkitExitFullscreen();

@@ -373,5 +373,32 @@ module.exports = {
 
         return arr.filter((item,
             index) => arr.indexOf(item) == index);
+    },
+
+    autocomplete: async function (title) {
+        
+        const resp = await axios({
+            method: 'GET',
+            url: `${baseUrl}/manga`,
+            maxContentLength: Infinity,
+            params: {
+                title: title,
+                // [`order[${sortBy}]`]: "desc",
+            }
+        }).then(t => t.data);
+
+        // let mangaName = resp.data.data.map(manga => manga.attributes.title);
+        // console.log(resp.data.map(t => t.attributes.title))
+
+        let mangaName = resp.data.map(t => t.attributes.title)
+for (let i in mangaName){
+        mangaName[i] = JSON.stringify(mangaName[i])
+        // console.log()
+        mangaName[i] = mangaName[i].split('"')
+        mangaName[i] = mangaName[i][3]
+}
+        return mangaName
     }
+
+
 }

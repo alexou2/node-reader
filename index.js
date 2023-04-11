@@ -7,6 +7,7 @@ const form = require('./utilities/formsManager')
 
 const writeJson = require('./utilities/jsonWriter');
 const jsonWriter = require('./utilities/jsonWriter');
+const mangadex = require('./utilities/mangadex');
 
 app.use(bodyParser.json());
 
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 //serve mangas and css
 app.use("/manga", express.static('./manga'))
 app.use(express.static('./ressources'))
+app.use(express.static('./testFiles'))
 
 //form to add chapters
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -34,6 +36,34 @@ if (!fs.existsSync(`jsonFiles`)) {
     fs.mkdirSync(`jsonFiles`)
 }
 
+
+
+
+
+// testing xhr request for autocomplete
+app.get('/test/complete', (req, res) => {
+    res.render('complete.ejs');
+})
+
+app.get('/test/:mid', async (req, res) => {
+    // let mid = req;
+
+    console.log("---------------------------------------------------------------------")
+    var mid = req.params.mid;
+    console.log("mid:", mid)
+
+const axios = require('axios')
+
+    // const manga = await axios('https://api.mangadex.org/manga/' + mid+" ").then(t => t.data);
+    mid = await(mangadex.autocomplete(mid))
+    
+    console.log(mid.length)
+    // console.log('Found data: ', { manga });
+    // console.log(manga)
+    // const requestManga = require('./testFiles/requestManga.js')
+    // requestManga.complete(mid)
+    res.json(mid);
+});
 
 
 // //loads the form
@@ -80,7 +110,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     chapterList.pop()
 
     // getting informations from json file
-    let data = jsonWriter.getMangaJson(mangaName,chapterList);
+    let data = jsonWriter.getMangaJson(mangaName, chapterList);
 
 
     let tags = data.tags;
@@ -93,8 +123,8 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
     // let bookmarks = jsonWriter.getBookmarks(mangaName)
 
-// console.log(data)
-console.log(chapterName)
+    // console.log(data)
+    console.log(chapterName)
 
 
     //renders the chapter-menu.ejs with the arguments
