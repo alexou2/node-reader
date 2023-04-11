@@ -1,4 +1,13 @@
-const puppeteer = require('puppeteer');
+
+try {
+  const puppeteer = require('puppeteer');
+} catch {
+  console.log('platform:', process.platform)
+  if (process.platform == android) {
+    console.log(`puppeteer is not supported on your device or isn't installed`)
+  }
+}
+
 const fs = require('fs');
 const parse = require('./parser')
 const request = require('request');
@@ -135,12 +144,12 @@ module.exports = {
 
       console.log("returnedmanga", returnedManga);
 
-        const call = (async () => {
-          console.log('calling parser')
-          parse.parse(returnedManga[0])
-        })
-        console.log(call)
-        
+      const call = (async () => {
+        console.log('calling parser')
+        parse.parse(returnedManga[0])
+      })
+      console.log(call)
+
       console.log('done!')
       return returnedManga[0]
     }
