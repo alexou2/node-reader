@@ -32,4 +32,5 @@ input[type=submit] {
   padding: .5em;
   color:blue; 
   width: 30em;
+  cursor: pointer;
 }

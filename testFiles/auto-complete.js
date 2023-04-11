@@ -27,8 +27,8 @@ function requestManga(title) {
             // Handle the response from the server here
             // const responseData = xhr.responseData;
             // const responseData = JSON.parse(xhr.responseText);
-             responseData = (JSON.parse(xhr.responseText))
-            console.log("returned manga: ",responseData);
+            responseData = (JSON.parse(xhr.responseText))
+            console.log("returned manga: ", responseData);
             changeContent(responseData)
         } else {
             console.log('Request failed. Returned status of ' + xhr.status);
@@ -36,8 +36,8 @@ function requestManga(title) {
     }
 
     const data = {
-        "title":title,
-        "uwu":"uwu"
+        "title": title,
+        "uwu": "uwu"
     }
     // xhr.send(title);
     xhr.send(title);
@@ -60,7 +60,7 @@ function changeContent(results) {
 
     let content = "";
     for (let i in results) {
-        content = `${content} <div class="complete-element">${results[i]}</div>`;
+        content = `${content} <div class="complete-element" onclick="fillForm('${results[i]}')">${results[i]}</div>`;
     };
     console.log("contenty", content);
     field.innerHTML = content;
@@ -70,4 +70,8 @@ function changeContent(results) {
 
     // field.innerhtml = results.join(" ");
     console.log("length", results.length)
+}
+function fillForm(search) {
+    document.getElementById("mangaName").value = search
+    console.log("clicked on ", search)
 }
