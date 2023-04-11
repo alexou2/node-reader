@@ -47,21 +47,14 @@ app.get('/test/complete', (req, res) => {
 
 app.get('/test/:mid', async (req, res) => {
     // let mid = req;
-
+console.log(req)
     console.log("---------------------------------------------------------------------")
     var mid = req.params.mid;
-    console.log("mid:", mid)
-
-const axios = require('axios')
 
     // const manga = await axios('https://api.mangadex.org/manga/' + mid+" ").then(t => t.data);
     mid = await(mangadex.autocomplete(mid))
     
     console.log(mid.length)
-    // console.log('Found data: ', { manga });
-    // console.log(manga)
-    // const requestManga = require('./testFiles/requestManga.js')
-    // requestManga.complete(mid)
     res.json(mid);
 });
 
@@ -202,6 +195,7 @@ app.post(`/bookmark-chap`, (req, res) => {
     // let mangaName = req.params.mangaName
     // console.log('data: ', req)
     form.bookmarkChap(req)
+    console.log(req)
     // console.log(req.body.updateJson)
     res.sendStatus(200)
 })

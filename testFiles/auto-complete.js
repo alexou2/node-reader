@@ -34,8 +34,14 @@ function requestManga(title) {
             console.log('Request failed. Returned status of ' + xhr.status);
         }
     }
+
+    const data = {
+        "title":title,
+        "uwu":"uwu"
+    }
     // xhr.send(title);
-    xhr.send();
+    xhr.send(title);
+    // xhr.send(JSON.stringify(data))
     // 
     responseData = JSON.stringify(responseData, null, 2);
     // console.log(responseData.length)
@@ -54,7 +60,7 @@ function changeContent(results) {
 
     let content = "";
     for (let i in results) {
-        content = `${content} ${results[i]}<br>`;
+        content = `${content} <div class="complete-element">${results[i]}</div>`;
     };
     console.log("contenty", content);
     field.innerHTML = content;

@@ -1,12 +1,9 @@
-.field {}
-
-#autocomplete {
-    
-    
-    
-    display: none;
+.field {
+/* background-color:blue; */
+margin:.5em;
 }
-* { box-sizing: border-box; }
+
+/* * { box-sizing: border-box; } */
 body {
   font: 16px Arial;
 }
@@ -28,4 +25,11 @@ input[type=text] {
 input[type=submit] {
   background-color: DodgerBlue;
   color: #fff;
+}
+.complete-element{
+  margin: 1em;
+  background-color: gray;
+  padding: .5em;
+  color:blue; 
+  width: 30em;
 }
