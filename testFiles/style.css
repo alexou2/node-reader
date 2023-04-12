@@ -1,8 +1,20 @@
-.complete-element{
+.field {
+  position: relative;
+  /* display: inline-block; */
+}
+
+.complete-element {
   background-color: aqua;
-  margin: .2em;
+  /* margin: .2em; */
   white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    cursor:pointer;
+  text-overflow: ellipsis;
+  cursor: pointer;
+
+  position: absolute;
+  /* z-index: 99; */
+  /* transform: translateY(+3em); */
+}
+.complete-element:first-child{
+display: flex;
+  justify-content: space-between;
 }

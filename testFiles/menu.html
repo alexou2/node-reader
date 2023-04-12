@@ -1,0 +1,42 @@
+<div class="dropdown">
+    <!-- Dropdown trigger element -->
+    <div class="dropdown-menu">
+      <div class="dropdown-item">Click me <i class="fas fa-caret-down"></i></div>
+      <!-- Dropdown menu items -->
+      <div class="dropdown-item">Option 1</div>
+      <div class="dropdown-item">Option 2</div>
+      <div class="dropdown-item">Option 3</div>
+    </div>
+  </div>asdasd
+<style>
+    /* Styles for the dropdown menu */
+.dropdown-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Styles for each dropdown menu item */
+.dropdown-item {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+}
+
+/* Styles for the trigger element */
+.dropdown-item:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Hide the dropdown menu items by default */
+.dropdown-item:not(:first-child) {
+  display: none;
+}
+
+/* Show the dropdown menu items when the trigger element is hovered */
+.dropdown-item:hover ~ .dropdown-item:not(:first-child) {
+  display: block;
+}
+
+</style>  

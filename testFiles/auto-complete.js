@@ -63,7 +63,7 @@ function changeContent(results) {
 
     let content = "";
     for (let i in results) {
-        content = `${content} <div class="complete-element dropdown-button show-options" onclick="fillForm('${results[i]}')">${results[i]}</div>`;
+        content = `${content} <div class="complete-element dropdown-button show-options" onclick="fillForm('${results[i]}')">${results[i]}</div><br><br>`;
     };
     console.log("contenty", content);
     field.innerHTML = content;

@@ -384,6 +384,7 @@ module.exports = {
             params: {
                 title: title,
                 "order[relevance]": "desc",
+                "order[followedCount]": "desc",
             }
         }).then(t => t.data);
 
