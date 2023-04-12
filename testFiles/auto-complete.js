@@ -45,6 +45,9 @@ function requestManga(title) {
     // 
     responseData = JSON.stringify(responseData, null, 2);
     // console.log(responseData.length)
+    if(title == ""){
+        changeContent('')
+    }
 }
 
 
