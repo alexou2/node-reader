@@ -4,7 +4,7 @@ try {
   const puppeteer = require('puppeteer');
 } catch {
   console.log('platform:', process.platform)
-  if (process.platform == android) {
+  if (process.platform == "android") {
     console.log(`puppeteer is not supported on your device or isn't installed`)
   }
 }
