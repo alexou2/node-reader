@@ -5,6 +5,7 @@
   max-height: 221px;
   overflow-y: auto;
   border-radius: 7px;
+  z-index: 99;
 }
 
 .complete-element {
