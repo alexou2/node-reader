@@ -7,6 +7,7 @@
     "theme_color": "#2c2c2c",
     "scope": ".",
     "description": "An offline manga reader that can download from other websites",
+    "version":2,
     "icons": [
         {
             "src": "/images/node-reader-icon3.svg",
