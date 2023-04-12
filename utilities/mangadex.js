@@ -14,7 +14,7 @@ const sanitizeFilename = require('sanitize-filename');
 
 
 //I use semaphores in order not to fill up my ram by downloading every chapter at the same time. it will stop the program when there is no more semaphores
-const sem = require('semaphore')(5);//change 5 by any number to change the number of chapters that can be downloaded at the same time
+const sem = require('semaphore')(2);//change 5 by any number to change the number of chapters that can be downloaded at the same time
 
 const baseUrl = 'https://api.mangadex.org'
 
