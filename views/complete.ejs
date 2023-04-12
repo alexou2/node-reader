@@ -97,37 +97,21 @@
         </div>
     </div>
 
+    <button type="button" onclick="increaseProgress()">++</button>
 
-
-
-
-
-
-    <div class="progress-bar">
-        <input id="progress" type='range' min='0' max='100' step='1' value="75">
-        <button onclick="increaseProgress()">++</button>
-    </div>
-
-    <script>
-        window.onload = function () {
-            document.getElementById('progress').value = 0
-
-        }
-        // function increaseProgress() {
-        //     document.getElementById('progress').value++
-        // }
-    </script>
-
-
-
-
-
+    <form>
+        chap
+        <input type='range' min='1' max='200' step='1' id="chapters">
+        jsonChap
+        <input type='range' min='1' max='200' step='1' id="json">
+        <input type="button" onclick="getProgress(document.getElementById('chapters').value, document.getElementById('json').value)">
+    </form>
 
     <div>
         <h1>Custom Progress Bar</h1>
 
         <div class="progress">
-            <div class="progress-done" data-done="10">
+            <div class="progress-done" data-done="0">
 
             </div>
         </div>
@@ -171,7 +155,9 @@
             height: 100%;
             width: 0;
             opacity: 0;
-            transition: 1s ease 0.3s;
+            /* transition: 1s ease 0.3s; */
+            transition: 1s;
+
         }
     </style>
 
@@ -189,20 +175,35 @@
 
         }
 
-        function increaseProgress() {
-            // progress = document.querySelector('.progress-done');
+        function increaseProgress(value) {
 
             let where = (progress.style.width).replaceAll('%', '')
             where = parseFloat(where)
-            // progress.style.width = ((parseFloat(progress.getAttribute('data-done')) + 10) + '%')
-            progress.style.width =where+ 10+'%'
-            console.log(progress.style.width)
 
-            // console.log(parseFloat(progress.getAttribute('data-done')))
-            progress.innerHTML = ((progress.style.width).replaceAll('%', '')+'%')
-            if(where == 90){
-                progress.innerHTML = 'download complete'
-            }
+            // progress.style.width = where + 10 + '%'
+            progress.style.width = value + "%"
+
+            // if (where >= 99) {
+            //     progress.innerHTML = 'download complete'
+            // } else {
+                // progress.innerHTML = ((progress.style.width).replaceAll('%', '') + '%')
+                progress.innerHTML = value + '%'
+            // }
+        }
+
+        function getProgress(chapters, jsonChapters) {
+console.log(chapters, jsonChapters)
+            // gets the size of the increments
+            let increment = (chapters / jsonChapters)*100;
+            console.log('increment',increment)
+
+            let value = (increment)
+            increaseProgress(value)
+        }
+
+
+        function updateProgress() {
+
         }
     </script>
 
