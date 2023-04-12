@@ -9,19 +9,19 @@
     "description": "An offline manga reader that can download from other websites",
     "icons": [
         {
-            "src": "/node-reader-icon3.svg",
+            "src": "/images/node-reader-icon3.svg",
             "type": "image/svg+xml",
             "sizes": "309x383",
             "purpose": "any"
         },
         {
-            "src": "/pwa-icon.svg",
+            "src": "/images/pwa-icon.svg",
             "sizes": "512x512",
             "type": "image/png",
             "purpose":"any"
         },
         {
-            "src": "/android-pwa-icon.svg",
+            "src": "/images/android-pwa-icon.svg",
             "type": "image/svg+xml",
             "sizes": "512x512",
             "purpose": "maskable",
@@ -37,7 +37,7 @@
             "url": "/",
             "icons": [
                 {
-                    "src": "/android-pwa-icon.svg",
+                    "src": "/images/android-pwa-icon.svg",
                     "type": "image/svg+xml",
                     "sizes": "512x512",
                     "purpose": "any"
@@ -51,7 +51,7 @@
             "url": "/bookmarks",
             "icons": [
                 {
-                    "src": "/red-bookmark.svg",
+                    "src": "/images/red-bookmark.svg",
                     "type": "image/svg+xml",
                     "sizes": "100x100",
                     "purpose": "any"

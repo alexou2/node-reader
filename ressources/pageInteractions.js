@@ -9,14 +9,14 @@ function addBookmark(mangaName, chapter, value) {
   // when chapter is bookmarked
   if (value == "true") {
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-  <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'false')" src=" /red-bookmark.svg">
+  <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'false')" src=" /images/red-bookmark.svg">
   `
   }
 
   // when chapter is un-bookmarked
   if (value == "false") {
     document.getElementById(`bookmark-${chapter}`).innerHTML = `
-    <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'true')" src=" /dark-bookmark.svg">
+    <img id ="bookmark-img" onclick="addBookmark(\`${mangaName}\`, \`${chapter}\`,'true')" src=" /images/dark-bookmark.svg">
     `
   }
   console.log("bookmark icon changed");

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css.css">
     <script type="text/javascript" src="/pageInteractions.js"></script>
-    <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
+    <link rel="icon" href="/images/node-reader-icon3.svg" type="image/x-icon" />
     <title>Bookmarks</title>
 </head>
 
@@ -19,7 +19,7 @@
             </h1>
         </div>
         <div class="currentPath" id="currentPath">
-            <a href="/">Home > </a><a href="/manga/Bookmarks">
+            <a href="/">Home > </a><a href="/images/manga/Bookmarks">
                 Bookmarks
             </a>
         </div>
@@ -38,7 +38,7 @@
                 <span id="bookmark-<%=chapterList[j]%>">
                     <img id="bookmark-img"
                         onclick="addBookmark(`<%= mangaName[i] %>`, `<%=chapterList[j]%>`,`false`)"
-                        src=" /red-bookmark.svg">
+                        src="/images/red-bookmark.svg">
                 </span>
                 <a class="chapter" href="<%= chapterList[j] %>">
                     <%= chapterName[j] %>
