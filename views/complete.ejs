@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/auto-complete.js"></script>
-    
+
     <link rel="stylesheet" href="/css.css">
     <link rel="stylesheet" href="/style.css">
     <title>Document</title>
@@ -96,6 +96,117 @@
 
         </div>
     </div>
+
+
+
+
+
+
+
+    <div class="progress-bar">
+        <input id="progress" type='range' min='0' max='100' step='1' value="75">
+        <button onclick="increaseProgress()">++</button>
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById('progress').value = 0
+
+        }
+        // function increaseProgress() {
+        //     document.getElementById('progress').value++
+        // }
+    </script>
+
+
+
+
+
+
+    <div>
+        <h1>Custom Progress Bar</h1>
+
+        <div class="progress">
+            <div class="progress-done" data-done="10">
+
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap'); */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* background-color: #f4f4f4; */
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .progress {
+            background-color: #d8d8d8;
+            border-radius: 20px;
+            position: relative;
+            margin: 15px 0;
+            height: 30px;
+            width: 300px;
+        }
+
+        .progress-done {
+            background: linear-gradient(to left, #F2709C, #FF9472);
+            box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+            border-radius: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 0;
+            opacity: 0;
+            transition: 1s ease 0.3s;
+        }
+    </style>
+
+    <script>
+
+
+        var progress = document.querySelector('.progress-done');
+
+        progress.style.width = progress.getAttribute('data-done') + '%';
+        progress.style.opacity = 1;
+
+        window.onload = function () {
+            var progress = document.querySelector('.progress-done');
+            progress.innerHTML = ((parseFloat(progress.getAttribute('data-done'))) + '%')
+
+        }
+
+        function increaseProgress() {
+            // progress = document.querySelector('.progress-done');
+
+            let where = (progress.style.width).replaceAll('%', '')
+            where = parseFloat(where)
+            // progress.style.width = ((parseFloat(progress.getAttribute('data-done')) + 10) + '%')
+            progress.style.width =where+ 10+'%'
+            console.log(progress.style.width)
+
+            // console.log(parseFloat(progress.getAttribute('data-done')))
+            progress.innerHTML = ((progress.style.width).replaceAll('%', '')+'%')
+            if(where == 90){
+                progress.innerHTML = 'download complete'
+            }
+        }
+    </script>
+
+
 
 
 
