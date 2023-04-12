@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/node-reader-icon3.svg" type="image/x-icon" />
 
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript" src="/auto-complete.js"></script>
+
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="black">
 
@@ -75,7 +78,13 @@
             <form action="/new" method="post">
                 <!-- text inputs -->
                 Manga Name
-                <input type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus required>
+                <input autocomplete="off" type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus required>
+
+<!-- field for autocomplete -->
+                <div class="complete-text">
+                    <div class="field" id="autocomplete">
+                    </div>
+                </div>
 
                 Source
                 <select class="select_source" name="source">

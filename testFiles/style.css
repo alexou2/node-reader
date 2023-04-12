@@ -1,20 +1,24 @@
 .field {
-  position: relative;
+  position: absolute;
+  margin-top: 0px;
   /* display: inline-block; */
+  max-height: 15em;
+  overflow-y: auto;
 }
 
 .complete-element {
   background-color: aqua;
-  /* margin: .2em; */
+  margin-top: .2em;
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
   cursor: pointer;
-
-  position: absolute;
-  /* z-index: 99; */
-  /* transform: translateY(+3em); */
+  min-width: 100%;
+  padding: 10px;
+  border-radius: 7px;
 }
-.complete-element:first-child{
-display: flex;
-  justify-content: space-between;
+
+.complete-text {
+  position: relative;
+  
 }
