@@ -74,7 +74,9 @@ function changeContent(results) {
     console.log("length", results.length)
 }
 function fillForm(search) {
-    document.getElementById("mangaName").value = search
+    document.getElementById("mangaName").value = search;
+    // document.getElementById("autocomplete").style.display = "none"
+    document.getElementById("autocomplete").innerHTML = ""
     console.log("clicked on ", search)
 }
 

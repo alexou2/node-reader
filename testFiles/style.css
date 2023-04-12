@@ -2,8 +2,9 @@
   position: absolute;
   margin-top: 0px;
   /* display: inline-block; */
-  max-height: 15em;
+  max-height: 221px;
   overflow-y: auto;
+  border-radius: 7px;
 }
 
 .complete-element {
@@ -13,7 +14,6 @@
   text-overflow: ellipsis;
   overflow: hidden;
   cursor: pointer;
-  min-width: 100%;
   padding: 10px;
   border-radius: 7px;
 }
