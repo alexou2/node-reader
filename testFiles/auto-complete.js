@@ -1,7 +1,3 @@
-// const { autocomplete } = require("../utilities/mangadex");
-
-const baseUrl = 'https://api.mangadex.org/';
-
 window.onload = function () {
     var x = document.getElementById('mangaName');
     x.addEventListener('input', function () {
