@@ -9,6 +9,13 @@ window.onload = function () {
         // changeContent(x.value)
         requestManga(x.value)
     });
+
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (x) {
+        // closeAllLists(x.target);
+        document.getElementById("autocomplete").innerHTML = ""
+        console.log('close list')
+    });
 }
 
 
@@ -44,7 +51,7 @@ function requestManga(title) {
     // 
     responseData = JSON.stringify(responseData, null, 2);
     // console.log(responseData.length)
-    if(title == ""){
+    if (title == "") {
         changeContent('')
     }
 }
@@ -66,13 +73,9 @@ function changeContent(results) {
     };
     console.log("contenty", content);
     field.innerHTML = content;
-
-    // results = JSON.parse(results)
-
-
-    // field.innerhtml = results.join(" ");
     console.log("length", results.length)
 }
+
 function fillForm(search) {
     document.getElementById("mangaName").value = search;
     // document.getElementById("autocomplete").style.display = "none"
@@ -81,4 +84,4 @@ function fillForm(search) {
 }
 
 // todo
-    // filter manga that have chapters in desired language
+// filter manga that have chapters in desired language
