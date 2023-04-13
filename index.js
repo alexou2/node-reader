@@ -73,7 +73,7 @@ app.get(`/`, (req, res) => {
     let mangaName = "."
     let mangaList = getList(mangaName);
     for (let i in mangaList) {
-        mangaList[i] = mangaList[i].replaceAll('%', '%25');
+        // mangaList[i] = mangaList[i].replaceAll('%', '%25');
     }
     res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
     console.log("homepage is running")
