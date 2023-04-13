@@ -35,7 +35,7 @@ module.exports = {
         if (args.includes('h') || finalArg == 'help' || finalArg == 'h') {
             this.showHelp()
         }
-        return 
+        return lan
     },
 
     showHelp: function () {
