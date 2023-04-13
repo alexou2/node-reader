@@ -71,9 +71,9 @@ app.get('/test/:mid', async (req, res) => {
 //renders the homepage accessible at localhost:3000
 app.get(`/`, (req, res) => {
     let mangaName = "."
-    let mangaList = getList(mangaName)
+    let mangaList = getList(mangaName);
     for (i in mangaList) {
-        mangaList[i] = mangaList[i].replaceAll('%', '%25')
+        mangaList[i] = mangaList[i].replaceAll('%', '%25');
     }
     res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
     console.log("homepage is running")

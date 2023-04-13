@@ -5,8 +5,6 @@ try {
 const cheerio = require('cheerio');
 const fs = require('fs');
 
-const { linkSync } = require("fs");
-const { parse } = require('path');
 
 //sets the max number of chapters to download at the same time
 const sem = require('semaphore')(5);// I would recomend 5 to 10 with 16gb of ram. else, your terminal might crash
