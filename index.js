@@ -229,7 +229,8 @@ app.post(`/`, (req, res) => {
 let lanAccess = argsManager.getArgs(process.argv)
 console.log('lan:',lanAccess)
 // enables the server to be accessed via localhost 3000
-if (process.platform != 'win32' && process.platform != 'linux' || lanAccess != true) {
+// if (process.platform != 'win32' && process.platform != 'linux' || lanAccess != true) {
+    if(lanAccess != true){
     app.listen(3000, (req, res) => {
         console.log("Connected on port:3000");
     });
