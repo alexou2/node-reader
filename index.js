@@ -41,7 +41,6 @@ if (!fs.existsSync(`jsonFiles`)) {
 
 // gets the arguments
 
-argsManager.getArgs(process.argv)
 
 
 
@@ -224,12 +223,11 @@ app.post(`/`, (req, res) => {
     res.sendStatus(200)
 })
 
-const os = require('os');
-// console.log('os:', process.platform)
-// console.log('args:', os.hostname());
+// uses arguments to see if user wants lan access
+let lanAccess = argsManager.getArgs(process.argv)
 
 // enables the server to be accessed via localhost 3000
-if (process.platform != 'win32' && process.platform != 'linux') {
+if (process.platform != 'win32' && process.platform != 'linux' && lanAccess) {
     app.listen(3000, (req, res) => {
         console.log("Connected on port:3000");
     });

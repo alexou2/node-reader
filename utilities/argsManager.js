@@ -19,12 +19,15 @@ module.exports = {
 
         const finalArg = args[1]
         args = args[0]
-        console.log(typeof (args), finalArg)
+
+        // boolean to enable lan access from other devices
+        let lan = false;
 
         // argument for enabing lan access
         if (args.includes('lan') || finalArg == ('lan')) {
             console.log('LAN access enabled')
             console.log(`Your Hostname is: ${os.hostname}`)
+            lan = true;
         } else {
             console.log('Access will only be possible from localhost')
         }
@@ -32,6 +35,7 @@ module.exports = {
         if (args.includes('h') || finalArg == 'help' || finalArg == 'h') {
             this.showHelp()
         }
+        return 
     },
 
     showHelp: function () {
