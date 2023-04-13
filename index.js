@@ -9,6 +9,7 @@ const writeJson = require('./utilities/jsonWriter');
 const jsonWriter = require('./utilities/jsonWriter');
 const mangadex = require('./utilities/mangadex');
 const argsManager = require('./utilities/argsManager');
+const os = require('os')
 
 app.use(bodyParser.json());
 
@@ -227,14 +228,14 @@ app.post(`/`, (req, res) => {
 let lanAccess = argsManager.getArgs(process.argv)
 
 // enables the server to be accessed via localhost 3000
-if (process.platform != 'win32' && process.platform != 'linux' && lanAccess) {
+if (process.platform != 'win32' && process.platform != 'linux' || !lanAccess) {
     app.listen(3000, (req, res) => {
         console.log("Connected on port:3000");
     });
 } else {
     // if the pc is running a distro of linux or windows
     const PORT = 3000;
-    const LAN_IP_ADDRESS = 'hordeprix' // this is the name of the computer on the network 
+    const LAN_IP_ADDRESS = os.hostname
 
     app.listen(PORT, LAN_IP_ADDRESS, () => {
         console.log(`Server running at http://${LAN_IP_ADDRESS}:${PORT}/`);
