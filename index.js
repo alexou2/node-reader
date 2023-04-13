@@ -47,14 +47,14 @@ app.get('/test/complete', (req, res) => {
 
 app.get('/test/:mid', async (req, res) => {
     // let mid = req;
-console.log(req)
-    console.log("---------------------------------------------------------------------")
+    // console.log(req)
+    // console.log("---------------------------------------------------------------------")
     var mid = req.params.mid;
 
     // const manga = await axios('https://api.mangadex.org/manga/' + mid+" ").then(t => t.data);
-    mid = await(mangadex.autocomplete(mid))
-    
-    console.log(mid.length)
+    mid = await (mangadex.autocomplete(mid))
+
+    console.log('autocomplete:', mid)
     res.json(mid);
 });
 
@@ -225,14 +225,20 @@ app.post(`/`, (req, res) => {
 
 
 
-
 // enables the server to be accessed via localhost 3000
-app.listen(3000, (req, res) => {
-    console.log("Connected on port:3000");
-});
+if (process.platform != 'win32' || process.platform != 'linux') {
+    app.listen(3000, (req, res) => {
+        console.log("Connected on port:3000");
+    });
+} else {
+    // if the pc is running a distro of linux or windows
+    const PORT = 3000;
+    const LAN_IP_ADDRESS = '192.168.2.71'; //you might need to change the op address 
 
-
-
+    app.listen(PORT, LAN_IP_ADDRESS, () => {
+        console.log(`Server running at http://${LAN_IP_ADDRESS}:${PORT}/`);
+    });
+}
 
 
 
