@@ -72,7 +72,7 @@ app.get('/test/:mid', async (req, res) => {
 app.get(`/`, (req, res) => {
     let mangaName = "."
     let mangaList = getList(mangaName);
-    for (i in mangaList) {
+    for (let i in mangaList) {
         mangaList[i] = mangaList[i].replaceAll('%', '%25');
     }
     res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
