@@ -1,7 +1,7 @@
 {
     "name": "Node-Reader",
     "short_name": "Node Reader",
-    "start_url": ".",
+    "start_url": "http://raspexandre:3000",
     "id":".",
     "display": "standalone",
     "background_color": "#2c2c2c",
