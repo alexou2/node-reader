@@ -3,6 +3,7 @@
     "short_name": "Node Reader",
     "start_url": "/",
     "id":"/",
+    "scope":"/",
     "display": "standalone",
     "background_color": "#2c2c2c",
     "theme_color": "#2c2c2c",
