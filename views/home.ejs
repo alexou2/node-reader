@@ -184,10 +184,13 @@
     <script>
         window.addEventListener('load', () => {
             registerSW();
+            console.log('window loaded')
         });
 
         // Register the Service Worker
         async function registerSW() {
+            console.log('trying to register service worker ')
+            
             if ('serviceWorker' in navigator) {
                 try {
                     await navigator
