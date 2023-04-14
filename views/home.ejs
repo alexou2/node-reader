@@ -197,6 +197,7 @@
                     await navigator
                         .serviceWorker
                         .register('/serviceWorker.js');
+                        console.log('registered')
                 }
                 catch (e) {
                     console.log('SW registration failed');
