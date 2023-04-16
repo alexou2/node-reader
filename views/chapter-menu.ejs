@@ -41,13 +41,16 @@
             let progress = document.querySelector('.progress-done');
             progress.style.width = progressNumber + "%"
             progress.innerHTML = progressNumber.toFixed(1) + '%'
+            if(progressNumber == 100){
+                progress.innerHTML = 'Download Completed'
+            }
         }
 
         window.onload = function () {
             // function getProgress(){
             let chapters = "<%= chapterList .length%>"
             let jsonChapters = "<%- chapterNumber %>"
-console.log("<%=chapterList.length%>")
+            console.log("<%=chapterList.length%>")
             console.log()
 
             console.log(chapters, jsonChapters)
@@ -63,7 +66,7 @@ console.log("<%=chapterList.length%>")
 
 
 
- 
+
     <!-- shows manga cover, description, tags, etc... -->
 
     <div class="manga-infos">
