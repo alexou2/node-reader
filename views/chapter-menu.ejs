@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/node-reader-icon3.svg" type="image/x-icon" />
 
-
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>reading <%= mangaName %>
     </title>
@@ -28,7 +27,72 @@
                 <%= mangaName %>
             </a>
         </div>
+
+        <!-- progress bar for the download progress -->
+        <div class="progress">
+            <div class="progress-done">
+
+            </div>
+        </div>
+        <button type="button" onclick="getProgress()"></button>
     </div>
+
+    <script>
+        function increaseProgress(progressNumber) {
+            let progress = document.querySelector('.progress-done');
+            progress.style.width = progressNumber + "%"
+            progress.innerHTML = progressNumber.toFixed(1) + '%'
+        }
+
+        window.onload = function () {
+            // function getProgress(){
+            let chapters = "<%= chapterList .length%>"
+            let jsonChapters = "<%- chapterNumber %>"
+console.log("<%=chapterList.length%>")
+            console.log()
+
+            console.log(chapters, jsonChapters)
+            // gets the size of the increments
+            let increment = (chapters / jsonChapters) * 100;
+            console.log('increment', increment)
+
+            let progressNumber = increment
+            increaseProgress(progressNumber)
+
+        }
+    </script>
+
+
+
+    <style>
+        .progress {
+            background-color: #d8d8d8;
+            border-radius: 20px;
+            position: relative;
+            margin: 15px 0;
+            height: 30px;
+            width: 300px;
+            right: -3em
+        }
+
+        .progress-done {
+            background: linear-gradient(to left, #F2709C, #FF9472);
+            box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+            border-radius: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 0;
+            opacity: 1;
+            transition: 1s;
+        }
+    </style>
+
+
+
+
 
     <!-- shows manga cover, description, tags, etc... -->
 

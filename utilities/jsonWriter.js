@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const fs = require('fs');
 const sanitizeFilename = require('sanitize-filename');
 
@@ -133,8 +134,10 @@ module.exports = {
         // reads the json file and extracts the list of chapters
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
-        // let folderContent = (fs.readdirSync(`manga/${path}`))
-
+        
+        if(folderContent == ""){
+        let folderContent = (fs.readdirSync(`manga/${path}`))
+    }
         // console.log(chapterPath)
         let elementsToDelete = []
 

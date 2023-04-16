@@ -83,3 +83,29 @@ function goFullscreen() {
   }
 }
 
+// progress bar 
+
+
+
+// function increaseProgress(progressNumber) {
+//   let progress = document.querySelector('.progress-done');
+//   progress.style.width = progressNumber + "%"
+//   progress.innerHTML = progressNumber.toFixed(1) + '%'
+// }
+
+// window.onload = function () {
+//   // function getProgress(){
+//   let chapters = "<%- chapterList %>".length
+//   let jsonChapters = "<%- chapterNumber %>".length
+
+//   console.log()
+
+//   console.log(chapters, jsonChapters)
+//   // gets the size of the increments
+//   let increment = (chapters / jsonChapters) * 100;
+//   console.log('increment', increment)
+
+//   let progressNumber = increment
+//   increaseProgress(progressNumber)
+
+// }

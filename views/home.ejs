@@ -4,24 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/images/node-reader-icon3.svg" type="image/x-icon" />
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="icon" href="/images/node-reader-icon3.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="/css.css">
     <link rel="stylesheet" href="/style.css">
     <script type="text/javascript" src="/auto-complete.js"></script>
     <script type="text/javascript" src="/serviceWorker.js"></script>
+    <script type="text/javascript" src="/pageInteractions.js"></script>
+    <link rel="manifest" href="/manifest.json">
 
     <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
     <meta name="theme-color" content="black">
-
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <!-- Manifest File link -->
-    <link rel="manifest" href="/manifest.json">
-
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
     <title>Homepage</title>
 </head>
 
@@ -38,9 +35,17 @@
         </div>
 
         <!-- <button class="openbtn" onclick="openForm()">click Here to Download a new Manga</button> -->
-
+        
     </div>
 
+
+
+
+
+    <script>
+        var myVar = "<%- mangaList %>";
+        console.log(myVar);
+    </script>
 
 
 
@@ -79,9 +84,10 @@
             <form action="/new" method="post">
                 <!-- text inputs -->
                 Manga Name
-                <input autocomplete="off" type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus required>
+                <input autocomplete="off" type="text" id="mangaName" name="mangaName" placeholder="Manga Name" autofocus
+                    required>
 
-<!-- field for autocomplete -->
+                <!-- field for autocomplete -->
                 <div class="complete-text">
                     <div class="field" id="autocomplete">
                     </div>
@@ -191,18 +197,18 @@
         // Register the Service Worker
         async function registerSW() {
             console.log('trying to register service worker ')
-            
+
             if ('serviceWorker' in navigator) {
                 try {
                     await navigator
                         .serviceWorker
                         .register('/serviceWorker.js');
-                        console.log('registered')
+                    console.log('registered')
                 }
                 catch (e) {
                     console.log('SW registration failed');
                 }
-            }else{
+            } else {
                 console.log('no SW')
             }
         }

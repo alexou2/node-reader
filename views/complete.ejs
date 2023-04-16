@@ -97,35 +97,78 @@
         </div>
     </div>
 
-    <button type="button" onclick="increaseProgress()">++</button>
 
     <form>
         chap
         <input type='range' min='1' max='200' step='1' id="chapters">
         jsonChap
         <input type='range' min='1' max='200' step='1' id="json">
-        <input type="button" onclick="getProgress(document.getElementById('chapters').value, document.getElementById('json').value)">
+        <input type="button"
+            onclick="getProgress(document.getElementById('chapters').value, document.getElementById('json').value)">
     </form>
 
     <div>
         <h1>Custom Progress Bar</h1>
 
         <div class="progress">
-            <div class="progress-done" data-done="0">
+            <div class="progress-done" >
 
             </div>
         </div>
     </div>
 
+
+
+    <script>
+
+
+        var progress = document.querySelector('.progress-done');
+
+        // progress.style.width = progress.getAttribute('data-done') + '%';
+// progress.style.width = 0+'%'
+
+        // window.onload = function () {
+        //     var progress = document.querySelector('.progress-done');
+        //     progress.innerHTML = ((parseFloat(progress.getAttribute('data-done'))) + '%')
+
+        // }
+
+        function increaseProgress(progressNumber) {
+
+            progress.style.width = progressNumber + "%"
+            progress.innerHTML = progressNumber.toFixed(1) + '%'
+        }
+
+        document.getElementById("chapters").addEventListener("click", function () {
+
+            let chapters = document.getElementById('chapters').value
+            let jsonChapters = document.getElementById('json').value
+
+
+            console.log(chapters, jsonChapters)
+            // gets the size of the increments
+            let increment = (chapters / jsonChapters) * 100;
+            console.log('increment', increment)
+
+            let progressNumber = increment
+            increaseProgress(progressNumber)
+        })
+    </script>
+
+
+
+
+
+
+
     <style>
         /* @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap'); */
 
-        * {
+        /* * {
             box-sizing: border-box;
-        }
+        } */
 
         body {
-            /* background-color: #f4f4f4; */
             flex-direction: column;
             font-family: 'Montserrat', sans-serif;
             display: flex;
@@ -154,59 +197,10 @@
             justify-content: center;
             height: 100%;
             width: 0;
-            opacity: 0;
-            /* transition: 1s ease 0.3s; */
+            opacity: 1;
             transition: 1s;
-
         }
     </style>
-
-    <script>
-
-
-        var progress = document.querySelector('.progress-done');
-
-        progress.style.width = progress.getAttribute('data-done') + '%';
-        progress.style.opacity = 1;
-
-        window.onload = function () {
-            var progress = document.querySelector('.progress-done');
-            progress.innerHTML = ((parseFloat(progress.getAttribute('data-done'))) + '%')
-
-        }
-
-        function increaseProgress(value) {
-
-            let where = (progress.style.width).replaceAll('%', '')
-            where = parseFloat(where)
-
-            // progress.style.width = where + 10 + '%'
-            progress.style.width = value + "%"
-
-            // if (where >= 99) {
-            //     progress.innerHTML = 'download complete'
-            // } else {
-                // progress.innerHTML = ((progress.style.width).replaceAll('%', '') + '%')
-                progress.innerHTML = value + '%'
-            // }
-        }
-
-        function getProgress(chapters, jsonChapters) {
-console.log(chapters, jsonChapters)
-            // gets the size of the increments
-            let increment = (chapters / jsonChapters)*100;
-            console.log('increment',increment)
-
-            let value = (increment)
-            increaseProgress(value)
-        }
-
-
-        function updateProgress() {
-
-        }
-    </script>
-
 
 
 
