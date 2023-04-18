@@ -186,7 +186,7 @@ app.post(`/new`, (req, res) => {
     console.log(req.body)
     console.log(req.body.baseOffset)
 
-    form.downloadManga(req)
+    // form.downloadManga(req)
 
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
@@ -228,9 +228,11 @@ app.post(`/`, (req, res) => {
 
 app.post(`/deleteManga`,(req, res) => {
     console.log(req.body.mangaName)
-jsonWriter.deleteManga(req.body.mangaName)
+// jsonWriter.deleteManga(req.body.mangaName)
 
-    res.redirect('/')
+    res.redirect('https://google.com')
+    console.log('post')
+    
 })
 
 // uses arguments to see if user wants lan access

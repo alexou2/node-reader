@@ -101,4 +101,5 @@ function deleteManga(mangaName) {
   } else {
     console.log(`${mangaName} won't be deleted`)
   }
+  location.replace('/')
 }
