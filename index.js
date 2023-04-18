@@ -228,7 +228,7 @@ app.post(`/`, (req, res) => {
 
 app.post(`/deleteManga`,(req, res) => {
     console.log(req.body.mangaName)
-// jsonWriter.deleteManga(req.body.mangaName)
+jsonWriter.deleteManga(req.body.mangaName)
 
     res.redirect('https://google.com')
     console.log('post')
