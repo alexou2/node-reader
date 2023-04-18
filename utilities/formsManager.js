@@ -24,10 +24,12 @@ module.exports = {
 
                 // if manganato is the source
                 case 'Manganato':
-                    // parse.parse(req.body.mangaName)
-                    // parse.searchByName(req.body.mangaName)
-                    manganato.parse(req.body.mangaName)
+                    if ((req.body.source).startsWith('https://chapmanganato.com/')){
+                        manganato.parse(req.body.mangaName)
                     console.log(`manganato in ${req.body.translatedLanguages}`)
+            }else{
+                console.error("\u0007\nThe URL doesn't come from manganato. Please check the link again.")
+            }
                     break;
 
 
@@ -53,7 +55,7 @@ module.exports = {
         console.log(req.body)
 
         // add json data to download chapters i other than english
-        mangadex.getMangaID(req.body.mangaName + " ", 'en', parseInt(req.body.offset),"", "relevance")
+        mangadex.getMangaID(req.body.mangaName + " ", 'en', parseInt(req.body.offset), "", "relevance")
 
     },
 
