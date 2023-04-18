@@ -194,12 +194,11 @@ module.exports = {
             console.error('There is no json file corresponding to be deleted')
         }
 
-        // try {
+        try {
             fs.rmSync(`manga/${mangaName}`, ({ recursive: true }))
-        // } catch {
-            // console.error(`manga can't be deleted`)
-
-        // }
+        } catch {
+            console.error(`manga can't be deleted`)
+        }
 
 
     }
