@@ -230,7 +230,7 @@ app.post(`/deleteManga`,(req, res) => {
     console.log(req.body.mangaName)
 jsonWriter.deleteManga(req.body.mangaName)
 
-    res.sendStatus(200)
+    res.redirect('/')
 })
 
 // uses arguments to see if user wants lan access
