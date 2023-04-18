@@ -156,7 +156,7 @@ module.exports = {
             name = name.replaceAll('(', '.?')
             name = name.replaceAll(')', '.?')
             name = name.trim()
-            console.log('name', name, chapterNumber)
+            // console.log('name', name, chapterNumber)
 
             let regex = new RegExp(`Ch.?.?.?.?.?.?.?.?${chapterNumber}.*${name}.*`, "ig")
 
@@ -165,7 +165,7 @@ module.exports = {
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
             if (!match && jsonData.chapter_count > folderContent.length + 1) {
-                console.log('not there', chapterPath[i])
+                // console.log('not there', chapterPath[i])
                 elementsToDelete.push(i)
                 // console.log('push', jsonData.chapters[i])
             }
@@ -186,5 +186,21 @@ module.exports = {
 
         return jsonData
     },
+    deleteManga: function (mangaName) {
+        // deletes json file
+        try {
+            fs.rmSync(`/jsonFiles/${mangaName.json}.json`);
+        } catch {
+            console.error('There is no json file corresponding to be deleted')
+        }
 
+        try {
+            fs.rmSync(`/manga/${mangaName}`, ({ recursive: true }))
+        } catch {
+            console.error(`manga can't be deleted`)
+
+        }
+
+
+    }
 }

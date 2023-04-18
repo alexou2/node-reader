@@ -86,17 +86,17 @@ function goFullscreen() {
 
 
 function deleteManga(mangaName) {
-console.log('clicked')
-  let confirmation = confirm("Do Yu really want to delete the manga?");
+  console.log('clicked')
+  let confirmation = confirm("Do you really want to delete this manga?");
 
-console.log(confirmation)
+  console.log(confirmation)
 
   if (confirmation) {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('POST', `/deleteManga/${mangaName}`);
+    xhr.open('POST', `/deleteManga`);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(mangaName);
+    xhr.send(JSON.stringify({"mangaName": mangaName}));
     console.log('data:', mangaName);
   } else {
     console.log(`${mangaName} won't be deleted`)

@@ -188,6 +188,7 @@ a {
     box-shadow: 0 0 24px -4px black;
     margin: 1em;
     transition: .2s;
+    flex:none;
 }
 
 .chapter {
@@ -231,8 +232,16 @@ a {
 
 .manga-infos {
     display: inline-block;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
-
+.info{
+    display: flex;
+flex-wrap: wrap;
+max-width: 50%;
+flex-direction: column;
+}
 /* .tags, */
 .description {
     display: inline-block;
@@ -478,6 +487,24 @@ input[type=submit]:hover {
     opacity: 1;
     transition: 1s;
 }
+
+.deleteManga{
+    background-color: #44444400;
+    border-color: #44444400;
+    font-size: 3em;
+    /* margin-left: .5em; */
+    color: #fff;
+    /* text-align: center; */
+    border: none;
+    background-color: red;
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 5px;
+text-align: center;
+}
+
+
 
 /* screen width */
 @media screen and (max-width: 650px) {

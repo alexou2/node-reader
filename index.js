@@ -226,8 +226,10 @@ app.post(`/`, (req, res) => {
     res.sendStatus(200)
 })
 
-app.post('deleteManga/:mangaName',(req, res) => {
-    console.log(req.body)
+app.post(`/deleteManga`,(req, res) => {
+    console.log(req.body.mangaName)
+// jsonWriter.deleteManga(req.body.mangaName)
+
     res.sendStatus(200)
 })
 
