@@ -3,3 +3,4 @@ node_modules
 *.jpg
 jsonFiles/*.json
 logs.log
+cert/*
