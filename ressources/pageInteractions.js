@@ -90,16 +90,18 @@ function deleteManga(mangaName) {
   let confirmation = confirm("Do you really want to delete this manga?");
 
   console.log(confirmation)
-
   if (confirmation) {
     const xhr = new XMLHttpRequest();
-
+    console.log('data:', mangaName);
     xhr.open('POST', `/deleteManga`);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({"mangaName": mangaName}));
-    console.log('data:', mangaName);
+    xhr.send(JSON.stringify({ "mangaName": mangaName }))
+    // location.replace('/')
+    console.log('redirect')
   } else {
     console.log(`${mangaName} won't be deleted`)
   }
-  location.replace('/')
+
+
+  // location.replace('/')
 }

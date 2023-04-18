@@ -190,12 +190,14 @@ module.exports = {
         // deletes json file
         try {
             fs.rmSync(`jsonFiles/${mangaName.json}.json`);
+            console.log('json deleted')
         } catch {
             console.error('There is no json file corresponding to be deleted')
         }
 
         try {
             fs.rmSync(`manga/${mangaName}`, ({ recursive: true }))
+            console.log('folder deleted')
         } catch {
             console.error(`manga can't be deleted`)
         }

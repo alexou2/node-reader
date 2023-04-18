@@ -74,7 +74,6 @@ app.get(`/`, (req, res) => {
     let mangaList = getList(mangaName);
     for (let i in mangaList) {
         mangaList[i] = mangaList[i].replaceAll('%', '%25');
-        console.log(typeof(mangaList[i]))
     }
     res.render("../views/home", { mangaList: mangaList, mangaName: mangaName });
     console.log("homepage is running")
@@ -186,7 +185,7 @@ app.post(`/new`, (req, res) => {
     console.log(req.body)
     console.log(req.body.baseOffset)
 
-    // form.downloadManga(req)
+    form.downloadManga(req)
 
     // redirects the user to the homepage after adding the manga
     res.redirect(`/`)
@@ -219,7 +218,6 @@ app.post(`/`, (req, res) => {
     console.log('req', req)
     console.log(req.body)
     console.log(req.body.baseOffset)
-
     // calls the form manager to take care of the request
     form.downloadManga(req)
     // res.redirect(`.`)
@@ -230,7 +228,7 @@ app.post(`/deleteManga`,(req, res) => {
     console.log(req.body.mangaName)
 jsonWriter.deleteManga(req.body.mangaName)
 
-    res.redirect('https://google.com')
+    res.redirect('/')
     console.log('post')
     
 })
