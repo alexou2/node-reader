@@ -1,10 +1,14 @@
-const manganato = require('./utilities/parser');
+const fs = require('fs')
 
-console.log('---------------------------------------------------');
-// (async () => {
-    const searchLink = manganato.searchByName('three days of happiness')
-    console.log(searchLink)
+try{
+fs.mkdirSync('testrm')
+}catch{}
 
-    const mangaLink = (manganato.getMangaLink(searchLink))
-    console.log(mangaLink)
-// })
+try{
+fs.writeFileSync('testrm/t.l', 'tl')
+}catch{}
+
+// try{
+fs.rmSync('testrm', ({ recursive: true }))
+// }catch{}
+console.log(fs.existsSync('testrm'))

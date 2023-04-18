@@ -134,10 +134,10 @@ module.exports = {
         // reads the json file and extracts the list of chapters
         let jsonData = JSON.parse(fs.readFileSync(`jsonFiles/${path}.json`, 'utf-8'));
         let chapterPath = jsonData.chapters.map(path => path.chapterPath)
-        
-        if(folderContent == ""){
-        let folderContent = (fs.readdirSync(`manga/${path}`))
-    }
+
+        if (folderContent == "") {
+            let folderContent = (fs.readdirSync(`manga/${path}`))
+        }
         // console.log(chapterPath)
         let elementsToDelete = []
 
@@ -156,7 +156,7 @@ module.exports = {
             name = name.replaceAll('(', '.?')
             name = name.replaceAll(')', '.?')
             name = name.trim()
-console.log('name',name, chapterNumber)
+            console.log('name', name, chapterNumber)
 
             let regex = new RegExp(`Ch.?.?.?.?.?.?.?.?${chapterNumber}.*${name}.*`, "ig")
 
@@ -164,12 +164,12 @@ console.log('name',name, chapterNumber)
 
             // tries to match chapters in the json file to a downloaded chapter
             let match = folderContent.some(chapter => regex.test(chapter));
-            if (!match && jsonData.chapter_count > folderContent.length+1) {
-                console.log('not there',chapterPath[i])
+            if (!match && jsonData.chapter_count > folderContent.length + 1) {
+                console.log('not there', chapterPath[i])
                 elementsToDelete.push(i)
                 // console.log('push', jsonData.chapters[i])
             }
-            if (folderContent[i] == (chapter => regex.test(chapter))){
+            if (folderContent[i] == (chapter => regex.test(chapter))) {
                 console.log('name changed')
             }
 

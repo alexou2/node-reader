@@ -37,6 +37,7 @@ function addBookmark(mangaName, chapter, value) {
 
 }
 
+
 // when the button is clicked, it will download the newest chapters for the manga
 function updateChapters(mangaName, offset) {
   console.log(mangaName)
@@ -58,13 +59,13 @@ function updateChapters(mangaName, offset) {
   console.log(data)
 }
 
+
 function goFullscreen() {
   // document.getElementsByClassName("entire").requestFullscreen();
 
   var elem = document.documentElement;
 
   /* View in fullscreen */
-
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
   } else if (elem.webkitRequestFullscreen) { /* Safari */
@@ -83,29 +84,21 @@ function goFullscreen() {
   }
 }
 
-// progress bar 
 
+function deleteManga(mangaName) {
+console.log('clicked')
+  let confirmation = confirm("Do Yu really want to delete the manga?");
 
+console.log(confirmation)
 
-// function increaseProgress(progressNumber) {
-//   let progress = document.querySelector('.progress-done');
-//   progress.style.width = progressNumber + "%"
-//   progress.innerHTML = progressNumber.toFixed(1) + '%'
-// }
+  if (confirmation) {
+    const xhr = new XMLHttpRequest();
 
-// window.onload = function () {
-//   // function getProgress(){
-//   let chapters = "<%- chapterList %>".length
-//   let jsonChapters = "<%- chapterNumber %>".length
-
-//   console.log()
-
-//   console.log(chapters, jsonChapters)
-//   // gets the size of the increments
-//   let increment = (chapters / jsonChapters) * 100;
-//   console.log('increment', increment)
-
-//   let progressNumber = increment
-//   increaseProgress(progressNumber)
-
-// }
+    xhr.open('POST', `/deleteManga/${mangaName}`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(mangaName);
+    console.log('data:', mangaName);
+  } else {
+    console.log(`${mangaName} won't be deleted`)
+  }
+}

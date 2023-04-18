@@ -213,6 +213,7 @@ app.post(`/update-chapters`, (req, res) => {
     res.sendStatus(200)
 })
 
+
 // post request when adding a new manga
 app.post(`/`, (req, res) => {
     console.log('req', req)
@@ -222,6 +223,11 @@ app.post(`/`, (req, res) => {
     // calls the form manager to take care of the request
     form.downloadManga(req)
     // res.redirect(`.`)
+    res.sendStatus(200)
+})
+
+app.post('deleteManga/:mangaName',(req, res) => {
+    console.log(req.body)
     res.sendStatus(200)
 })
 
