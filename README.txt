@@ -97,4 +97,9 @@ DEPRICATED        views/add-manga.ejs : The form where you can fill in order to 
 
         views/chapter-menu.ejs : The page where you get informations about the manga (in the future) and where you see the chapters (/manga/mangaName)
 
+Cert generation:
 
+cd ~/easyrsa
+./easyrsa --subject-alt-name="DNS:hordeprix" build-server-full hordeprix nopass
+cp private/hordeprix.key ~/Documents/test-mangaJs/cert/server.key
+cp issued/hordeprix.crt ~/Documents/test-mangaJs/cert/server.crt

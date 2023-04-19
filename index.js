@@ -10,7 +10,7 @@ const jsonWriter = require('./utilities/jsonWriter');
 const mangadex = require('./utilities/mangadex');
 const argsManager = require('./utilities/argsManager');
 const os = require('os')
-
+const path = require('path')
 // try {
     const https = require('https');
 // } catch {
@@ -260,8 +260,8 @@ if (lanAccess != true) {
 
 
     const sslServer = https.createServer({
-        key: fs.readFileSync('cert/key.pem'),
-        cert: fs.readFileSync('cert/cert.pem')
+        key: fs.readFileSync(path.join(__dirname, 'cert/','server.key')),
+        cert: fs.readFileSync(path.join(__dirname, 'cert/','server.crt'))
     }, app)
 
     sslServer.listen(3000, () => console.log('Secure server 🚀🔑 on port 3000'))
