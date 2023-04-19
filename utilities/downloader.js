@@ -1,13 +1,13 @@
 // downloads the pages from manganato usinf a headless browser
 // throws an error if puppeteer isn't installed on the device
-try {
+// try {
   const puppeteer = require('puppeteer');
-} catch {
-  console.log('platform:', process.platform)
-  if (process.platform == "android") {
-    console.log(`puppeteer is not supported on your device or isn't installed`)
-  }
-}
+// } catch {
+//   console.log('platform:', process.platform)
+//   if (process.platform == "android") {
+//     console.log(`puppeteer is not supported on your device or isn't installed`)
+//   }
+// }
 
 const fs = require('fs');
 const parse = require('./parser')

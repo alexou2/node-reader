@@ -1,5 +1,5 @@
 
-try {
+// try {
     const puppeteer = require('puppeteer');
  
 const cheerio = require('cheerio');
@@ -17,12 +17,12 @@ const { download } = require('./downloader.js');
 const ddl = require('./downloader.js')
 const sanitizeFilename = require('sanitize-filename');
 
- } catch {
-    console.log('platform:', process.platform)
-    if (process.platform == "android") {
-      console.log(`puppeteer is not supported on your device or isn't installed`)
-    }
-  }
+//  } catch {
+//     console.log('platform:', process.platform)
+//     if (process.platform == "android") {
+//       console.log(`puppeteer is not supported on your device or isn't installed`)
+//     }
+//   }
 
 
 module.exports = {

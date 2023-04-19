@@ -11,6 +11,13 @@ const mangadex = require('./utilities/mangadex');
 const argsManager = require('./utilities/argsManager');
 const os = require('os')
 
+// try {
+    const https = require('https');
+// } catch {
+    // console.log(`The https module isn't installed on the device. You wont't be able to access the site with https`)
+// }
+
+
 app.use(bodyParser.json());
 
 
@@ -123,7 +130,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
 
 
     //renders the chapter-menu.ejs with the arguments
-    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags , chapterNumber: chapterNumber});
+    res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterName, tags: tags, chapterNumber: chapterNumber });
     // res.render("../views/chapter-menu", { mangaName: mangaName, chapterList: chapterList, mangaDesc: mangaDesc, bookmarks: bookmarks, chapterName: chapterList, tags: tags });
 });
 
@@ -224,32 +231,40 @@ app.post(`/`, (req, res) => {
     res.sendStatus(200)
 })
 
-app.post(`/deleteManga`,(req, res) => {
+app.post(`/deleteManga`, (req, res) => {
     console.log(req.body.mangaName)
-jsonWriter.deleteManga(req.body.mangaName)
+    jsonWriter.deleteManga(req.body.mangaName)
 
     res.redirect('/')
     console.log('post')
-    
+
 })
 
 // uses arguments to see if user wants lan access
 let lanAccess = argsManager.getArgs(process.argv)
-console.log('lan:',lanAccess)
+console.log('lan:', lanAccess)
 // enables the server to be accessed via localhost 3000
 // if (process.platform != 'win32' && process.platform != 'linux' || lanAccess != true) {
-    if(lanAccess != true){
+if (lanAccess != true) {
     app.listen(3000, (req, res) => {
         console.log("Connected on port:3000");
     });
 } else {
     // if the pc is running a distro of linux or windows
-    const PORT = 3000;
-    const LAN_IP_ADDRESS = os.hostname
+    // const PORT = 3000;
+    // const LAN_IP_ADDRESS = os.hostname
 
-    app.listen(PORT, LAN_IP_ADDRESS, () => {
-        console.log(`Server running at http://${LAN_IP_ADDRESS}:${PORT}/`);
-    });
+    // app.listen(PORT, LAN_IP_ADDRESS, () => {
+    //     console.log(`Server running at http://${LAN_IP_ADDRESS}:${PORT}/`);
+    // });
+
+
+    const sslServer = https.createServer({
+        key: fs.readFileSync('cert/key.pem'),
+        cert: fs.readFileSync('cert/cert.pem')
+    }, app)
+
+    sslServer.listen(3000, () => console.log('Secure server 🚀🔑 on port 3000'))
 }
 
 

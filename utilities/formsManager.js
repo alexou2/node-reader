@@ -25,12 +25,12 @@ module.exports = {
 
                 // if manganato is the source
                 case 'Manganato':
-                    if ((req.body.source).startsWith('https://chapmanganato.com/')){
+                    // if ((req.body.source).startsWith('https://chapmanganato.com/') || (req.body.source).startsWith('https://manganato.com/')){
                         manganato.parse(req.body.mangaName)
                     console.log(`manganato in ${req.body.translatedLanguages}`)
-            }else{
-                console.error("\u0007\nThe URL doesn't come from manganato. Please check the link again.")
-            }
+            // }else{
+            //     console.error("\u0007\nThe URL doesn't come from manganato. Please check the link again.")
+            // }
                     break;
 
 
