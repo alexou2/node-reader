@@ -97,6 +97,7 @@ DEPRICATED        views/add-manga.ejs : The form where you can fill in order to 
 
         views/chapter-menu.ejs : The page where you get informations about the manga (in the future) and where you see the chapters (/manga/mangaName)
 
+
 Cert generation:
 
 cd ~/easyrsa

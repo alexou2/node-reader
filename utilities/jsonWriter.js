@@ -186,6 +186,8 @@ module.exports = {
 
         return jsonData
     },
+
+    // deletes the manga and its json (accessible from front-end)
     deleteManga: function (mangaName) {
         // deletes json file
         try {

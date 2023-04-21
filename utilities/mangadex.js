@@ -159,8 +159,9 @@ module.exports = {
 
 
             }
-            chapterName = this.filterArr(chapterName)
-            chapterID = this.filterArr(chapterID)
+            [chapterName, chapterID] = this.filterArr(chapterName, chapterID)
+
+            // chapterID = this.filterArr(chapterID)
 
             console.log('chapter names:', chapterName)
             //gets the cover image from the manga
@@ -366,17 +367,73 @@ module.exports = {
 
         })();
     },
+
+
     // removes duplicates in an array
     // used to remove duplicate chapters
-    filterArr: function (arr) {
-        console.log(arr)
+    filterArr: function (chapterName, chapterID) {
 
-        return arr.filter((item,
-            index) => arr.indexOf(item) == index);
+let elementsToDelete = []
+let match
+        // if (chapterName.length > 0) {
+        // for (let j in chapterName) {
+
+            // let regex = new RegExp(`${chapterName[j]}.*`, "ig")
+
+
+
+            // tries to match chapters in the json file to a downloaded chapter
+            // let match = chapterName.some(chapter => regex.test(chapter));
+
+            // match = (chapterName.indexOf(chapterName[j]))
+
+            // console.log(match)
+            // if (match){
+            //     // console.log('not there', chapterPath[i])
+            //     elementsToDelete.push(j)
+            //     console.log('aa')
+            //     // console.log('push', jsonData.chapters[i])
+                
+            // }
+            let j = 0
+            chapterName.forEach(element => {
+                if(chapterName.lastIndexOf(element)){
+                    console.log('delete', element)
+                    
+                    chapterID.splice((chapterName.lastIndexOf(element)-j), 0);
+                chapterName.splice((chapterName.lastIndexOf(element)-j), 0);
+                }else{
+                    
+                }
+                j++
+            });
+
+        // }
+        console.log(match)
+
+        // deletes the extra chapters in the json object
+        if (elementsToDelete.length > 0) {
+            for (let j in elementsToDelete) {
+                // deletes the elements to delete
+                chapterID.splice(([elementsToDelete[j]] - j), 1);
+                chapterName.splice(([elementsToDelete[j]] - j), 1);
+                
+            }
+        }
+        console.log(chapterName)
+        console.log(chapterID)
+
+
+
+        return [chapterName, chapterID]
+        // return arr.filter((item,
+        //     index) => arr.indexOf(item) == index);
     },
 
+
+    // autocompleter for front end
     autocomplete: async function (title) {
-        
+
         const resp = await axios({
             method: 'GET',
             url: `${baseUrl}/manga`,
@@ -392,12 +449,12 @@ module.exports = {
         // console.log(resp.data.map(t => t.attributes.title))
 
         let mangaName = resp.data.map(t => t.attributes.title)
-for (let i in mangaName){
-        mangaName[i] = JSON.stringify(mangaName[i])
-        // console.log()
-        mangaName[i] = mangaName[i].split('"')
-        mangaName[i] = mangaName[i][3]
-}
+        for (let i in mangaName) {
+            mangaName[i] = JSON.stringify(mangaName[i])
+            // console.log()
+            mangaName[i] = mangaName[i].split('"')
+            mangaName[i] = mangaName[i][3]
+        }
         return mangaName
     }
 
