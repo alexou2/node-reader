@@ -102,12 +102,12 @@ module.exports = {
 
         const jsonExists = fs.existsSync(`jsonFiles/${mangaName}.json`)
 
-        let jsonContent = fs.readFileSync(`jsonFiles/${mangaName}.json`)
-        let mangaChaps = fs.readdirSync(`manga/${mangaName}`)
-        jsonContent = JSON.stringify(jsonContent)
-        const sameNumberOfChaps = ((jsonContent.chapter).length == mangaChaps.length)
+        // let jsonContent = fs.readFileSync(`jsonFiles/${mangaName}.json`)
+        // let mangaChaps = fs.readdirSync(`manga/${mangaName}`)
+        // jsonContent = JSON.stringify(jsonContent)
+        // const sameNumberOfChaps = ((jsonContent.chapter).length == mangaChaps.length)
 
-        if (!jsonExists || !sameNumberOfChaps) {
+        if (!jsonExists) {
             console.log(__dirname)
             this.createJsonFromFiles(mangaName)
             console.log('created missing jsons for manga')
