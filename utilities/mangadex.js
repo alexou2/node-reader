@@ -29,7 +29,7 @@ module.exports = {
 
 
 
-        (async () => {
+        // (async () => {
             const resp = await axios({
                 method: 'GET',
                 url: `${baseUrl}/manga`,
@@ -41,16 +41,19 @@ module.exports = {
                     [`order[${sortBy}]`]: "desc",
                 }
 
-            });
-            console.log("\n\nList of manga corresponding to the search: \n", resp.data.data.map(manga => manga.id), "\n");
+            }).then(t => t.data);
+
+            console.log('resp:',resp)
+            // console.log('data:',data)
+            console.log("\n\nList of manga corresponding to the search: \n", resp.data.map(manga => manga.id), "\n");
 
 
-            let mangaID = resp.data.data.map(manga => manga.id)
+            let mangaID = resp.data.map(manga => manga.id)
 
 
 
             // fetches the first manga name in the mangadex list
-            let mangaName = resp.data.data.map(manga => manga.attributes.title)
+            let mangaName = resp.data.map(manga => manga.attributes.title)
             console.log(mangaName)
             mangaName = mangaName[0]
             mangaName = JSON.stringify(mangaName)
@@ -65,15 +68,15 @@ module.exports = {
 
             // fetches the alternative titles for the manga
             // let altTitles = resp.data.data.map(manga => manga.attributes.altTitles)
-            let altTitles = resp.data.data.map(manga => manga.attributes.altTitles.map(altTitle => altTitle))
+            let altTitles = resp.data.map(manga => manga.attributes.altTitles.map(altTitle => altTitle))
 
 
 
             // gets informations about the manga like status, tags, demographic
             console.log(altTitles)
-            let tags = resp.data.data.map(manga => manga.attributes.tags.map(attributes => attributes.attributes.name.en))
-            let status = resp.data.data.map(manga => manga.attributes.status)
-            let description = resp.data.data.map(manga => manga.attributes.description.en)
+            let tags = resp.data.map(manga => manga.attributes.tags.map(attributes => attributes.attributes.name.en))
+            let status = resp.data.map(manga => manga.attributes.status)
+            let description = resp.data.map(manga => manga.attributes.description.en)
             console.log(altTitles, tags[0], status, description[0])
 
 
@@ -91,7 +94,7 @@ module.exports = {
 
 
 
-        })();
+        // })();
 
     },
 
@@ -182,11 +185,11 @@ module.exports = {
 
                 })
             }
-            if(sem.capacity == sem.current){
+            if (sem.capacity == sem.current) {
                 console.log('All chapters have finished downloading')
             }
 
-        })();
+        })().then
     },
 
 
@@ -375,71 +378,71 @@ module.exports = {
     // used to remove duplicate chapters
     filterArr: function (chapterName, chapterID) {
 
-// let elementsToDelete = []
-// let match
-//         // if (chapterName.length > 0) {
-//         // for (let j in chapterName) {
+        // let elementsToDelete = []
+        // let match
+        //         // if (chapterName.length > 0) {
+        //         // for (let j in chapterName) {
 
-//             // let regex = new RegExp(`${chapterName[j]}.*`, "ig")
-
-
-
-//             // tries to match chapters in the json file to a downloaded chapter
-//             // let match = chapterName.some(chapter => regex.test(chapter));
-
-//             // match = (chapterName.indexOf(chapterName[j]))
-
-//             // console.log(match)
-//             // if (match){
-//             //     // console.log('not there', chapterPath[i])
-//             //     elementsToDelete.push(j)
-//             //     console.log('aa')
-//             //     // console.log('push', jsonData.chapters[i])
-                
-//             // }
-//             let j = 0
-//             chapterName.forEach(element => {
-//                 if(chapterName.lastIndexOf(element)){
-//                     console.log('delete', element)
-                    
-//                     chapterID.splice((chapterName.lastIndexOf(element)-j), 0);
-//                 chapterName.splice((chapterName.lastIndexOf(element)-j), 0);
-//                 }else{
-                    
-//                 }
-//                 j++
-//             });
-
-//         // }
-//         console.log(match)
-
-//         // deletes the extra chapters in the json object
-//         if (elementsToDelete.length > 0) {
-//             for (let j in elementsToDelete) {
-//                 // deletes the elements to delete
-//                 chapterID.splice(([elementsToDelete[j]] - j), 1);
-//                 chapterName.splice(([elementsToDelete[j]] - j), 1);
-                
-//             }
-//         }
-//         console.log(chapterName)
-//         console.log(chapterID)
+        //             // let regex = new RegExp(`${chapterName[j]}.*`, "ig")
 
 
 
-//         return [chapterName, chapterID]
+        //             // tries to match chapters in the json file to a downloaded chapter
+        //             // let match = chapterName.some(chapter => regex.test(chapter));
 
-// chapterName = chapterName.filter((item,
-//     index) => chapterName.indexOf(item) == index);
+        //             // match = (chapterName.indexOf(chapterName[j]))
 
-//     chapterID = chapterID.filter((item,
-//         index) => chapterName.indexOf(item) == chapterName);
+        //             // console.log(match)
+        //             // if (match){
+        //             //     // console.log('not there', chapterPath[i])
+        //             //     elementsToDelete.push(j)
+        //             //     console.log('aa')
+        //             //     // console.log('push', jsonData.chapters[i])
+
+        //             // }
+        //             let j = 0
+        //             chapterName.forEach(element => {
+        //                 if(chapterName.lastIndexOf(element)){
+        //                     console.log('delete', element)
+
+        //                     chapterID.splice((chapterName.lastIndexOf(element)-j), 0);
+        //                 chapterName.splice((chapterName.lastIndexOf(element)-j), 0);
+        //                 }else{
+
+        //                 }
+        //                 j++
+        //             });
+
+        //         // }
+        //         console.log(match)
+
+        //         // deletes the extra chapters in the json object
+        //         if (elementsToDelete.length > 0) {
+        //             for (let j in elementsToDelete) {
+        //                 // deletes the elements to delete
+        //                 chapterID.splice(([elementsToDelete[j]] - j), 1);
+        //                 chapterName.splice(([elementsToDelete[j]] - j), 1);
+
+        //             }
+        //         }
+        //         console.log(chapterName)
+        //         console.log(chapterID)
+
+
+
+        //         return [chapterName, chapterID]
+
+        // chapterName = chapterName.filter((item,
+        //     index) => chapterName.indexOf(item) == index);
+
+        //     chapterID = chapterID.filter((item,
+        //         index) => chapterName.indexOf(item) == chapterName);
 
         return chapterName.filter((item,
             index) => chapterName.indexOf(item) == index);
 
-//         console.log(chapterName, chapterID  )
-// return [chapterName, chapterID]
+        //         console.log(chapterName, chapterID  )
+        // return [chapterName, chapterID]
     },
 
 
