@@ -105,7 +105,7 @@ module.exports = {
         let jsonContent = fs.readFileSync(`jsonFiles/${mangaName}.json`)
         let mangaChaps = fs.readdirSync(`manga/${mangaName}`)
         jsonContent = JSON.stringify(jsonContent)
-        const sameNumberOfChaps = (jsonContent.chapter_count == mangaChaps.length)
+        const sameNumberOfChaps = (jsonContent.chapter.length == mangaChaps.length)
 
         if (!jsonExists || !sameNumberOfChaps) {
             console.log(__dirname)
