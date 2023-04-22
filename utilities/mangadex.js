@@ -29,7 +29,6 @@ module.exports = {
 
 
 
-
         (async () => {
             const resp = await axios({
                 method: 'GET',
@@ -182,6 +181,9 @@ module.exports = {
                     console.log('\x1b[94m%s\x1b[0m', `started ${chapterName[j]}`)
 
                 })
+            }
+            if(sem.capacity == sem.current){
+                console.log('All chapters have finished downloading')
             }
 
         })();
