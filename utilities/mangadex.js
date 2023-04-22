@@ -373,61 +373,61 @@ module.exports = {
     // used to remove duplicate chapters
     filterArr: function (chapterName, chapterID) {
 
-let elementsToDelete = []
-let match
-        // if (chapterName.length > 0) {
-        // for (let j in chapterName) {
+// let elementsToDelete = []
+// let match
+//         // if (chapterName.length > 0) {
+//         // for (let j in chapterName) {
 
-            // let regex = new RegExp(`${chapterName[j]}.*`, "ig")
+//             // let regex = new RegExp(`${chapterName[j]}.*`, "ig")
 
 
 
-            // tries to match chapters in the json file to a downloaded chapter
-            // let match = chapterName.some(chapter => regex.test(chapter));
+//             // tries to match chapters in the json file to a downloaded chapter
+//             // let match = chapterName.some(chapter => regex.test(chapter));
 
-            // match = (chapterName.indexOf(chapterName[j]))
+//             // match = (chapterName.indexOf(chapterName[j]))
 
-            // console.log(match)
-            // if (match){
-            //     // console.log('not there', chapterPath[i])
-            //     elementsToDelete.push(j)
-            //     console.log('aa')
-            //     // console.log('push', jsonData.chapters[i])
+//             // console.log(match)
+//             // if (match){
+//             //     // console.log('not there', chapterPath[i])
+//             //     elementsToDelete.push(j)
+//             //     console.log('aa')
+//             //     // console.log('push', jsonData.chapters[i])
                 
-            // }
-            let j = 0
-            chapterName.forEach(element => {
-                if(chapterName.lastIndexOf(element)){
-                    console.log('delete', element)
+//             // }
+//             let j = 0
+//             chapterName.forEach(element => {
+//                 if(chapterName.lastIndexOf(element)){
+//                     console.log('delete', element)
                     
-                    chapterID.splice((chapterName.lastIndexOf(element)-j), 0);
-                chapterName.splice((chapterName.lastIndexOf(element)-j), 0);
-                }else{
+//                     chapterID.splice((chapterName.lastIndexOf(element)-j), 0);
+//                 chapterName.splice((chapterName.lastIndexOf(element)-j), 0);
+//                 }else{
                     
-                }
-                j++
-            });
+//                 }
+//                 j++
+//             });
 
-        // }
-        console.log(match)
+//         // }
+//         console.log(match)
 
-        // deletes the extra chapters in the json object
-        if (elementsToDelete.length > 0) {
-            for (let j in elementsToDelete) {
-                // deletes the elements to delete
-                chapterID.splice(([elementsToDelete[j]] - j), 1);
-                chapterName.splice(([elementsToDelete[j]] - j), 1);
+//         // deletes the extra chapters in the json object
+//         if (elementsToDelete.length > 0) {
+//             for (let j in elementsToDelete) {
+//                 // deletes the elements to delete
+//                 chapterID.splice(([elementsToDelete[j]] - j), 1);
+//                 chapterName.splice(([elementsToDelete[j]] - j), 1);
                 
-            }
-        }
-        console.log(chapterName)
-        console.log(chapterID)
+//             }
+//         }
+//         console.log(chapterName)
+//         console.log(chapterID)
 
 
 
-        return [chapterName, chapterID]
-        // return arr.filter((item,
-        //     index) => arr.indexOf(item) == index);
+//         return [chapterName, chapterID]
+        return arr.filter((item,
+            index) => arr.indexOf(item) == index);
     },
 
 
