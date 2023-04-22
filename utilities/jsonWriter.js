@@ -99,7 +99,15 @@ module.exports = {
     checkJson: function (mangaName) {
 
         // for (let i = 0; i < mangaFiles.length; i++) {
-        if (!fs.existsSync(`jsonFiles/${mangaName}.json`)) {
+
+        const jsonExists = fs.existsSync(`jsonFiles/${mangaName}.json`)
+
+        let jsonContent = fs.readFileSync(`jsonFiles/${mangaName}.json`)
+        let mangaChaps = fs.readdirSync(`manga/${mangaName}`)
+        jsonContent = JSON.stringify(jsonContent)
+        const sameNumberOfChaps = (jsonContent.chapter_count == mangaChaps.length)
+
+        if (!jsonExists || !sameNumberOfChaps) {
             console.log(__dirname)
             this.createJsonFromFiles(mangaName)
             console.log('created missing jsons for manga')
@@ -196,7 +204,7 @@ module.exports = {
         } catch {
             console.error('There is no json file corresponding to be deleted')
         }
-
+        // deletes the manga directory
         try {
             fs.rmSync(`manga/${mangaName}`, ({ recursive: true }))
             console.log('folder deleted')
