@@ -159,9 +159,9 @@ module.exports = {
 
 
             }
-            [chapterName, chapterID] = this.filterArr(chapterName, chapterID)
+            // [chapterName, chapterID] = this.filterArr(chapterName, chapterID)
 
-            // chapterID = this.filterArr(chapterID)
+            chapterName = this.filterArr(chapterName, "")
 
             console.log('chapter names:', chapterName)
             //gets the cover image from the manga
@@ -359,7 +359,7 @@ module.exports = {
 
 
 
-            chapterName = this.filterArr(chapterName)
+            chapterName = this.filterArr(chapterName, "")
 
 
 
@@ -426,8 +426,18 @@ module.exports = {
 
 
 //         return [chapterName, chapterID]
-        return arr.filter((item,
-            index) => arr.indexOf(item) == index);
+
+// chapterName = chapterName.filter((item,
+//     index) => chapterName.indexOf(item) == index);
+
+//     chapterID = chapterID.filter((item,
+//         index) => chapterName.indexOf(item) == chapterName);
+
+        return chapterName.filter((item,
+            index) => chapterName.indexOf(item) == index);
+
+//         console.log(chapterName, chapterID  )
+// return [chapterName, chapterID]
     },
 
 
