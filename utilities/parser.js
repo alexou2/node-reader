@@ -171,8 +171,8 @@ module.exports = {
 
 
         //calls getMangaLink()
-        // this.getMangaLink(searchedManga)
-        ddl.getMangaLink(searchedManga)
+        this.getMangaLink(searchedManga)
+        // ddl.getMangaLink(searchedManga)
         return searchedManga
     }
 
