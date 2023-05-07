@@ -264,7 +264,7 @@ console.log('lan:', lanAccess)
         cert: fs.readFileSync(path.join(__dirname, 'cert/','server.crt'))
     }, app)
 
-    sslServer.listen(3000, () => console.log('Secure server 🚀🔑 on port 4000'))
+    sslServer.listen(4000, () => console.log('Secure server 🚀🔑 on port 4000'))
 }
 
 
