@@ -245,11 +245,11 @@ let lanAccess = argsManager.getArgs(process.argv)
 console.log('lan:', lanAccess)
 // enables the server to be accessed via localhost 3000
 // if (process.platform != 'win32' && process.platform != 'linux' || lanAccess != true) {
-if (lanAccess != true) {
+
     app.listen(3000, (req, res) => {
         console.log("Connected on port:3000");
     });
-} else {
+    if (lanAccess == true) {
     // if the pc is running a distro of linux or windows
     // const PORT = 3000;
     // const LAN_IP_ADDRESS = os.hostname
@@ -264,7 +264,7 @@ if (lanAccess != true) {
         cert: fs.readFileSync(path.join(__dirname, 'cert/','server.crt'))
     }, app)
 
-    sslServer.listen(3000, () => console.log('Secure server 🚀🔑 on port 3000'))
+    sslServer.listen(3000, () => console.log('Secure server 🚀🔑 on port 4000'))
 }
 
 
