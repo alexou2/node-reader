@@ -109,7 +109,7 @@ app.get(`/manga/:mangaName`, (req, res) => {
     for (i in chapterList) {
         chapterList[i] = chapterList[i].replaceAll('%', '%25')
     }
-    chapterList.pop()
+    // chapterList.pop()
 
     // getting informations from json file
     let data = jsonWriter.getMangaJson(mangaName, chapterList);
