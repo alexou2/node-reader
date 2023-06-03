@@ -3,7 +3,7 @@
 # installs nodejs
 echo "updating packages..."
 apt update
-pkg install git npm nodejs
+pkg install git nodejs
 
 # clones the project and goes in the directory
 echo "cloning repository..."
