@@ -45,7 +45,7 @@ For Android users:
 
     2) download the android install script by typing `curl -O https://raw.githubusercontent.com/alexou2/node-reader/master/android-install.sh` in termux
 
-    3) run the install script with `chmod +x && ./android-install.sh`
+    3) run the install script with `chmod +x android-install.sh && ./android-install.sh`
 
     4) access the server on localhost:3000 in your browser's search bar
 
