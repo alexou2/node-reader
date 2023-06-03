@@ -12,6 +12,7 @@ cd node-reader
 
 # deletes content of files wit modules that aren't supported on android
 echo "applying android fixes..."
+rm package.json package-lock.json
 echo "" >utilities/downloader.js
 echo "" >utilities/parser.js
 echo "installing dependancies..."
@@ -20,7 +21,8 @@ npm i path fs axios ejs https request semaphore express body-parser sanitize-fil
 # creates the run script, then runs it
 echo "creating script..."
 cd ..
-echo "cd node-reader && node index.js &" >manga-reader.sh
+echo -e "cd node-reader \n" >manga-reader.sh
+echo "node index.js" >> manga-reader.sh
 chmod +x manga-reader.sh
 
 # tells user that script has finished
