@@ -55,7 +55,7 @@ For Android users:
 list of commands (assuming that you are in the project folder in the terminal):
 
     starting server: `nodemon index.js`
-    restarting server (after downloading a manga or after a crash): `rs`
+    restarting server (after a crash): `rs`
     stop the server: do `ctrl + C` in the terminal
 
 
