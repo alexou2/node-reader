@@ -41,11 +41,11 @@ For Android users:
 
     Not all of the functionnalities are availale on android, but the main ones do work on android
     
-    1) download termux for android (you might need to download it from the f-droid store) Termux is a terminal emulator that can run nodejs servers.
-    1.1)install node Js in termux with `pkg update && pkg install nodejs`
+    1) download termux for android (you might need to download it from the f-droid store or as an apk)
 
-    2) download the android install script by typing `curl -O https://raw.githubusercontent.com/alexou2/node-reader/master/android-install.sh` in termux
+    2) download the android install script by typing ```curl -O https://raw.githubusercontent.com/alexou2/node-reader/master/android-install.sh``` in termux
 
+    3) run the install script with ```chmod +x && ./android-install.sh```
 
 
 list of commands (assuming that you are in the project folder in the terminal):
