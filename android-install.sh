@@ -25,12 +25,12 @@ chmod +x manga-reader.sh
 
 # tells user that script has finished
 echo "Finished installing."
-echo -e "You will now be able to run the server script with \033[0;34m ./manga-reader.sh"
+echo -e "You will now be able to run the server script with \033[0;34m ./manga-reader.sh \033[0m"
 
 # promps the user if they want to run the script
 read -p "Do you want to run the server script? [Y/n] " run_scr
 if [[ $run_scr == "y" ]] || [[ -z $run_scr ]]; then
     echo "the script is now running"
     echo "./manga-reader.sh"
-    # ./manga-reader.sh &
+     ./manga-reader.sh &
 fi
