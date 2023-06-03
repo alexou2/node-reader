@@ -21,7 +21,7 @@ npm i path fs axios ejs https request semaphore express body-parser sanitize-fil
 # creates the run script, then runs it
 echo "creating script..."
 cd ..
-echo -e "cd node-reader \n" >manga-reader.sh
+echo -e "cd node-reader" >manga-reader.sh
 echo "node index.js" >> manga-reader.sh
 chmod +x manga-reader.sh
 
