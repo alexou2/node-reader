@@ -1,19 +1,24 @@
 #!/bin/bash
 
 # installs nodejs
+echo "updating packages..."
 apt update
 apt install git npm nodejs
 
 # clones the project and goes in the directory
+echo "cloning repository..."
 git clone https://github.com/alexou2/node-reader.git
 cd node-reader
 
 # deletes content of files wit modules that aren't supported on android
+echo "applying android fixes..."
 echo "" >utilities/downloader.js
 echo "" >utilities/parser.js
+echo "installing dependancies..."
 npm i path fs axios ejs https request semaphore express body-parser sanitize-filename
 
 # creates the run script, then runs it
+echo "creating script..."
 cd ..
 echo "cd node-reader && node index.js &" >manga-reader.sh
 chmod +x manga-reader.sh

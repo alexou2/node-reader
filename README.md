@@ -43,9 +43,13 @@ For Android users:
     
     1) download termux for android (you might need to download it from the f-droid store or as an apk)
 
-    2) download the android install script by typing ```curl -O https://raw.githubusercontent.com/alexou2/node-reader/master/android-install.sh``` in termux
+    2) download the android install script by typing `curl -O https://raw.githubusercontent.com/alexou2/node-reader/master/android-install.sh` in termux
 
-    3) run the install script with ```chmod +x && ./android-install.sh```
+    3) run the install script with `chmod +x && ./android-install.sh`
+
+    4) access the server on localhost:3000 in your browser's search bar
+
+    5) run the server script anytime with `./manga-reader.sh` in termux
 
 
 list of commands (assuming that you are in the project folder in the terminal):
