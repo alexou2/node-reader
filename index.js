@@ -33,6 +33,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.urlencoded({ extended: true }));
 
+// enables websites to make http reuests to the server
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace with the domain of your frontend code
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
 
 
 // insures that the program won't crash because there is a folder or essential file missing
@@ -189,13 +196,14 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
 
-    console.log(req.body)
-    console.log(req.body.baseOffset)
-
+    // console.log(req.body)
+    // console.log(req.body.baseOffset)
+console.log(req)
     form.downloadManga(req)
 
     // redirects the user to the homepage after adding the manga
-    res.redirect(`/`)
+    // res.redirect(`/`)
+    res.sendStatus(200)
 })
 
 // post request for bookmarking chapters
