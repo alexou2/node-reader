@@ -196,9 +196,8 @@ app.get(`/manga/:mangaName/:chapName/`, (req, res) => {
 //prints the content of the form and redirects to the homepage 
 app.post(`/new`, (req, res) => {
 
-    // console.log(req.body)
+    console.log("body:", req.body)
     // console.log(req.body.baseOffset)
-console.log(req)
     form.downloadManga(req)
 
     // redirects the user to the homepage after adding the manga

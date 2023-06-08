@@ -15,16 +15,18 @@ module.exports = {
             console.log(req.body.updateJson)
             console.log(req.body)
 
-            switch (req.body.source) {
+            let source = JSON.stringify(req.body.source)
+
+            switch (source.toLowerCase()) {
 
                 //if mangadex is the source
-                case 'Mangadex':
+                case 'mangadex':
                     mangadex.getMangaID(req.body.mangaName + ' ', req.body.translatedLanguages, parseInt(req.body.baseOffset), req.body.updateJson, req.body.sortBy)
                     console.log('mangadex in ', req.body.translatedLanguages)
                     break;
 
                 // if manganato is the source
-                case 'Manganato':
+                case 'manganato':
                     if ((req.body.mangaName).startsWith("https://chapmanganato.com/") || (req.body.mangaName).startsWith('https://manganato.com/')) {
                         manganato.parse(req.body.mangaName)
                         console.log(`manganato in ${req.body.translatedLanguages}`)
@@ -35,7 +37,7 @@ module.exports = {
 
 
                 //if no match is found
-                default: console.log(`no valid matches were found for ${req.body.mangaName}`)
+                default: console.log(`${req.body.source} is not a valid source`)
             }
 
 
