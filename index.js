@@ -201,8 +201,8 @@ app.post(`/new`, (req, res) => {
     form.downloadManga(req)
 
     // redirects the user to the homepage after adding the manga
-    // res.redirect(`/`)
-    res.sendStatus(200)
+    res.redirect(`/`)
+    // res.sendStatus(200)
 })
 
 // post request for bookmarking chapters
