@@ -10,7 +10,7 @@ module.exports = {
     // for the add manga form
     // it will call the function that downloads from the secific site
     downloadManga: function (req) {
-        try {
+        // try {
             console.log('form')
             console.log(req.body.updateJson)
             console.log(req.body)
@@ -42,11 +42,11 @@ module.exports = {
 
 
             // error messages
-        } catch {
-            console.error('An error occured. Please check your connection with the site.')
-            console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
-            console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
-        }
+        // } catch {
+        //     console.error('An error occured. Please check your connection with the site.')
+        //     console.error('If you are downloading from manganato, check if the link you entered is valid and that you selected manganato as an option')
+        //     console.error('If you are downloading from mangadex, please verify that there are chapters translated in the manga that you selected')
+        // }
 
     },
 
