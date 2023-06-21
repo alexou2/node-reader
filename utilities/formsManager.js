@@ -16,7 +16,7 @@ module.exports = {
             console.log(req.body)
 
             let source = JSON.stringify(req.body.source)
-            source = source.toLowerCase()
+            source = source.toLowerCase().replaceAll('"', '')
             console.log('source = ', source)
             switch (source) {
 
