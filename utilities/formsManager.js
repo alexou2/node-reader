@@ -17,7 +17,8 @@ module.exports = {
 
             let source = JSON.stringify(req.body.source)
             source = source.toLowerCase()
-            switch (source.toLowerCase()) {
+            console.log('source = ', source)
+            switch (source) {
 
                 //if mangadex is the source
                 case 'mangadex':
